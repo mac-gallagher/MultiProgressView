@@ -1,7 +1,7 @@
 # MGSegmentedProgressBar
 An animatable progress bar with support for multiple sections.
 
-![ProgressBar](Images/progress_bar.gif)
+![ProgressBar](https://raw.githubusercontent.com/mac-gallagher/MGSegmentedProgressBar/master/Images/progress_bar.gif)
 
 ## Installation
 
@@ -43,7 +43,7 @@ Download and drop the `Classes` directory into your project.
     
 3. Set your progress bar's `dataSource` property.
 
- ```swift
+    ```swift
     progressBar.dataSource = self
     ```
 
