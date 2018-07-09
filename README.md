@@ -3,6 +3,11 @@ An animatable progress bar with support for multiple sections.
 
 ![ProgressBar](https://raw.githubusercontent.com/mac-gallagher/MGSegmentedProgressBar/master/Images/progress_bar.gif)
 
+## Requirements
+* iOS 9.0+
+* Xcode 9.0+
+* Swift 4.1+
+
 ## Installation
 
 ### CocoaPods
@@ -12,40 +17,46 @@ MGSegmentedProgressBar is available through [CocoaPods](<https://cocoapods.org/>
 
 
 ### Manual
-Download and drop the `Classes` directory into your project.
+Download and drop the `MGSegmentedProgressBar ` directory into your project.
 
-## Usage
+## Quick Start
 
-1. Add a `MGSegmentedProgressBar ` to your view.
+```swift
+class ViewController: UIViewController {
 
-    ```swift
-    class ViewController: UIViewController {
-    
-        var progressBar = MGSegmentedProgressBar()
-        
-        override func viewDidLoad() {
-            view.addSubview(progressBar)
-            progressBar.frame = CGRect(x: 50, y: 50, width: 200, height: 50)
-        }
-        
+	var progressBar = MGSegmentedProgressBar()
+
+	override func viewDidLoad() {
+		view.addSubview(progressBar)
+		progressBar.frame = CGRect(x: 50, y: 50, width: 200, height: 50)
+		
+		progressBar.dataSource = self
+	}	
+	
+}
+
+extension ViewController: MGSegmentedProgressBarDataSource {
+
+	func progressBar(_ progressBar: MGSegmentedProgressBar, barForSection section: Int) -> MGBarView {
+		return MGBarView()
+	}
+	
+	func numberOfSections(in progressBar: MGSegmentedProgressBar) -> Int {
+		return 3
+	}
+	
+	func progressBar(_ progressBar: MGSegmentedProgressBar, numberOfStepsInSection section: Int) -> Int {
+		return 4
+	}
+	
+	//optional
+	func progressBar(_ progressBar: MGSegmentedProgressBar, titleForSection section: Int) -> String? {
+        return "Bar \(section + 1)"
     }
-    ```
 
-2. Conform your view controller to the protocol `MGSegmentedProgressBarDataSource` and complete the following functions:
+}
 
-    ```swift
-    func progressBar(_ progressBar: MGSegmentedProgressBar, barForSection section: Int) -> MGBarView
-    
-    func numberOfSections(in progressBar: MGSegmentedProgressBar) -> Int
-    
-    func progressBar(_ progressBar: MGSegmentedProgressBar, numberOfStepsInSection section: Int) -> Int
-    ```
-    
-3. Set your progress bar's `dataSource` property.
-
-    ```swift
-    progressBar.dataSource = self
-    ```
+```
 
 ## Customization
 
@@ -57,10 +68,6 @@ UIView.animate(withDuration: 0.15, delay: 0, options: .curveEaseInOut, animation
 	self.progressBar.layoutIfNeeded()
 }, completion: nil)
 ```
-
-## Requirements
-* iOS 9.0+
-* Xcode 9.0+
 
 ## Author
 Mac Gallagher, jmgallagher36@gmail.com
