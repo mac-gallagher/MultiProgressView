@@ -24,33 +24,33 @@ Download and drop the `MGSegmentedProgressBar ` directory into your project.
 ```swift
 class ViewController: UIViewController {
 
-	var progressBar = MGSegmentedProgressBar()
-
-	override func viewDidLoad() {
-		view.addSubview(progressBar)
-		progressBar.frame = CGRect(x: 50, y: 50, width: 200, height: 50)
-		
-		progressBar.dataSource = self
-	}	
+    var progressBar = MGSegmentedProgressBar()
+    
+    override func viewDidLoad() {
+        view.addSubview(progressBar)
+        progressBar.frame = CGRect(x: 50, y: 50, width: 200, height: 50)
+        
+        progressBar.dataSource = self
+    }	
 	
 }
 
 extension ViewController: MGSegmentedProgressBarDataSource {
 
-	func progressBar(_ progressBar: MGSegmentedProgressBar, barForSection section: Int) -> MGBarView {
-		return MGBarView()
-	}
-	
-	func numberOfSections(in progressBar: MGSegmentedProgressBar) -> Int {
-		return 3
-	}
-	
-	func progressBar(_ progressBar: MGSegmentedProgressBar, numberOfStepsInSection section: Int) -> Int {
-		return 4
-	}
-	
-	//optional
-	func progressBar(_ progressBar: MGSegmentedProgressBar, titleForSection section: Int) -> String? {
+    func progressBar(_ progressBar: MGSegmentedProgressBar, barForSection section: Int) -> MGBarView {
+        return MGBarView()
+    }
+    
+    func numberOfSections(in progressBar: MGSegmentedProgressBar) -> Int {
+        return 3
+    }
+    
+    func progressBar(_ progressBar: MGSegmentedProgressBar, numberOfStepsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    //optional
+    func progressBar(_ progressBar: MGSegmentedProgressBar, titleForSection section: Int) -> String? {
         return "Bar \(section + 1)"
     }
 
@@ -65,7 +65,7 @@ To animate any changes, simply call your progress bar's `layoutIfNeeded()` funct
 	
 ```swift
 UIView.animate(withDuration: 0.15, delay: 0, options: .curveEaseInOut, animations: {
-	self.progressBar.layoutIfNeeded()
+    self.progressBar.layoutIfNeeded()
 }, completion: nil)
 ```
 
