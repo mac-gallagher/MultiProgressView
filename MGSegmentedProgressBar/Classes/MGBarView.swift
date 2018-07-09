@@ -12,22 +12,17 @@ open class MGBarView: UIView {
     
     //MARK: - Variables
     
-    public var titleLabel: UILabel?
-    
+    public private(set) var titleLabel: UILabel?
+    private var labelConstraints = [NSLayoutConstraint]()
+
     public var labelEdgeInsets: UIEdgeInsets = .zero {
         didSet {
             layoutMargins = labelEdgeInsets
             setNeedsLayout()
         }
     }
-    
-    public var labelHorizontalAlignment: MGHorizontalAlignment = .center {
-        didSet {
-            setNeedsLayout()
-        }
-    }
-    
-    public var labelVerticalAlignment: MGVerticalAlignment = .center {
+
+    public var labelAlignment: MGLabelAlignment = .center {
         didSet {
             setNeedsLayout()
         }
@@ -37,58 +32,70 @@ open class MGBarView: UIView {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        initialize()
+        sharedInit()
     }
     
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        initialize()
+        sharedInit()
     }
     
-    private func initialize() {
+    private func sharedInit() {
         clipsToBounds  = true
-        backgroundColor = .black
+        backgroundColor = .white
+        labelEdgeInsets = .zero
     }
     
     //MARK: - Layout
     
-    private var labelConstraints = [NSLayoutConstraint]()
-    
     open override func layoutSubviews() {
         super.layoutSubviews()
-        guard let label = titleLabel else { return }
+        layoutTitleLabel()
+    }
+    
+    private func layoutTitleLabel() {
+        guard let titleLabel = titleLabel else { return }
         
         NSLayoutConstraint.deactivate(labelConstraints)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         labelConstraints = []
         
-        switch labelHorizontalAlignment {
+        switch labelAlignment {
         case .left:
-            labelConstraints.append(label.leftAnchor.constraint(equalTo: layoutMarginsGuide.leftAnchor))
-            label.textAlignment = .left
-        case .center:
-            labelConstraints.append(label.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor))
-            label.textAlignment = .center
-        case .right:
-            labelConstraints.append(label.rightAnchor.constraint(equalTo: layoutMarginsGuide.rightAnchor))
-            label.textAlignment = .right
-        }
-        
-        switch labelVerticalAlignment {
+            labelConstraints.append(titleLabel.leftAnchor.constraint(equalTo: layoutMarginsGuide.leftAnchor))
+            labelConstraints.append(titleLabel.centerYAnchor.constraint(equalTo: layoutMarginsGuide.centerYAnchor))
+        case .topLeft:
+            labelConstraints.append(titleLabel.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor))
+            labelConstraints.append(titleLabel.leftAnchor.constraint(equalTo: layoutMarginsGuide.leftAnchor))
         case .top:
-            labelConstraints.append(label.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor))
-        case .center:
-            labelConstraints.append(label.centerYAnchor.constraint(equalTo: layoutMarginsGuide.centerYAnchor))
+            labelConstraints.append(titleLabel.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor))
+            labelConstraints.append(titleLabel.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor))
+        case .topRight:
+            labelConstraints.append(titleLabel.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor))
+            labelConstraints.append(titleLabel.rightAnchor.constraint(equalTo: layoutMarginsGuide.rightAnchor))
+        case .right:
+            labelConstraints.append(titleLabel.rightAnchor.constraint(equalTo: layoutMarginsGuide.rightAnchor))
+            labelConstraints.append(titleLabel.centerYAnchor.constraint(equalTo: layoutMarginsGuide.centerYAnchor))
+        case .bottomRight:
+            labelConstraints.append(titleLabel.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor))
+            labelConstraints.append(titleLabel.rightAnchor.constraint(equalTo: layoutMarginsGuide.rightAnchor))
         case .bottom:
-            labelConstraints.append(label.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor))
+            labelConstraints.append(titleLabel.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor))
+            labelConstraints.append(titleLabel.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor))
+        case .bottomLeft:
+            labelConstraints.append(titleLabel.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor))
+            labelConstraints.append(titleLabel.leftAnchor.constraint(equalTo: layoutMarginsGuide.leftAnchor))
+        case .center:
+            labelConstraints.append(titleLabel.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor))
+            labelConstraints.append(titleLabel.centerYAnchor.constraint(equalTo: layoutMarginsGuide.centerYAnchor))
         }
         
         NSLayoutConstraint.activate(labelConstraints)
         
-        if CGRect(origin: .zero, size: layoutMarginsGuide.layoutFrame.size).contains(label.bounds) {
-            label.isHidden = false
+        if CGRect(origin: .zero, size: layoutMarginsGuide.layoutFrame.size).contains(titleLabel.bounds) {
+            titleLabel.isHidden = false
         } else {
-            label.isHidden = true
+            titleLabel.isHidden = true
         }
     }
     
