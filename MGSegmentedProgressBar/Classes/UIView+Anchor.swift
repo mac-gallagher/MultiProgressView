@@ -1,5 +1,5 @@
 //
-//  Extensions1.swift
+//  UIView+Anchor.swift
 //  MGSegmentedProgressBar
 //
 //  Created by Mac Gallagher on 7/8/18.

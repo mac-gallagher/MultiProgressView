@@ -10,8 +10,6 @@ import UIKit
 
 open class MGBarView: UIView {
     
-    //MARK: - Variables
-    
     public private(set) var titleLabel: UILabel?
     private var labelConstraints = [NSLayoutConstraint]()
 
@@ -23,9 +21,7 @@ open class MGBarView: UIView {
     }
 
     public var labelAlignment: MGLabelAlignment = .center {
-        didSet {
-            setNeedsLayout()
-        }
+        didSet { setNeedsLayout() }
     }
     
     //MARK: - Initialization
@@ -42,7 +38,7 @@ open class MGBarView: UIView {
     
     private func sharedInit() {
         clipsToBounds  = true
-        backgroundColor = .white
+        backgroundColor = .lightGray
         labelEdgeInsets = .zero
     }
     

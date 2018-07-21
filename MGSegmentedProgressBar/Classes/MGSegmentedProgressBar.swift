@@ -14,12 +14,8 @@ public enum MGLineCap {
 
 open class MGSegmentedProgressBar: UIView {
     
-    //MARK: - Variables
-    
     public var dataSource: MGSegmentedProgressBarDataSource? {
-        didSet {
-            reloadData()
-        }
+        didSet { reloadData() }
     }
     
     private let trackView: UIView = {
@@ -31,9 +27,7 @@ open class MGSegmentedProgressBar: UIView {
     private var trackViewConstriants = [NSLayoutConstraint]()
     
     public var trackInset: CGFloat = 0 {
-        didSet {
-            layoutTrackView()
-        }
+        didSet { layoutTrackView() }
     }
     
     public var trackBackgroundColor: UIColor? {
@@ -46,21 +40,15 @@ open class MGSegmentedProgressBar: UIView {
     private var labelConstraints = [NSLayoutConstraint]()
     
     public var labelEdgeInsets: UIEdgeInsets = .zero {
-        didSet {
-            setNeedsLayout()
-        }
+        didSet { setNeedsLayout() }
     }
-    
+
     public var labelAlignment: MGLabelAlignment = .center {
-        didSet {
-            setNeedsLayout()
-        }
+        didSet { setNeedsLayout() }
     }
     
     public var lineCap: MGLineCap = .round {
-        didSet {
-            setNeedsDisplay()
-        }
+        didSet { setNeedsDisplay() }
     }
     
     private var bars: [MGBarView] = []
@@ -254,7 +242,6 @@ open class MGSegmentedProgressBar: UIView {
     private func reloadBarTitle(_ bar: MGBarView, section: Int) {
         guard let dataSource = dataSource else { return }
         
-        //reload title
         let attributedTitle = dataSource.progressBar(self, attributedTitleForSection: section)
         if attributedTitle != nil {
             bar.setAttributedTitle(attributedTitle)
@@ -263,11 +250,9 @@ open class MGSegmentedProgressBar: UIView {
             bar.setTitle(title)
         }
         
-        //reload title insets
         let insets = dataSource.progressBar(self, titleInsetsForSection: section)
         bar.labelEdgeInsets = insets
         
-        //reload title alignment
         let alignment = dataSource.progressBar(self, titleAlignmentForSection: section)
         bar.labelAlignment = alignment
     }
