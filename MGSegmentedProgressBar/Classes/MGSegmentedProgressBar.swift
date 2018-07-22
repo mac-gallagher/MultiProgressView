@@ -51,13 +51,17 @@ open class MGSegmentedProgressBar: UIView {
         didSet { setNeedsDisplay() }
     }
     
+    private var numberOfSections: Int = 0
     private var bars: [MGBarView] = []
-    private var barConstraintsForSection: [Int: [NSLayoutConstraint]] = [:]
-    private var currentStepForSection: [Int: Int] = [:]
-    private var numberOfStepsForSection: [Int: Int] = [:]
-    private var totalSteps = 0
+    private var barWidthConstraints: [NSLayoutConstraint] = []
     
-    //MARK: - Initialization
+    private var currentSteps: [Int] = []
+    private var currentStepsTotal: Int {
+        return currentSteps.reduce(0, { $0 + $1 })
+    }
+    private var totalSteps: Int = 0
+    
+    //MARK: - Initialization (DONE)
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -74,14 +78,14 @@ open class MGSegmentedProgressBar: UIView {
         addSubview(trackView)
     }
     
-    //MARK: - Layout
+    //MARK: - Layout (DONE)
 
     open override func layoutSubviews() {
         super.layoutSubviews()
         layoutTrackView()
         layoutTrackTitleLabel()
-        for index in 0..<bars.count {
-            layoutBar(bars[index], section: index)
+        for (section, bar) in bars.enumerated() {
+            layoutBar(bar, section: section)
         }
     }
     
@@ -135,22 +139,12 @@ open class MGSegmentedProgressBar: UIView {
     }
     
     private func layoutBar(_ bar: MGBarView, section: Int) {
-        if barConstraintsForSection[section] != nil {
-            NSLayoutConstraint.deactivate(barConstraintsForSection[section]!)
+        NSLayoutConstraint.deactivate([barWidthConstraints[section]])
+        if totalSteps != 0 {
+            let widthMultiplier = CGFloat(currentSteps[section]) / CGFloat(totalSteps)
+            barWidthConstraints[section] = bar.widthAnchor.constraint(equalTo: trackView.widthAnchor, multiplier: widthMultiplier)
         }
-        
-        if section == 0 {
-            barConstraintsForSection[section] = bar.anchor(top: trackView.topAnchor, left: trackView.leftAnchor, bottom: trackView.bottomAnchor)
-        } else {
-            barConstraintsForSection[section] = bar.anchor(top: trackView.topAnchor, left: bars[section - 1].rightAnchor, bottom: trackView.bottomAnchor)
-        }
-        
-        if let steps = currentStepForSection[section], totalSteps != 0 {
-            let widthMultiplier = CGFloat(steps) / CGFloat(totalSteps)
-            barConstraintsForSection[section]?.append(bar.widthAnchor.constraint(equalTo: trackView.widthAnchor, multiplier: widthMultiplier))
-        }
-        
-        NSLayoutConstraint.activate(barConstraintsForSection[section]!)
+        NSLayoutConstraint.activate([barWidthConstraints[section]])
     }
     
     open override func draw(_ rect: CGRect) {
@@ -165,11 +159,55 @@ open class MGSegmentedProgressBar: UIView {
         }
     }
     
-    //MARK: - Setters/Getters
+    //MARK: - Data Source (DONE)
     
-    open func setTitle(_ title: String?) {
+    public func reloadData() {
+        guard let dataSource = dataSource else { return }
+        
+        bars.forEach({ $0.removeFromSuperview() })
+        bars = []
+        currentSteps = []
+        barWidthConstraints = []
+        numberOfSections = dataSource.numberOfSections(in: self)
+        totalSteps = dataSource.numberOfSteps(in: self)
+        
+        for section in 0..<numberOfSections {
+            let bar = reloadBar(section: section) ?? MGBarView()
+            bars.append(bar)
+            currentSteps.append(0)
+            trackView.addSubview(bar)
+            barWidthConstraints.append(NSLayoutConstraint())
+            if section == 0 {
+                _ = bar.anchor(top: trackView.topAnchor, left: trackView.leftAnchor, bottom: trackView.bottomAnchor)
+            } else {
+                _ = bar.anchor(top: trackView.topAnchor, left: bars[section - 1].rightAnchor, bottom: trackView.bottomAnchor)
+            }
+        }
+    }
+    
+    private func reloadBar(section: Int) -> MGBarView? {
+        guard let dataSource = dataSource else { return nil }
+        let bar = dataSource.progressBar(self, barForSection: section)
+        
+        let attributedTitle = dataSource.progressBar(self, attributedTitleForSection: section)
+        bar.setAttributedTitle(attributedTitle)
+        
+        let title = dataSource.progressBar(self, titleForSection: section)
+        bar.setTitle(title)
+        
+        let insets = dataSource.progressBar(self, titleInsetsForSection: section)
+        bar.labelEdgeInsets = insets
+        
+        let alignment = dataSource.progressBar(self, titleAlignmentForSection: section)
+        bar.labelAlignment = alignment
+        
+        return bar
+    }
+    
+    //MARK: - Setters/Getters (DONE)
+    
+    public func setTitle(_ title: String?) {
         if titleLabel == nil {
-            titleLabel?.removeFromSuperview()
             titleLabel = UILabel()
             trackView.insertSubview(titleLabel!, at: 0)
         }
@@ -177,9 +215,8 @@ open class MGSegmentedProgressBar: UIView {
         layoutTrackTitleLabel()
     }
     
-    open func setAttributedTitle(_ title: NSAttributedString?) {
+    public func setAttributedTitle(_ title: NSAttributedString?) {
         if titleLabel == nil {
-            titleLabel?.removeFromSuperview()
             titleLabel = UILabel()
             trackView.insertSubview(titleLabel!, at: 0)
         }
@@ -187,75 +224,26 @@ open class MGSegmentedProgressBar: UIView {
         layoutTrackTitleLabel()
     }
     
-    //MARK: - Main Methods
+    //MARK: - Main Methods (DONE)
     
     open func setProgress(section: Int, steps: Int) {
-        if section < 0 || section >= bars.count { return }
-        if steps <= 0 {
-            currentStepForSection[section] = 0
-        } else {
-            currentStepForSection[section] = min(steps, numberOfStepsForSection[section] ?? 0)
-        }
+        if section < 0 || section >= numberOfSections { return }
+        let newCurrentSteps = (currentStepsTotal - currentSteps[section] + steps)
+        currentSteps[section] = max(0, steps + min(0, totalSteps - newCurrentSteps))
         layoutBar(bars[section], section: section)
+        layoutIfNeeded()
     }
     
     open func advance(section: Int, by numberOfSteps: Int = 1) {
-        setProgress(section: section, steps: (currentStepForSection[section] ?? 0) + numberOfSteps)
+        setProgress(section: section, steps: currentSteps[section] + numberOfSteps)
     }
-    
-    open func reset() {
+
+    open func resetProgress() {
         for section in 0..<bars.count {
             setProgress(section: section, steps: 0)
         }
     }
 
-    //MARK: - Data Source
-    
-    public func reloadData() {
-        guard let dataSource = dataSource else { return }
-        
-        for bar in bars {
-            bar.removeFromSuperview()
-        }
-        bars = []
-        numberOfStepsForSection = [:]
-        totalSteps = 0
-        
-        for section in 0..<dataSource.numberOfSections(in: self) {
-            let bar = dataSource.progressBar(self, barForSection: section)
-            
-            bar.removeFromSuperview()
-            trackView.addSubview(bar)
-            bars.append(bar)
-            
-            currentStepForSection[section] = 0
-            let steps = dataSource.progressBar(self, numberOfStepsInSection: section)
-            numberOfStepsForSection[section] = steps
-            totalSteps += steps
-            
-            reloadBarTitle(bar, section: section)
-        }
-
-        setNeedsLayout()
-    }
-    
-    private func reloadBarTitle(_ bar: MGBarView, section: Int) {
-        guard let dataSource = dataSource else { return }
-        
-        let attributedTitle = dataSource.progressBar(self, attributedTitleForSection: section)
-        if attributedTitle != nil {
-            bar.setAttributedTitle(attributedTitle)
-        } else {
-            let title = dataSource.progressBar(self, titleForSection: section)
-            bar.setTitle(title)
-        }
-        
-        let insets = dataSource.progressBar(self, titleInsetsForSection: section)
-        bar.labelEdgeInsets = insets
-        
-        let alignment = dataSource.progressBar(self, titleAlignmentForSection: section)
-        bar.labelAlignment = alignment
-    }
     
 }
 

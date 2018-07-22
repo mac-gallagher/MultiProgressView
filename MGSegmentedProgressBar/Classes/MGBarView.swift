@@ -97,9 +97,8 @@ open class MGBarView: UIView {
     
     //MARK: - Setters/Getters
     
-    open func setTitle(_ title: String?) {
+    public func setTitle(_ title: String?) {
         if titleLabel == nil {
-            titleLabel?.removeFromSuperview()
             titleLabel = UILabel()
             addSubview(titleLabel!)
         }
@@ -107,9 +106,8 @@ open class MGBarView: UIView {
         setNeedsLayout()
     }
     
-    open func setAttributedTitle(_ title: NSAttributedString?) {
+    public func setAttributedTitle(_ title: NSAttributedString?) {
         if titleLabel == nil {
-            titleLabel?.removeFromSuperview()
             titleLabel = UILabel()
             addSubview(titleLabel!)
         }
