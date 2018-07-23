@@ -1,4 +1,9 @@
 # MGSegmentedProgressBar
+![Swift-Version](https://img.shields.io/badge/Swift-4.1-orange.svg)
+![CocoaPods](https://img.shields.io/cocoapods/v/MGSegmentedProgressBar.svg)
+![license](https://img.shields.io/cocoapods/l/MGSegmentedProgressBar.svg)
+![CocoaPods](https://img.shields.io/cocoapods/p/MGSegmentedProgressBar.svg)
+
 An animatable progress bar with support for multiple sections.
 
 ![ProgressBar](https://raw.githubusercontent.com/mac-gallagher/MGSegmentedProgressBar/master/Images/progress_bar.gif)
