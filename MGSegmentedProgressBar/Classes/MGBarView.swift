@@ -24,6 +24,8 @@ open class MGBarView: UIView {
         didSet { setNeedsLayout() }
     }
     
+    public var titleAlwaysVisible: Bool = false
+    
     //MARK: - Initialization
     
     public override init(frame: CGRect) {
@@ -88,7 +90,7 @@ open class MGBarView: UIView {
         
         NSLayoutConstraint.activate(labelConstraints)
         
-        if CGRect(origin: .zero, size: layoutMarginsGuide.layoutFrame.size).contains(titleLabel.bounds) {
+        if CGRect(origin: .zero, size: layoutMarginsGuide.layoutFrame.size).contains(titleLabel.bounds) || titleAlwaysVisible {
             titleLabel.isHidden = false
         } else {
             titleLabel.isHidden = true
@@ -97,9 +99,8 @@ open class MGBarView: UIView {
     
     //MARK: - Setters/Getters
     
-    open func setTitle(_ title: String?) {
+    public func setTitle(_ title: String?) {
         if titleLabel == nil {
-            titleLabel?.removeFromSuperview()
             titleLabel = UILabel()
             addSubview(titleLabel!)
         }
@@ -107,9 +108,8 @@ open class MGBarView: UIView {
         setNeedsLayout()
     }
     
-    open func setAttributedTitle(_ title: NSAttributedString?) {
+    public func setAttributedTitle(_ title: NSAttributedString?) {
         if titleLabel == nil {
-            titleLabel?.removeFromSuperview()
             titleLabel = UILabel()
             addSubview(titleLabel!)
         }
