@@ -52,16 +52,12 @@ open class MGSegmentedProgressBar: UIView {
     }
     
     private var numberOfSections: Int = 0
+    private var currentSteps: [Int] = []
+    private var totalSteps: Int = 0
     private var bars: [MGBarView] = []
     private var barWidthConstraints: [NSLayoutConstraint] = []
     
-    private var currentSteps: [Int] = []
-    private var currentStepsTotal: Int {
-        return currentSteps.reduce(0, { $0 + $1 })
-    }
-    private var totalSteps: Int = 0
-    
-    //MARK: - Initialization (DONE)
+    //MARK: - Initialization
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -78,7 +74,7 @@ open class MGSegmentedProgressBar: UIView {
         addSubview(trackView)
     }
     
-    //MARK: - Layout (DONE)
+    //MARK: - Layout
 
     open override func layoutSubviews() {
         super.layoutSubviews()
@@ -159,7 +155,7 @@ open class MGSegmentedProgressBar: UIView {
         }
     }
     
-    //MARK: - Data Source (DONE)
+    //MARK: - Data Source
     
     public func reloadData() {
         guard let dataSource = dataSource else { return }
@@ -204,7 +200,7 @@ open class MGSegmentedProgressBar: UIView {
         return bar
     }
     
-    //MARK: - Setters/Getters (DONE)
+    //MARK: - Setters/Getters
     
     public func setTitle(_ title: String?) {
         if titleLabel == nil {
@@ -224,21 +220,22 @@ open class MGSegmentedProgressBar: UIView {
         layoutTrackTitleLabel()
     }
     
-    //MARK: - Main Methods (DONE)
+    //MARK: - Main Methods
     
-    open func setProgress(section: Int, steps: Int) {
+    public func setProgress(section: Int, steps: Int) {
         if section < 0 || section >= numberOfSections { return }
-        let newCurrentSteps = (currentStepsTotal - currentSteps[section] + steps)
-        currentSteps[section] = max(0, steps + min(0, totalSteps - newCurrentSteps))
+        let currentStepsTotal = currentSteps.reduce(0, { $0 + $1 })
+        let newCurrentStepsTotal = (currentStepsTotal - currentSteps[section] + steps)
+        currentSteps[section] = max(0, steps + min(0, totalSteps - newCurrentStepsTotal))
         layoutBar(bars[section], section: section)
         layoutIfNeeded()
     }
     
-    open func advance(section: Int, by numberOfSteps: Int = 1) {
+    public func advance(section: Int, by numberOfSteps: Int = 1) {
         setProgress(section: section, steps: currentSteps[section] + numberOfSteps)
     }
 
-    open func resetProgress() {
+    public func resetProgress() {
         for section in 0..<bars.count {
             setProgress(section: section, steps: 0)
         }
