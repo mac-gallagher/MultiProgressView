@@ -18,6 +18,10 @@ open class MGSegmentedProgressBar: UIView {
         didSet { reloadData() }
     }
     
+    public var delegate: MGSegmentedProgressBarDelegate? {
+        didSet { reloadData() }
+    }
+    
     private let trackView: UIView = {
         let track = UIView()
         track.clipsToBounds = true
@@ -54,6 +58,7 @@ open class MGSegmentedProgressBar: UIView {
     private var numberOfSections: Int = 0
     private var currentSteps: [Int] = []
     private var totalSteps: Int = 0
+    private var maxSteps: [Int] = []
     private var bars: [MGBarView] = []
     private var barWidthConstraints: [NSLayoutConstraint] = []
     
@@ -164,6 +169,7 @@ open class MGSegmentedProgressBar: UIView {
         bars = []
         currentSteps = []
         barWidthConstraints = []
+        maxSteps = []
         numberOfSections = dataSource.numberOfSections(in: self)
         totalSteps = dataSource.numberOfSteps(in: self)
         
@@ -171,6 +177,7 @@ open class MGSegmentedProgressBar: UIView {
             let bar = reloadBar(section: section) ?? MGBarView()
             bars.append(bar)
             currentSteps.append(0)
+            maxSteps.append(dataSource.progressBar(self, maximumNumberOfStepsForSection: section))
             trackView.addSubview(bar)
             barWidthConstraints.append(NSLayoutConstraint())
             if section == 0 {
@@ -185,18 +192,15 @@ open class MGSegmentedProgressBar: UIView {
         guard let dataSource = dataSource else { return nil }
         let bar = dataSource.progressBar(self, barForSection: section)
         
-        let attributedTitle = dataSource.progressBar(self, attributedTitleForSection: section)
-        bar.setAttributedTitle(attributedTitle)
+        bar.setAttributedTitle(dataSource.progressBar(self, attributedTitleForSection: section))
+        bar.setTitle(dataSource.progressBar(self, titleForSection: section))
         
-        let title = dataSource.progressBar(self, titleForSection: section)
-        bar.setTitle(title)
-        
-        let insets = dataSource.progressBar(self, titleInsetsForSection: section)
-        bar.labelEdgeInsets = insets
-        
-        let alignment = dataSource.progressBar(self, titleAlignmentForSection: section)
-        bar.labelAlignment = alignment
-        
+        if let delegate = delegate {
+            bar.labelEdgeInsets = delegate.progressBar(self, titleInsetsForSection: section)
+            bar.labelAlignment = delegate.progressBar(self, titleAlignmentForSection: section)
+            bar.titleAlwaysVisible = delegate.progressBar(self, titleAlwaysVisibleForSection: section)
+        }
+       
         return bar
     }
     
@@ -226,7 +230,8 @@ open class MGSegmentedProgressBar: UIView {
         if section < 0 || section >= numberOfSections { return }
         let currentStepsTotal = currentSteps.reduce(0, { $0 + $1 })
         let newCurrentStepsTotal = (currentStepsTotal - currentSteps[section] + steps)
-        currentSteps[section] = max(0, steps + min(0, totalSteps - newCurrentStepsTotal))
+        let overflow = min(0, totalSteps - newCurrentStepsTotal)
+        currentSteps[section] = min(max(0, steps + overflow), maxSteps[section])
         layoutBar(bars[section], section: section)
         layoutIfNeeded()
     }

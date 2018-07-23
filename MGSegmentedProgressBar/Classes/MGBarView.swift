@@ -24,6 +24,8 @@ open class MGBarView: UIView {
         didSet { setNeedsLayout() }
     }
     
+    public var titleAlwaysVisible: Bool = false
+    
     //MARK: - Initialization
     
     public override init(frame: CGRect) {
@@ -88,7 +90,7 @@ open class MGBarView: UIView {
         
         NSLayoutConstraint.activate(labelConstraints)
         
-        if CGRect(origin: .zero, size: layoutMarginsGuide.layoutFrame.size).contains(titleLabel.bounds) {
+        if CGRect(origin: .zero, size: layoutMarginsGuide.layoutFrame.size).contains(titleLabel.bounds) || titleAlwaysVisible {
             titleLabel.isHidden = false
         } else {
             titleLabel.isHidden = true
