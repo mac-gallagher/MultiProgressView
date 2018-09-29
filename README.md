@@ -17,7 +17,7 @@ An animatable progress bar with support for multiple sections.
 - [Architecture](#architecture)
    - [MGSegmentedProgressBar](#mgsegmentedprogressbar)
      - [Updating your progress](#updating-your-progress)
-      - [Data source & delegates](#data-source-&-delegates)
+     - [Data source & delegates](#data-source--delegates)
    - [MGBarView](#mgbarview)
 - [Author](#author)
 - [License](#license)
@@ -87,7 +87,6 @@ class ViewController: UIViewController {
     @objc func handleTouch(_ sender: UIButton) {
         progressBar.advance(section: sender.tag - 1)
     }
-    
 }
 
 //MARK: Data Source
@@ -107,7 +106,6 @@ extension ViewController: MGSegmentedProgressBarDataSource {
     func numberOfSteps(in progressBar: MGSegmentedProgressBar) -> Int {
         return 10
     }
-
 }
 
 ```
@@ -186,7 +184,7 @@ var titleAlwaysVisible: Bool = false
 ```
 
 # Author
-Mac Gallagher, jmgallagher36@gmail.com
+Mac Gallagher, jmgallagher36@gmail.com.
 
 # License
 MGSegmentedProgressBar is available under the [MIT License](LICENSE), see LICENSE for more infomation.
