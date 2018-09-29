@@ -1,0 +1,16 @@
+PODS:
+  - MGSegmentedProgressBar (0.2.0)
+
+DEPENDENCIES:
+  - MGSegmentedProgressBar (from `../`)
+
+EXTERNAL SOURCES:
+  MGSegmentedProgressBar:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  MGSegmentedProgressBar: 2adc359d7950cddd7a6f955c71bc36f8d2f690c0
+
+PODFILE CHECKSUM: 51cf7cccc835c715a20fbd53a60d16183c2014c1
+
+COCOAPODS: 1.5.0

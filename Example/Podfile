@@ -1,0 +1,5 @@
+use_frameworks!
+
+target 'MGSegmentedProgressBar_Example' do
+    pod 'MGSegmentedProgressBar', :path => '../'
+end
