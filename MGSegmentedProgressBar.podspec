@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name         = "MGSegmentedProgressBar"
-s.version      = "0.3.0"
+s.version      = "0.3.1"
 s.platform     = :ios, "9.0"
 s.summary      = "An animatable progress bar with support for multiple sections"
 
@@ -14,7 +14,7 @@ s.screenshots  = ["https://raw.githubusercontent.com/mac-gallagher/MGSegmentedPr
 s.documentation_url = "https://github.com/mac-gallagher/MGSegmentedProgressBar/tree/master/README.md"
 s.license      = { :type => 'MIT', :file => 'LICENSE' }
 s.author       = { "Mac Gallagher" => "jmgallagher36@gmail.com" }
-s.source       = { :git => "https://github.com/mac-gallagher/MGSegmentedProgressBar.git", :tag => "v0.3.0" }
+s.source       = { :git => "https://github.com/mac-gallagher/MGSegmentedProgressBar.git", :tag => "v0.3.1" }
 
 s.swift_version = "4.1"
 s.source_files = "MGSegmentedProgressBar/Classes/**/*"
