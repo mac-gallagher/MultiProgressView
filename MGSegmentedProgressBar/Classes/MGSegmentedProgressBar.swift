@@ -140,12 +140,12 @@ open class MGSegmentedProgressBar: UIView {
     }
     
     private func layoutBar(_ bar: MGBarView, section: Int) {
-        NSLayoutConstraint.deactivate([barWidthConstraints[section]])
         if totalSteps != 0 {
+            NSLayoutConstraint.deactivate([barWidthConstraints[section]])
             let widthMultiplier = CGFloat(currentSteps[section]) / CGFloat(totalSteps)
             barWidthConstraints[section] = bar.widthAnchor.constraint(equalTo: trackView.widthAnchor, multiplier: widthMultiplier)
+            NSLayoutConstraint.activate([barWidthConstraints[section]])
         }
-        NSLayoutConstraint.activate([barWidthConstraints[section]])
     }
     
     open override func draw(_ rect: CGRect) {
