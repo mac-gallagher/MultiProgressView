@@ -12,7 +12,7 @@ import Nimble
 
 @testable import MGSegmentedProgressBar
 
-class ProgressBarSectionTests: QuickSpec {
+class ProgressBarSectionSpec: QuickSpec {
     override func spec() {
         var section: ProgressBarSection!
         
@@ -57,13 +57,5 @@ class ProgressBarSectionTests: QuickSpec {
                 expect(section.titleLabel?.attributedText).to(equal(title))
             }
         }
-        
-        context("when setting the section's title label alignment") {
-            
-        }
-    }
-    
-    func testTitleLabelAlignmentLayout() {
-//        let section = ProgressBarSection()
     }
 }

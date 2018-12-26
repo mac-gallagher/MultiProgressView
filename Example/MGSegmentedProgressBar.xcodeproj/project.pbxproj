@@ -16,7 +16,7 @@
 		ADA523F820F1BC9300CB8AE6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA523F720F1BC9300CB8AE6 /* ViewController.swift */; };
 		ADA523FD20F1BC9500CB8AE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADA523FC20F1BC9500CB8AE6 /* Assets.xcassets */; };
 		ADA5240020F1BC9500CB8AE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADA523FE20F1BC9500CB8AE6 /* LaunchScreen.storyboard */; };
-		ADE1AEC921D40DF2000D9539 /* ProgressBarSectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1AEC821D40DF2000D9539 /* ProgressBarSectionTests.swift */; };
+		ADE1AEC921D40DF2000D9539 /* ProgressBarSectionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1AEC821D40DF2000D9539 /* ProgressBarSectionSpec.swift */; };
 		ADE1AED521D410FC000D9539 /* Pods_MGSegmentedProgressBar_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE1AED421D410FC000D9539 /* Pods_MGSegmentedProgressBar_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,7 +48,7 @@
 		ADA523FF20F1BC9500CB8AE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ADA5240120F1BC9500CB8AE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADE1AEC621D40DF2000D9539 /* MGSegmentedProgressBar_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MGSegmentedProgressBar_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		ADE1AEC821D40DF2000D9539 /* ProgressBarSectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarSectionTests.swift; sourceTree = "<group>"; };
+		ADE1AEC821D40DF2000D9539 /* ProgressBarSectionSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarSectionSpec.swift; sourceTree = "<group>"; };
 		ADE1AECA21D40DF2000D9539 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADE1AED021D4108C000D9539 /* MGSegmentedProgressBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MGSegmentedProgressBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE1AED221D410A9000D9539 /* MGSegmentedProgressBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MGSegmentedProgressBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,7 +142,7 @@
 		ADE1AEC721D40DF2000D9539 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				ADE1AEC821D40DF2000D9539 /* ProgressBarSectionTests.swift */,
+				ADE1AEC821D40DF2000D9539 /* ProgressBarSectionSpec.swift */,
 				ADE1AED621D416B6000D9539 /* Supporting Files */,
 			);
 			name = Tests;
@@ -366,7 +366,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADE1AEC921D40DF2000D9539 /* ProgressBarSectionTests.swift in Sources */,
+				ADE1AEC921D40DF2000D9539 /* ProgressBarSectionSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,7 +516,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DYZ8Y2U8DB;
 				INFOPLIST_FILE = MGSegmentedProgressBar/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.macgallagher.MGSegmentedProgressBar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -532,7 +535,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DYZ8Y2U8DB;
 				INFOPLIST_FILE = MGSegmentedProgressBar/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.macgallagher.MGSegmentedProgressBar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -549,7 +555,11 @@
 				DEVELOPMENT_TEAM = DYZ8Y2U8DB;
 				INFOPLIST_FILE = MGSegmentedProgressBar_Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.macgallagher.MGSegmentedProgressBar-Tests";
@@ -569,7 +579,11 @@
 				DEVELOPMENT_TEAM = DYZ8Y2U8DB;
 				INFOPLIST_FILE = MGSegmentedProgressBar_Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.macgallagher.MGSegmentedProgressBar-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
