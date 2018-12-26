@@ -16,7 +16,7 @@ s.license      = { :type => 'MIT', :file => 'LICENSE' }
 s.author       = { "Mac Gallagher" => "jmgallagher36@gmail.com" }
 s.source       = { :git => "https://github.com/mac-gallagher/MGSegmentedProgressBar.git", :tag => "v0.3.1" }
 
-s.swift_version = "4.1"
+s.swift_version = "4.2"
 s.source_files = "MGSegmentedProgressBar/Classes/**/*"
 
 end

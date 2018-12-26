@@ -1,16 +1,27 @@
 PODS:
-  - MGSegmentedProgressBar (0.2.0)
+  - MGSegmentedProgressBar (0.3.1)
+  - Nimble (7.3.1)
+  - Quick (1.3.2)
 
 DEPENDENCIES:
   - MGSegmentedProgressBar (from `../`)
+  - Nimble
+  - Quick
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Nimble
+    - Quick
 
 EXTERNAL SOURCES:
   MGSegmentedProgressBar:
     :path: "../"
 
 SPEC CHECKSUMS:
-  MGSegmentedProgressBar: 2adc359d7950cddd7a6f955c71bc36f8d2f690c0
+  MGSegmentedProgressBar: 66c7b380a1e6881360112ec6d2822b62efe24c04
+  Nimble: 04f732da099ea4d153122aec8c2a88fd0c7219ae
+  Quick: 2623cb30d7a7f41ca62f684f679586558f483d46
 
-PODFILE CHECKSUM: 51cf7cccc835c715a20fbd53a60d16183c2014c1
+PODFILE CHECKSUM: 758e8f108745301cf50ac241d56bf19d078346dd
 
 COCOAPODS: 1.5.0

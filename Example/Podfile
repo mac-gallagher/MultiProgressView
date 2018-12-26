@@ -3,3 +3,11 @@ use_frameworks!
 target 'MGSegmentedProgressBar_Example' do
     pod 'MGSegmentedProgressBar', :path => '../'
 end
+
+target 'MGSegmentedProgressBar_Tests' do
+    pod 'MGSegmentedProgressBar', :path => '../'
+    pod 'Quick'
+    pod 'Nimble'
+    
+    inherit! :search_paths
+end

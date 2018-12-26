@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2805E1DE37CDBB8AC6C1D828 /* Pods_MGSegmentedProgressBar_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51DCD9415BE88E7D6BB8E76B /* Pods_MGSegmentedProgressBar_Example.framework */; };
+		89C185F3E6DB278C6954DD0E /* Pods_MGSegmentedProgressBar_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CA46F31434639FB4A00CEA6 /* Pods_MGSegmentedProgressBar_Tests.framework */; };
 		AD536B9B20F3108D0003CA03 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD536B9A20F3108D0003CA03 /* Extensions.swift */; };
 		AD536BA220F3380D0003CA03 /* MGSegmentedProgressBar.podspec in Resources */ = {isa = PBXBuildFile; fileRef = AD536B9F20F3380D0003CA03 /* MGSegmentedProgressBar.podspec */; };
 		AD536BA320F3380D0003CA03 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = AD536BA020F3380D0003CA03 /* LICENSE */; };
@@ -16,12 +16,27 @@
 		ADA523F820F1BC9300CB8AE6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA523F720F1BC9300CB8AE6 /* ViewController.swift */; };
 		ADA523FD20F1BC9500CB8AE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADA523FC20F1BC9500CB8AE6 /* Assets.xcassets */; };
 		ADA5240020F1BC9500CB8AE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADA523FE20F1BC9500CB8AE6 /* LaunchScreen.storyboard */; };
+		ADE1AEC921D40DF2000D9539 /* ProgressBarSectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1AEC821D40DF2000D9539 /* ProgressBarSectionTests.swift */; };
+		ADE1AED521D410FC000D9539 /* Pods_MGSegmentedProgressBar_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE1AED421D410FC000D9539 /* Pods_MGSegmentedProgressBar_Example.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		ADE1AECB21D40DF2000D9539 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ADA523EA20F1BC9300CB8AE6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ADA523F120F1BC9300CB8AE6;
+			remoteInfo = MGSegmentedProgressBar_Example;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1B1B447444B362A6D534FD19 /* Pods-MGSegmentedProgressBar_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MGSegmentedProgressBar_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MGSegmentedProgressBar_Example/Pods-MGSegmentedProgressBar_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		2C481B6D963450293B1AE775 /* Pods-MGSegmentedProgressBar_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MGSegmentedProgressBar_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-MGSegmentedProgressBar_Example/Pods-MGSegmentedProgressBar_Example.release.xcconfig"; sourceTree = "<group>"; };
+		45E2F1AE0A9902C93B9745B3 /* Pods-MGSegmentedProgressBar_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MGSegmentedProgressBar_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MGSegmentedProgressBar_Tests/Pods-MGSegmentedProgressBar_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		4CA46F31434639FB4A00CEA6 /* Pods_MGSegmentedProgressBar_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MGSegmentedProgressBar_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		51DCD9415BE88E7D6BB8E76B /* Pods_MGSegmentedProgressBar_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MGSegmentedProgressBar_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAEADB0EFEB769A5FFB10E33 /* Pods-MGSegmentedProgressBar_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MGSegmentedProgressBar_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MGSegmentedProgressBar_Tests/Pods-MGSegmentedProgressBar_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		AD536B9A20F3108D0003CA03 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AD536B9F20F3380D0003CA03 /* MGSegmentedProgressBar.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = MGSegmentedProgressBar.podspec; path = ../MGSegmentedProgressBar.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		AD536BA020F3380D0003CA03 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -32,6 +47,12 @@
 		ADA523FC20F1BC9500CB8AE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ADA523FF20F1BC9500CB8AE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ADA5240120F1BC9500CB8AE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ADE1AEC621D40DF2000D9539 /* MGSegmentedProgressBar_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MGSegmentedProgressBar_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADE1AEC821D40DF2000D9539 /* ProgressBarSectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarSectionTests.swift; sourceTree = "<group>"; };
+		ADE1AECA21D40DF2000D9539 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ADE1AED021D4108C000D9539 /* MGSegmentedProgressBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MGSegmentedProgressBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADE1AED221D410A9000D9539 /* MGSegmentedProgressBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MGSegmentedProgressBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADE1AED421D410FC000D9539 /* Pods_MGSegmentedProgressBar_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_MGSegmentedProgressBar_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,7 +60,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2805E1DE37CDBB8AC6C1D828 /* Pods_MGSegmentedProgressBar_Example.framework in Frameworks */,
+				ADE1AED521D410FC000D9539 /* Pods_MGSegmentedProgressBar_Example.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADE1AEC321D40DF2000D9539 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89C185F3E6DB278C6954DD0E /* Pods_MGSegmentedProgressBar_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,6 +80,8 @@
 			children = (
 				1B1B447444B362A6D534FD19 /* Pods-MGSegmentedProgressBar_Example.debug.xcconfig */,
 				2C481B6D963450293B1AE775 /* Pods-MGSegmentedProgressBar_Example.release.xcconfig */,
+				45E2F1AE0A9902C93B9745B3 /* Pods-MGSegmentedProgressBar_Tests.debug.xcconfig */,
+				AAEADB0EFEB769A5FFB10E33 /* Pods-MGSegmentedProgressBar_Tests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -69,7 +100,8 @@
 			isa = PBXGroup;
 			children = (
 				AD536B9E20F337FA0003CA03 /* Podspec Metadata */,
-				ADA523F420F1BC9300CB8AE6 /* MGSegmentedProgressBar */,
+				ADA523F420F1BC9300CB8AE6 /* Example for MGSegmentedProgressBar */,
+				ADE1AEC721D40DF2000D9539 /* Tests */,
 				ADA523F320F1BC9300CB8AE6 /* Products */,
 				117CF13A193CD9F2202AFC2F /* Pods */,
 				DEB17BE03A963B4F4733EF42 /* Frameworks */,
@@ -80,27 +112,47 @@
 			isa = PBXGroup;
 			children = (
 				ADA523F220F1BC9300CB8AE6 /* MGSegmentedProgressBar_Example.app */,
+				ADE1AEC621D40DF2000D9539 /* MGSegmentedProgressBar_Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		ADA523F420F1BC9300CB8AE6 /* MGSegmentedProgressBar */ = {
+		ADA523F420F1BC9300CB8AE6 /* Example for MGSegmentedProgressBar */ = {
 			isa = PBXGroup;
 			children = (
 				ADA523F520F1BC9300CB8AE6 /* AppDelegate.swift */,
 				ADA523F720F1BC9300CB8AE6 /* ViewController.swift */,
 				AD536B9A20F3108D0003CA03 /* Extensions.swift */,
-				ADA523FC20F1BC9500CB8AE6 /* Assets.xcassets */,
-				ADA523FE20F1BC9500CB8AE6 /* LaunchScreen.storyboard */,
 				ADA5240720F1BCC900CB8AE6 /* Supporting Files */,
 			);
+			name = "Example for MGSegmentedProgressBar";
 			path = MGSegmentedProgressBar;
 			sourceTree = "<group>";
 		};
 		ADA5240720F1BCC900CB8AE6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				ADA523FC20F1BC9500CB8AE6 /* Assets.xcassets */,
 				ADA5240120F1BC9500CB8AE6 /* Info.plist */,
+				ADA523FE20F1BC9500CB8AE6 /* LaunchScreen.storyboard */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ADE1AEC721D40DF2000D9539 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				ADE1AEC821D40DF2000D9539 /* ProgressBarSectionTests.swift */,
+				ADE1AED621D416B6000D9539 /* Supporting Files */,
+			);
+			name = Tests;
+			path = MGSegmentedProgressBar_Tests;
+			sourceTree = "<group>";
+		};
+		ADE1AED621D416B6000D9539 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				ADE1AECA21D40DF2000D9539 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -108,7 +160,11 @@
 		DEB17BE03A963B4F4733EF42 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ADE1AED421D410FC000D9539 /* Pods_MGSegmentedProgressBar_Example.framework */,
+				ADE1AED221D410A9000D9539 /* MGSegmentedProgressBar.framework */,
+				ADE1AED021D4108C000D9539 /* MGSegmentedProgressBar.framework */,
 				51DCD9415BE88E7D6BB8E76B /* Pods_MGSegmentedProgressBar_Example.framework */,
+				4CA46F31434639FB4A00CEA6 /* Pods_MGSegmentedProgressBar_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -135,19 +191,43 @@
 			productReference = ADA523F220F1BC9300CB8AE6 /* MGSegmentedProgressBar_Example.app */;
 			productType = "com.apple.product-type.application";
 		};
+		ADE1AEC521D40DF2000D9539 /* MGSegmentedProgressBar_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADE1AECF21D40DF2000D9539 /* Build configuration list for PBXNativeTarget "MGSegmentedProgressBar_Tests" */;
+			buildPhases = (
+				43321FD9B159E70540A0B1DD /* [CP] Check Pods Manifest.lock */,
+				ADE1AEC221D40DF2000D9539 /* Sources */,
+				ADE1AEC321D40DF2000D9539 /* Frameworks */,
+				ADE1AEC421D40DF2000D9539 /* Resources */,
+				3EED488BBFC1A5683C9B78A1 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ADE1AECC21D40DF2000D9539 /* PBXTargetDependency */,
+			);
+			name = MGSegmentedProgressBar_Tests;
+			productName = MGSegmentedProgressBar_Tests;
+			productReference = ADE1AEC621D40DF2000D9539 /* MGSegmentedProgressBar_Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		ADA523EA20F1BC9300CB8AE6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0940;
+				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Mac Gallagher";
 				TargetAttributes = {
 					ADA523F120F1BC9300CB8AE6 = {
 						CreatedOnToolsVersion = 9.4.1;
 						LastSwiftMigration = 1000;
+					};
+					ADE1AEC521D40DF2000D9539 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = ADA523F120F1BC9300CB8AE6;
 					};
 				};
 			};
@@ -165,6 +245,7 @@
 			projectRoot = "";
 			targets = (
 				ADA523F120F1BC9300CB8AE6 /* MGSegmentedProgressBar_Example */,
+				ADE1AEC521D40DF2000D9539 /* MGSegmentedProgressBar_Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -182,9 +263,56 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ADE1AEC421D40DF2000D9539 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3EED488BBFC1A5683C9B78A1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-MGSegmentedProgressBar_Tests/Pods-MGSegmentedProgressBar_Tests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/MGSegmentedProgressBar/MGSegmentedProgressBar.framework",
+				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
+				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MGSegmentedProgressBar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MGSegmentedProgressBar_Tests/Pods-MGSegmentedProgressBar_Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		43321FD9B159E70540A0B1DD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MGSegmentedProgressBar_Tests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		BAD98C83F8213678D8257F48 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -234,7 +362,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ADE1AEC221D40DF2000D9539 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADE1AEC921D40DF2000D9539 /* ProgressBarSectionTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ADE1AECC21D40DF2000D9539 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ADA523F120F1BC9300CB8AE6 /* MGSegmentedProgressBar_Example */;
+			targetProxy = ADE1AECB21D40DF2000D9539 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		ADA523FE20F1BC9500CB8AE6 /* LaunchScreen.storyboard */ = {
@@ -299,12 +443,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -353,11 +498,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.2;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -370,10 +516,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DYZ8Y2U8DB;
 				INFOPLIST_FILE = MGSegmentedProgressBar/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.macgallagher.MGSegmentedProgressBar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -389,14 +532,50 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DYZ8Y2U8DB;
 				INFOPLIST_FILE = MGSegmentedProgressBar/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.macgallagher.MGSegmentedProgressBar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		ADE1AECD21D40DF2000D9539 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45E2F1AE0A9902C93B9745B3 /* Pods-MGSegmentedProgressBar_Tests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DYZ8Y2U8DB;
+				INFOPLIST_FILE = MGSegmentedProgressBar_Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.macgallagher.MGSegmentedProgressBar-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MGSegmentedProgressBar_Example.app/MGSegmentedProgressBar_Example";
+			};
+			name = Debug;
+		};
+		ADE1AECE21D40DF2000D9539 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAEADB0EFEB769A5FFB10E33 /* Pods-MGSegmentedProgressBar_Tests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DYZ8Y2U8DB;
+				INFOPLIST_FILE = MGSegmentedProgressBar_Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.macgallagher.MGSegmentedProgressBar-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MGSegmentedProgressBar_Example.app/MGSegmentedProgressBar_Example";
 			};
 			name = Release;
 		};
@@ -417,6 +596,15 @@
 			buildConfigurations = (
 				ADA5240520F1BC9500CB8AE6 /* Debug */,
 				ADA5240620F1BC9500CB8AE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ADE1AECF21D40DF2000D9539 /* Build configuration list for PBXNativeTarget "MGSegmentedProgressBar_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADE1AECD21D40DF2000D9539 /* Debug */,
+				ADE1AECE21D40DF2000D9539 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
