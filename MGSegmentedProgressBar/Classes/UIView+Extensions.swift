@@ -40,7 +40,7 @@ extension UIView {
     }
     
     @discardableResult
-    func anchorToSuperview(withAlignment alignment: AlignmentType, insets: UIEdgeInsets = .zero) -> [NSLayoutConstraint] {
+    func anchorToSuperview(withAlignment alignment: AlignmentType, insets: UIEdgeInsets) -> [NSLayoutConstraint] {
         guard let superview = superview else { return [] }
         translatesAutoresizingMaskIntoConstraints = false
         
@@ -82,6 +82,24 @@ extension UIView {
         case .topRight:
             constraints.append(topAnchor.constraint(equalTo: superview.topAnchor, constant: insets.top))
             constraints.append(rightAnchor.constraint(equalTo: superview.rightAnchor, constant: -insets.right))
+        }
+        
+        constraints.forEach({$0.isActive = true})
+        
+        return constraints
+    }
+    
+    func anchorToSuperview(withCapType type: LineCapType, padding: CGFloat) -> [NSLayoutConstraint] {
+        guard let superview = superview else { return [] }
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        var constraints = [NSLayoutConstraint]()
+        
+        switch type {
+        case .butt:
+            constraints = anchor(top: superview.topAnchor, left: superview.leftAnchor, bottom: superview.bottomAnchor, right: superview.rightAnchor, paddingTop: padding, paddingBottom: padding)
+        case .round, .square:
+            constraints = anchor(top: superview.topAnchor, left: superview.leftAnchor, bottom: superview.bottomAnchor, right: superview.rightAnchor, paddingTop: padding, paddingLeft: padding, paddingBottom: padding, paddingRight: padding)
         }
         
         constraints.forEach({$0.isActive = true})

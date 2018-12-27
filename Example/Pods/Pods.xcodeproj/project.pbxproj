@@ -805,11 +805,6 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
 				LastUpgradeCheck = 1010;
-				TargetAttributes = {
-					B9B5C8AB976A30D46A561FBF4D00A38C = {
-						LastSwiftMigration = 1010;
-					};
-				};
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1054,38 +1049,6 @@
 			};
 			name = Release;
 		};
-		12ED67C17D7399BD990E4C929A6471EA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 064831BB3F9CF612FE7F515313DD18B9 /* MGSegmentedProgressBar.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/MGSegmentedProgressBar/MGSegmentedProgressBar-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/MGSegmentedProgressBar/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/MGSegmentedProgressBar/MGSegmentedProgressBar.modulemap";
-				PRODUCT_MODULE_NAME = MGSegmentedProgressBar;
-				PRODUCT_NAME = MGSegmentedProgressBar;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		1E1B1A54E5F126C24A31ADA3F78077A8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EF81EE5948FD2876F9408C8C98C31A4B /* Pods-MGSegmentedProgressBar_Tests.release.xcconfig */;
@@ -1194,6 +1157,39 @@
 			};
 			name = Debug;
 		};
+		30E8A6BFF853E864FC83372612C3392E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 064831BB3F9CF612FE7F515313DD18B9 /* MGSegmentedProgressBar.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/MGSegmentedProgressBar/MGSegmentedProgressBar-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/MGSegmentedProgressBar/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/MGSegmentedProgressBar/MGSegmentedProgressBar.modulemap";
+				PRODUCT_MODULE_NAME = MGSegmentedProgressBar;
+				PRODUCT_NAME = MGSegmentedProgressBar;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		3A5D63BBE7B1FD9C7E508E43AF1EE8F0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AFE4BE7D9282807F0AEB8591BD9031E6 /* Nimble.xcconfig */;
@@ -1258,39 +1254,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
-		};
-		7D3320477BD580144145B921CBB4E32E /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 064831BB3F9CF612FE7F515313DD18B9 /* MGSegmentedProgressBar.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/MGSegmentedProgressBar/MGSegmentedProgressBar-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/MGSegmentedProgressBar/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/MGSegmentedProgressBar/MGSegmentedProgressBar.modulemap";
-				PRODUCT_MODULE_NAME = MGSegmentedProgressBar;
-				PRODUCT_NAME = MGSegmentedProgressBar;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
 		};
 		87EAC867385563488A6D8F1E74AC46B4 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1424,6 +1387,38 @@
 			};
 			name = Release;
 		};
+		DB9F9D827B376F8F7780992093707995 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 064831BB3F9CF612FE7F515313DD18B9 /* MGSegmentedProgressBar.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/MGSegmentedProgressBar/MGSegmentedProgressBar-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/MGSegmentedProgressBar/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/MGSegmentedProgressBar/MGSegmentedProgressBar.modulemap";
+				PRODUCT_MODULE_NAME = MGSegmentedProgressBar;
+				PRODUCT_NAME = MGSegmentedProgressBar;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		F2AA923D6FF349A9938C6C4AC00B4250 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AFE4BE7D9282807F0AEB8591BD9031E6 /* Nimble.xcconfig */;
@@ -1480,8 +1475,8 @@
 		69D9660B27C3168CFE9E91D7B2333338 /* Build configuration list for PBXNativeTarget "MGSegmentedProgressBar" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				12ED67C17D7399BD990E4C929A6471EA /* Debug */,
-				7D3320477BD580144145B921CBB4E32E /* Release */,
+				DB9F9D827B376F8F7780992093707995 /* Debug */,
+				30E8A6BFF853E864FC83372612C3392E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

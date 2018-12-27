@@ -22,6 +22,6 @@
     "git": "https://github.com/mac-gallagher/MGSegmentedProgressBar.git",
     "tag": "v0.3.1"
   },
-  "swift_version": "4.1",
+  "swift_version": "4.2",
   "source_files": "MGSegmentedProgressBar/Classes/**/*"
 }
