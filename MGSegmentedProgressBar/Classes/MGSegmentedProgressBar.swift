@@ -92,7 +92,7 @@ open class MGSegmentedProgressBar: UIView {
     private var currentSteps: [Int] = []
     private var totalSteps: Int = 0
     private var totalRemainingSteps: Int {
-        return totalSteps - currentSteps.reduce(0, { $0 + $1 })
+        return totalSteps - totalProgress()
     }
     
     //MARK: - Initialization
@@ -221,6 +221,10 @@ open class MGSegmentedProgressBar: UIView {
     
     public func progress(forSection section: Int) -> Int {
         return currentSteps[section]
+    }
+    
+    public func totalProgress() -> Int {
+        return currentSteps.reduce(0) { $0 + $1 }
     }
     
     public func setProgress(forSection section: Int, steps: Int) {

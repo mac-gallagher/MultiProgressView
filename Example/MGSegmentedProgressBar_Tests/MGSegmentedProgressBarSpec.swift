@@ -71,8 +71,17 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                     expect(progressBar.dataSource).to(beNil())
                 }
                 
+                it("should clip to bounds") {
+                    expect(progressBar.clipsToBounds).to(beTrue())
+                }
+                
                 it("should have exactly one subview") {
                     expect(progressBar.subviews.count).to(equal(1))
+                }
+               
+                it("should clip its subview to its bounds") {
+                    let subview = progressBar.subviews.first
+                    expect(subview?.clipsToBounds).to(beTrue())
                 }
             }
         }
@@ -110,10 +119,10 @@ class MGSegmentedProgressBarSpec: QuickSpec {
         }
         
         describe("corner radius") {
-            var subview: UIView!
-            
             context("when the line cap type is round") {
                 context("when the corner radius is set to zero") {
+                    var subview: UIView!
+                    
                     beforeEach {
                         progressBar = self.setupProgressBar(configure: { bar in
                             bar.lineCap = .round
@@ -133,6 +142,7 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                 
                 context("when the corner radius is nonzero") {
                     let cornerRadius: CGFloat = 1
+                    var subview: UIView!
                     
                     beforeEach {
                         progressBar = self.setupProgressBar(configure: { bar in
@@ -154,6 +164,8 @@ class MGSegmentedProgressBarSpec: QuickSpec {
             
             context("when the line cap type is square") {
                 context("when the corner radius is set to zero") {
+                    var subview: UIView!
+                    
                     beforeEach {
                         progressBar = self.setupProgressBar(configure: { bar in
                             bar.lineCap = .square
@@ -173,6 +185,7 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                 
                 context("when the corner radius is nonzero") {
                     let cornerRadius: CGFloat = 1
+                    var subview: UIView!
                     
                     beforeEach {
                         progressBar = self.setupProgressBar(configure: { bar in
@@ -194,6 +207,8 @@ class MGSegmentedProgressBarSpec: QuickSpec {
             
             context("when the line cap type is butt") {
                 context("when the corner radius is set to zero") {
+                    var subview: UIView!
+                    
                     beforeEach {
                         progressBar = self.setupProgressBar(configure: { bar in
                             bar.lineCap = .butt
@@ -213,6 +228,7 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                 
                 context("when the corner radius is nonzero") {
                     let cornerRadius: CGFloat = 1
+                    var subview: UIView!
                     
                     beforeEach {
                         progressBar = self.setupProgressBar(configure: { bar in
@@ -280,9 +296,9 @@ class MGSegmentedProgressBarSpec: QuickSpec {
         }
         
         describe("bar inset") {
-            var subview: UIView!
-            
             context("when the bar inset is equal to zero") {
+                var subview: UIView!
+                
                 beforeEach {
                     progressBar = self.setupProgressBar(configure: { bar in
                         bar.barInset = 0
@@ -297,6 +313,7 @@ class MGSegmentedProgressBarSpec: QuickSpec {
             
             context("when the bar inset is nonzero") {
                 let inset: CGFloat = 1
+                var subview: UIView!
                 
                 context("when the line cap type is round") {
                     beforeEach {
@@ -314,6 +331,8 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                 }
                 
                 context("when the line cap type is square") {
+                    var subview: UIView!
+                    
                     beforeEach {
                         progressBar = self.setupProgressBar(configure: { bar in
                             bar.barInset = inset
@@ -329,6 +348,8 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                 }
                 
                 context("when the line cap type is butt") {
+                    var subview: UIView!
+                    
                     beforeEach {
                         progressBar = self.setupProgressBar(configure: { bar in
                             bar.barInset = inset
@@ -346,11 +367,10 @@ class MGSegmentedProgressBarSpec: QuickSpec {
         }
         
         describe("data source") {
-            var dataSource: MockMGSegmentedProgressBarDataSource!
-            
             context("when setting the data source") {
+                let dataSource = MockMGSegmentedProgressBarDataSource()
+                
                 beforeEach {
-                    dataSource = MockMGSegmentedProgressBarDataSource()
                     progressBar = self.setupProgressBar(configure: { bar in
                         bar.dataSource = dataSource
                     })
@@ -363,8 +383,9 @@ class MGSegmentedProgressBarSpec: QuickSpec {
             }
             
             context("when the number of sections is zero") {
+                let dataSource = MockMGSegmentedProgressBarDataSource(numberOfSections: 0)
+                
                 beforeEach {
-                    dataSource = MockMGSegmentedProgressBarDataSource(numberOfSections: 0)
                     progressBar = self.setupProgressBar(configure: { bar in
                         bar.dataSource = dataSource
                     })
@@ -377,9 +398,9 @@ class MGSegmentedProgressBarSpec: QuickSpec {
             
             context("when the number of sections is nonzero") {
                 let numberOfSections: Int = 10
+                let dataSource = MockMGSegmentedProgressBarDataSource(numberOfSections: numberOfSections)
                 
                 beforeEach {
-                    dataSource = MockMGSegmentedProgressBarDataSource(numberOfSections: numberOfSections)
                     progressBar = self.setupProgressBar(configure: { bar in
                         bar.dataSource = dataSource
                     })
@@ -392,10 +413,10 @@ class MGSegmentedProgressBarSpec: QuickSpec {
             
             context("when reloading the data") {
                 let numberOfSections: Int = 10
+                let dataSource = MockMGSegmentedProgressBarDataSource(numberOfSections: numberOfSections)
                 var progressBarSubview: UIView!
                 
                 beforeEach {
-                    dataSource = MockMGSegmentedProgressBarDataSource(numberOfSections: numberOfSections)
                     progressBar = self.setupProgressBar(configure: { bar in
                         bar.dataSource = dataSource
                     })
@@ -418,7 +439,6 @@ class MGSegmentedProgressBarSpec: QuickSpec {
         describe("changing the progress") {
             let numberOfSections: Int = 3
             let numberOfSteps: Int = 10
-            var progress: Int!
             
             beforeEach {
                 let dataSource = MockMGSegmentedProgressBarDataSource(numberOfSteps: numberOfSteps, numberOfSections: numberOfSections)
@@ -429,8 +449,9 @@ class MGSegmentedProgressBarSpec: QuickSpec {
             
             context("when setting a nonnegative progress on an individual section") {
                 context("when setting a progress that does not exceed the total number of steps in the progress bar") {
+                    let progress: Int = 1
+                    
                     beforeEach {
-                        progress = 1
                         progressBar.setProgress(forSection: 0, steps: progress)
                     }
                     
@@ -440,8 +461,9 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                 }
                 
                 context("when setting a progress that exceeds the total number of steps in the progress bar") {
+                    let progress: Int = numberOfSteps + 1
+                    
                     beforeEach {
-                        progress = numberOfSteps + 1
                         progressBar.setProgress(forSection: 0, steps: progress)
                     }
                     
@@ -452,8 +474,9 @@ class MGSegmentedProgressBarSpec: QuickSpec {
             }
             
             context("when setting a negative progress on an individual section") {
+                let progress: Int = -1
+                
                 beforeEach {
-                    progress = -1
                     progressBar.setProgress(forSection: 0, steps: progress)
                 }
                 
@@ -463,11 +486,10 @@ class MGSegmentedProgressBarSpec: QuickSpec {
             }
             
             context("when setting a progress from an existing progress on an individual section") {
-                var initialProgress: Int!
+                let progress: Int = 1
+                let initialProgress: Int = 5
                 
                 beforeEach {
-                    progress = 1
-                    initialProgress = 5
                     progressBar.setProgress(forSection: 0, steps: initialProgress)
                     progressBar.setProgress(forSection: 0, steps: progress)
                 }
@@ -478,10 +500,10 @@ class MGSegmentedProgressBarSpec: QuickSpec {
             }
             
             context("when setting a progress which causes the sum of all sections' progress to exceed the number of steps in the progress bar") {
-                let sum = 2 + 3
+                let progress: Int = 1000
+                let sum: Int = 2 + 3
                 
                 beforeEach {
-                    progress = 1000
                     progressBar.setProgress(forSection: 0, steps: 2)
                     progressBar.setProgress(forSection: 1, steps: 3)
                     progressBar.setProgress(forSection: 2, steps: progress)
@@ -495,8 +517,9 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                 let existingProgress: Int = 5
                 
                 context("when advancing progress in a section with existing progress") {
+                    let progress: Int = 1
+                    
                     beforeEach {
-                        progress = 1
                         progressBar.setProgress(forSection: 0, steps: existingProgress)
                         progressBar.advance(section: 0, by: progress)
                     }
@@ -507,8 +530,9 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                 }
                 
                 context("when subtracting progress in a section with existing progress ") {
+                    let progress: Int = -1
+                    
                     beforeEach {
-                        progress = -1
                         progressBar.setProgress(forSection: 0, steps: existingProgress)
                         progressBar.advance(section: 0, by: progress)
                     }
@@ -533,12 +557,25 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                     }
                 }
             }
+            
+            context("when getting the total progress") {
+                let progress: Int = 2
+                
+                beforeEach {
+                    progressBar.setProgress(forSection: 0, steps: progress)
+                    progressBar.setProgress(forSection: 1, steps: progress)
+                    progressBar.setProgress(forSection: 2, steps: progress)
+                }
+                
+                it("should return the correct total progress") {
+                    expect(progressBar.totalProgress()).to(equal(3 * progress))
+                }
+            }
         }
         
         describe("bar section layout") {
-            var progressBarSubview: UIView!
-            
             context("when the progress bar is initialized") {
+                var progressBarSubview: UIView!
                 let numberOfSections: Int = 3
                 
                 beforeEach {
@@ -561,6 +598,7 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                     let numberOfSections: Int = 1
                     let numberOfSteps: Int = 10
                     let progress: Int = 1
+                    var progressBarSubview: UIView!
                     
                     beforeEach {
                         let dataSource = MockMGSegmentedProgressBarDataSource(numberOfSteps: numberOfSteps, numberOfSections: numberOfSections)
@@ -583,6 +621,7 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                     let numberOfSteps: Int = 10
                     let firstSectionProgress: Int = 2
                     let secondSectionProgress: Int = 1
+                    var progressBarSubview: UIView!
                     
                     beforeEach {
                         let dataSource = MockMGSegmentedProgressBarDataSource(numberOfSteps: numberOfSteps, numberOfSections: numberOfSections)

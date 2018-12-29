@@ -44,6 +44,12 @@ class ViewController: UIViewController {
         button1.anchor(bottom: button2.topAnchor, paddingBottom: 50, width: 200, height: 50)
         button1.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
+        //add buttons on either side of "Section 1", "Section 2", etc.
+        
+        setupProgressBar()
+    }
+    
+    private func setupProgressBar() {
         progressBar.barInset = 10
         progressBar.barBackgroundColor = .gray
         progressBar.backgroundColor = .green
@@ -52,10 +58,8 @@ class ViewController: UIViewController {
         progressBar.barTitleAlignment = .left
         progressBar.cornerRadius = 10
         progressBar.barTitleEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
-        
+    
         progressBar.dataSource = self
-        
-        //add buttons on either side of "Section 1", "Section 2", etc.
     }
     
     @objc private func handleTap(_ button: UIButton) {

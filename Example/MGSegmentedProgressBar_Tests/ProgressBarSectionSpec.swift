@@ -31,6 +31,10 @@ class ProgressBarSectionSpec: QuickSpec {
                 it("should have a center title alignment") {
                     expect(section.titleAlignment).to(equal(.center))
                 }
+                
+                it("should clip to bounds") {
+                    expect(section.clipsToBounds).to(beTrue())
+                }
             }
         }
         
@@ -70,17 +74,8 @@ class ProgressBarSectionSpec: QuickSpec {
 
 extension ProgressBarSectionSpec {
     func setupBarSection(configure: (ProgressBarSection) -> Void = { _ in } ) -> ProgressBarSection {
-        let parentView = UIView()
         let section = ProgressBarSection()
-        parentView.addSubview(section)
-        
-        section.translatesAutoresizingMaskIntoConstraints = false
-        section.widthAnchor.constraint(equalToConstant: progressBarWidth).isActive = true
-        section.heightAnchor.constraint(equalToConstant: progressBarHeight).isActive = true
-        
         configure(section)
-        
-        section.layoutIfNeeded()
         return section
     }
 }
