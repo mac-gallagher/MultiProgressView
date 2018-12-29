@@ -249,8 +249,36 @@ class MGSegmentedProgressBarSpec: QuickSpec {
             }
         }
         
-        describe("border") {
+        describe("borders") {
             context("when setting the border color") {
+                let color: UIColor = .blue
+                
+                beforeEach {
+                    progressBar = self.setupProgressBar(configure: { bar in
+                        bar.borderColor = color
+                    })
+                }
+                
+                it("should correctly set the border color") {
+                    expect(progressBar.borderColor).to(equal(color))
+                }
+            }
+            
+            context("when setting the border width") {
+                let width: CGFloat = 5
+                
+                beforeEach {
+                    progressBar = self.setupProgressBar(configure: { bar in
+                        bar.borderWidth = width
+                    })
+                }
+                
+                it("should correctly set the border width") {
+                    expect(progressBar.borderWidth).to(equal(width))
+                }
+            }
+            
+            context("when setting the progress bar's border color") {
                 let color: UIColor = .blue
                 
                 beforeEach {
@@ -264,7 +292,7 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                 }
             }
             
-            context("when setting the border width") {
+            context("when setting the progress bar's border width") {
                 let width: CGFloat = 5
                 
                 beforeEach {
