@@ -39,6 +39,7 @@ open class ProgressBarSection: UIView {
     
     private func initialize() {
         backgroundColor = .black
+        clipsToBounds = true
     }
     
     private var labelConstraints = [NSLayoutConstraint]() {

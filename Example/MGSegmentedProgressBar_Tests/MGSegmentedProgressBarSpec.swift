@@ -10,10 +10,10 @@ import Quick
 import Nimble
 import MGSegmentedProgressBar
 
-let progressBarWidth: CGFloat = 300
-let progressBarHeight: CGFloat = 50
-
 class MGSegmentedProgressBarSpec: QuickSpec {
+    private let progressBarWidth: CGFloat = 300
+    private let progressBarHeight: CGFloat = 50
+
     override func spec() {
         var progressBar: MGSegmentedProgressBar!
         
@@ -29,6 +29,14 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                 
                 it("should have bar insets equal to zero") {
                     expect(progressBar.barInset).to(equal(0))
+                }
+                
+                it("should have a border color of black") {
+                    expect(progressBar.borderColor).to(equal(.black))
+                }
+                
+                it("should have a border width of zero") {
+                    expect(progressBar.borderWidth).to(equal(0))
                 }
                 
                 it("should have bar title insets equal to zero") {
@@ -369,6 +377,7 @@ class MGSegmentedProgressBarSpec: QuickSpec {
             
             context("when the number of sections is nonzero") {
                 let numberOfSections: Int = 10
+                
                 beforeEach {
                     dataSource = MockMGSegmentedProgressBarDataSource(numberOfSections: numberOfSections)
                     progressBar = self.setupProgressBar(configure: { bar in
@@ -455,6 +464,7 @@ class MGSegmentedProgressBarSpec: QuickSpec {
             
             context("when setting a progress from an existing progress on an individual section") {
                 var initialProgress: Int!
+                
                 beforeEach {
                     progress = 1
                     initialProgress = 5
@@ -469,6 +479,7 @@ class MGSegmentedProgressBarSpec: QuickSpec {
             
             context("when setting a progress which causes the sum of all sections' progress to exceed the number of steps in the progress bar") {
                 let sum = 2 + 3
+                
                 beforeEach {
                     progress = 1000
                     progressBar.setProgress(forSection: 0, steps: 2)
@@ -481,13 +492,11 @@ class MGSegmentedProgressBarSpec: QuickSpec {
             }
             
             context("when advancing a section") {
-                var existingProgress: Int!
+                let existingProgress: Int = 5
                 
                 context("when advancing progress in a section with existing progress") {
-                    
                     beforeEach {
                         progress = 1
-                        existingProgress = 5
                         progressBar.setProgress(forSection: 0, steps: existingProgress)
                         progressBar.advance(section: 0, by: progress)
                     }
@@ -500,7 +509,6 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                 context("when subtracting progress in a section with existing progress ") {
                     beforeEach {
                         progress = -1
-                        existingProgress = 5
                         progressBar.setProgress(forSection: 0, steps: existingProgress)
                         progressBar.advance(section: 0, by: progress)
                     }
@@ -528,6 +536,76 @@ class MGSegmentedProgressBarSpec: QuickSpec {
         }
         
         describe("bar section layout") {
+            var progressBarSubview: UIView!
+            
+            context("when the progress bar is initialized") {
+                let numberOfSections: Int = 3
+                
+                beforeEach {
+                    let dataSource = MockMGSegmentedProgressBarDataSource(numberOfSections: numberOfSections)
+                    progressBar = self.setupProgressBar(configure: { bar in
+                        bar.dataSource = dataSource
+                    })
+                    progressBarSubview = progressBar.subviews.first
+                }
+                
+                it("should layout each section with zero width") {
+                    for section in progressBarSubview.subviews {
+                        expect(section.frame.width).to(equal(0))
+                    }
+                }
+            }
+            
+            context("after setting the progress") {
+                context("on an individual bar section") {
+                    let numberOfSections: Int = 1
+                    let numberOfSteps: Int = 10
+                    let progress: Int = 1
+                    
+                    beforeEach {
+                        let dataSource = MockMGSegmentedProgressBarDataSource(numberOfSteps: numberOfSteps, numberOfSections: numberOfSections)
+                        progressBar = self.setupProgressBar(configure: { bar in
+                            bar.dataSource = dataSource
+                            bar.setProgress(forSection: 0, steps: progress)
+                        })
+                        progressBarSubview = progressBar.subviews.first
+                    }
+                    
+                    it("should calculate the correct width for the bar section") {
+                        let section = progressBarSubview.subviews.first
+                        let expectedWidth = (CGFloat(progress) / CGFloat(numberOfSteps)) * progressBarSubview.frame.width
+                        expect(section?.frame.width).to(equal(expectedWidth))
+                    }
+                }
+                
+                context("on a section with whose section before it has nonzero progress") {
+                    let numberOfSections: Int = 2
+                    let numberOfSteps: Int = 10
+                    let firstSectionProgress: Int = 2
+                    let secondSectionProgress: Int = 1
+                    
+                    beforeEach {
+                        let dataSource = MockMGSegmentedProgressBarDataSource(numberOfSteps: numberOfSteps, numberOfSections: numberOfSections)
+                        progressBar = self.setupProgressBar(configure: { bar in
+                            bar.dataSource = dataSource
+                            bar.setProgress(forSection: 0, steps: firstSectionProgress)
+                            bar.setProgress(forSection: 1, steps: secondSectionProgress)
+                        })
+                        progressBarSubview = progressBar.subviews.first
+                    }
+                    
+                    it("should calculate the correct width and origin for the section") {
+                        let firstSection = progressBarSubview.subviews.first!
+                        let secondSection = progressBarSubview.subviews.last
+                        
+                        let expectedOrigin = CGPoint(x: firstSection.frame.width, y: 0)
+                        let expectedWidth = (CGFloat(secondSectionProgress) / CGFloat(numberOfSteps)) * progressBarSubview.frame.width
+                        
+                        expect(secondSection?.frame.origin).to(equal(expectedOrigin))
+                        expect(secondSection?.frame.width).to(equal(expectedWidth))
+                    }
+                }
+            }
         }
     }
 }

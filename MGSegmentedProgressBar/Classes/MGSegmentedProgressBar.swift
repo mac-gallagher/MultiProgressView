@@ -21,6 +21,18 @@ open class MGSegmentedProgressBar: UIView {
         }
     }
     
+    public var borderWidth: CGFloat = 0 {
+        didSet {
+            layer.borderWidth = borderWidth
+        }
+    }
+    
+    public var borderColor: UIColor? = .black {
+        didSet {
+            layer.borderColor = borderColor?.cgColor
+        }
+    }
+    
     public var barInset: CGFloat = 0 {
         didSet {
             setNeedsLayout()
@@ -75,10 +87,13 @@ open class MGSegmentedProgressBar: UIView {
         return bar
     }()
     
+    private var progressBarSections: [ProgressBarSection] = []
     private var numberOfSections: Int = 0
     private var currentSteps: [Int] = []
     private var totalSteps: Int = 0
-    private var progressBarSections: [ProgressBarSection] = []
+    private var totalRemainingSteps: Int {
+        return totalSteps - currentSteps.reduce(0, { $0 + $1 })
+    }
     
     //MARK: - Initialization
     
@@ -114,36 +129,36 @@ open class MGSegmentedProgressBar: UIView {
         }
     }
     
-    //just make bar constraints
-//    private var barWidthConstraints = [NSLayoutConstraint]() {
-//        didSet {
-//            NSLayoutConstraint.activate(barWidthConstraints)
-//            NSLayoutConstraint.deactivate(oldValue)
-//        }
-//    }
+    private var barSectionConstraints = [[NSLayoutConstraint]]()
     
     open override func layoutSubviews() {
         super.layoutSubviews()
         progressBarConstraints = progressBar.anchorToSuperview(withCapType: lineCap, padding: barInset)
         labelConstraints = barTitleLabel?.anchorToSuperview(withAlignment: barTitleAlignment, insets: barTitleEdgeInsets) ?? []
-//        for (section, bar) in sections.enumerated() {
-//            layoutBar(bar, section: section)
-//        }
+        for (index, bar) in progressBarSections.enumerated() {
+            layoutBar(bar, section: index)
+        }
         applyCornerRadius()
     }
 
-//    private func layoutBar(_ bar: ProgressBarSection, section: Int) {
-//        guard totalSteps != 0 else { return }
-//        NSLayoutConstraint.deactivate([barWidthConstraints[section]])
-//        let widthMultiplier = CGFloat(currentSteps[section]) / CGFloat(totalSteps)
-//        barWidthConstraints[section] = bar.widthAnchor.constraint(equalTo: trackView.widthAnchor, multiplier: widthMultiplier)
-//        NSLayoutConstraint.activate([barWidthConstraints[section]])
-//    }
-//
-  
-    private func constraintsForBar(index: Int) {
-//        let currentStepsTotal = currentSteps.reduce(0, { $0 + $1 })
-//        let newCurrentStepsTotal = (currentStepsTotal - currentSteps[section] + steps)
+    private func layoutBar(_ bar: ProgressBarSection, section: Int) {
+        if totalSteps <= 0 { return }
+        
+        NSLayoutConstraint.deactivate(barSectionConstraints[section])
+        var barConstraints = [NSLayoutConstraint]()
+        
+        if section == 0 {
+            barConstraints.append(contentsOf: bar.anchor(top: progressBar.topAnchor, left: progressBar.leftAnchor, bottom: progressBar.bottomAnchor))
+        } else {
+            barConstraints.append(contentsOf: bar.anchor(top: progressBar.topAnchor, left: progressBarSections[section - 1].rightAnchor, bottom: progressBar.bottomAnchor))
+        }
+        
+        let widthMultiplier = CGFloat(currentSteps[section]) / CGFloat(totalSteps)
+        let widthConstraint = bar.widthAnchor.constraint(equalTo: progressBar.widthAnchor, multiplier: widthMultiplier)
+        barConstraints.append(widthConstraint)
+        
+        NSLayoutConstraint.activate(barConstraints)
+        barSectionConstraints[section] = barConstraints
     }
     
     private func applyCornerRadius() {
@@ -170,20 +185,18 @@ open class MGSegmentedProgressBar: UIView {
         progressBarSections.forEach({ $0.removeFromSuperview() })
         progressBarSections.removeAll()
         currentSteps.removeAll()
-//        barWidthConstraints = []
+        barSectionConstraints.removeAll()
 
         for section in 0..<numberOfSections {
             let bar = dataSource.progressBar(self, barForSection: section)
             progressBarSections.append(bar)
-            currentSteps.append(0)
             progressBar.addSubview(bar)
-//            barWidthConstraints.append(NSLayoutConstraint())
-//            if section == 0 {
-//                _ = bar.anchor(top: trackView.topAnchor, left: trackView.leftAnchor, bottom: trackView.bottomAnchor)
-//            } else {
-//                _ = bar.anchor(top: trackView.topAnchor, left: sections[section - 1].rightAnchor, bottom: trackView.bottomAnchor)
-//            }
+            
+            currentSteps.append(0)
+            barSectionConstraints.append([])
         }
+        
+        setNeedsLayout()
     }
     
     //MARK: - Main Methods
@@ -211,10 +224,7 @@ open class MGSegmentedProgressBar: UIView {
     }
     
     public func setProgress(forSection section: Int, steps: Int) {
-        let currentStepsSum = currentSteps.reduce(0, { $0 + $1 })
-        let newStepsSum = currentStepsSum + (steps - currentSteps[section])
-        let stepsToAdd = min(0, totalSteps - newStepsSum)
-        currentSteps[section] = max(0, steps + stepsToAdd)
+        currentSteps[section] = max(0, min(steps, totalRemainingSteps + currentSteps[section]))
         setNeedsLayout()
     }
     

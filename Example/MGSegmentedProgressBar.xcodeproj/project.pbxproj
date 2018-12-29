@@ -8,12 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		89C185F3E6DB278C6954DD0E /* Pods_MGSegmentedProgressBar_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CA46F31434639FB4A00CEA6 /* Pods_MGSegmentedProgressBar_Tests.framework */; };
-		AD536B9B20F3108D0003CA03 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD536B9A20F3108D0003CA03 /* Extensions.swift */; };
+		AD536B9B20F3108D0003CA03 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD536B9A20F3108D0003CA03 /* UIView+Extensions.swift */; };
 		AD536BA220F3380D0003CA03 /* MGSegmentedProgressBar.podspec in Resources */ = {isa = PBXBuildFile; fileRef = AD536B9F20F3380D0003CA03 /* MGSegmentedProgressBar.podspec */; };
 		AD536BA320F3380D0003CA03 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = AD536BA020F3380D0003CA03 /* LICENSE */; };
 		AD536BA420F3380D0003CA03 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AD536BA120F3380D0003CA03 /* README.md */; };
 		AD59919F21D438E3001381F9 /* MGSegmentedProgressBarSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD59919E21D438E3001381F9 /* MGSegmentedProgressBarSpec.swift */; };
-		AD9DDE3121D5BD810014B10F /* UIViewExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5991A021D54B60001381F9 /* UIViewExtensionsSpec.swift */; };
 		ADA523F620F1BC9300CB8AE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA523F520F1BC9300CB8AE6 /* AppDelegate.swift */; };
 		ADA523F820F1BC9300CB8AE6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA523F720F1BC9300CB8AE6 /* ViewController.swift */; };
 		ADA523FD20F1BC9500CB8AE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADA523FC20F1BC9500CB8AE6 /* Assets.xcassets */; };
@@ -39,12 +38,11 @@
 		4CA46F31434639FB4A00CEA6 /* Pods_MGSegmentedProgressBar_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MGSegmentedProgressBar_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		51DCD9415BE88E7D6BB8E76B /* Pods_MGSegmentedProgressBar_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MGSegmentedProgressBar_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAEADB0EFEB769A5FFB10E33 /* Pods-MGSegmentedProgressBar_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MGSegmentedProgressBar_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MGSegmentedProgressBar_Tests/Pods-MGSegmentedProgressBar_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		AD536B9A20F3108D0003CA03 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		AD536B9A20F3108D0003CA03 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		AD536B9F20F3380D0003CA03 /* MGSegmentedProgressBar.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = MGSegmentedProgressBar.podspec; path = ../MGSegmentedProgressBar.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		AD536BA020F3380D0003CA03 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		AD536BA120F3380D0003CA03 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		AD59919E21D438E3001381F9 /* MGSegmentedProgressBarSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MGSegmentedProgressBarSpec.swift; sourceTree = "<group>"; };
-		AD5991A021D54B60001381F9 /* UIViewExtensionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensionsSpec.swift; sourceTree = "<group>"; };
 		ADA523F220F1BC9300CB8AE6 /* MGSegmentedProgressBar_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MGSegmentedProgressBar_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADA523F520F1BC9300CB8AE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADA523F720F1BC9300CB8AE6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -126,7 +124,7 @@
 			children = (
 				ADA523F520F1BC9300CB8AE6 /* AppDelegate.swift */,
 				ADA523F720F1BC9300CB8AE6 /* ViewController.swift */,
-				AD536B9A20F3108D0003CA03 /* Extensions.swift */,
+				AD536B9A20F3108D0003CA03 /* UIView+Extensions.swift */,
 				ADA5240720F1BCC900CB8AE6 /* Supporting Files */,
 			);
 			name = "Example for MGSegmentedProgressBar";
@@ -148,7 +146,6 @@
 			children = (
 				AD59919E21D438E3001381F9 /* MGSegmentedProgressBarSpec.swift */,
 				ADE1AEC821D40DF2000D9539 /* ProgressBarSectionSpec.swift */,
-				AD5991A021D54B60001381F9 /* UIViewExtensionsSpec.swift */,
 				ADE1AED621D416B6000D9539 /* Supporting Files */,
 			);
 			name = Tests;
@@ -363,7 +360,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADA523F820F1BC9300CB8AE6 /* ViewController.swift in Sources */,
-				AD536B9B20F3108D0003CA03 /* Extensions.swift in Sources */,
+				AD536B9B20F3108D0003CA03 /* UIView+Extensions.swift in Sources */,
 				ADA523F620F1BC9300CB8AE6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -372,7 +369,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD9DDE3121D5BD810014B10F /* UIViewExtensionsSpec.swift in Sources */,
 				AD59919F21D438E3001381F9 /* MGSegmentedProgressBarSpec.swift in Sources */,
 				ADE1AEC921D40DF2000D9539 /* ProgressBarSectionSpec.swift in Sources */,
 			);

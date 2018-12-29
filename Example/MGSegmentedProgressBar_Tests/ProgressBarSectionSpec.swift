@@ -14,12 +14,12 @@ class ProgressBarSectionSpec: QuickSpec {
     override func spec() {
         var section: ProgressBarSection!
         
-        beforeEach {
-            section = ProgressBarSection()
-        }
-        
         describe("initialization") {
             context("when initializing a new section") {
+                beforeEach {
+                    section = self.setupBarSection()
+                }
+                
                 it("should not have a title label") {
                     expect(section.titleLabel).to(beNil())
                 }
@@ -37,9 +37,12 @@ class ProgressBarSectionSpec: QuickSpec {
         describe("title label") {
             context("when setting the section's title") {
                 var title: String!
+                
                 beforeEach {
                     title = "title"
-                    section.setTitle(title)
+                    section = self.setupBarSection(configure: { section in
+                        section.setTitle(title)
+                    })
                 }
                 
                 it("should have a title") {
@@ -49,9 +52,12 @@ class ProgressBarSectionSpec: QuickSpec {
             
             context("when setting the section's attributed title") {
                 var title: NSAttributedString!
+                
                 beforeEach {
                     title = NSAttributedString(string: "title")
-                    section.setAttributedTitle(title)
+                    section = self.setupBarSection(configure: { section in
+                        section.setAttributedTitle(title)
+                    })
                 }
                 
                 it("should have an attributed title") {
@@ -59,5 +65,22 @@ class ProgressBarSectionSpec: QuickSpec {
                 }
             }
         }
+    }
+}
+
+extension ProgressBarSectionSpec {
+    func setupBarSection(configure: (ProgressBarSection) -> Void = { _ in } ) -> ProgressBarSection {
+        let parentView = UIView()
+        let section = ProgressBarSection()
+        parentView.addSubview(section)
+        
+        section.translatesAutoresizingMaskIntoConstraints = false
+        section.widthAnchor.constraint(equalToConstant: progressBarWidth).isActive = true
+        section.heightAnchor.constraint(equalToConstant: progressBarHeight).isActive = true
+        
+        configure(section)
+        
+        section.layoutIfNeeded()
+        return section
     }
 }
