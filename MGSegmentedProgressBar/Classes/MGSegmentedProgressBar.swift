@@ -8,155 +8,170 @@
 
 import UIKit
 
-public enum MGLineCap {
-    case round, butt, square
-}
-
 open class MGSegmentedProgressBar: UIView {
-    
     public var dataSource: MGSegmentedProgressBarDataSource? {
-        didSet { reloadData() }
-    }
-    
-    public var delegate: MGSegmentedProgressBarDelegate? {
-        didSet { reloadData() }
-    }
-    
-    private let trackView: UIView = {
-        let track = UIView()
-        track.clipsToBounds = true
-        return track
-    }()
-    
-    private var trackViewConstriants = [NSLayoutConstraint]()
-    
-    public var trackInset: CGFloat = 0 {
-        didSet { layoutTrackView() }
-    }
-    
-    public var trackBackgroundColor: UIColor? {
         didSet {
-            trackView.backgroundColor = trackBackgroundColor
+            reloadData()
         }
     }
     
-    public private(set) var titleLabel: UILabel?
-    private var labelConstraints = [NSLayoutConstraint]()
-    
-    public var labelEdgeInsets: UIEdgeInsets = .zero {
-        didSet { setNeedsLayout() }
-    }
-
-    public var labelAlignment: MGLabelAlignment = .center {
-        didSet { setNeedsLayout() }
+    public var cornerRadius: CGFloat = 0 {
+        didSet {
+            setNeedsLayout()
+        }
     }
     
-    public var lineCap: MGLineCap = .round {
-        didSet { setNeedsDisplay() }
+    public var borderWidth: CGFloat = 0 {
+        didSet {
+            layer.borderWidth = borderWidth
+        }
     }
     
+    public var borderColor: UIColor? = .black {
+        didSet {
+            layer.borderColor = borderColor?.cgColor
+        }
+    }
+    
+    public var barInset: CGFloat = 0 {
+        didSet {
+            setNeedsLayout()
+        }
+    }
+    
+    public var barBackgroundColor: UIColor? = .white {
+        didSet {
+            progressBar.backgroundColor = barBackgroundColor
+        }
+    }
+    
+    public var barBorderColor: UIColor? = .black {
+        didSet {
+            progressBar.layer.borderColor = barBorderColor?.cgColor
+        }
+    }
+    
+    public var barBorderWidth: CGFloat = 0 {
+        didSet {
+            progressBar.layer.borderWidth = barBorderWidth
+        }
+    }
+    
+    public var barTitleLabel: UILabel? {
+        return label
+    }
+    
+    private var label: UILabel?
+    
+    public var barTitleEdgeInsets: UIEdgeInsets = .zero {
+        didSet {
+            setNeedsLayout()
+        }
+    }
+    
+    public var barTitleAlignment: AlignmentType = .center {
+        didSet {
+            setNeedsLayout()
+        }
+    }
+    
+    public var lineCap: LineCapType = .round {
+        didSet {
+            setNeedsLayout()
+        }
+    }
+    
+    private let progressBar: UIView = {
+        let bar = UIView()
+        bar.clipsToBounds = true
+        return bar
+    }()
+    
+    private var progressBarSections: [ProgressBarSection] = []
     private var numberOfSections: Int = 0
     private var currentSteps: [Int] = []
     private var totalSteps: Int = 0
-    private var maxSteps: [Int] = []
-    private var bars: [MGBarView] = []
-    private var barWidthConstraints: [NSLayoutConstraint] = []
+    private var totalRemainingSteps: Int {
+        return totalSteps - totalProgress()
+    }
     
     //MARK: - Initialization
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        sharedInit()
+        initialize()
     }
     
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        sharedInit()
+        initialize()
     }
     
-    private func sharedInit() {
+    private func initialize() {
+        backgroundColor = .white
         clipsToBounds = true
-        addSubview(trackView)
+        addSubview(progressBar)
     }
     
     //MARK: - Layout
-
+    
+    private var progressBarConstraints = [NSLayoutConstraint]() {
+        didSet {
+            NSLayoutConstraint.deactivate(oldValue)
+            NSLayoutConstraint.activate(progressBarConstraints)
+        }
+    }
+    
+    private var labelConstraints = [NSLayoutConstraint]() {
+        didSet {
+            NSLayoutConstraint.deactivate(oldValue)
+            NSLayoutConstraint.activate(labelConstraints)
+        }
+    }
+    
+    private var barSectionConstraints = [[NSLayoutConstraint]]()
+    
     open override func layoutSubviews() {
         super.layoutSubviews()
-        layoutTrackView()
-        layoutTrackTitleLabel()
-        for (section, bar) in bars.enumerated() {
-            layoutBar(bar, section: section)
+        progressBarConstraints = progressBar.anchorToSuperview(withCapType: lineCap, padding: barInset)
+        labelConstraints = barTitleLabel?.anchorToSuperview(withAlignment: barTitleAlignment, insets: barTitleEdgeInsets) ?? []
+        for (index, bar) in progressBarSections.enumerated() {
+            layoutBar(bar, section: index)
         }
+        applyCornerRadius()
     }
-    
-    private func layoutTrackView() {
-        NSLayoutConstraint.deactivate(trackViewConstriants)
-        if lineCap == .butt {
-            trackViewConstriants = trackView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: trackInset, bottomConstant: trackInset)
+
+    private func layoutBar(_ bar: ProgressBarSection, section: Int) {
+        if totalSteps <= 0 { return }
+        
+        NSLayoutConstraint.deactivate(barSectionConstraints[section])
+        var barConstraints = [NSLayoutConstraint]()
+        
+        if section == 0 {
+            barConstraints.append(contentsOf: bar.anchor(top: progressBar.topAnchor, left: progressBar.leftAnchor, bottom: progressBar.bottomAnchor))
         } else {
-            trackViewConstriants = trackView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: trackInset, leftConstant: trackInset, bottomConstant: trackInset, rightConstant: trackInset)
-        }
-    }
-    
-    private func layoutTrackTitleLabel() {
-        guard let titleLabel = titleLabel else { return }
-        
-        NSLayoutConstraint.deactivate(labelConstraints)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        labelConstraints = []
-        
-        switch labelAlignment {
-        case .left:
-            labelConstraints.append(titleLabel.leftAnchor.constraint(equalTo: layoutMarginsGuide.leftAnchor))
-            labelConstraints.append(titleLabel.centerYAnchor.constraint(equalTo: layoutMarginsGuide.centerYAnchor))
-        case .topLeft:
-            labelConstraints.append(titleLabel.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor))
-            labelConstraints.append(titleLabel.leftAnchor.constraint(equalTo: layoutMarginsGuide.leftAnchor))
-        case .top:
-            labelConstraints.append(titleLabel.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor))
-            labelConstraints.append(titleLabel.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor))
-        case .topRight:
-            labelConstraints.append(titleLabel.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor))
-            labelConstraints.append(titleLabel.rightAnchor.constraint(equalTo: layoutMarginsGuide.rightAnchor))
-        case .right:
-            labelConstraints.append(titleLabel.rightAnchor.constraint(equalTo: layoutMarginsGuide.rightAnchor))
-            labelConstraints.append(titleLabel.centerYAnchor.constraint(equalTo: layoutMarginsGuide.centerYAnchor))
-        case .bottomRight:
-            labelConstraints.append(titleLabel.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor))
-            labelConstraints.append(titleLabel.rightAnchor.constraint(equalTo: layoutMarginsGuide.rightAnchor))
-        case .bottom:
-            labelConstraints.append(titleLabel.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor))
-            labelConstraints.append(titleLabel.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor))
-        case .bottomLeft:
-            labelConstraints.append(titleLabel.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor))
-            labelConstraints.append(titleLabel.leftAnchor.constraint(equalTo: layoutMarginsGuide.leftAnchor))
-        case .center:
-            labelConstraints.append(titleLabel.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor))
-            labelConstraints.append(titleLabel.centerYAnchor.constraint(equalTo: layoutMarginsGuide.centerYAnchor))
+            barConstraints.append(contentsOf: bar.anchor(top: progressBar.topAnchor, left: progressBarSections[section - 1].rightAnchor, bottom: progressBar.bottomAnchor))
         }
         
-        NSLayoutConstraint.activate(labelConstraints)
+        let widthMultiplier = CGFloat(currentSteps[section]) / CGFloat(totalSteps)
+        let widthConstraint = bar.widthAnchor.constraint(equalTo: progressBar.widthAnchor, multiplier: widthMultiplier)
+        barConstraints.append(widthConstraint)
+        
+        NSLayoutConstraint.activate(barConstraints)
+        barSectionConstraints[section] = barConstraints
     }
     
-    private func layoutBar(_ bar: MGBarView, section: Int) {
-        if totalSteps != 0 {
-            NSLayoutConstraint.deactivate([barWidthConstraints[section]])
-            let widthMultiplier = CGFloat(currentSteps[section]) / CGFloat(totalSteps)
-            barWidthConstraints[section] = bar.widthAnchor.constraint(equalTo: trackView.widthAnchor, multiplier: widthMultiplier)
-            NSLayoutConstraint.activate([barWidthConstraints[section]])
-        }
-    }
-    
-    open override func draw(_ rect: CGRect) {
-        super.draw(rect)
+    private func applyCornerRadius() {
         switch lineCap {
         case .round:
-            layer.cornerRadius = bounds.height / 2
-            trackView.layer.cornerRadius = trackView.bounds.height / 2
-        case .butt, .square:
+            layer.cornerRadius = cornerRadius == 0 ? bounds.height / 2 : cornerRadius
+            progressBar.layer.cornerRadius = cornerRadius == 0 ? bounds.height / 2 : cornerRadius
+        case .butt:
+            layer.cornerRadius = cornerRadius
+            progressBar.layer.cornerRadius = 0
+        case .square:
             layer.cornerRadius = 0
-            trackView.layer.cornerRadius = 0
+            progressBar.layer.cornerRadius = 0
         }
     }
     
@@ -164,94 +179,66 @@ open class MGSegmentedProgressBar: UIView {
     
     public func reloadData() {
         guard let dataSource = dataSource else { return }
-        
-        bars.forEach({ $0.removeFromSuperview() })
-        bars = []
-        currentSteps = []
-        barWidthConstraints = []
-        maxSteps = []
         numberOfSections = dataSource.numberOfSections(in: self)
         totalSteps = dataSource.numberOfSteps(in: self)
         
+        progressBarSections.forEach({ $0.removeFromSuperview() })
+        progressBarSections.removeAll()
+        currentSteps.removeAll()
+        barSectionConstraints.removeAll()
+
         for section in 0..<numberOfSections {
-            let bar = reloadBar(section: section) ?? MGBarView()
-            bars.append(bar)
+            let bar = dataSource.progressBar(self, barForSection: section)
+            progressBarSections.append(bar)
+            progressBar.addSubview(bar)
+            
             currentSteps.append(0)
-            maxSteps.append(dataSource.progressBar(self, maximumNumberOfStepsForSection: section))
-            trackView.addSubview(bar)
-            barWidthConstraints.append(NSLayoutConstraint())
-            if section == 0 {
-                _ = bar.anchor(top: trackView.topAnchor, left: trackView.leftAnchor, bottom: trackView.bottomAnchor)
-            } else {
-                _ = bar.anchor(top: trackView.topAnchor, left: bars[section - 1].rightAnchor, bottom: trackView.bottomAnchor)
-            }
+            barSectionConstraints.append([])
         }
-    }
-    
-    private func reloadBar(section: Int) -> MGBarView? {
-        guard let dataSource = dataSource else { return nil }
-        let bar = dataSource.progressBar(self, barForSection: section)
         
-        bar.setAttributedTitle(dataSource.progressBar(self, attributedTitleForSection: section))
-        bar.setTitle(dataSource.progressBar(self, titleForSection: section))
-        
-        if let delegate = delegate {
-            bar.labelEdgeInsets = delegate.progressBar(self, titleInsetsForSection: section)
-            bar.labelAlignment = delegate.progressBar(self, titleAlignmentForSection: section)
-            bar.titleAlwaysVisible = delegate.progressBar(self, titleAlwaysVisibleForSection: section)
-        }
-       
-        return bar
-    }
-    
-    //MARK: - Setters/Getters
-    
-    public func setTitle(_ title: String?) {
-        if titleLabel == nil {
-            titleLabel = UILabel()
-            trackView.insertSubview(titleLabel!, at: 0)
-        }
-        titleLabel?.text = title
-        layoutTrackTitleLabel()
-    }
-    
-    public func setAttributedTitle(_ title: NSAttributedString?) {
-        if titleLabel == nil {
-            titleLabel = UILabel()
-            trackView.insertSubview(titleLabel!, at: 0)
-        }
-        titleLabel?.attributedText = title
-        layoutTrackTitleLabel()
+        setNeedsLayout()
     }
     
     //MARK: - Main Methods
     
-    public func setProgress(section: Int, steps: Int) {
-        if section < 0 || section >= numberOfSections { return }
-        let currentStepsTotal = currentSteps.reduce(0, { $0 + $1 })
-        let newCurrentStepsTotal = (currentStepsTotal - currentSteps[section] + steps)
-        let overflow = min(0, totalSteps - newCurrentStepsTotal)
-        currentSteps[section] = min(max(0, steps + overflow), maxSteps[section])
-        layoutBar(bars[section], section: section)
-        layoutIfNeeded()
+    public func setTitle(_ title: String?) {
+        createTitleLabelIfNeeded()
+        label?.text = title
+    }
+    
+    public func setAttributedTitle(_ title: NSAttributedString?) {
+        createTitleLabelIfNeeded()
+        label?.attributedText = title
+    }
+    
+    private func createTitleLabelIfNeeded() {
+        guard barTitleLabel == nil else { return }
+        let title = UILabel()
+        progressBar.insertSubview(title, at: 0)
+        label = title
+        setNeedsLayout()
+    }
+    
+    public func progress(forSection section: Int) -> Int {
+        return currentSteps[section]
+    }
+    
+    public func totalProgress() -> Int {
+        return currentSteps.reduce(0) { $0 + $1 }
+    }
+    
+    public func setProgress(forSection section: Int, steps: Int) {
+        currentSteps[section] = max(0, min(steps, totalRemainingSteps + currentSteps[section]))
+        setNeedsLayout()
     }
     
     public func advance(section: Int, by numberOfSteps: Int = 1) {
-        setProgress(section: section, steps: currentSteps[section] + numberOfSteps)
+        setProgress(forSection: section, steps: currentSteps[section] + numberOfSteps)
     }
 
     public func resetProgress() {
-        for section in 0..<bars.count {
-            setProgress(section: section, steps: 0)
+        for section in 0..<progressBarSections.count {
+            setProgress(forSection: section, steps: 0)
         }
     }
-
-    
 }
-
-
-
-
-
-
-

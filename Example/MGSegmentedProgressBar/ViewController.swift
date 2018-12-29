@@ -10,73 +10,82 @@ import UIKit
 import MGSegmentedProgressBar
 
 class ViewController: UIViewController {
-    
     let progressBar = MGSegmentedProgressBar()
-    
     let button1: UIButton = {
-        let button = UIButton(type: .system)
+        let button = UIButton()
+        button.addTarget(self, action: #selector(handleTap), for: .touchUpInside)
         button.tag = 1
-        button.setTitle("Section 1", for: .normal)
+        button.setTitle("Section 0", for: .normal)
         return button
     }()
     
     let button2: UIButton = {
-        let button = UIButton(type: .system)
+        let button = UIButton()
+        button.addTarget(self, action: #selector(handleTap), for: .touchUpInside)
         button.tag = 2
-        button.setTitle("Section 2", for: .normal)
+        button.setTitle("Section 1", for: .normal)
         return button
     }()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        //configure progress bar
-        view.addSubview(progressBar)
-        progressBar.frame = CGRect(x: 50, y: 50, width: view.bounds.width - 100, height: 50)
-        progressBar.dataSource = self
+        view.backgroundColor = .lightGray
         
-        //configure buttons
-        view.addSubview(button1)
-        button1.frame = CGRect(x: 50, y: 100, width: view.bounds.width - 100, height: 50)
-        button1.addTarget(self, action: #selector(handleTouch), for: .touchUpInside)
+        view.addSubview(progressBar)
+        progressBar.anchor(width: 300, height: 100)
+        progressBar.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        progressBar.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
         view.addSubview(button2)
-        button2.frame = CGRect(x: 50, y: 150, width: view.bounds.width - 100, height: 50)
-        button2.addTarget(self, action: #selector(handleTouch), for: .touchUpInside)
+        button2.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingBottom: 50, width: 200, height: 50)
+        button2.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        view.addSubview(button1)
+        button1.anchor(bottom: button2.topAnchor, paddingBottom: 50, width: 200, height: 50)
+        button1.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        //add buttons on either side of "Section 1", "Section 2", etc.
+        
+        setupProgressBar()
     }
     
-    @objc func handleTouch(_ sender: UIButton) {
-        progressBar.advance(section: sender.tag - 1)
+    private func setupProgressBar() {
+        progressBar.barInset = 10
+        progressBar.barBackgroundColor = .gray
+        progressBar.backgroundColor = .green
+        progressBar.barBorderColor = .orange
+        progressBar.setTitle("Background title")
+        progressBar.barTitleAlignment = .left
+        progressBar.cornerRadius = 10
+        progressBar.barTitleEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
+    
+        progressBar.dataSource = self
     }
     
+    @objc private func handleTap(_ button: UIButton) {
+        if button.tag == 1 {
+            progressBar.advance(section: 0)
+        } else if button.tag == 2 {
+            progressBar.advance(section: 1)
+        }
+    }
 }
 
-//MARK: Data Source
-
-extension ViewController: MGSegmentedProgressBarDataSource {
-    
-    func progressBar(_ progressBar: MGSegmentedProgressBar, barForSection section: Int) -> MGBarView {
-        let bar =  MGBarView()
-        bar.backgroundColor = section % 2 == 0 ? .red : .blue
-        bar.titleAlwaysVisible = true
-        return bar
-    }
-    
-    func numberOfSections(in progressBar: MGSegmentedProgressBar) -> Int {
-        return 2
-    }
-    
-    func numberOfSteps(in progressBar: MGSegmentedProgressBar) -> Int {
+extension UIViewController: MGSegmentedProgressBarDataSource {
+    public func numberOfSteps(in progressBar: MGSegmentedProgressBar) -> Int {
         return 10
     }
     
-    func progressBar(_ progressBar: MGSegmentedProgressBar, maximumNumberOfStepsForSection section: Int) -> Int {
-        if section == 1 { return 1}
-        return Int.max
+    public func numberOfSections(in progressBar: MGSegmentedProgressBar) -> Int {
+        return 3
     }
     
-    func progressBar(_ progressBar: MGSegmentedProgressBar, titleForSection section: Int) -> String? {
-        return "Hello!"
+    public func progressBar(_ progressBar: MGSegmentedProgressBar, barForSection section: Int) -> ProgressBarSection {
+        let bar = ProgressBarSection()
+        bar.backgroundColor = section % 2 == 0 ? .blue : .red
+        bar.setTitle("Title")
+        
+        //check clipToBounds in tests
+        return bar
     }
-    
 }
