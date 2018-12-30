@@ -148,8 +148,7 @@
 				ADE1AEC821D40DF2000D9539 /* ProgressBarSectionSpec.swift */,
 				ADE1AED621D416B6000D9539 /* Supporting Files */,
 			);
-			name = Tests;
-			path = MGSegmentedProgressBar_Tests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		ADE1AED621D416B6000D9539 /* Supporting Files */ = {

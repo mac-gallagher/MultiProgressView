@@ -59,7 +59,7 @@ The progress of each section can be changed by calling any of the following func
 ```swift
 func setProgress(forSection section: Int, steps: Int) //sets the progress
 func advance(section: Int, by numberOfSteps: Int = 1) //advances the existing progress 
-func resetProgress() //sets the progress of all section to zero
+func resetProgress() //sets the progress of all sections to zero
 ```
 
 # Architecture
@@ -90,7 +90,7 @@ All of methods which change the progress can easily be animated. For example,
 
 ```swift
 UIView.animate(withDuration: 0.2) {
-	self.progressBar.setProgress(forSection: 0, steps: 4)
+    self.progressBar.setProgress(forSection: 0, steps: 4)
 }
 
 ```
