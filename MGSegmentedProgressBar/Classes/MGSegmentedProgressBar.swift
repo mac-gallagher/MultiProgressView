@@ -230,6 +230,7 @@ open class MGSegmentedProgressBar: UIView {
     public func setProgress(forSection section: Int, steps: Int) {
         currentSteps[section] = max(0, min(steps, totalRemainingSteps + currentSteps[section]))
         setNeedsLayout()
+        layoutIfNeeded()
     }
     
     public func advance(section: Int, by numberOfSteps: Int = 1) {

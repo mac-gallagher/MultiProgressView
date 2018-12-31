@@ -632,8 +632,8 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                         let dataSource = MockMGSegmentedProgressBarDataSource(numberOfSteps: numberOfSteps, numberOfSections: numberOfSections)
                         progressBar = self.setupProgressBar(configure: { bar in
                             bar.dataSource = dataSource
-                            bar.setProgress(forSection: 0, steps: progress)
                         })
+                        progressBar.setProgress(forSection: 0, steps: progress)
                         progressBarSubview = progressBar.subviews.first
                     }
                     
@@ -644,7 +644,7 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                     }
                 }
                 
-                context("on a section with whose section before it has nonzero progress") {
+                fcontext("on a section with whose section before it has nonzero progress") {
                     let numberOfSections: Int = 2
                     let numberOfSteps: Int = 10
                     let firstSectionProgress: Int = 2
@@ -655,9 +655,9 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                         let dataSource = MockMGSegmentedProgressBarDataSource(numberOfSteps: numberOfSteps, numberOfSections: numberOfSections)
                         progressBar = self.setupProgressBar(configure: { bar in
                             bar.dataSource = dataSource
-                            bar.setProgress(forSection: 0, steps: firstSectionProgress)
-                            bar.setProgress(forSection: 1, steps: secondSectionProgress)
                         })
+                        progressBar.setProgress(forSection: 0, steps: firstSectionProgress)
+                        progressBar.setProgress(forSection: 1, steps: secondSectionProgress)
                         progressBarSubview = progressBar.subviews.first
                     }
                     

@@ -26,7 +26,7 @@ class ViewController: UIViewController {
         button.setTitle("Section 1", for: .normal)
         return button
     }()
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .lightGray
@@ -58,15 +58,19 @@ class ViewController: UIViewController {
         progressBar.barTitleAlignment = .left
         progressBar.cornerRadius = 10
         progressBar.barTitleEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
-    
+        
         progressBar.dataSource = self
     }
     
     @objc private func handleTap(_ button: UIButton) {
         if button.tag == 1 {
-            progressBar.advance(section: 0)
+            UIView.animate(withDuration: 0.2) {
+                self.progressBar.advance(section: 0)
+            }
         } else if button.tag == 2 {
-            progressBar.advance(section: 1)
+            UIView.animate(withDuration: 0.2) {
+                self.progressBar.advance(section: 1)
+            }
         }
     }
 }
