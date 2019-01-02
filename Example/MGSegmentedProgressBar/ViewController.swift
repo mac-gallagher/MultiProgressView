@@ -50,33 +50,34 @@ class ViewController: UIViewController {
     }
     
     private func setupProgressBar() {
-        progressBar.barInset = 10
-        progressBar.barBackgroundColor = .gray
+        progressBar.trackInset = 10
+        progressBar.trackBackgroundColor = .gray
         progressBar.backgroundColor = .green
-        progressBar.barBorderColor = .orange
+        progressBar.trackBorderColor = .orange
         progressBar.setTitle("Background title")
-        progressBar.barTitleAlignment = .left
+        progressBar.trackTitleAlignment = .left
         progressBar.cornerRadius = 10
-        progressBar.barTitleEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
+        progressBar.trackTitleEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
         
         progressBar.dataSource = self
     }
     
     @objc private func handleTap(_ button: UIButton) {
         if button.tag == 1 {
-            UIView.animate(withDuration: 0.2) {
-                self.progressBar.advance(section: 0)
-            }
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.3, options: .curveLinear, animations: {
+                self.progressBar.setProgress(forSection: 0, to: 3)
+                self.progressBar.setProgress(forSection: 1, to: 5)
+            }, completion: nil)
         } else if button.tag == 2 {
-            UIView.animate(withDuration: 0.2) {
-                self.progressBar.advance(section: 1)
+            UIView.animate(withDuration: 0.1) {
+                self.progressBar.resetProgress()
             }
         }
     }
 }
 
 extension UIViewController: MGSegmentedProgressBarDataSource {
-    public func numberOfSteps(in progressBar: MGSegmentedProgressBar) -> Int {
+    public func numberOfUnits(in progressBar: MGSegmentedProgressBar) -> Int {
         return 10
     }
     

@@ -33,43 +33,43 @@ open class MGSegmentedProgressBar: UIView {
         }
     }
     
-    public var barInset: CGFloat = 0 {
+    public var trackInset: CGFloat = 0 {
         didSet {
             setNeedsLayout()
         }
     }
     
-    public var barBackgroundColor: UIColor? = .white {
+    public var trackBackgroundColor: UIColor? = .white {
         didSet {
-            progressBar.backgroundColor = barBackgroundColor
+            track.backgroundColor = trackBackgroundColor
         }
     }
     
-    public var barBorderColor: UIColor? = .black {
+    public var trackBorderColor: UIColor? = .black {
         didSet {
-            progressBar.layer.borderColor = barBorderColor?.cgColor
+            track.layer.borderColor = trackBorderColor?.cgColor
         }
     }
     
-    public var barBorderWidth: CGFloat = 0 {
+    public var trackBorderWidth: CGFloat = 0 {
         didSet {
-            progressBar.layer.borderWidth = barBorderWidth
+            track.layer.borderWidth = trackBorderWidth
         }
     }
     
-    public var barTitleLabel: UILabel? {
+    public var trackTitleLabel: UILabel? {
         return label
     }
     
     private var label: UILabel?
     
-    public var barTitleEdgeInsets: UIEdgeInsets = .zero {
+    public var trackTitleEdgeInsets: UIEdgeInsets = .zero {
         didSet {
             setNeedsLayout()
         }
     }
     
-    public var barTitleAlignment: AlignmentType = .center {
+    public var trackTitleAlignment: AlignmentType = .center {
         didSet {
             setNeedsLayout()
         }
@@ -81,10 +81,10 @@ open class MGSegmentedProgressBar: UIView {
         }
     }
     
-    private let progressBar: UIView = {
-        let bar = UIView()
-        bar.clipsToBounds = true
-        return bar
+    private let track: UIView = {
+        let view = UIView()
+        view.clipsToBounds = true
+        return view
     }()
     
     private var progressBarSections: [ProgressBarSection] = []
@@ -110,7 +110,7 @@ open class MGSegmentedProgressBar: UIView {
     private func initialize() {
         backgroundColor = .white
         clipsToBounds = true
-        addSubview(progressBar)
+        addSubview(track)
     }
     
     //MARK: - Layout
@@ -133,8 +133,8 @@ open class MGSegmentedProgressBar: UIView {
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-        progressBarConstraints = progressBar.anchorToSuperview(withCapType: lineCap, padding: barInset)
-        labelConstraints = barTitleLabel?.anchorToSuperview(withAlignment: barTitleAlignment, insets: barTitleEdgeInsets) ?? []
+        progressBarConstraints = track.anchorToSuperview(withCapType: lineCap, padding: trackInset)
+        labelConstraints = trackTitleLabel?.anchorToSuperview(withAlignment: trackTitleAlignment, insets: trackTitleEdgeInsets) ?? []
         for (index, bar) in progressBarSections.enumerated() {
             layoutBar(bar, section: index)
         }
@@ -148,13 +148,13 @@ open class MGSegmentedProgressBar: UIView {
         var barConstraints = [NSLayoutConstraint]()
         
         if section == 0 {
-            barConstraints.append(contentsOf: bar.anchor(top: progressBar.topAnchor, left: progressBar.leftAnchor, bottom: progressBar.bottomAnchor))
+            barConstraints.append(contentsOf: bar.anchor(top: track.topAnchor, left: track.leftAnchor, bottom: track.bottomAnchor))
         } else {
-            barConstraints.append(contentsOf: bar.anchor(top: progressBar.topAnchor, left: progressBarSections[section - 1].rightAnchor, bottom: progressBar.bottomAnchor))
+            barConstraints.append(contentsOf: bar.anchor(top: track.topAnchor, left: progressBarSections[section - 1].rightAnchor, bottom: track.bottomAnchor))
         }
         
         let widthMultiplier = CGFloat(currentSteps[section]) / CGFloat(totalSteps)
-        let widthConstraint = bar.widthAnchor.constraint(equalTo: progressBar.widthAnchor, multiplier: widthMultiplier)
+        let widthConstraint = bar.widthAnchor.constraint(equalTo: track.widthAnchor, multiplier: widthMultiplier)
         barConstraints.append(widthConstraint)
         
         NSLayoutConstraint.activate(barConstraints)
@@ -165,13 +165,13 @@ open class MGSegmentedProgressBar: UIView {
         switch lineCap {
         case .round:
             layer.cornerRadius = cornerRadius == 0 ? bounds.height / 2 : cornerRadius
-            progressBar.layer.cornerRadius = cornerRadius == 0 ? bounds.height / 2 : cornerRadius
+            track.layer.cornerRadius = cornerRadius == 0 ? bounds.height / 2 : cornerRadius
         case .butt:
             layer.cornerRadius = cornerRadius
-            progressBar.layer.cornerRadius = 0
+            track.layer.cornerRadius = 0
         case .square:
             layer.cornerRadius = 0
-            progressBar.layer.cornerRadius = 0
+            track.layer.cornerRadius = 0
         }
     }
     
@@ -180,7 +180,7 @@ open class MGSegmentedProgressBar: UIView {
     public func reloadData() {
         guard let dataSource = dataSource else { return }
         numberOfSections = dataSource.numberOfSections(in: self)
-        totalSteps = dataSource.numberOfSteps(in: self)
+        totalSteps = dataSource.numberOfUnits(in: self)
         
         progressBarSections.forEach({ $0.removeFromSuperview() })
         progressBarSections.removeAll()
@@ -190,7 +190,7 @@ open class MGSegmentedProgressBar: UIView {
         for section in 0..<numberOfSections {
             let bar = dataSource.progressBar(self, barForSection: section)
             progressBarSections.append(bar)
-            progressBar.addSubview(bar)
+            track.addSubview(bar)
             
             currentSteps.append(0)
             barSectionConstraints.append([])
@@ -212,9 +212,9 @@ open class MGSegmentedProgressBar: UIView {
     }
     
     private func createTitleLabelIfNeeded() {
-        guard barTitleLabel == nil else { return }
+        guard trackTitleLabel == nil else { return }
         let title = UILabel()
-        progressBar.insertSubview(title, at: 0)
+        track.insertSubview(title, at: 0)
         label = title
         setNeedsLayout()
     }
@@ -227,19 +227,19 @@ open class MGSegmentedProgressBar: UIView {
         return currentSteps.reduce(0) { $0 + $1 }
     }
     
-    public func setProgress(forSection section: Int, steps: Int) {
-        currentSteps[section] = max(0, min(steps, totalRemainingSteps + currentSteps[section]))
+    public func setProgress(forSection section: Int, to units: Int) {
+        currentSteps[section] = max(0, min(units, totalRemainingSteps + currentSteps[section]))
         setNeedsLayout()
         layoutIfNeeded()
     }
     
-    public func advance(section: Int, by numberOfSteps: Int = 1) {
-        setProgress(forSection: section, steps: currentSteps[section] + numberOfSteps)
+    public func advance(section: Int, by units: Int = 1) {
+        setProgress(forSection: section, to: currentSteps[section] + units)
     }
 
     public func resetProgress() {
         for section in 0..<progressBarSections.count {
-            setProgress(forSection: section, steps: 0)
+            setProgress(forSection: section, to: 0)
         }
     }
 }

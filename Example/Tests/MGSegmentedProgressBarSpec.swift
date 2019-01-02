@@ -24,11 +24,11 @@ class MGSegmentedProgressBarSpec: QuickSpec {
             
             context("when initializing a new progress bar") {
                 it("should have no bar title label") {
-                    expect(progressBar.barTitleLabel).to(beNil())
+                    expect(progressBar.trackTitleLabel).to(beNil())
                 }
                 
-                it("should have bar insets equal to zero") {
-                    expect(progressBar.barInset).to(equal(0))
+                it("should have track insets equal to zero") {
+                    expect(progressBar.trackInset).to(equal(0))
                 }
                 
                 it("should have a border color of black") {
@@ -39,24 +39,24 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                     expect(progressBar.borderWidth).to(equal(0))
                 }
                 
-                it("should have bar title insets equal to zero") {
-                    expect(progressBar.barTitleEdgeInsets).to(equal(.zero))
+                it("should have track title insets equal to zero") {
+                    expect(progressBar.trackTitleEdgeInsets).to(equal(.zero))
                 }
                 
-                it("should have a center bar title alignment") {
-                    expect(progressBar.barTitleAlignment).to(equal(.center))
+                it("should have a center track title alignment") {
+                    expect(progressBar.trackTitleAlignment).to(equal(.center))
                 }
                 
-                it("should have a bar background color of white") {
-                    expect(progressBar.barBackgroundColor).to(equal(.white))
+                it("should have a track background color of white") {
+                    expect(progressBar.trackBackgroundColor).to(equal(.white))
                 }
                 
-                it("should have a bar border color of black") {
-                    expect(progressBar.barBorderColor).to(equal(.black))
+                it("should have a track border color of black") {
+                    expect(progressBar.trackBorderColor).to(equal(.black))
                 }
                 
-                it("should have a bar border width of zero") {
-                    expect(progressBar.barBorderWidth).to(equal(0))
+                it("should have a track border width of zero") {
+                    expect(progressBar.trackBorderWidth).to(equal(0))
                 }
                 
                 it("should have a round line cap type") {
@@ -98,7 +98,7 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                 }
                 
                 it("should show the expected title") {
-                    expect(progressBar.barTitleLabel?.text).to(equal(title))
+                    expect(progressBar.trackTitleLabel?.text).to(equal(title))
                 }
             }
             
@@ -113,7 +113,7 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                 }
                 
                 it("should show the expected attributed title") {
-                    expect(progressBar.barTitleLabel?.attributedText).to(equal(title))
+                    expect(progressBar.trackTitleLabel?.attributedText).to(equal(title))
                 }
             }
         }
@@ -283,12 +283,12 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                 
                 beforeEach {
                     progressBar = self.setupProgressBar(configure: { bar in
-                        bar.barBorderColor = color
+                        bar.trackBorderColor = color
                     })
                 }
                 
                 it("should correctly set the progress bar's border color") {
-                    expect(progressBar.barBorderColor).to(equal(color))
+                    expect(progressBar.trackBorderColor).to(equal(color))
                 }
             }
             
@@ -297,12 +297,12 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                 
                 beforeEach {
                     progressBar = self.setupProgressBar(configure: { bar in
-                        bar.barBorderWidth = width
+                        bar.trackBorderWidth = width
                     })
                 }
                 
                 it("should correctly set the progress bar's border width") {
-                    expect(progressBar.barBorderWidth).to(equal(width))
+                    expect(progressBar.trackBorderWidth).to(equal(width))
                 }
             }
         }
@@ -313,12 +313,12 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                 
                 beforeEach {
                     progressBar = self.setupProgressBar(configure: { bar in
-                        bar.barBackgroundColor = color
+                        bar.trackBackgroundColor = color
                     })
                 }
                 
                 it("should correctly set the progress bar's background color") {
-                    expect(progressBar.barBackgroundColor).to(equal(color))
+                    expect(progressBar.trackBackgroundColor).to(equal(color))
                 }
             }
         }
@@ -329,7 +329,7 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                 
                 beforeEach {
                     progressBar = self.setupProgressBar(configure: { bar in
-                        bar.barInset = 0
+                        bar.trackInset = 0
                     })
                     subview = progressBar.subviews.first
                 }
@@ -346,7 +346,7 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                 context("when the line cap type is round") {
                     beforeEach {
                         progressBar = self.setupProgressBar(configure: { bar in
-                            bar.barInset = inset
+                            bar.trackInset = inset
                             bar.lineCap = .round
                         })
                         subview = progressBar.subviews.first
@@ -363,7 +363,7 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                     
                     beforeEach {
                         progressBar = self.setupProgressBar(configure: { bar in
-                            bar.barInset = inset
+                            bar.trackInset = inset
                             bar.lineCap = .square
                         })
                         subview = progressBar.subviews.first
@@ -380,7 +380,7 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                     
                     beforeEach {
                         progressBar = self.setupProgressBar(configure: { bar in
-                            bar.barInset = inset
+                            bar.trackInset = inset
                             bar.lineCap = .butt
                         })
                         subview = progressBar.subviews.first
@@ -405,7 +405,7 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                 }
                 
                 it("should always retrieve the number of steps and number of sections") {
-                    expect(dataSource.numberOfStepsCalled).to(beTrue())
+                    expect(dataSource.numberOfUnitsCalled).to(beTrue())
                     expect(dataSource.numberOfSectionsCalled).to(beTrue())
                 }
             }
@@ -466,10 +466,10 @@ class MGSegmentedProgressBarSpec: QuickSpec {
         
         describe("changing the progress") {
             let numberOfSections: Int = 3
-            let numberOfSteps: Int = 10
+            let numberOfUnits: Int = 10
             
             beforeEach {
-                let dataSource = MockMGSegmentedProgressBarDataSource(numberOfSteps: numberOfSteps, numberOfSections: numberOfSections)
+                let dataSource = MockMGSegmentedProgressBarDataSource(numberOfUnits: numberOfUnits, numberOfSections: numberOfSections)
                 progressBar = self.setupProgressBar(configure: { bar in
                     bar.dataSource = dataSource
                 })
@@ -480,7 +480,7 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                     let progress: Int = 1
                     
                     beforeEach {
-                        progressBar.setProgress(forSection: 0, steps: progress)
+                        progressBar.setProgress(forSection: 0, to: progress)
                     }
                     
                     it("should set the correct progress for the section") {
@@ -489,14 +489,14 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                 }
                 
                 context("when setting a progress that exceeds the total number of steps in the progress bar") {
-                    let progress: Int = numberOfSteps + 1
+                    let progress: Int = numberOfUnits + 1
                     
                     beforeEach {
-                        progressBar.setProgress(forSection: 0, steps: progress)
+                        progressBar.setProgress(forSection: 0, to: progress)
                     }
                     
                     it("should set the progress to the total number of steps in the progress bar") {
-                        expect(progressBar.progress(forSection: 0)).to(equal(numberOfSteps))
+                        expect(progressBar.progress(forSection: 0)).to(equal(numberOfUnits))
                     }
                 }
             }
@@ -505,7 +505,7 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                 let progress: Int = -1
                 
                 beforeEach {
-                    progressBar.setProgress(forSection: 0, steps: progress)
+                    progressBar.setProgress(forSection: 0, to: progress)
                 }
                 
                 it("should set it's progress to zero") {
@@ -518,8 +518,8 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                 let initialProgress: Int = 5
                 
                 beforeEach {
-                    progressBar.setProgress(forSection: 0, steps: initialProgress)
-                    progressBar.setProgress(forSection: 0, steps: progress)
+                    progressBar.setProgress(forSection: 0, to: initialProgress)
+                    progressBar.setProgress(forSection: 0, to: progress)
                 }
                 
                 it("should replace its previous progress") {
@@ -532,12 +532,12 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                 let sum: Int = 2 + 3
                 
                 beforeEach {
-                    progressBar.setProgress(forSection: 0, steps: 2)
-                    progressBar.setProgress(forSection: 1, steps: 3)
-                    progressBar.setProgress(forSection: 2, steps: progress)
+                    progressBar.setProgress(forSection: 0, to: 2)
+                    progressBar.setProgress(forSection: 1, to: 3)
+                    progressBar.setProgress(forSection: 2, to: progress)
                 }
                 it("should only progress up to the maximum number of steps") {
-                    expect(progressBar.progress(forSection: 2)).to(equal(numberOfSteps - sum))
+                    expect(progressBar.progress(forSection: 2)).to(equal(numberOfUnits - sum))
                 }
             }
             
@@ -548,7 +548,7 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                     let progress: Int = 1
                     
                     beforeEach {
-                        progressBar.setProgress(forSection: 0, steps: existingProgress)
+                        progressBar.setProgress(forSection: 0, to: existingProgress)
                         progressBar.advance(section: 0, by: progress)
                     }
                     
@@ -561,7 +561,7 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                     let progress: Int = -1
                     
                     beforeEach {
-                        progressBar.setProgress(forSection: 0, steps: existingProgress)
+                        progressBar.setProgress(forSection: 0, to: existingProgress)
                         progressBar.advance(section: 0, by: progress)
                     }
                     
@@ -573,9 +573,9 @@ class MGSegmentedProgressBarSpec: QuickSpec {
             
             context("when resetting the progress bar") {
                 beforeEach {
-                    progressBar.setProgress(forSection: 0, steps: 1)
-                    progressBar.setProgress(forSection: 1, steps: 1)
-                    progressBar.setProgress(forSection: 2, steps: 1)
+                    progressBar.setProgress(forSection: 0, to: 1)
+                    progressBar.setProgress(forSection: 1, to: 1)
+                    progressBar.setProgress(forSection: 2, to: 1)
                     progressBar.resetProgress()
                 }
                 
@@ -590,9 +590,9 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                 let progress: Int = 2
                 
                 beforeEach {
-                    progressBar.setProgress(forSection: 0, steps: progress)
-                    progressBar.setProgress(forSection: 1, steps: progress)
-                    progressBar.setProgress(forSection: 2, steps: progress)
+                    progressBar.setProgress(forSection: 0, to: progress)
+                    progressBar.setProgress(forSection: 1, to: progress)
+                    progressBar.setProgress(forSection: 2, to: progress)
                 }
                 
                 it("should return the correct total progress") {
@@ -624,40 +624,40 @@ class MGSegmentedProgressBarSpec: QuickSpec {
             context("after setting the progress") {
                 context("on an individual bar section") {
                     let numberOfSections: Int = 1
-                    let numberOfSteps: Int = 10
+                    let numberOfUnits: Int = 10
                     let progress: Int = 1
                     var progressBarSubview: UIView!
                     
                     beforeEach {
-                        let dataSource = MockMGSegmentedProgressBarDataSource(numberOfSteps: numberOfSteps, numberOfSections: numberOfSections)
+                        let dataSource = MockMGSegmentedProgressBarDataSource(numberOfUnits: numberOfUnits, numberOfSections: numberOfSections)
                         progressBar = self.setupProgressBar(configure: { bar in
                             bar.dataSource = dataSource
                         })
-                        progressBar.setProgress(forSection: 0, steps: progress)
+                        progressBar.setProgress(forSection: 0, to: progress)
                         progressBarSubview = progressBar.subviews.first
                     }
                     
                     it("should calculate the correct width for the bar section") {
                         let section = progressBarSubview.subviews.first
-                        let expectedWidth = (CGFloat(progress) / CGFloat(numberOfSteps)) * progressBarSubview.frame.width
+                        let expectedWidth = (CGFloat(progress) / CGFloat(numberOfUnits)) * progressBarSubview.frame.width
                         expect(section?.frame.width).to(equal(expectedWidth))
                     }
                 }
                 
-                fcontext("on a section with whose section before it has nonzero progress") {
+                context("on a section with whose section before it has nonzero progress") {
                     let numberOfSections: Int = 2
-                    let numberOfSteps: Int = 10
+                    let numberOfUnits: Int = 10
                     let firstSectionProgress: Int = 2
                     let secondSectionProgress: Int = 1
                     var progressBarSubview: UIView!
                     
                     beforeEach {
-                        let dataSource = MockMGSegmentedProgressBarDataSource(numberOfSteps: numberOfSteps, numberOfSections: numberOfSections)
+                        let dataSource = MockMGSegmentedProgressBarDataSource(numberOfUnits: numberOfUnits, numberOfSections: numberOfSections)
                         progressBar = self.setupProgressBar(configure: { bar in
                             bar.dataSource = dataSource
                         })
-                        progressBar.setProgress(forSection: 0, steps: firstSectionProgress)
-                        progressBar.setProgress(forSection: 1, steps: secondSectionProgress)
+                        progressBar.setProgress(forSection: 0, to: firstSectionProgress)
+                        progressBar.setProgress(forSection: 1, to: secondSectionProgress)
                         progressBarSubview = progressBar.subviews.first
                     }
                     
@@ -666,7 +666,7 @@ class MGSegmentedProgressBarSpec: QuickSpec {
                         let secondSection = progressBarSubview.subviews.last
                         
                         let expectedOrigin = CGPoint(x: firstSection.frame.width, y: 0)
-                        let expectedWidth = (CGFloat(secondSectionProgress) / CGFloat(numberOfSteps)) * progressBarSubview.frame.width
+                        let expectedWidth = (CGFloat(secondSectionProgress) / CGFloat(numberOfUnits)) * progressBarSubview.frame.width
                         
                         expect(secondSection?.frame.origin).to(equal(expectedOrigin))
                         expect(secondSection?.frame.width).to(equal(expectedWidth))
@@ -696,21 +696,21 @@ extension MGSegmentedProgressBarSpec {
 
 extension MGSegmentedProgressBarSpec {
     class MockMGSegmentedProgressBarDataSource: MGSegmentedProgressBarDataSource {
-        var numberOfStepsCalled: Bool = false
+        var numberOfUnitsCalled: Bool = false
         var numberOfSectionsCalled: Bool = false
         var barForSectionCalledCount: Int = 0
         
-        private var numberOfSteps: Int
+        private var numberOfUnits: Int
         private var numberOfSections: Int
         
-        init(numberOfSteps: Int = 0, numberOfSections: Int = 0) {
-            self.numberOfSteps = numberOfSteps
+        init(numberOfUnits: Int = 0, numberOfSections: Int = 0) {
+            self.numberOfUnits = numberOfUnits
             self.numberOfSections = numberOfSections
         }
         
-        func numberOfSteps(in progressBar: MGSegmentedProgressBar) -> Int {
-            numberOfStepsCalled = true
-            return numberOfSteps
+        func numberOfUnits(in progressBar: MGSegmentedProgressBar) -> Int {
+            numberOfUnitsCalled = true
+            return numberOfUnits
         }
         
         func numberOfSections(in progressBar: MGSegmentedProgressBar) -> Int {

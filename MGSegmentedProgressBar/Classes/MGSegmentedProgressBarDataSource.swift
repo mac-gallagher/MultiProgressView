@@ -7,7 +7,7 @@
 //
 
 public protocol MGSegmentedProgressBarDataSource {
-    func numberOfSteps(in progressBar: MGSegmentedProgressBar) -> Int
+    func numberOfUnits(in progressBar: MGSegmentedProgressBar) -> Int
     func numberOfSections(in progressBar: MGSegmentedProgressBar) -> Int
     func progressBar(_ progressBar: MGSegmentedProgressBar, barForSection section: Int) -> ProgressBarSection
 }
