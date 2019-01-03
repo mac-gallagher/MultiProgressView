@@ -1,0 +1,27 @@
+{
+  "name": "MultiProgressView",
+  "version": "0.4.1",
+  "platforms": {
+    "ios": "9.0"
+  },
+  "summary": "An animatable progress bar with support for multiple sections",
+  "description": "An animatable progress bar with support for multiple sections.",
+  "homepage": "https://github.com/mac-gallagher/MultiProgressView",
+  "screenshots": [
+    "https://raw.githubusercontent.com/mac-gallagher/MultiProgressView/master/Images/progress_bar.gif"
+  ],
+  "documentation_url": "https://github.com/mac-gallagher/MultiProgressView/tree/master/README.md",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Mac Gallagher": "jmgallagher36@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/mac-gallagher/MultiProgressView",
+    "tag": "v0.4.1"
+  },
+  "swift_version": "4.2",
+  "source_files": "MultiProgressView/Classes/**/*"
+}

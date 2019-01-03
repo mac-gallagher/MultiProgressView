@@ -8,7 +8,7 @@
 
 import Quick
 import Nimble
-import MGSegmentedProgressBar
+import MultiProgressView
 
 class ProgressBarSectionSpec: QuickSpec {
     override func spec() {

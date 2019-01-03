@@ -2,14 +2,14 @@ use_frameworks!
 
 platform :ios, '9.0'
 
-workspace 'MGSegmentedProgressBar'
+workspace 'MultiProgressView'
 
-target 'MGSegmentedProgressBar_Example' do
-    pod 'MGSegmentedProgressBar', :path => '../'
+target 'MultiProgressView_Example' do
+    pod 'MultiProgressView', :path => '../'
 end
 
-target 'MGSegmentedProgressBar_Tests' do
-    pod 'MGSegmentedProgressBar', :path => '../'
+target 'MultiProgressView_Tests' do
+    pod 'MultiProgressView', :path => '../'
     pod 'Quick'
     pod 'Nimble'
     

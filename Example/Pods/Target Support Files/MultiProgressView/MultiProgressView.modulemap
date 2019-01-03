@@ -1,0 +1,6 @@
+framework module MultiProgressView {
+  umbrella header "MultiProgressView-umbrella.h"
+
+  export *
+  module * { export * }
+}

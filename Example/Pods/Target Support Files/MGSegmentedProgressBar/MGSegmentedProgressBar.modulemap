@@ -1,6 +1,0 @@
-framework module MGSegmentedProgressBar {
-  umbrella header "MGSegmentedProgressBar-umbrella.h"
-
-  export *
-  module * { export * }
-}

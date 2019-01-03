@@ -1,18 +1,18 @@
-# MGSegmentedProgressBar
+# MultiProgressView
 
 ![Swift-Version](https://img.shields.io/badge/Swift-4.2-orange.svg)
-![CocoaPods](https://img.shields.io/cocoapods/v/MGSegmentedProgressBar.svg)
-![license](https://img.shields.io/cocoapods/l/MGSegmentedProgressBar.svg)
-![CocoaPods](https://img.shields.io/cocoapods/p/MGSegmentedProgressBar.svg)
+![CocoaPods](https://img.shields.io/cocoapods/v/MultiProgressView.svg)
+![license](https://img.shields.io/cocoapods/l/MultiProgressView.svg)
+![CocoaPods](https://img.shields.io/cocoapods/p/MultiProgressView.svg)
 
-![ProgressBar](https://raw.githubusercontent.com/mac-gallagher/MGSegmentedProgressBar/master/Images/progress_bar.gif)
+![ProgressBar](https://raw.githubusercontent.com/mac-gallagher/MultiProgressView/master/Images/progress_bar.gif)
 
 # About
-**MGSegmentedProgressbar** is an animatable progress bar developed in response to `UIProgressView` lacking support for multiple progress sections. The `MGSegmentedProgressBar` class includes all of the same features as `UIProgressView` as well as additional customization options.
+**MultiProgressView** is an animatable progress bar developed in response to `UIProgressView` lacking support for multiple progress sections. The `MultiProgressView` class includes all of the same features as `UIProgressView` as well as additional customization options.
 
 
 # Example
-To run the example project, clone the repo and run the `MGSegmentedProgressbar-Example` target. 
+To run the example project, clone the repo and run the `MultiProgressView-Example` target. 
 
 [Show example gifs here]
 
@@ -24,27 +24,27 @@ To run the example project, clone the repo and run the `MGSegmentedProgressbar-E
 # Installation
 
 ### CocoaPods
-MGSegmentedProgressBar is available through [CocoaPods](<https://cocoapods.org/>). To install it, simply add the following line to your `Podfile`:
+MultiProgressView is available through [CocoaPods](<https://cocoapods.org/>). To install it, simply add the following line to your `Podfile`:
 
-	pod 'MGSegmentedProgressBar'
+	pod 'MultiProgressView'
 
 ### Manual
-Download and drop the `MGSegmentedProgressBar` directory into your project.
+Download and drop the `MultiProgressView` directory into your project.
 
 # Usage
-1. Add a `MGSegmentedProgressBar` to your view hierarchy:
+1. Add a `MultiProgressView` to your view hierarchy:
 
     ```swift
-    let progressBar = MGSegmentedProgressBar()
+    let progressBar = MultiProgressView()
     view.addSubview(progressBar)
     ```
     
-2. Conform your class to the `MGSegmentedProgressBarDataSource` protocol and set your progress bar's `dataSource`:
+2. Conform your class to the `MultiProgressViewDataSource` protocol and set your progress bar's `dataSource`:
 
     ```swift
-    func numberOfSteps(in progressBar: MGSegmentedProgressBar) -> Int
-    func numberOfSections(in progressBar: MGSegmentedProgressBar) -> Int
-    func progressBar(_ progressBar: MGSegmentedProgressBar, barForSection section: Int) -> ProgressBarSection
+    func numberOfSteps(in progressBar: MultiProgressView) -> Int
+    func numberOfSections(in progressBar: MultiProgressView) -> Int
+    func progressBar(_ progressBar: MultiProgressView, barForSection section: Int) -> ProgressBarSection
     ```
     
     ```swift
@@ -61,8 +61,8 @@ Download and drop the `MGSegmentedProgressBar` directory into your project.
 
 ## Customization
 
-### MGSegmentedProgressBar
-Each `MGSegmentedProgressBar` exposes the following customizable variables:
+### MultiProgressView
+Each `MultiProgressView` exposes the following customizable variables:
 
 ```swift
 var cornerRadius: CGFloat = 0
@@ -115,4 +115,4 @@ UIView.animate(withDuration: 0.2) {
 Mac Gallagher, jmgallagher36@gmail.com.
 
 # License
-MGSegmentedProgressBar is available under the [MIT License](LICENSE), see LICENSE for more infomation.
+MultiProgressView is available under the [MIT License](LICENSE), see LICENSE for more infomation.
