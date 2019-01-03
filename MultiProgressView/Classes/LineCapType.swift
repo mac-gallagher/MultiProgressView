@@ -1,6 +1,6 @@
 //
 //  LineCapType.swift
-//  MGSegmentedProgressBar
+//  MultiProgressView
 //
 //  Created by Mac Gallagher on 12/25/18.
 //

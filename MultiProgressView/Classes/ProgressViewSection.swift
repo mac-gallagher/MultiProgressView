@@ -1,6 +1,6 @@
 //
 //  MGBarView.swift
-//  MGSegmentedProgressBar
+//  MultiProgressView
 //
 //  Created by Mac Gallagher on 6/15/18.
 //  Copyright © 2018 Mac Gallagher. All rights reserved.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class ProgressBarSection: UIView {
+open class ProgressViewSection: UIView {
     public var titleLabel: UILabel? {
         return label
     }

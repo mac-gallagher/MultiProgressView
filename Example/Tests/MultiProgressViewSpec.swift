@@ -1,6 +1,6 @@
 //
-//  MGSegmentedProgressBarSpec.swift
-//  MGSegmentedProgressBar_Tests
+//  MultiProgressViewSpec.swift
+//  MultiProgressView_Tests
 //
 //  Created by Mac Gallagher on 12/26/18.
 //  Copyright © 2018 Mac Gallagher. All rights reserved.
@@ -11,109 +11,109 @@ import Nimble
 import MultiProgressView
 
 class MultiProgressViewSpec: QuickSpec {
-    private let progressBarWidth: CGFloat = 300
-    private let progressBarHeight: CGFloat = 50
+    private let progressViewWidth: CGFloat = 300
+    private let progressViewHeight: CGFloat = 50
 
     override func spec() {
-        var progressBar: MultiProgressView!
+        var progressView: MultiProgressView!
         
         describe("initialization") {
             beforeEach {
-                progressBar = self.setupProgressBar()
+                progressView = self.setupProgressView()
             }
             
-            context("when initializing a new progress bar") {
-                it("should have no bar title label") {
-                    expect(progressBar.trackTitleLabel).to(beNil())
+            context("when initializing a new progress view") {
+                it("should have no track title label") {
+                    expect(progressView.trackTitleLabel).to(beNil())
                 }
                 
                 it("should have track insets equal to zero") {
-                    expect(progressBar.trackInset).to(equal(0))
+                    expect(progressView.trackInset).to(equal(0))
                 }
                 
                 it("should have a border color of black") {
-                    expect(progressBar.borderColor).to(equal(.black))
+                    expect(progressView.borderColor).to(equal(.black))
                 }
                 
                 it("should have a border width of zero") {
-                    expect(progressBar.borderWidth).to(equal(0))
+                    expect(progressView.borderWidth).to(equal(0))
                 }
                 
                 it("should have track title insets equal to zero") {
-                    expect(progressBar.trackTitleEdgeInsets).to(equal(.zero))
+                    expect(progressView.trackTitleEdgeInsets).to(equal(.zero))
                 }
                 
                 it("should have a center track title alignment") {
-                    expect(progressBar.trackTitleAlignment).to(equal(.center))
+                    expect(progressView.trackTitleAlignment).to(equal(.center))
                 }
                 
                 it("should have a track background color of white") {
-                    expect(progressBar.trackBackgroundColor).to(equal(.white))
+                    expect(progressView.trackBackgroundColor).to(equal(.white))
                 }
                 
                 it("should have a track border color of black") {
-                    expect(progressBar.trackBorderColor).to(equal(.black))
+                    expect(progressView.trackBorderColor).to(equal(.black))
                 }
                 
                 it("should have a track border width of zero") {
-                    expect(progressBar.trackBorderWidth).to(equal(0))
+                    expect(progressView.trackBorderWidth).to(equal(0))
                 }
                 
                 it("should have a round line cap type") {
-                    expect(progressBar.lineCap).to(equal(.round))
+                    expect(progressView.lineCap).to(equal(.round))
                 }
                 
                 it("should have corner radius equal to zero") {
-                    expect(progressBar.cornerRadius).to(equal(0))
+                    expect(progressView.cornerRadius).to(equal(0))
                 }
                 
                 it("should have no data source") {
-                    expect(progressBar.dataSource).to(beNil())
+                    expect(progressView.dataSource).to(beNil())
                 }
                 
                 it("should clip to bounds") {
-                    expect(progressBar.clipsToBounds).to(beTrue())
+                    expect(progressView.clipsToBounds).to(beTrue())
                 }
                 
                 it("should have exactly one subview") {
-                    expect(progressBar.subviews.count).to(equal(1))
+                    expect(progressView.subviews.count).to(equal(1))
                 }
                
                 it("should clip its subview to its bounds") {
-                    let subview = progressBar.subviews.first
+                    let subview = progressView.subviews.first
                     expect(subview?.clipsToBounds).to(beTrue())
                 }
             }
         }
 
-        describe("bar title label") {
-            context("when setting the progress bar's title") {
+        describe("progress view title label") {
+            context("when setting the progress view's title") {
                 var title: String!
                 
                 beforeEach {
                     title = "title"
-                    progressBar = self.setupProgressBar(configure: { bar in
-                        bar.setTitle(title)
+                    progressView = self.setupProgressView(configure: { view in
+                        view.setTitle(title)
                     })
                 }
                 
                 it("should show the expected title") {
-                    expect(progressBar.trackTitleLabel?.text).to(equal(title))
+                    expect(progressView.trackTitleLabel?.text).to(equal(title))
                 }
             }
             
-            context("when setting the the progress bar's attributed title") {
+            context("when setting the the progress view's attributed title") {
                 var title: NSAttributedString!
                 
                 beforeEach {
                     title = NSAttributedString(string: "title")
-                    progressBar = self.setupProgressBar(configure: { bar in
-                        bar.setAttributedTitle(title)
+                    progressView = self.setupProgressView(configure: { view in
+                        view.setAttributedTitle(title)
                     })
                 }
                 
                 it("should show the expected attributed title") {
-                    expect(progressBar.trackTitleLabel?.attributedText).to(equal(title))
+                    expect(progressView.trackTitleLabel?.attributedText).to(equal(title))
                 }
             }
         }
@@ -124,15 +124,15 @@ class MultiProgressViewSpec: QuickSpec {
                     var subview: UIView!
                     
                     beforeEach {
-                        progressBar = self.setupProgressBar(configure: { bar in
-                            bar.lineCap = .round
-                            bar.cornerRadius = 0
+                        progressView = self.setupProgressView(configure: { view in
+                            view.lineCap = .round
+                            view.cornerRadius = 0
                         })
-                        subview = progressBar.subviews.first
+                        subview = progressView.subviews.first
                     }
 
                     it("should have corner radius equal to half its height") {
-                        expect(progressBar.layer.cornerRadius).to(equal(progressBar.bounds.height / 2))
+                        expect(progressView.layer.cornerRadius).to(equal(progressView.bounds.height / 2))
                     }
 
                     it("should have its subview's corner radius equal to half its height") {
@@ -145,15 +145,15 @@ class MultiProgressViewSpec: QuickSpec {
                     var subview: UIView!
                     
                     beforeEach {
-                        progressBar = self.setupProgressBar(configure: { bar in
-                            bar.lineCap = .round
-                            bar.cornerRadius = cornerRadius
+                        progressView = self.setupProgressView(configure: { view in
+                            view.lineCap = .round
+                            view.cornerRadius = cornerRadius
                         })
-                        subview = progressBar.subviews.first
+                        subview = progressView.subviews.first
                     }
                     
                     it("should have corner radius equal to the set corner radius") {
-                        expect(progressBar.layer.cornerRadius).to(equal(cornerRadius))
+                        expect(progressView.layer.cornerRadius).to(equal(cornerRadius))
                     }
                     
                     it("should have its subview's corner radius equal to the set corner radius") {
@@ -167,15 +167,15 @@ class MultiProgressViewSpec: QuickSpec {
                     var subview: UIView!
                     
                     beforeEach {
-                        progressBar = self.setupProgressBar(configure: { bar in
-                            bar.lineCap = .square
-                            bar.cornerRadius = 0
+                        progressView = self.setupProgressView(configure: { view in
+                            view.lineCap = .square
+                            view.cornerRadius = 0
                         })
-                        subview = progressBar.subviews.first
+                        subview = progressView.subviews.first
                     }
                     
                     it("should have corner radius equal to zero") {
-                        expect(progressBar.layer.cornerRadius).to(equal(0))
+                        expect(progressView.layer.cornerRadius).to(equal(0))
                     }
                     
                     it("should have its subview's corner radius equal to zero") {
@@ -188,15 +188,15 @@ class MultiProgressViewSpec: QuickSpec {
                     var subview: UIView!
                     
                     beforeEach {
-                        progressBar = self.setupProgressBar(configure: { bar in
-                            bar.lineCap = .square
-                            bar.cornerRadius = cornerRadius
+                        progressView = self.setupProgressView(configure: { view in
+                            view.lineCap = .square
+                            view.cornerRadius = cornerRadius
                         })
-                        subview = progressBar.subviews.first
+                        subview = progressView.subviews.first
                     }
                     
                     it("should have corner radius equal to zero") {
-                        expect(progressBar.layer.cornerRadius).to(equal(0))
+                        expect(progressView.layer.cornerRadius).to(equal(0))
                     }
                     
                     it("should have its subview's corner radius equal to zero") {
@@ -210,15 +210,15 @@ class MultiProgressViewSpec: QuickSpec {
                     var subview: UIView!
                     
                     beforeEach {
-                        progressBar = self.setupProgressBar(configure: { bar in
-                            bar.lineCap = .butt
-                            bar.cornerRadius = 0
+                        progressView = self.setupProgressView(configure: { view in
+                            view.lineCap = .butt
+                            view.cornerRadius = 0
                         })
-                        subview = progressBar.subviews.first
+                        subview = progressView.subviews.first
                     }
                     
                     it("should have corner radius equal to zero") {
-                        expect(progressBar.layer.cornerRadius).to(equal(0))
+                        expect(progressView.layer.cornerRadius).to(equal(0))
                     }
                     
                     it("should have its subview's corner radius equal to zero") {
@@ -231,15 +231,15 @@ class MultiProgressViewSpec: QuickSpec {
                     var subview: UIView!
                     
                     beforeEach {
-                        progressBar = self.setupProgressBar(configure: { bar in
-                            bar.lineCap = .butt
-                            bar.cornerRadius = cornerRadius
+                        progressView = self.setupProgressView(configure: { view in
+                            view.lineCap = .butt
+                            view.cornerRadius = cornerRadius
                         })
-                        subview = progressBar.subviews.first
+                        subview = progressView.subviews.first
                     }
                     
-                    it("should have corner radius equal to the set corner radius") {
-                        expect(progressBar.layer.cornerRadius).to(equal(cornerRadius))
+                    it("should have corner radius equal to zero") {
+                        expect(progressView.layer.cornerRadius).to(equal(0))
                     }
                     
                     it("should have its subview's corner radius equal to zero") {
@@ -254,13 +254,13 @@ class MultiProgressViewSpec: QuickSpec {
                 let color: UIColor = .blue
                 
                 beforeEach {
-                    progressBar = self.setupProgressBar(configure: { bar in
-                        bar.borderColor = color
+                    progressView = self.setupProgressView(configure: { view in
+                        view.borderColor = color
                     })
                 }
                 
                 it("should correctly set the border color") {
-                    expect(progressBar.borderColor).to(equal(color))
+                    expect(progressView.borderColor).to(equal(color))
                 }
             }
             
@@ -268,93 +268,93 @@ class MultiProgressViewSpec: QuickSpec {
                 let width: CGFloat = 5
                 
                 beforeEach {
-                    progressBar = self.setupProgressBar(configure: { bar in
-                        bar.borderWidth = width
+                    progressView = self.setupProgressView(configure: { view in
+                        view.borderWidth = width
                     })
                 }
                 
                 it("should correctly set the border width") {
-                    expect(progressBar.borderWidth).to(equal(width))
+                    expect(progressView.borderWidth).to(equal(width))
                 }
             }
             
-            context("when setting the progress bar's border color") {
+            context("when setting the progress view's border color") {
                 let color: UIColor = .blue
                 
                 beforeEach {
-                    progressBar = self.setupProgressBar(configure: { bar in
-                        bar.trackBorderColor = color
+                    progressView = self.setupProgressView(configure: { view in
+                        view.trackBorderColor = color
                     })
                 }
                 
-                it("should correctly set the progress bar's border color") {
-                    expect(progressBar.trackBorderColor).to(equal(color))
+                it("should correctly set the progress view's border color") {
+                    expect(progressView.trackBorderColor).to(equal(color))
                 }
             }
             
-            context("when setting the progress bar's border width") {
+            context("when setting the progress view's border width") {
                 let width: CGFloat = 5
                 
                 beforeEach {
-                    progressBar = self.setupProgressBar(configure: { bar in
-                        bar.trackBorderWidth = width
+                    progressView = self.setupProgressView(configure: { view in
+                        view.trackBorderWidth = width
                     })
                 }
                 
-                it("should correctly set the progress bar's border width") {
-                    expect(progressBar.trackBorderWidth).to(equal(width))
+                it("should correctly set the progress view's border width") {
+                    expect(progressView.trackBorderWidth).to(equal(width))
                 }
             }
         }
         
-        describe("bar background color") {
-            context("when setting the bar background color") {
+        describe("progress view section background color") {
+            context("when setting the progress view section's background color") {
                 let color: UIColor = .blue
                 
                 beforeEach {
-                    progressBar = self.setupProgressBar(configure: { bar in
-                        bar.trackBackgroundColor = color
+                    progressView = self.setupProgressView(configure: { view in
+                        view.trackBackgroundColor = color
                     })
                 }
                 
-                it("should correctly set the progress bar's background color") {
-                    expect(progressBar.trackBackgroundColor).to(equal(color))
+                it("should correctly set the progress view's background color") {
+                    expect(progressView.trackBackgroundColor).to(equal(color))
                 }
             }
         }
         
-        describe("bar inset") {
-            context("when the bar inset is equal to zero") {
+        describe("track inset") {
+            context("when the track inset is equal to zero") {
                 var subview: UIView!
                 
                 beforeEach {
-                    progressBar = self.setupProgressBar(configure: { bar in
-                        bar.trackInset = 0
+                    progressView = self.setupProgressView(configure: { view in
+                        view.trackInset = 0
                     })
-                    subview = progressBar.subviews.first
+                    subview = progressView.subviews.first
                 }
                 
                 it("should have no insets on its subview") {
-                    expect(subview.frame).to(equal(progressBar.bounds))
+                    expect(subview.frame).to(equal(progressView.bounds))
                 }
             }
             
-            context("when the bar inset is nonzero") {
+            context("when the track inset is nonzero") {
                 let inset: CGFloat = 1
                 var subview: UIView!
                 
                 context("when the line cap type is round") {
                     beforeEach {
-                        progressBar = self.setupProgressBar(configure: { bar in
-                            bar.trackInset = inset
-                            bar.lineCap = .round
+                        progressView = self.setupProgressView(configure: { view in
+                            view.trackInset = inset
+                            view.lineCap = .round
                         })
-                        subview = progressBar.subviews.first
+                        subview = progressView.subviews.first
                     }
                     
                     it("should have insets on all sides of its subview") {
-                        expect(subview.bounds.height).to(equal(progressBar.bounds.height - 2 * inset))
-                        expect(subview.bounds.width).to(equal(progressBar.bounds.width - 2 * inset))
+                        expect(subview.bounds.height).to(equal(progressView.bounds.height - 2 * inset))
+                        expect(subview.bounds.width).to(equal(progressView.bounds.width - 2 * inset))
                     }
                 }
                 
@@ -362,16 +362,16 @@ class MultiProgressViewSpec: QuickSpec {
                     var subview: UIView!
                     
                     beforeEach {
-                        progressBar = self.setupProgressBar(configure: { bar in
-                            bar.trackInset = inset
-                            bar.lineCap = .square
+                        progressView = self.setupProgressView(configure: { view in
+                            view.trackInset = inset
+                            view.lineCap = .square
                         })
-                        subview = progressBar.subviews.first
+                        subview = progressView.subviews.first
                     }
                     
                     it("should have insets on all sides of its subview") {
-                        expect(subview.bounds.height).to(equal(progressBar.bounds.height - 2 * inset))
-                        expect(subview.bounds.width).to(equal(progressBar.bounds.width - 2 * inset))
+                        expect(subview.bounds.height).to(equal(progressView.bounds.height - 2 * inset))
+                        expect(subview.bounds.width).to(equal(progressView.bounds.width - 2 * inset))
                     }
                 }
                 
@@ -379,16 +379,16 @@ class MultiProgressViewSpec: QuickSpec {
                     var subview: UIView!
                     
                     beforeEach {
-                        progressBar = self.setupProgressBar(configure: { bar in
-                            bar.trackInset = inset
-                            bar.lineCap = .butt
+                        progressView = self.setupProgressView(configure: { view in
+                            view.trackInset = inset
+                            view.lineCap = .butt
                         })
-                        subview = progressBar.subviews.first
+                        subview = progressView.subviews.first
                     }
                     
                     it("should have insets on only the top and the bottom of its subview") {
-                        expect(subview.bounds.height).to(equal(progressBar.bounds.height - 2 * inset))
-                        expect(subview.bounds.width).to(equal(progressBar.bounds.width))
+                        expect(subview.bounds.height).to(equal(progressView.bounds.height - 2 * inset))
+                        expect(subview.bounds.width).to(equal(progressView.bounds.width))
                     }
                 }
             }
@@ -396,11 +396,11 @@ class MultiProgressViewSpec: QuickSpec {
         
         describe("data source") {
             context("when setting the data source") {
-                let dataSource = MockMGSegmentedProgressBarDataSource()
+                let dataSource = MockMultiProgressViewDataSource()
                 
                 beforeEach {
-                    progressBar = self.setupProgressBar(configure: { bar in
-                        bar.dataSource = dataSource
+                    progressView = self.setupProgressView(configure: { view in
+                        view.dataSource = dataSource
                     })
                 }
                 
@@ -411,55 +411,55 @@ class MultiProgressViewSpec: QuickSpec {
             }
             
             context("when the number of sections is zero") {
-                let dataSource = MockMGSegmentedProgressBarDataSource(numberOfSections: 0)
+                let dataSource = MockMultiProgressViewDataSource(numberOfSections: 0)
                 
                 beforeEach {
-                    progressBar = self.setupProgressBar(configure: { bar in
-                        bar.dataSource = dataSource
+                    progressView = self.setupProgressView(configure: { view in
+                        view.dataSource = dataSource
                     })
                 }
                 
-                it("should not call the barForSectionAt function") {
-                    expect(dataSource.barForSectionCalledCount).to(equal(0))
+                it("should not call the viewForSectionAt function") {
+                    expect(dataSource.viewForSectionCalledCount).to(equal(0))
                 }
             }
             
             context("when the number of sections is nonzero") {
                 let numberOfSections: Int = 10
-                let dataSource = MockMGSegmentedProgressBarDataSource(numberOfSections: numberOfSections)
+                let dataSource = MockMultiProgressViewDataSource(numberOfSections: numberOfSections)
                 
                 beforeEach {
-                    progressBar = self.setupProgressBar(configure: { bar in
-                        bar.dataSource = dataSource
+                    progressView = self.setupProgressView(configure: { view in
+                        view.dataSource = dataSource
                     })
                 }
                 
-                it("should call the barForSectionAt function exactly once for each section") {
-                    expect(dataSource.barForSectionCalledCount).to(equal(numberOfSections))
+                it("should call the viewForSectionAt function exactly once for each section") {
+                    expect(dataSource.viewForSectionCalledCount).to(equal(numberOfSections))
                 }
             }
             
             context("when reloading the data") {
                 let numberOfSections: Int = 10
-                let dataSource = MockMGSegmentedProgressBarDataSource(numberOfSections: numberOfSections)
-                var progressBarSubview: UIView!
+                let dataSource = MockMultiProgressViewDataSource(numberOfSections: numberOfSections)
+                var progressViewSubview: UIView!
                 
                 beforeEach {
-                    progressBar = self.setupProgressBar(configure: { bar in
-                        bar.dataSource = dataSource
+                    progressView = self.setupProgressView(configure: { view in
+                        view.dataSource = dataSource
                     })
-                    progressBarSubview = progressBar.subviews.first
-                    progressBar.reloadData()
+                    progressViewSubview = progressView.subviews.first
+                    progressView.reloadData()
                 }
                 
-                it("should reset the progress on each bar") {
+                it("should reset the progress on each progress view section") {
                     for index in 0..<numberOfSections {
-                        expect(progressBar.progress(forSection: index)).to(equal(0))
+                        expect(progressView.progress(forSection: index)).to(equal(0))
                     }
                 }
                 
                 it("should have the correct number of subviews") {
-                    expect(progressBarSubview.subviews.count).to(equal(numberOfSections))
+                    expect(progressViewSubview.subviews.count).to(equal(numberOfSections))
                 }
             }
         }
@@ -469,34 +469,34 @@ class MultiProgressViewSpec: QuickSpec {
             let numberOfUnits: Int = 10
             
             beforeEach {
-                let dataSource = MockMGSegmentedProgressBarDataSource(numberOfUnits: numberOfUnits, numberOfSections: numberOfSections)
-                progressBar = self.setupProgressBar(configure: { bar in
-                    bar.dataSource = dataSource
+                let dataSource = MockMultiProgressViewDataSource(numberOfUnits: numberOfUnits, numberOfSections: numberOfSections)
+                progressView = self.setupProgressView(configure: { view in
+                    view.dataSource = dataSource
                 })
             }
             
             context("when setting a nonnegative progress on an individual section") {
-                context("when setting a progress that does not exceed the total number of steps in the progress bar") {
+                context("when setting a progress that does not exceed the total number of steps in the progress view") {
                     let progress: Int = 1
                     
                     beforeEach {
-                        progressBar.setProgress(forSection: 0, to: progress)
+                        progressView.setProgress(section: 0, to: progress)
                     }
                     
                     it("should set the correct progress for the section") {
-                        expect(progressBar.progress(forSection: 0)).to(equal(progress))
+                        expect(progressView.progress(forSection: 0)).to(equal(progress))
                     }
                 }
                 
-                context("when setting a progress that exceeds the total number of steps in the progress bar") {
+                context("when setting a progress that exceeds the total number of steps in the progress view") {
                     let progress: Int = numberOfUnits + 1
                     
                     beforeEach {
-                        progressBar.setProgress(forSection: 0, to: progress)
+                        progressView.setProgress(section: 0, to: progress)
                     }
                     
-                    it("should set the progress to the total number of steps in the progress bar") {
-                        expect(progressBar.progress(forSection: 0)).to(equal(numberOfUnits))
+                    it("should set the progress to the total number of steps in the progress view") {
+                        expect(progressView.progress(forSection: 0)).to(equal(numberOfUnits))
                     }
                 }
             }
@@ -505,11 +505,11 @@ class MultiProgressViewSpec: QuickSpec {
                 let progress: Int = -1
                 
                 beforeEach {
-                    progressBar.setProgress(forSection: 0, to: progress)
+                    progressView.setProgress(section: 0, to: progress)
                 }
                 
                 it("should set it's progress to zero") {
-                    expect(progressBar.progress(forSection: 0)).to(equal(0))
+                    expect(progressView.progress(forSection: 0)).to(equal(0))
                 }
             }
             
@@ -518,26 +518,26 @@ class MultiProgressViewSpec: QuickSpec {
                 let initialProgress: Int = 5
                 
                 beforeEach {
-                    progressBar.setProgress(forSection: 0, to: initialProgress)
-                    progressBar.setProgress(forSection: 0, to: progress)
+                    progressView.setProgress(section: 0, to: initialProgress)
+                    progressView.setProgress(section: 0, to: progress)
                 }
                 
                 it("should replace its previous progress") {
-                    expect(progressBar.progress(forSection: 0)).to(equal(progress))
+                    expect(progressView.progress(forSection: 0)).to(equal(progress))
                 }
             }
             
-            context("when setting a progress which causes the sum of all sections' progress to exceed the number of steps in the progress bar") {
+            context("when setting a progress which causes the sum of all sections' progress to exceed the number of steps in the progress view") {
                 let progress: Int = 1000
                 let sum: Int = 2 + 3
                 
                 beforeEach {
-                    progressBar.setProgress(forSection: 0, to: 2)
-                    progressBar.setProgress(forSection: 1, to: 3)
-                    progressBar.setProgress(forSection: 2, to: progress)
+                    progressView.setProgress(section: 0, to: 2)
+                    progressView.setProgress(section: 1, to: 3)
+                    progressView.setProgress(section: 2, to: progress)
                 }
                 it("should only progress up to the maximum number of steps") {
-                    expect(progressBar.progress(forSection: 2)).to(equal(numberOfUnits - sum))
+                    expect(progressView.progress(forSection: 2)).to(equal(numberOfUnits - sum))
                 }
             }
             
@@ -548,12 +548,12 @@ class MultiProgressViewSpec: QuickSpec {
                     let progress: Int = 1
                     
                     beforeEach {
-                        progressBar.setProgress(forSection: 0, to: existingProgress)
-                        progressBar.advance(section: 0, by: progress)
+                        progressView.setProgress(section: 0, to: existingProgress)
+                        progressView.advance(by: progress, section: 0)
                     }
                     
                     it("should add to the existing progress") {
-                        expect(progressBar.progress(forSection: 0)).to(equal(existingProgress + progress))
+                        expect(progressView.progress(forSection: 0)).to(equal(existingProgress + progress))
                     }
                 }
                 
@@ -561,27 +561,27 @@ class MultiProgressViewSpec: QuickSpec {
                     let progress: Int = -1
                     
                     beforeEach {
-                        progressBar.setProgress(forSection: 0, to: existingProgress)
-                        progressBar.advance(section: 0, by: progress)
+                        progressView.setProgress(section: 0, to: existingProgress)
+                        progressView.advance(by: progress, section: 0)
                     }
                     
                     it("should subtract from the existing progress") {
-                        expect(progressBar.progress(forSection: 0)).to(equal(existingProgress + progress))
+                        expect(progressView.progress(forSection: 0)).to(equal(existingProgress + progress))
                     }
                 }
             }
             
-            context("when resetting the progress bar") {
+            context("when resetting the progress view") {
                 beforeEach {
-                    progressBar.setProgress(forSection: 0, to: 1)
-                    progressBar.setProgress(forSection: 1, to: 1)
-                    progressBar.setProgress(forSection: 2, to: 1)
-                    progressBar.resetProgress()
+                    progressView.setProgress(section: 0, to: 1)
+                    progressView.setProgress(section: 1, to: 1)
+                    progressView.setProgress(section: 2, to: 1)
+                    progressView.resetProgress()
                 }
                 
                 it("should set each section's progress to zero") {
                     for index in 0..<numberOfSections {
-                        expect(progressBar.progress(forSection: index)).to(equal(0))
+                        expect(progressView.progress(forSection: index)).to(equal(0))
                     }
                 }
             }
@@ -590,56 +590,56 @@ class MultiProgressViewSpec: QuickSpec {
                 let progress: Int = 2
                 
                 beforeEach {
-                    progressBar.setProgress(forSection: 0, to: progress)
-                    progressBar.setProgress(forSection: 1, to: progress)
-                    progressBar.setProgress(forSection: 2, to: progress)
+                    progressView.setProgress(section: 0, to: progress)
+                    progressView.setProgress(section: 1, to: progress)
+                    progressView.setProgress(section: 2, to: progress)
                 }
                 
                 it("should return the correct total progress") {
-                    expect(progressBar.totalProgress()).to(equal(3 * progress))
+                    expect(progressView.totalProgress()).to(equal(3 * progress))
                 }
             }
         }
         
-        describe("bar section layout") {
-            context("when the progress bar is initialized") {
-                var progressBarSubview: UIView!
+        describe("progress view section layout") {
+            context("when the progress view is initialized") {
+                var progressViewSubview: UIView!
                 let numberOfSections: Int = 3
                 
                 beforeEach {
-                    let dataSource = MockMGSegmentedProgressBarDataSource(numberOfSections: numberOfSections)
-                    progressBar = self.setupProgressBar(configure: { bar in
-                        bar.dataSource = dataSource
+                    let dataSource = MockMultiProgressViewDataSource(numberOfSections: numberOfSections)
+                    progressView = self.setupProgressView(configure: { view in
+                        view.dataSource = dataSource
                     })
-                    progressBarSubview = progressBar.subviews.first
+                    progressViewSubview = progressView.subviews.first
                 }
                 
                 it("should layout each section with zero width") {
-                    for section in progressBarSubview.subviews {
+                    for section in progressViewSubview.subviews {
                         expect(section.frame.width).to(equal(0))
                     }
                 }
             }
             
             context("after setting the progress") {
-                context("on an individual bar section") {
+                context("on an individual progress view section") {
                     let numberOfSections: Int = 1
                     let numberOfUnits: Int = 10
                     let progress: Int = 1
-                    var progressBarSubview: UIView!
+                    var progressViewSubview: UIView!
                     
                     beforeEach {
-                        let dataSource = MockMGSegmentedProgressBarDataSource(numberOfUnits: numberOfUnits, numberOfSections: numberOfSections)
-                        progressBar = self.setupProgressBar(configure: { bar in
-                            bar.dataSource = dataSource
+                        let dataSource = MockMultiProgressViewDataSource(numberOfUnits: numberOfUnits, numberOfSections: numberOfSections)
+                        progressView = self.setupProgressView(configure: { view in
+                            view.dataSource = dataSource
                         })
-                        progressBar.setProgress(forSection: 0, to: progress)
-                        progressBarSubview = progressBar.subviews.first
+                        progressView.setProgress(section: 0, to: progress)
+                        progressViewSubview = progressView.subviews.first
                     }
                     
-                    it("should calculate the correct width for the bar section") {
-                        let section = progressBarSubview.subviews.first
-                        let expectedWidth = (CGFloat(progress) / CGFloat(numberOfUnits)) * progressBarSubview.frame.width
+                    it("should calculate the correct width for the section") {
+                        let section = progressViewSubview.subviews.first
+                        let expectedWidth = (CGFloat(progress) / CGFloat(numberOfUnits)) * progressViewSubview.frame.width
                         expect(section?.frame.width).to(equal(expectedWidth))
                     }
                 }
@@ -649,24 +649,24 @@ class MultiProgressViewSpec: QuickSpec {
                     let numberOfUnits: Int = 10
                     let firstSectionProgress: Int = 2
                     let secondSectionProgress: Int = 1
-                    var progressBarSubview: UIView!
+                    var progressViewSubview: UIView!
                     
                     beforeEach {
-                        let dataSource = MockMGSegmentedProgressBarDataSource(numberOfUnits: numberOfUnits, numberOfSections: numberOfSections)
-                        progressBar = self.setupProgressBar(configure: { bar in
-                            bar.dataSource = dataSource
+                        let dataSource = MockMultiProgressViewDataSource(numberOfUnits: numberOfUnits, numberOfSections: numberOfSections)
+                        progressView = self.setupProgressView(configure: { view in
+                            view.dataSource = dataSource
                         })
-                        progressBar.setProgress(forSection: 0, to: firstSectionProgress)
-                        progressBar.setProgress(forSection: 1, to: secondSectionProgress)
-                        progressBarSubview = progressBar.subviews.first
+                        progressView.setProgress(section: 0, to: firstSectionProgress)
+                        progressView.setProgress(section: 1, to: secondSectionProgress)
+                        progressViewSubview = progressView.subviews.first
                     }
                     
                     it("should calculate the correct width and origin for the section") {
-                        let firstSection = progressBarSubview.subviews.first!
-                        let secondSection = progressBarSubview.subviews.last
+                        let firstSection = progressViewSubview.subviews.first!
+                        let secondSection = progressViewSubview.subviews.last
                         
                         let expectedOrigin = CGPoint(x: firstSection.frame.width, y: 0)
-                        let expectedWidth = (CGFloat(secondSectionProgress) / CGFloat(numberOfUnits)) * progressBarSubview.frame.width
+                        let expectedWidth = (CGFloat(secondSectionProgress) / CGFloat(numberOfUnits)) * progressViewSubview.frame.width
                         
                         expect(secondSection?.frame.origin).to(equal(expectedOrigin))
                         expect(secondSection?.frame.width).to(equal(expectedWidth))
@@ -678,27 +678,27 @@ class MultiProgressViewSpec: QuickSpec {
 }
 
 extension MultiProgressViewSpec {
-    func setupProgressBar(configure: (MultiProgressView) -> Void = { _ in } ) -> MultiProgressView {
+    func setupProgressView(configure: (MultiProgressView) -> Void = { _ in } ) -> MultiProgressView {
         let parentView = UIView()
-        let progressBar = MultiProgressView()
-        parentView.addSubview(progressBar)
+        let progressView = MultiProgressView()
+        parentView.addSubview(progressView)
         
-        progressBar.translatesAutoresizingMaskIntoConstraints = false
-        progressBar.widthAnchor.constraint(equalToConstant: progressBarWidth).isActive = true
-        progressBar.heightAnchor.constraint(equalToConstant: progressBarHeight).isActive = true
+        progressView.translatesAutoresizingMaskIntoConstraints = false
+        progressView.widthAnchor.constraint(equalToConstant: progressViewWidth).isActive = true
+        progressView.heightAnchor.constraint(equalToConstant: progressViewHeight).isActive = true
         
-        configure(progressBar)
+        configure(progressView)
         
-        progressBar.layoutIfNeeded()
-        return progressBar
+        progressView.layoutIfNeeded()
+        return progressView
     }
 }
 
 extension MultiProgressViewSpec {
-    class MockMGSegmentedProgressBarDataSource: MultiProgressViewDataSource {
+    class MockMultiProgressViewDataSource: MultiProgressViewDataSource {
         var numberOfUnitsCalled: Bool = false
         var numberOfSectionsCalled: Bool = false
-        var barForSectionCalledCount: Int = 0
+        var viewForSectionCalledCount: Int = 0
         
         private var numberOfUnits: Int
         private var numberOfSections: Int
@@ -708,19 +708,19 @@ extension MultiProgressViewSpec {
             self.numberOfSections = numberOfSections
         }
         
-        func numberOfUnits(in progressBar: MultiProgressView) -> Int {
+        func numberOfUnits(in progressView: MultiProgressView) -> Int {
             numberOfUnitsCalled = true
             return numberOfUnits
         }
         
-        func numberOfSections(in progressBar: MultiProgressView) -> Int {
+        func numberOfSections(in progressView: MultiProgressView) -> Int {
             numberOfSectionsCalled = true
             return numberOfSections
         }
         
-        func progressBar(_ progressBar: MultiProgressView, barForSection section: Int) -> ProgressBarSection {
-            barForSectionCalledCount += 1
-            return ProgressBarSection()
+        func progressView(_ progressView: MultiProgressView, viewForSection section: Int) -> ProgressViewSection {
+            viewForSectionCalledCount += 1
+            return ProgressViewSection()
         }
     }
 }

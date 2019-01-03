@@ -1,6 +1,6 @@
 //
 //  MGSegmentedProgressBar.swift
-//  MGSegmentedProgressBar
+//  MultiProgressView
 //
 //  Created by Mac Gallagher on 6/15/18.
 //  Copyright © 2018 Mac Gallagher. All rights reserved.
@@ -87,7 +87,7 @@ open class MultiProgressView: UIView {
         return view
     }()
     
-    private var progressBarSections: [ProgressBarSection] = []
+    private var progressBarSections: [ProgressViewSection] = []
     private var numberOfSections: Int = 0
     private var currentSteps: [Int] = []
     private var totalSteps: Int = 0
@@ -141,7 +141,7 @@ open class MultiProgressView: UIView {
         applyCornerRadius()
     }
 
-    private func layoutBar(_ bar: ProgressBarSection, section: Int) {
+    private func layoutBar(_ bar: ProgressViewSection, section: Int) {
         if totalSteps <= 0 { return }
         
         NSLayoutConstraint.deactivate(barSectionConstraints[section])
@@ -166,10 +166,7 @@ open class MultiProgressView: UIView {
         case .round:
             layer.cornerRadius = cornerRadius == 0 ? bounds.height / 2 : cornerRadius
             track.layer.cornerRadius = cornerRadius == 0 ? bounds.height / 2 : cornerRadius
-        case .butt:
-            layer.cornerRadius = cornerRadius
-            track.layer.cornerRadius = 0
-        case .square:
+        case .butt, .square:
             layer.cornerRadius = 0
             track.layer.cornerRadius = 0
         }
@@ -187,16 +184,18 @@ open class MultiProgressView: UIView {
         currentSteps.removeAll()
         barSectionConstraints.removeAll()
 
-        for section in 0..<numberOfSections {
-            let bar = dataSource.progressBar(self, barForSection: section)
-            progressBarSections.append(bar)
-            track.addSubview(bar)
-            
-            currentSteps.append(0)
-            barSectionConstraints.append([])
+        for index in 0..<numberOfSections {
+            configureSection(index)
         }
-        
-        setNeedsLayout()
+    }
+    
+    private func configureSection(_ section: Int) {
+        guard let dataSource = dataSource else { return }
+        let bar = dataSource.progressView(self, viewForSection: section)
+        progressBarSections.insert(bar, at: section)
+        track.addSubview(bar)
+        currentSteps.insert(0, at: section)
+        barSectionConstraints.insert([], at: section)
     }
     
     //MARK: - Main Methods
@@ -216,7 +215,6 @@ open class MultiProgressView: UIView {
         let title = UILabel()
         track.insertSubview(title, at: 0)
         label = title
-        setNeedsLayout()
     }
     
     public func progress(forSection section: Int) -> Int {
@@ -227,19 +225,19 @@ open class MultiProgressView: UIView {
         return currentSteps.reduce(0) { $0 + $1 }
     }
     
-    public func setProgress(forSection section: Int, to units: Int) {
+    public func setProgress(section: Int, to units: Int) {
         currentSteps[section] = max(0, min(units, totalRemainingSteps + currentSteps[section]))
         setNeedsLayout()
         layoutIfNeeded()
     }
     
-    public func advance(section: Int, by units: Int = 1) {
-        setProgress(forSection: section, to: currentSteps[section] + units)
+    public func advance(by units: Int = 1, section: Int) {
+        setProgress(section: section, to: currentSteps[section] + units)
     }
 
     public func resetProgress() {
         for section in 0..<progressBarSections.count {
-            setProgress(forSection: section, to: 0)
+            setProgress(section: section, to: 0)
         }
     }
 }

@@ -1,6 +1,6 @@
 //
 //  UIView+Extensions.swift
-//  MGSegmentedProgressBar
+//  MultiProgressView
 //
 //  Created by Mac Gallagher on 7/8/18.
 //  Copyright © 2018 Mac Gallagher. All rights reserved.

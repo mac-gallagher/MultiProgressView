@@ -1,6 +1,6 @@
 //
-//  MGSegmentedProgressBar_Tests.swift
-//  MGSegmentedProgressBar_Tests
+//  ProgressBarSectionSpec.swift
+//  MultiProgressView_Tests
 //
 //  Created by Mac Gallagher on 12/26/18.
 //  Copyright © 2018 Mac Gallagher. All rights reserved.
@@ -12,7 +12,7 @@ import MultiProgressView
 
 class ProgressBarSectionSpec: QuickSpec {
     override func spec() {
-        var section: ProgressBarSection!
+        var section: ProgressViewSection!
         
         describe("initialization") {
             context("when initializing a new section") {
@@ -73,8 +73,8 @@ class ProgressBarSectionSpec: QuickSpec {
 }
 
 extension ProgressBarSectionSpec {
-    func setupBarSection(configure: (ProgressBarSection) -> Void = { _ in } ) -> ProgressBarSection {
-        let section = ProgressBarSection()
+    func setupBarSection(configure: (ProgressViewSection) -> Void = { _ in } ) -> ProgressViewSection {
+        let section = ProgressViewSection()
         configure(section)
         return section
     }

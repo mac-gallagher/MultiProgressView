@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  MGSegmentedProgressBar
+//  MultiProgressView
 //
 //  Created by Mac Gallagher on 7/7/18.
 //  Copyright © 2018 Mac Gallagher. All rights reserved.
@@ -59,20 +59,19 @@ class ViewController: UIViewController {
         progressBar.trackTitleAlignment = .left
         progressBar.cornerRadius = 10
         progressBar.trackTitleEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
-        
         progressBar.dataSource = self
     }
     
     @objc private func handleTap(_ button: UIButton) {
         if button.tag == 1 {
             UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.3, options: .curveLinear, animations: {
-                self.progressBar.setProgress(forSection: 0, to: 3)
+                self.progressBar.setProgress(section: 0, to: 3)
             }, completion: nil)
             UIView.animate(withDuration: 1, delay: 0.7, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.3, options: .curveLinear, animations: {
-                self.progressBar.setProgress(forSection: 1, to: 5)
+                self.progressBar.setProgress(section: 1, to: 5)
             }, completion: nil)
             UIView.animate(withDuration: 1, delay: 0.4, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.3, options: .curveLinear, animations: {
-                self.progressBar.setProgress(forSection: 2, to: 1)
+                self.progressBar.setProgress(section: 2, to: 1)
             }, completion: nil)
         } else if button.tag == 2 {
             UIView.animate(withDuration: 0.1) {
@@ -91,8 +90,8 @@ extension UIViewController: MultiProgressViewDataSource {
         return 3
     }
     
-    public func progressBar(_ progressBar: MultiProgressView, barForSection section: Int) -> ProgressBarSection {
-        let bar = ProgressBarSection()
+    public func progressView(_ progressBar: MultiProgressView, viewForSection section: Int) -> ProgressViewSection {
+        let bar = ProgressViewSection()
         switch section {
         case 0:
             bar.backgroundColor = .blue
