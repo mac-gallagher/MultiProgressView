@@ -5,16 +5,11 @@
 ![license](https://img.shields.io/cocoapods/l/MultiProgressView.svg)
 ![CocoaPods](https://img.shields.io/cocoapods/p/MultiProgressView.svg)
 
-![ProgressBar](https://raw.githubusercontent.com/mac-gallagher/MultiProgressView/master/Images/progress_bar.gif)
-
 # About
-**MultiProgressView** is an animatable progress bar developed in response to `UIProgressView` lacking support for multiple progress sections. The `MultiProgressView` class includes all of the same features as `UIProgressView` as well as additional customization options.
-
+**MultiProgressView** is a discrete, animatable progress bar that depicts multiple progresses over time. The `MultiProgressView` class mimics `UIProgressView` as much as possible while also providing additional customization options. 
 
 # Example
-To run the example project, clone the repo and run the `MultiProgressView-Example` target. 
-
-[Show example gifs here]
+To run the example project, clone the repo and run the `MultiProgressView-Example` target.
 
 # Requirements
 * iOS 9.0+
@@ -35,26 +30,26 @@ Download and drop the `MultiProgressView` directory into your project.
 1. Add a `MultiProgressView` to your view hierarchy:
 
     ```swift
-    let progressBar = MultiProgressView()
-    view.addSubview(progressBar)
+    let progressView = MultiProgressView()
+    view.addSubview(progressView)
     ```
     
-2. Conform your class to the `MultiProgressViewDataSource` protocol and set your progress bar's `dataSource`:
+2. Conform your class to the `MultiProgressViewDataSource` protocol and set your progress view's `dataSource`:
 
     ```swift
-    func numberOfSteps(in progressBar: MultiProgressView) -> Int
+    func numberOfUnits(in progressBar: MultiProgressView) -> Int
     func numberOfSections(in progressBar: MultiProgressView) -> Int
     func progressBar(_ progressBar: MultiProgressView, barForSection section: Int) -> ProgressBarSection
     ```
     
     ```swift
-    progressBar.dataSource = self
+    progressView.dataSource = self
     ```
-3. Call the `setProgress` function to change set progress.
+3. Call the `setProgress` function to update your view's progress.
 
     ```swift
     UIView.animate(withDuration: 0.2) {
-        self.progressBar.setProgress(forSection: 0, steps: 4)
+        self.progressView.setProgress(forSection: 0, steps: 4)
     }
     ```
 
@@ -62,7 +57,7 @@ Download and drop the `MultiProgressView` directory into your project.
 ## Customization
 
 ### MultiProgressView
-Each `MultiProgressView` exposes the following customizable variables:
+Each `MultiProgressView` exposes the following variables:
 
 ```swift
 var cornerRadius: CGFloat = 0
@@ -80,7 +75,7 @@ var barTitleAlignment: AlignmentType = .center
 ```
 
 ### ProgressBarSection
-Each `ProgressBarSection` exposes the following customizable variables:
+Each `ProgressBarSection` exposes the following variables:
 
 ```swift
 var titleLabel: UILabel?
@@ -89,7 +84,7 @@ var titleAlignment: AlignmentType = .center
 ```
 
 ### Animating your progress
-All of methods which change the progress can easily be animated. For example,
+All of methods which alter the view's progress can be animated. For example:
 
 ```swift
 UIView.animate(withDuration: 0.2) {
@@ -106,7 +101,7 @@ UIView.animate(withDuration: 0.2) {
 	- Have a detailed message as to what your pull request fixes/enhances/adds.
 
 # To-do
-- [ ] Support for **Carthage** installation
+- [ ] Support for Carthage installation
 - [ ] Storyboard/`IBInspectable` support
 - [ ] Support for both vertical and horizontal axis
 - [ ] Continuous progress support
