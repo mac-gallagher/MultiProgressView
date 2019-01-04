@@ -75,6 +75,12 @@ open class MultiProgressView: UIView {
         }
     }
     
+    public var trackImageView: UIImageView? {
+        return imageView
+    }
+    
+    private var imageView: UIImageView?
+    
     public var lineCap: LineCapType = .round {
         didSet {
             setNeedsLayout()
@@ -129,14 +135,27 @@ open class MultiProgressView: UIView {
         }
     }
     
+    private var imageViewConstaints = [NSLayoutConstraint]() {
+        didSet {
+            NSLayoutConstraint.deactivate(oldValue)
+            NSLayoutConstraint.activate(imageViewConstaints)
+        }
+    }
+    
     private var barSectionConstraints = [[NSLayoutConstraint]]()
     
     open override func layoutSubviews() {
         super.layoutSubviews()
         progressBarConstraints = track.anchorToSuperview(withCapType: lineCap, padding: trackInset)
         labelConstraints = trackTitleLabel?.anchorToSuperview(withAlignment: trackTitleAlignment, insets: trackTitleEdgeInsets) ?? []
+        imageViewConstaints = imageView?.anchorToSuperview() ?? []
+        
         for (index, bar) in progressBarSections.enumerated() {
             layoutBar(bar, section: index)
+        }
+        
+        if let imageView = imageView {
+            track.sendSubviewToBack(imageView)
         }
         applyCornerRadius()
     }
@@ -215,6 +234,19 @@ open class MultiProgressView: UIView {
         let title = UILabel()
         track.insertSubview(title, at: 0)
         label = title
+    }
+    
+    public func setTrackImage(_ image: UIImage?) {
+        guard let image = image else { return }
+        createTrackImageViewIfNeeded()
+        imageView?.image = image
+    }
+    
+    private func createTrackImageViewIfNeeded() {
+        guard imageView == nil else { return }
+        let iv = UIImageView()
+        track.addSubview(iv)
+        imageView = iv
     }
     
     public func progress(forSection section: Int) -> Int {

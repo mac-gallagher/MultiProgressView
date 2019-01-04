@@ -40,6 +40,12 @@ extension UIView {
     }
     
     @discardableResult
+    func anchorToSuperview() -> [NSLayoutConstraint] {
+        guard let superview = superview else { return [] }
+        return anchor(top: superview.topAnchor, left: superview.leftAnchor, bottom: superview.bottomAnchor, right: superview.rightAnchor)
+    }
+    
+    @discardableResult
     func anchorToSuperview(withAlignment alignment: AlignmentType, insets: UIEdgeInsets) -> [NSLayoutConstraint] {
         guard let superview = superview else { return [] }
         translatesAutoresizingMaskIntoConstraints = false

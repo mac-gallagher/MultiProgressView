@@ -14,7 +14,7 @@ To run the example project, clone the repo and run the `MultiProgressView-Exampl
 # Requirements
 * iOS 9.0+
 * Xcode 10.0+
-* Swift 4.2+
+* Swift 4.2
 
 # Installation
 
@@ -37,20 +37,18 @@ Download and drop the `MultiProgressView` directory into your project.
 2. Conform your class to the `MultiProgressViewDataSource` protocol and set your progress view's `dataSource`:
 
     ```swift
-    func numberOfUnits(in progressBar: MultiProgressView) -> Int
-    func numberOfSections(in progressBar: MultiProgressView) -> Int
-    func progressBar(_ progressBar: MultiProgressView, barForSection section: Int) -> ProgressBarSection
+    func numberOfUnits(in progressView: MultiProgressView) -> Int
+    func numberOfSections(in progressView: MultiProgressView) -> Int
+    func progressBar(_ progressView: MultiProgressView, viewForSection section: Int) -> ProgressViewSection
     ```
     
     ```swift
     progressView.dataSource = self
     ```
-3. Call the `setProgress` function to update your view's progress.
+3. Call the `setProgress` function to update your view's progress:
 
     ```swift
-    UIView.animate(withDuration: 0.2) {
-        self.progressView.setProgress(forSection: 0, steps: 4)
-    }
+    progressView.setProgress(forSection: 0, to: 4)
     ```
 
 
@@ -60,24 +58,28 @@ Download and drop the `MultiProgressView` directory into your project.
 Each `MultiProgressView` exposes the following variables:
 
 ```swift
+var dataSource: MultiProgressViewDataSource?
+
 var cornerRadius: CGFloat = 0
 var borderWidth: CGFloat = 0
 var borderColor: UIColor? = .black
 var lineCap: LineCapType = .round 
 
-var barInset: CGFloat = 0
-var barBackgroundColor: UIColor? = .white
-var barBorderColor: UIColor? = .black
-var barBorderWidth: CGFloat = 0
-var barTitleLabel: UILabel?
-var barTitleEdgeInsets: UIEdgeInsets = .zero
-var barTitleAlignment: AlignmentType = .center
+var trackInset: CGFloat = 0
+var trackBackgroundColor: UIColor? = .white
+var trackBorderColor: UIColor? = .black
+var trackBorderWidth: CGFloat = 0
+var trackImageView: UIImageView?
+var trackTitleLabel: UILabel?
+var trackTitleEdgeInsets: UIEdgeInsets = .zero
+var trackTitleAlignment: AlignmentType = .center
 ```
 
-### ProgressBarSection
-Each `ProgressBarSection` exposes the following variables:
+### ProgressViewSection
+Each `ProgressViewSection` exposes the following variables:
 
 ```swift
+var imageView: UIImageView?
 var titleLabel: UILabel?
 var titleEdgeInsets: UIEdgeInsets = .zero
 var titleAlignment: AlignmentType = .center
@@ -90,7 +92,6 @@ All of methods which alter the view's progress can be animated. For example:
 UIView.animate(withDuration: 0.2) {
     self.progressBar.setProgress(forSection: 0, steps: 4)
 }
-
 ```
 
 # Contributing
