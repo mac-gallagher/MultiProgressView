@@ -103,8 +103,6 @@ extension UIViewController: MultiProgressViewDataSource {
             break
         }
         bar.setTitle("Title")
-        
-        //check clipToBounds in tests
         return bar
     }
 }
