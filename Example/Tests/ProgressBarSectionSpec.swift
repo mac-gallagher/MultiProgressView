@@ -1,6 +1,6 @@
 //
-//  MGSegmentedProgressBar_Tests.swift
-//  MGSegmentedProgressBar_Tests
+//  ProgressBarSectionSpec.swift
+//  MultiProgressView_Tests
 //
 //  Created by Mac Gallagher on 12/26/18.
 //  Copyright © 2018 Mac Gallagher. All rights reserved.
@@ -8,11 +8,14 @@
 
 import Quick
 import Nimble
-import MGSegmentedProgressBar
+import MultiProgressView
 
 class ProgressBarSectionSpec: QuickSpec {
+    private let sectionWidth: CGFloat = 100
+    private let sectionHeight: CGFloat = 50
+    
     override func spec() {
-        var section: ProgressBarSection!
+        var section: ProgressViewSection!
         
         describe("initialization") {
             context("when initializing a new section") {
@@ -40,10 +43,9 @@ class ProgressBarSectionSpec: QuickSpec {
         
         describe("title label") {
             context("when setting the section's title") {
-                var title: String!
+                let title: String = "title"
                 
                 beforeEach {
-                    title = "title"
                     section = self.setupBarSection(configure: { section in
                         section.setTitle(title)
                     })
@@ -55,10 +57,9 @@ class ProgressBarSectionSpec: QuickSpec {
             }
             
             context("when setting the section's attributed title") {
-                var title: NSAttributedString!
+                let title: NSAttributedString = NSAttributedString(string: "title")
                 
                 beforeEach {
-                    title = NSAttributedString(string: "title")
                     section = self.setupBarSection(configure: { section in
                         section.setAttributedTitle(title)
                     })
@@ -69,13 +70,52 @@ class ProgressBarSectionSpec: QuickSpec {
                 }
             }
         }
+        
+        describe("image view") {
+            context("when setting the section's image") {
+                let image = UIImage()
+                
+                beforeEach {
+                    section = self.setupBarSection(configure: { section in
+                        let subview1 = UIView()
+                        section.addSubview(subview1)
+                        
+                        section.setImage(image)
+                        
+                        let subview2 = UIView()
+                        section.addSubview(subview2)
+                    })
+                }
+                
+                it("should have an image view with the correct bounds") {
+                    expect(section.imageView?.frame).to(equal(section.bounds))
+                }
+                
+                it("should have an image on it's image view") {
+                    expect(section.imageView?.image).to(equal(image))
+                }
+                
+                it("should have its image view behind all other subviews") {
+                    expect(section.subviews.first is UIImageView).to(beTrue())
+                }
+            }
+        }
     }
 }
 
 extension ProgressBarSectionSpec {
-    func setupBarSection(configure: (ProgressBarSection) -> Void = { _ in } ) -> ProgressBarSection {
-        let section = ProgressBarSection()
+    func setupBarSection(configure: (ProgressViewSection) -> Void = { _ in } ) -> ProgressViewSection {
+        let parentView = UIView()
+        let section = ProgressViewSection()
+        parentView.addSubview(section)
+        
+        section.translatesAutoresizingMaskIntoConstraints = false
+        section.widthAnchor.constraint(equalToConstant: sectionWidth).isActive = true
+        section.heightAnchor.constraint(equalToConstant: sectionHeight).isActive = true
+        
         configure(section)
+        
+        section.layoutIfNeeded()
         return section
     }
 }

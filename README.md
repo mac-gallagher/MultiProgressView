@@ -1,40 +1,98 @@
-# MGSegmentedProgressBar
+# MultiProgressView
+
 ![Swift-Version](https://img.shields.io/badge/Swift-4.2-orange.svg)
-![CocoaPods](https://img.shields.io/cocoapods/v/MGSegmentedProgressBar.svg)
-![license](https://img.shields.io/cocoapods/l/MGSegmentedProgressBar.svg)
-![CocoaPods](https://img.shields.io/cocoapods/p/MGSegmentedProgressBar.svg)
+![CocoaPods](https://img.shields.io/cocoapods/v/MultiProgressView.svg)
+![license](https://img.shields.io/cocoapods/l/MultiProgressView.svg)
+![CocoaPods](https://img.shields.io/cocoapods/p/MultiProgressView.svg)
 
-An animatable progress bar with support for multiple sections.
+# About
+**MultiProgressView** is a discrete, animatable progress bar that depicts multiple progresses over time. The `MultiProgressView` class mimics `UIProgressView` as much as possible while also providing additional customization options. 
 
-![ProgressBar](https://raw.githubusercontent.com/mac-gallagher/MGSegmentedProgressBar/master/Images/progress_bar.gif)
-
-***
-
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Contributing](#contributing)
-- [Quick Start](#quick-start)
-- [Architecture](#architecture)
-   - [MGSegmentedProgressBar](#mgsegmentedprogressbar)
-     - [Animating your progress](#animating-your-progress)
-   - [ProgressBarSection](#progressbarsection)
-- [Author](#author)
-- [License](#license)
+# Example
+To run the example project, clone the repo and run the `MultiProgressView-Example` target.
 
 # Requirements
 * iOS 9.0+
 * Xcode 10.0+
-* Swift 4.2+
+* Swift 4.2
 
 # Installation
 
 ### CocoaPods
-MGSegmentedProgressBar is available through [CocoaPods](<https://cocoapods.org/>). To install it, simply add the following line to your `Podfile`:
+MultiProgressView is available through [CocoaPods](<https://cocoapods.org/>). To install it, simply add the following line to your `Podfile`:
 
-	pod 'MGSegmentedProgressBar'
+	pod 'MultiProgressView'
 
 ### Manual
-Download and drop the `MGSegmentedProgressBar` directory into your project.
+Download and drop the `MultiProgressView` directory into your project.
+
+# Usage
+1. Add a `MultiProgressView` to your view hierarchy:
+
+    ```swift
+    let progressView = MultiProgressView()
+    view.addSubview(progressView)
+    ```
+    
+2. Conform your class to the `MultiProgressViewDataSource` protocol and set your progress view's `dataSource`:
+
+    ```swift
+    func numberOfSections(in progressView: MultiProgressView) -> Int
+    func progressBar(_ progressView: MultiProgressView, viewForSection section: Int) -> ProgressViewSection
+    ```
+    
+    ```swift
+    progressView.dataSource = self
+    ```
+3. Call the `setProgress` function to update your view's progress:
+
+    ```swift
+    progressView.setProgress(section: 0, to: 0.4)
+    ```
+
+
+## Customization
+
+### MultiProgressView
+Each `MultiProgressView` exposes the following variables:
+
+```swift
+var dataSource: MultiProgressViewDataSource?
+var totalProgress: Float
+
+var cornerRadius: CGFloat = 0
+var borderWidth: CGFloat = 0
+var borderColor: UIColor? = .black
+var lineCap: LineCapType = .round 
+
+var trackInset: CGFloat = 0
+var trackBackgroundColor: UIColor? = .white
+var trackBorderColor: UIColor? = .black
+var trackBorderWidth: CGFloat = 0
+var trackImageView: UIImageView?
+var trackTitleLabel: UILabel?
+var trackTitleEdgeInsets: UIEdgeInsets = .zero
+var trackTitleAlignment: AlignmentType = .center
+```
+
+### ProgressViewSection
+Each `ProgressViewSection` exposes the following variables:
+
+```swift
+var imageView: UIImageView?
+var titleLabel: UILabel?
+var titleEdgeInsets: UIEdgeInsets = .zero
+var titleAlignment: AlignmentType = .center
+```
+
+### Animating your progress
+All of methods which alter the view's progress can be animated. For example:
+
+```swift
+UIView.animate(withDuration: 0.2) {
+    self.progressView.setProgress(section: 0, to: 0.4)
+}
+```
 
 # Contributing
 - If you **found a bug**, open an issue and tag as bug.
@@ -43,69 +101,13 @@ Download and drop the `MGSegmentedProgressBar` directory into your project.
 	- In order to submit a pull request, please fork this repo and submit a pull request from your forked repo.
 	- Have a detailed message as to what your pull request fixes/enhances/adds.
 
-# Quick Start
-1. Add a `MGSegmentedProgressBar` to your view hierarchy.
-2. Conform to the `MGSegmentedProgressBarDataSource` protocol (don't forget to set your progress bar's `dataSource`) and implement the following functions:
-
-    ```swift
-    func numberOfSteps(in progressBar: MGSegmentedProgressBar) -> Int
-    func numberOfSections(in progressBar: MGSegmentedProgressBar) -> Int
-    func progressBar(_ progressBar: MGSegmentedProgressBar, barForSection section: Int) -> MGBarView
-    ```
-3. Done!
-
-The progress of each section can be changed by calling any of the following functions:
-
-```swift
-func setProgress(forSection section: Int, steps: Int) //sets the progress
-func advance(section: Int, by numberOfSteps: Int = 1) //advances the existing progress 
-func resetProgress() //sets the progress of all sections to zero
-```
-
-# Architecture
-There are two major components in the `MGSegmentedProgressBar` framework. The first is the `MGSegmentedProgressBar` which displays the individual bar sections. It is responsible for maintaining the overall progress and controlling the width of each bar. The second component are the bar sections themselves.
-
-## MGSegmentedProgressBar
-Each `MGSegmentedProgressBar` exposes the following variables:
-
-```swift
-var dataSource: MGSegmentedProgressBarDataSource?
-
-var cornerRadius: CGFloat = 0
-var borderWidth: CGFloat = 0
-var borderColor: UIColor? = .black
-var lineCap: LineCapType = .round 
-
-var barInset: CGFloat = 0
-var barBackgroundColor: UIColor? = .white
-var barBorderColor: UIColor? = .black
-var barBorderWidth: CGFloat = 0
-var barTitleLabel: UILabel?
-var barTitleEdgeInsets: UIEdgeInsets = .zero
-var barTitleAlignment: AlignmentType = .center
-```
-
-### Animating your progress
-All of methods which change the progress can easily be animated. For example,
-
-```swift
-UIView.animate(withDuration: 0.2) {
-    self.progressBar.setProgress(forSection: 0, steps: 4)
-}
-
-```
-
-## ProgressBarSection
-Each `ProgressBarSection` exposes the following variables:
-
-```swift
-var titleLabel: UILabel?
-var titleEdgeInsets: UIEdgeInsets = .zero
-var titleAlignment: AlignmentType = .center
-```
+# To-do
+- [ ] Support for Carthage installation
+- [ ] Storyboard/`IBInspectable` support
+- [ ] Progress object (Foundation) support
 
 # Author
 Mac Gallagher, jmgallagher36@gmail.com.
 
 # License
-MGSegmentedProgressBar is available under the [MIT License](LICENSE), see LICENSE for more infomation.
+MultiProgressView is available under the [MIT License](LICENSE), see LICENSE for more infomation.
