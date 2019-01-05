@@ -1,5 +1,5 @@
 //
-//  MGBarView.swift
+//  ProgressViewSection.swift
 //  MultiProgressView
 //
 //  Created by Mac Gallagher on 6/15/18.
