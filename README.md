@@ -6,7 +6,7 @@
 ![CocoaPods](https://img.shields.io/cocoapods/p/MultiProgressView.svg)
 
 # About
-**MultiProgressView** is a discrete, animatable progress bar that depicts multiple progresses over time. The `MultiProgressView` class mimics `UIProgressView` as much as possible while also providing additional customization options. 
+**MultiProgressView** is an animatable progress bar that depicts multiple progresses over time. The `MultiProgressView` class mimics `UIProgressView` as much as possible while also providing additional customization options. 
 
 # Example
 To run the example project, clone the repo and run the `MultiProgressView-Example` target.
