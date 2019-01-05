@@ -37,7 +37,6 @@ Download and drop the `MultiProgressView` directory into your project.
 2. Conform your class to the `MultiProgressViewDataSource` protocol and set your progress view's `dataSource`:
 
     ```swift
-    func numberOfUnits(in progressView: MultiProgressView) -> Int
     func numberOfSections(in progressView: MultiProgressView) -> Int
     func progressBar(_ progressView: MultiProgressView, viewForSection section: Int) -> ProgressViewSection
     ```
@@ -48,7 +47,7 @@ Download and drop the `MultiProgressView` directory into your project.
 3. Call the `setProgress` function to update your view's progress:
 
     ```swift
-    progressView.setProgress(forSection: 0, to: 4)
+    progressView.setProgress(section: 0, to: 0.4)
     ```
 
 
@@ -59,6 +58,7 @@ Each `MultiProgressView` exposes the following variables:
 
 ```swift
 var dataSource: MultiProgressViewDataSource?
+var totalProgress: Float
 
 var cornerRadius: CGFloat = 0
 var borderWidth: CGFloat = 0
@@ -90,7 +90,7 @@ All of methods which alter the view's progress can be animated. For example:
 
 ```swift
 UIView.animate(withDuration: 0.2) {
-    self.progressBar.setProgress(forSection: 0, steps: 4)
+    self.progressView.setProgress(section: 0, to: 0.4)
 }
 ```
 
@@ -104,8 +104,7 @@ UIView.animate(withDuration: 0.2) {
 # To-do
 - [ ] Support for Carthage installation
 - [ ] Storyboard/`IBInspectable` support
-- [ ] Support for both vertical and horizontal axis
-- [ ] Continuous progress support
+- [ ] Progress object (Foundation) support
 
 # Author
 Mac Gallagher, jmgallagher36@gmail.com.
