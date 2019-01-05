@@ -81,10 +81,14 @@ open class MultiProgressView: UIView {
     
     private var imageView: UIImageView?
     
-    public var lineCap: LineCapType = .round {
+    public var lineCap: LineCapType = .square {
         didSet {
             setNeedsLayout()
         }
+    }
+    
+    public var totalProgress: Float {
+        return currentProgress.reduce(0) { $0 + $1 }
     }
     
     private let track: UIView = {
@@ -95,11 +99,7 @@ open class MultiProgressView: UIView {
     
     private var progressBarSections: [ProgressViewSection] = []
     private var numberOfSections: Int = 0
-    private var currentSteps: [Int] = []
-    private var totalSteps: Int = 0
-    private var totalRemainingSteps: Int {
-        return totalSteps - totalProgress()
-    }
+    private var currentProgress: [Float] = []
     
     //MARK: - Initialization
     
@@ -121,10 +121,10 @@ open class MultiProgressView: UIView {
     
     //MARK: - Layout
     
-    private var progressBarConstraints = [NSLayoutConstraint]() {
+    private var trackConstraints = [NSLayoutConstraint]() {
         didSet {
             NSLayoutConstraint.deactivate(oldValue)
-            NSLayoutConstraint.activate(progressBarConstraints)
+            NSLayoutConstraint.activate(trackConstraints)
         }
     }
     
@@ -146,23 +146,23 @@ open class MultiProgressView: UIView {
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-        progressBarConstraints = track.anchorToSuperview(withCapType: lineCap, padding: trackInset)
-        labelConstraints = trackTitleLabel?.anchorToSuperview(withAlignment: trackTitleAlignment, insets: trackTitleEdgeInsets) ?? []
+        trackConstraints = track.anchorToSuperview(withCapType: lineCap, padding: trackInset)
+        labelConstraints = label?.anchorToSuperview(withAlignment: trackTitleAlignment, insets: trackTitleEdgeInsets) ?? []
         imageViewConstaints = imageView?.anchorToSuperview() ?? []
         
         for (index, bar) in progressBarSections.enumerated() {
             layoutBar(bar, section: index)
+            track.bringSubviewToFront(bar)
         }
         
         if let imageView = imageView {
             track.sendSubviewToBack(imageView)
         }
+
         applyCornerRadius()
     }
 
     private func layoutBar(_ bar: ProgressViewSection, section: Int) {
-        if totalSteps <= 0 { return }
-        
         NSLayoutConstraint.deactivate(barSectionConstraints[section])
         var barConstraints = [NSLayoutConstraint]()
         
@@ -172,8 +172,7 @@ open class MultiProgressView: UIView {
             barConstraints.append(contentsOf: bar.anchor(top: track.topAnchor, left: progressBarSections[section - 1].rightAnchor, bottom: track.bottomAnchor))
         }
         
-        let widthMultiplier = CGFloat(currentSteps[section]) / CGFloat(totalSteps)
-        let widthConstraint = bar.widthAnchor.constraint(equalTo: track.widthAnchor, multiplier: widthMultiplier)
+        let widthConstraint = bar.widthAnchor.constraint(equalTo: track.widthAnchor, multiplier: CGFloat(currentProgress[section]))
         barConstraints.append(widthConstraint)
         
         NSLayoutConstraint.activate(barConstraints)
@@ -181,10 +180,11 @@ open class MultiProgressView: UIView {
     }
     
     private func applyCornerRadius() {
+        let cornerRadiusFactor: CGFloat = cornerRadius / bounds.height
         switch lineCap {
         case .round:
             layer.cornerRadius = cornerRadius == 0 ? bounds.height / 2 : cornerRadius
-            track.layer.cornerRadius = cornerRadius == 0 ? bounds.height / 2 : cornerRadius
+            track.layer.cornerRadius = cornerRadius == 0 ? track.bounds.height / 2 : cornerRadiusFactor * track.bounds.height
         case .butt, .square:
             layer.cornerRadius = 0
             track.layer.cornerRadius = 0
@@ -196,11 +196,10 @@ open class MultiProgressView: UIView {
     public func reloadData() {
         guard let dataSource = dataSource else { return }
         numberOfSections = dataSource.numberOfSections(in: self)
-        totalSteps = dataSource.numberOfUnits(in: self)
         
         progressBarSections.forEach({ $0.removeFromSuperview() })
         progressBarSections.removeAll()
-        currentSteps.removeAll()
+        currentProgress.removeAll()
         barSectionConstraints.removeAll()
 
         for index in 0..<numberOfSections {
@@ -213,26 +212,26 @@ open class MultiProgressView: UIView {
         let bar = dataSource.progressView(self, viewForSection: section)
         progressBarSections.insert(bar, at: section)
         track.addSubview(bar)
-        currentSteps.insert(0, at: section)
+        currentProgress.insert(0, at: section)
         barSectionConstraints.insert([], at: section)
     }
     
     //MARK: - Main Methods
     
     public func setTitle(_ title: String?) {
-        createTitleLabelIfNeeded()
+        createTrackTitleLabelIfNeeded()
         label?.text = title
     }
     
     public func setAttributedTitle(_ title: NSAttributedString?) {
-        createTitleLabelIfNeeded()
+        createTrackTitleLabelIfNeeded()
         label?.attributedText = title
     }
     
-    private func createTitleLabelIfNeeded() {
+    private func createTrackTitleLabelIfNeeded() {
         guard trackTitleLabel == nil else { return }
         let title = UILabel()
-        track.insertSubview(title, at: 0)
+        track.addSubview(title)
         label = title
     }
     
@@ -249,24 +248,16 @@ open class MultiProgressView: UIView {
         imageView = iv
     }
     
-    public func progress(forSection section: Int) -> Int {
-        return currentSteps[section]
+    public func progress(forSection section: Int) -> Float {
+        return currentProgress[section]
     }
     
-    public func totalProgress() -> Int {
-        return currentSteps.reduce(0) { $0 + $1 }
-    }
-    
-    public func setProgress(section: Int, to units: Int) {
-        currentSteps[section] = max(0, min(units, totalRemainingSteps + currentSteps[section]))
+    public func setProgress(section: Int, to progress: Float) {
+        currentProgress[section] = max(0, min(progress, 1 - totalProgress + currentProgress[section]))
         setNeedsLayout()
         layoutIfNeeded()
     }
     
-    public func advance(by units: Int = 1, section: Int) {
-        setProgress(section: section, to: currentSteps[section] + units)
-    }
-
     public func resetProgress() {
         for section in 0..<progressBarSections.count {
             setProgress(section: section, to: 0)

@@ -7,7 +7,6 @@
 //
 
 public protocol MultiProgressViewDataSource {
-    func numberOfUnits(in progressView: MultiProgressView) -> Int
     func numberOfSections(in progressView: MultiProgressView) -> Int
     func progressView(_ progressView: MultiProgressView, viewForSection section: Int) -> ProgressViewSection
 }

@@ -59,8 +59,12 @@ class MultiProgressViewSpec: QuickSpec {
                     expect(progressView.trackBorderWidth).to(equal(0))
                 }
                 
+                it("should have no track image view") {
+                    expect(progressView.trackImageView).to(beNil())
+                }
+                
                 it("should have a round line cap type") {
-                    expect(progressView.lineCap).to(equal(.round))
+                    expect(progressView.lineCap).to(equal(.square))
                 }
                 
                 it("should have corner radius equal to zero") {
@@ -121,14 +125,17 @@ class MultiProgressViewSpec: QuickSpec {
         describe("corner radius") {
             context("when the line cap type is round") {
                 context("when the corner radius is set to zero") {
+                    let trackinset: CGFloat = 5
                     var track: UIView!
                     
                     beforeEach {
                         progressView = self.setupProgressView(configure: { view in
                             view.lineCap = .round
                             view.cornerRadius = 0
+                            view.trackInset = trackinset
                         })
                         track = progressView.subviews.first
+                        progressView.layoutSubviews()
                     }
 
                     it("should have corner radius equal to half its height") {
@@ -141,23 +148,27 @@ class MultiProgressViewSpec: QuickSpec {
                 }
                 
                 context("when the corner radius is nonzero") {
-                    let cornerRadius: CGFloat = 1
+                    let trackinset: CGFloat = 5
+                    let cornerRadius: CGFloat = 10
                     var track: UIView!
                     
                     beforeEach {
                         progressView = self.setupProgressView(configure: { view in
                             view.lineCap = .round
                             view.cornerRadius = cornerRadius
+                            view.trackInset = trackinset
                         })
                         track = progressView.subviews.first
+                        progressView.layoutSubviews()
                     }
                     
                     it("should have corner radius equal to the set corner radius") {
                         expect(progressView.layer.cornerRadius).to(equal(cornerRadius))
                     }
                     
-                    it("should have its track's corner radius equal to the set corner radius") {
-                        expect(track.layer.cornerRadius).to(equal(cornerRadius))
+                    it("should have the correct scaled track corner radius") {
+                        let cornerRadiusFactor: CGFloat = cornerRadius / progressView.bounds.height
+                        expect(track.layer.cornerRadius).to(be(cornerRadiusFactor * track.bounds.height))
                     }
                 }
             }
@@ -352,9 +363,10 @@ class MultiProgressViewSpec: QuickSpec {
                         track = progressView.subviews.first
                     }
                     
-                    it("should have insets on all sides of its track") {
+                    it("should have a track with the correct size and origin") {
                         expect(track.bounds.height).to(equal(progressView.bounds.height - 2 * inset))
                         expect(track.bounds.width).to(equal(progressView.bounds.width - 2 * inset))
+                        expect(track.frame.origin).to(equal(CGPoint(x: inset, y: inset)))
                     }
                 }
                 
@@ -369,9 +381,10 @@ class MultiProgressViewSpec: QuickSpec {
                         track = progressView.subviews.first
                     }
                     
-                    it("should have insets on all sides of its track") {
+                    it("should have a track with the correct size and origin") {
                         expect(track.bounds.height).to(equal(progressView.bounds.height - 2 * inset))
                         expect(track.bounds.width).to(equal(progressView.bounds.width - 2 * inset))
+                        expect(track.frame.origin).to(equal(CGPoint(x: inset, y: inset)))
                     }
                 }
                 
@@ -386,9 +399,10 @@ class MultiProgressViewSpec: QuickSpec {
                         track = progressView.subviews.first
                     }
                     
-                    it("should have insets on only the top and the bottom of its track") {
+                    it("should have a track with the correct size and origin") {
                         expect(track.bounds.height).to(equal(progressView.bounds.height - 2 * inset))
                         expect(track.bounds.width).to(equal(progressView.bounds.width))
+                        expect(track.frame.origin).to(equal(CGPoint(x: 0, y: inset)))
                     }
                 }
             }
@@ -426,8 +440,7 @@ class MultiProgressViewSpec: QuickSpec {
                     })
                 }
                 
-                it("should always retrieve the number of steps and number of sections") {
-                    expect(dataSource.numberOfUnitsCalled).to(beTrue())
+                it("should always retrieve the number of sections") {
                     expect(dataSource.numberOfSectionsCalled).to(beTrue())
                 }
             }
@@ -464,13 +477,13 @@ class MultiProgressViewSpec: QuickSpec {
             context("when reloading the data") {
                 let numberOfSections: Int = 10
                 let dataSource = MockMultiProgressViewDataSource(numberOfSections: numberOfSections)
-                var progressViewSubview: UIView!
+                var track: UIView!
                 
                 beforeEach {
                     progressView = self.setupProgressView(configure: { view in
                         view.dataSource = dataSource
                     })
-                    progressViewSubview = progressView.subviews.first
+                    track = progressView.subviews.first
                     progressView.reloadData()
                 }
                 
@@ -480,26 +493,25 @@ class MultiProgressViewSpec: QuickSpec {
                     }
                 }
                 
-                it("should have the correct number of subviews") {
-                    expect(progressViewSubview.subviews.count).to(equal(numberOfSections))
+                it("should have a track with the correct number of sections") {
+                    expect(track.subviews.count).to(equal(numberOfSections))
                 }
             }
         }
         
         describe("changing the progress") {
             let numberOfSections: Int = 3
-            let numberOfUnits: Int = 10
             
             beforeEach {
-                let dataSource = MockMultiProgressViewDataSource(numberOfUnits: numberOfUnits, numberOfSections: numberOfSections)
+                let dataSource = MockMultiProgressViewDataSource(numberOfSections: numberOfSections)
                 progressView = self.setupProgressView(configure: { view in
                     view.dataSource = dataSource
                 })
             }
             
             context("when setting a nonnegative progress on an individual section") {
-                context("when setting a progress that does not exceed the total number of steps in the progress view") {
-                    let progress: Int = 1
+                context("when setting a progress that does not exceed 1") {
+                    let progress: Float = 0.1
                     
                     beforeEach {
                         progressView.setProgress(section: 0, to: progress)
@@ -510,21 +522,21 @@ class MultiProgressViewSpec: QuickSpec {
                     }
                 }
                 
-                context("when setting a progress that exceeds the total number of steps in the progress view") {
-                    let progress: Int = numberOfUnits + 1
+                context("when setting a progress that exceeds 1") {
+                    let progress: Float = 1.1
                     
                     beforeEach {
                         progressView.setProgress(section: 0, to: progress)
                     }
                     
-                    it("should set the progress to the total number of steps in the progress view") {
-                        expect(progressView.progress(forSection: 0)).to(equal(numberOfUnits))
+                    it("should set the progress to 1") {
+                        expect(progressView.progress(forSection: 0)).to(equal(1))
                     }
                 }
             }
             
             context("when setting a negative progress on an individual section") {
-                let progress: Int = -1
+                let progress: Float = -0.1
                 
                 beforeEach {
                     progressView.setProgress(section: 0, to: progress)
@@ -535,69 +547,40 @@ class MultiProgressViewSpec: QuickSpec {
                 }
             }
             
-            context("when setting a progress from an existing progress on an individual section") {
-                let progress: Int = 1
-                let initialProgress: Int = 5
+            context("when setting a progress on an individual section with existing progress") {
+                let progress: Float = 0.1
+                let initialProgress: Float = 0.5
                 
                 beforeEach {
                     progressView.setProgress(section: 0, to: initialProgress)
                     progressView.setProgress(section: 0, to: progress)
                 }
                 
-                it("should replace its previous progress") {
+                it("should replace its existing progress") {
                     expect(progressView.progress(forSection: 0)).to(equal(progress))
                 }
             }
             
-            context("when setting a progress which causes the sum of all sections' progress to exceed the number of steps in the progress view") {
-                let progress: Int = 1000
-                let sum: Int = 2 + 3
+            context("when setting a progress which causes the sum of all sections' progress to exceed 1") {
+                let firstProgress: Float = 0.2
+                let secondProgress: Float = 0.3
+                let thirdProgress: Float = 1000
                 
                 beforeEach {
-                    progressView.setProgress(section: 0, to: 2)
-                    progressView.setProgress(section: 1, to: 3)
-                    progressView.setProgress(section: 2, to: progress)
+                    progressView.setProgress(section: 0, to: firstProgress)
+                    progressView.setProgress(section: 1, to: secondProgress)
+                    progressView.setProgress(section: 2, to: thirdProgress)
                 }
-                it("should only progress up to the maximum number of steps") {
-                    expect(progressView.progress(forSection: 2)).to(equal(numberOfUnits - sum))
-                }
-            }
-            
-            context("when advancing a section") {
-                let existingProgress: Int = 5
-                
-                context("when advancing progress in a section with existing progress") {
-                    let progress: Int = 1
-                    
-                    beforeEach {
-                        progressView.setProgress(section: 0, to: existingProgress)
-                        progressView.advance(by: progress, section: 0)
-                    }
-                    
-                    it("should add to the existing progress") {
-                        expect(progressView.progress(forSection: 0)).to(equal(existingProgress + progress))
-                    }
-                }
-                
-                context("when subtracting progress in a section with existing progress ") {
-                    let progress: Int = -1
-                    
-                    beforeEach {
-                        progressView.setProgress(section: 0, to: existingProgress)
-                        progressView.advance(by: progress, section: 0)
-                    }
-                    
-                    it("should subtract from the existing progress") {
-                        expect(progressView.progress(forSection: 0)).to(equal(existingProgress + progress))
-                    }
+                it("should only progress up to one") {
+                    expect(progressView.progress(forSection: 2)).to(equal(1 - (firstProgress + secondProgress)))
                 }
             }
             
             context("when resetting the progress view") {
                 beforeEach {
-                    progressView.setProgress(section: 0, to: 1)
-                    progressView.setProgress(section: 1, to: 1)
-                    progressView.setProgress(section: 2, to: 1)
+                    progressView.setProgress(section: 0, to: 0.1)
+                    progressView.setProgress(section: 1, to: 0.1)
+                    progressView.setProgress(section: 2, to: 0.1)
                     progressView.resetProgress()
                 }
                 
@@ -609,7 +592,7 @@ class MultiProgressViewSpec: QuickSpec {
             }
             
             context("when getting the total progress") {
-                let progress: Int = 2
+                let progress: Float = 0.2
                 
                 beforeEach {
                     progressView.setProgress(section: 0, to: progress)
@@ -618,7 +601,7 @@ class MultiProgressViewSpec: QuickSpec {
                 }
                 
                 it("should return the correct total progress") {
-                    expect(progressView.totalProgress()).to(equal(3 * progress))
+                    expect(progressView.totalProgress).to(equal(3 * progress))
                 }
             }
         }
@@ -646,12 +629,11 @@ class MultiProgressViewSpec: QuickSpec {
             context("after setting the progress") {
                 context("on an individual progress view section") {
                     let numberOfSections: Int = 1
-                    let numberOfUnits: Int = 10
-                    let progress: Int = 1
+                    let progress: Float = 0.1
                     var track: UIView!
                     
                     beforeEach {
-                        let dataSource = MockMultiProgressViewDataSource(numberOfUnits: numberOfUnits, numberOfSections: numberOfSections)
+                        let dataSource = MockMultiProgressViewDataSource(numberOfSections: numberOfSections)
                         progressView = self.setupProgressView(configure: { view in
                             view.dataSource = dataSource
                         })
@@ -659,22 +641,25 @@ class MultiProgressViewSpec: QuickSpec {
                         track = progressView.subviews.first
                     }
                     
-                    it("should calculate the correct width for the section") {
+                    it("should calculate the correct width and origin for the section") {
                         let section = track.subviews.first
-                        let expectedWidth = (CGFloat(progress) / CGFloat(numberOfUnits)) * track.frame.width
-                        expect(section?.frame.width).to(equal(expectedWidth))
+                        let expectedWidth = CGFloat(progress) * track.frame.width
+                        let expectedOrigin = CGPoint.zero
+                        
+                        expect(section?.frame.origin.x).to(beCloseTo(expectedOrigin.x))
+                        expect(section?.frame.origin.y).to(beCloseTo(expectedOrigin.y))
+                        expect(section?.frame.width).to(beCloseTo(expectedWidth))
                     }
                 }
                 
                 context("on a section with whose section before it has nonzero progress") {
                     let numberOfSections: Int = 2
-                    let numberOfUnits: Int = 10
-                    let firstSectionProgress: Int = 2
-                    let secondSectionProgress: Int = 1
+                    let firstSectionProgress: Float = 0.2
+                    let secondSectionProgress: Float = 0.1
                     var track: UIView!
                     
                     beforeEach {
-                        let dataSource = MockMultiProgressViewDataSource(numberOfUnits: numberOfUnits, numberOfSections: numberOfSections)
+                        let dataSource = MockMultiProgressViewDataSource(numberOfSections: numberOfSections)
                         progressView = self.setupProgressView(configure: { view in
                             view.dataSource = dataSource
                         })
@@ -685,13 +670,14 @@ class MultiProgressViewSpec: QuickSpec {
                     
                     it("should calculate the correct width and origin for the section") {
                         let firstSection = track.subviews.first!
-                        let secondSection = track.subviews.last
+                        let secondSection = track.subviews.last!
                         
                         let expectedOrigin = CGPoint(x: firstSection.frame.width, y: 0)
-                        let expectedWidth = (CGFloat(secondSectionProgress) / CGFloat(numberOfUnits)) * track.frame.width
+                        let expectedWidth = CGFloat(secondSectionProgress) * track.frame.width
                         
-                        expect(secondSection?.frame.origin).to(equal(expectedOrigin))
-                        expect(secondSection?.frame.width).to(equal(expectedWidth))
+                        expect(secondSection.frame.origin.x).to(beCloseTo(expectedOrigin.x))
+                        expect(secondSection.frame.origin.y).to(beCloseTo(expectedOrigin.y))
+                        expect(secondSection.frame.width).to(beCloseTo(expectedWidth))
                     }
                 }
             }
@@ -718,21 +704,13 @@ extension MultiProgressViewSpec {
 
 extension MultiProgressViewSpec {
     class MockMultiProgressViewDataSource: MultiProgressViewDataSource {
-        var numberOfUnitsCalled: Bool = false
         var numberOfSectionsCalled: Bool = false
         var viewForSectionCalledCount: Int = 0
         
-        private var numberOfUnits: Int
         private var numberOfSections: Int
         
-        init(numberOfUnits: Int = 0, numberOfSections: Int = 0) {
-            self.numberOfUnits = numberOfUnits
+        init(numberOfSections: Int = 0) {
             self.numberOfSections = numberOfSections
-        }
-        
-        func numberOfUnits(in progressView: MultiProgressView) -> Int {
-            numberOfUnitsCalled = true
-            return numberOfUnits
         }
         
         func numberOfSections(in progressView: MultiProgressView) -> Int {

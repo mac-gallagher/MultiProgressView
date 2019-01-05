@@ -10,7 +10,7 @@ import UIKit
 import MultiProgressView
 
 class ViewController: UIViewController {
-    let progressBar = MultiProgressView()
+    let progressView = MultiProgressView()
     let button1: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(handleTap), for: .touchUpInside)
@@ -33,10 +33,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        view.addSubview(progressBar)
-        progressBar.anchor(width: 300, height: 100)
-        progressBar.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        progressBar.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        view.addSubview(progressView)
+        progressView.anchor(width: 300, height: 100)
+        progressView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        progressView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
         view.addSubview(button2)
         button2.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingBottom: 50, width: 200, height: 50)
@@ -52,40 +52,36 @@ class ViewController: UIViewController {
     }
     
     private func setupProgressBar() {
-        progressBar.trackBorderWidth = 2
-        progressBar.trackBorderColor = .gray
-        progressBar.trackBackgroundColor = .lightGray
-        progressBar.setTitle("Background title")
-        progressBar.trackTitleAlignment = .left
-        progressBar.cornerRadius = 10
-        progressBar.trackTitleEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
-        progressBar.dataSource = self
+        progressView.trackInset = 10
+        progressView.trackBackgroundColor = .lightGray
+        progressView.backgroundColor = .gray
+        progressView.setTitle("Background title")
+        progressView.trackTitleAlignment = .left
+        progressView.lineCap = .round
+        progressView.trackTitleEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
+        progressView.dataSource = self
     }
     
     @objc private func handleTap(_ button: UIButton) {
         if button.tag == 1 {
             UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.3, options: .curveLinear, animations: {
-                self.progressBar.setProgress(section: 0, to: 3)
+                self.progressView.setProgress(section: 0, to: 0.3)
             }, completion: nil)
             UIView.animate(withDuration: 1, delay: 0.7, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.3, options: .curveLinear, animations: {
-                self.progressBar.setProgress(section: 1, to: 5)
+                self.progressView.setProgress(section: 1, to: 0.5)
             }, completion: nil)
             UIView.animate(withDuration: 1, delay: 0.4, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.3, options: .curveLinear, animations: {
-                self.progressBar.setProgress(section: 2, to: 1)
+                self.progressView.setProgress(section: 2, to: 0.1)
             }, completion: nil)
         } else if button.tag == 2 {
             UIView.animate(withDuration: 0.1) {
-                self.progressBar.resetProgress()
+                self.progressView.resetProgress()
             }
         }
     }
 }
 
 extension UIViewController: MultiProgressViewDataSource {
-    public func numberOfUnits(in progressBar: MultiProgressView) -> Int {
-        return 10
-    }
-    
     public func numberOfSections(in progressBar: MultiProgressView) -> Int {
         return 3
     }
