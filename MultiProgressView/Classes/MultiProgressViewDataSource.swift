@@ -1,5 +1,5 @@
 //
-//  MGSegmentedProgressBarDataSource.swift
+//  MultiProgressViewDataSource.swift
 //  MultiProgressView
 //
 //  Created by Mac Gallagher on 6/15/18.
