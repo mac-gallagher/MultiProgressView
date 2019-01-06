@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		5ED3A186418B5166513B19E0 /* Pods_MultiProgressView_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD43E7433DD1898180C5B05E /* Pods_MultiProgressView_Tests.framework */; };
 		7F623FDE3F5C6636F98C6EE0 /* Pods_MultiProgressView_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32AC331554740EDEA43EC16F /* Pods_MultiProgressView_Example.framework */; };
+		AD44368221E157DD00A98A97 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD44368121E157DD00A98A97 /* UIColor+Extensions.swift */; };
+		AD44368721E15F3000A98A97 /* StorageProgressSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD44368621E15F3000A98A97 /* StorageProgressSection.swift */; };
+		AD44368921E1908300A98A97 /* StorageStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD44368821E1908300A98A97 /* StorageStackView.swift */; };
+		AD44368B21E191EB00A98A97 /* StorageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD44368A21E191EB00A98A97 /* StorageType.swift */; };
 		AD536B9B20F3108D0003CA03 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD536B9A20F3108D0003CA03 /* UIView+Extensions.swift */; };
 		AD536BA220F3380D0003CA03 /* MultiProgressView.podspec in Resources */ = {isa = PBXBuildFile; fileRef = AD536B9F20F3380D0003CA03 /* MultiProgressView.podspec */; };
 		AD536BA320F3380D0003CA03 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = AD536BA020F3380D0003CA03 /* LICENSE */; };
@@ -38,6 +42,10 @@
 		38A60C038AB8AFCB4AB0A11E /* Pods-MultiProgressView_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultiProgressView_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MultiProgressView_Tests/Pods-MultiProgressView_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		42327A871F0BF754C72B0C25 /* Pods-MultiProgressView_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultiProgressView_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MultiProgressView_Tests/Pods-MultiProgressView_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		AD43E7433DD1898180C5B05E /* Pods_MultiProgressView_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MultiProgressView_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD44368121E157DD00A98A97 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		AD44368621E15F3000A98A97 /* StorageProgressSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageProgressSection.swift; sourceTree = "<group>"; };
+		AD44368821E1908300A98A97 /* StorageStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageStackView.swift; sourceTree = "<group>"; };
+		AD44368A21E191EB00A98A97 /* StorageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageType.swift; sourceTree = "<group>"; };
 		AD536B9A20F3108D0003CA03 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		AD536B9F20F3380D0003CA03 /* MultiProgressView.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = MultiProgressView.podspec; path = ../MultiProgressView.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		AD536BA020F3380D0003CA03 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -85,6 +93,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		AD44368321E15A5C00A98A97 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AD536B9A20F3108D0003CA03 /* UIView+Extensions.swift */,
+				AD44368121E157DD00A98A97 /* UIColor+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		AD536B9E20F337FA0003CA03 /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,7 +138,10 @@
 			children = (
 				ADA523F520F1BC9300CB8AE6 /* AppDelegate.swift */,
 				ADA523F720F1BC9300CB8AE6 /* ViewController.swift */,
-				AD536B9A20F3108D0003CA03 /* UIView+Extensions.swift */,
+				AD44368621E15F3000A98A97 /* StorageProgressSection.swift */,
+				AD44368821E1908300A98A97 /* StorageStackView.swift */,
+				AD44368A21E191EB00A98A97 /* StorageType.swift */,
+				AD44368321E15A5C00A98A97 /* Extensions */,
 				ADA5240720F1BCC900CB8AE6 /* Supporting Files */,
 			);
 			name = "Example for MultiProgressView";
@@ -353,8 +373,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADA523F820F1BC9300CB8AE6 /* ViewController.swift in Sources */,
+				AD44368B21E191EB00A98A97 /* StorageType.swift in Sources */,
 				AD536B9B20F3108D0003CA03 /* UIView+Extensions.swift in Sources */,
+				AD44368721E15F3000A98A97 /* StorageProgressSection.swift in Sources */,
 				ADA523F620F1BC9300CB8AE6 /* AppDelegate.swift in Sources */,
+				AD44368921E1908300A98A97 /* StorageStackView.swift in Sources */,
+				AD44368221E157DD00A98A97 /* UIColor+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
