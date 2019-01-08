@@ -12,11 +12,7 @@
 
 To run the example project, clone the repo and run the `MultiProgressView-Example` target.
 
----
-
 ![Apple Demo](https://raw.githubusercontent.com/mac-gallagher/MultiProgressView/master/Images/example.gif)
-
----
 
 # Requirements
 * iOS 9.0+
