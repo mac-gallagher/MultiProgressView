@@ -74,18 +74,9 @@
 				AD706AC221E460B60007AFE3 /* MultiProgressViewDataSource.swift */,
 				AD706ABB21E460B60007AFE3 /* ProgressViewSection.swift */,
 				AD706ABA21E460B60007AFE3 /* UIView+Extensions.swift */,
-				AD706ABE21E460B60007AFE3 /* Supporting Files */,
+				AD80E7E121E67D47009CED59 /* Supporting Files */,
 			);
 			path = Classes;
-			sourceTree = "<group>";
-		};
-		AD706ABE21E460B60007AFE3 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				AD706ABF21E460B60007AFE3 /* MultiProgressView.h */,
-				AD706AC021E460B60007AFE3 /* Info.plist */,
-			);
-			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		AD706AC321E460B60007AFE3 /* Assets */ = {
@@ -94,6 +85,15 @@
 				AD706AC421E460B60007AFE3 /* .gitkeep */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		AD80E7E121E67D47009CED59 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AD706ABF21E460B60007AFE3 /* MultiProgressView.h */,
+				AD706AC021E460B60007AFE3 /* Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -318,8 +318,9 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/MultiProgressView/Classes/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/MultiProgressView/Classes/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -343,8 +344,9 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/MultiProgressView/Classes/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/MultiProgressView/Classes/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
