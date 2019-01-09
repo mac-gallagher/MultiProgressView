@@ -2,8 +2,10 @@
 
 ![Swift-Version](https://img.shields.io/badge/Swift-4.2-orange.svg)
 ![CocoaPods](https://img.shields.io/cocoapods/v/MultiProgressView.svg)
+[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 ![license](https://img.shields.io/cocoapods/l/MultiProgressView.svg)
 ![CocoaPods](https://img.shields.io/cocoapods/p/MultiProgressView.svg)
+
 
 # About
 **MultiProgressView** is an animatable view that depicts multiple progresses over time. The `MultiProgressView` class mimics `UIProgressView` as much as possible while providing additional customizations. 
@@ -22,9 +24,15 @@ To run the example project, clone the repo and run the `MultiProgressView-Exampl
 # Installation
 
 ### CocoaPods
-MultiProgressView is available through [CocoaPods](<https://cocoapods.org/>). To install it, simply add the following line to your `Podfile`:
+MultiProgressView is available through [CocoaPods](<https://cocoapods.org/>). To install it, simply add the following line to your Podfile:
 
 	pod 'MultiProgressView'
+
+### Carthage
+
+MultiProgressView is also avaiable through [Carthage](<https://github.com/Carthage/Carthage>). To install it, simply add the following line to your Cartfile:
+
+	github "mac-gallagher/MultiSwipeView"
 
 ### Manual
 Download and drop the `MultiProgressView` directory into your project.
@@ -105,7 +113,6 @@ UIView.animate(withDuration: 0.2) {
 	- Have a detailed message as to what your pull request fixes/enhances/adds.
 
 # To-do
-- [ ] Support for Carthage installation
 - [ ] Storyboard/`IBInspectable` support
 - [ ] Progress object (Foundation) support
 
