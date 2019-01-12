@@ -45,7 +45,7 @@ open class ProgressViewSection: UIView {
     
     private func initialize() {
         backgroundColor = .black
-        clipsToBounds = true
+        layer.masksToBounds = true
     }
     
     private var labelConstraints = [NSLayoutConstraint]() {

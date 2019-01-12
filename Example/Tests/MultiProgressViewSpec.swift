@@ -8,7 +8,8 @@
 
 import Quick
 import Nimble
-import MultiProgressView
+
+@testable import MultiProgressView
 
 class MultiProgressViewSpec: QuickSpec {
     private let progressViewWidth: CGFloat = 300
@@ -75,17 +76,12 @@ class MultiProgressViewSpec: QuickSpec {
                     expect(progressView.dataSource).to(beNil())
                 }
                 
-                it("should clip to bounds") {
-                    expect(progressView.clipsToBounds).to(beTrue())
-                }
-                
-                it("should have exactly one subview") {
-                    expect(progressView.subviews.count).to(equal(1))
+                it("should clip its layer to its bounds") {
+                    expect(progressView.layer.masksToBounds).to(beTrue())
                 }
                
-                it("should clip its subview to its bounds") {
-                    let subview = progressView.subviews.first
-                    expect(subview?.clipsToBounds).to(beTrue())
+                it("should have its track's layer mask to its bounds") {
+                    expect(progressView.track.layer.masksToBounds).to(beTrue())
                 }
             }
         }
@@ -126,7 +122,6 @@ class MultiProgressViewSpec: QuickSpec {
             context("when the line cap type is round") {
                 context("when the corner radius is set to zero") {
                     let trackinset: CGFloat = 5
-                    var track: UIView!
                     
                     beforeEach {
                         progressView = self.setupProgressView(configure: { view in
@@ -134,7 +129,6 @@ class MultiProgressViewSpec: QuickSpec {
                             view.cornerRadius = 0
                             view.trackInset = trackinset
                         })
-                        track = progressView.subviews.first
                         progressView.layoutSubviews()
                     }
 
@@ -143,6 +137,7 @@ class MultiProgressViewSpec: QuickSpec {
                     }
 
                     it("should have its track's corner radius equal to half its height") {
+                        let track = progressView.track
                         expect(track.layer.cornerRadius).to(equal(track.bounds.height / 2))
                     }
                 }
@@ -150,7 +145,6 @@ class MultiProgressViewSpec: QuickSpec {
                 context("when the corner radius is nonzero") {
                     let trackinset: CGFloat = 5
                     let cornerRadius: CGFloat = 10
-                    var track: UIView!
                     
                     beforeEach {
                         progressView = self.setupProgressView(configure: { view in
@@ -158,7 +152,6 @@ class MultiProgressViewSpec: QuickSpec {
                             view.cornerRadius = cornerRadius
                             view.trackInset = trackinset
                         })
-                        track = progressView.subviews.first
                         progressView.layoutSubviews()
                     }
                     
@@ -168,6 +161,7 @@ class MultiProgressViewSpec: QuickSpec {
                     
                     it("should have the correct scaled track corner radius") {
                         let cornerRadiusFactor: CGFloat = cornerRadius / progressView.bounds.height
+                        let track = progressView.track
                         expect(track.layer.cornerRadius).to(be(cornerRadiusFactor * track.bounds.height))
                     }
                 }
@@ -175,14 +169,11 @@ class MultiProgressViewSpec: QuickSpec {
             
             context("when the line cap type is square") {
                 context("when the corner radius is set to zero") {
-                    var track: UIView!
-                    
                     beforeEach {
                         progressView = self.setupProgressView(configure: { view in
                             view.lineCap = .square
                             view.cornerRadius = 0
                         })
-                        track = progressView.subviews.first
                     }
                     
                     it("should have corner radius equal to zero") {
@@ -190,20 +181,19 @@ class MultiProgressViewSpec: QuickSpec {
                     }
                     
                     it("should have its track's corner radius equal to zero") {
+                        let track = progressView.track
                         expect(track.layer.cornerRadius).to(equal(0))
                     }
                 }
                 
                 context("when the corner radius is nonzero") {
                     let cornerRadius: CGFloat = 1
-                    var track: UIView!
                     
                     beforeEach {
                         progressView = self.setupProgressView(configure: { view in
                             view.lineCap = .square
                             view.cornerRadius = cornerRadius
                         })
-                        track = progressView.subviews.first
                     }
                     
                     it("should have corner radius equal to zero") {
@@ -211,6 +201,7 @@ class MultiProgressViewSpec: QuickSpec {
                     }
                     
                     it("should have its track's corner radius equal to zero") {
+                        let track = progressView.track
                         expect(track.layer.cornerRadius).to(equal(0))
                     }
                 }
@@ -218,14 +209,11 @@ class MultiProgressViewSpec: QuickSpec {
             
             context("when the line cap type is butt") {
                 context("when the corner radius is set to zero") {
-                    var track: UIView!
-                    
                     beforeEach {
                         progressView = self.setupProgressView(configure: { view in
                             view.lineCap = .butt
                             view.cornerRadius = 0
                         })
-                        track = progressView.subviews.first
                     }
                     
                     it("should have corner radius equal to zero") {
@@ -233,20 +221,19 @@ class MultiProgressViewSpec: QuickSpec {
                     }
                     
                     it("should have its track's corner radius equal to zero") {
+                        let track = progressView.track
                         expect(track.layer.cornerRadius).to(equal(0))
                     }
                 }
                 
                 context("when the corner radius is nonzero") {
                     let cornerRadius: CGFloat = 1
-                    var track: UIView!
                     
                     beforeEach {
                         progressView = self.setupProgressView(configure: { view in
                             view.lineCap = .butt
                             view.cornerRadius = cornerRadius
                         })
-                        track = progressView.subviews.first
                     }
                     
                     it("should have corner radius equal to zero") {
@@ -254,6 +241,7 @@ class MultiProgressViewSpec: QuickSpec {
                     }
                     
                     it("should have its track's corner radius equal to zero") {
+                        let track = progressView.track
                         expect(track.layer.cornerRadius).to(equal(0))
                     }
                 }
@@ -336,23 +324,20 @@ class MultiProgressViewSpec: QuickSpec {
         
         describe("track inset") {
             context("when the track inset is equal to zero") {
-                var track: UIView!
-                
                 beforeEach {
                     progressView = self.setupProgressView(configure: { view in
                         view.trackInset = 0
                     })
-                    track = progressView.subviews.first
                 }
                 
                 it("should have no insets on its track") {
+                    let track = progressView.track
                     expect(track.frame).to(equal(progressView.bounds))
                 }
             }
             
             context("when the track inset is nonzero") {
                 let inset: CGFloat = 1
-                var track: UIView!
                 
                 context("when the line cap type is round") {
                     beforeEach {
@@ -360,10 +345,10 @@ class MultiProgressViewSpec: QuickSpec {
                             view.trackInset = inset
                             view.lineCap = .round
                         })
-                        track = progressView.subviews.first
                     }
                     
                     it("should have a track with the correct size and origin") {
+                        let track = progressView.track
                         expect(track.bounds.height).to(equal(progressView.bounds.height - 2 * inset))
                         expect(track.bounds.width).to(equal(progressView.bounds.width - 2 * inset))
                         expect(track.frame.origin).to(equal(CGPoint(x: inset, y: inset)))
@@ -371,17 +356,15 @@ class MultiProgressViewSpec: QuickSpec {
                 }
                 
                 context("when the line cap type is square") {
-                    var track: UIView!
-                    
                     beforeEach {
                         progressView = self.setupProgressView(configure: { view in
                             view.trackInset = inset
                             view.lineCap = .square
                         })
-                        track = progressView.subviews.first
                     }
                     
                     it("should have a track with the correct size and origin") {
+                        let track = progressView.track
                         expect(track.bounds.height).to(equal(progressView.bounds.height - 2 * inset))
                         expect(track.bounds.width).to(equal(progressView.bounds.width - 2 * inset))
                         expect(track.frame.origin).to(equal(CGPoint(x: inset, y: inset)))
@@ -389,17 +372,15 @@ class MultiProgressViewSpec: QuickSpec {
                 }
                 
                 context("when the line cap type is butt") {
-                    var track: UIView!
-                    
                     beforeEach {
                         progressView = self.setupProgressView(configure: { view in
                             view.trackInset = inset
                             view.lineCap = .butt
                         })
-                        track = progressView.subviews.first
                     }
                     
                     it("should have a track with the correct size and origin") {
+                        let track = progressView.track
                         expect(track.bounds.height).to(equal(progressView.bounds.height - 2 * inset))
                         expect(track.bounds.width).to(equal(progressView.bounds.width))
                         expect(track.frame.origin).to(equal(CGPoint(x: 0, y: inset)))
@@ -411,16 +392,15 @@ class MultiProgressViewSpec: QuickSpec {
         describe("track image view") {
             context("when setting the track's image") {
                 let image = UIImage()
-                var track: UIView!
                 
                 beforeEach {
                     progressView = self.setupProgressView(configure: { view in
                         view.setTrackImage(image)
                     })
-                    track = progressView.subviews.first
                 }
                 
                 it("should have a track image view with the correct bounds") {
+                    let track = progressView.track
                     expect(progressView.trackImageView?.frame).to(equal(track.bounds))
                 }
 
@@ -477,13 +457,11 @@ class MultiProgressViewSpec: QuickSpec {
             context("when reloading the data") {
                 let numberOfSections: Int = 10
                 let dataSource = MockMultiProgressViewDataSource(numberOfSections: numberOfSections)
-                var track: UIView!
                 
                 beforeEach {
                     progressView = self.setupProgressView(configure: { view in
                         view.dataSource = dataSource
                     })
-                    track = progressView.subviews.first
                     progressView.reloadData()
                 }
                 
@@ -493,7 +471,12 @@ class MultiProgressViewSpec: QuickSpec {
                     }
                 }
                 
-                it("should have a track with the correct number of sections") {
+                it("should have the correct number of sections") {
+                    expect(progressView.progressViewSections.count).to(equal(numberOfSections))
+                }
+                
+                it("should the correct number of subviews on its track") {
+                    let track = progressView.track
                     expect(track.subviews.count).to(equal(numberOfSections))
                 }
             }
@@ -608,7 +591,6 @@ class MultiProgressViewSpec: QuickSpec {
         
         describe("progress view section layout") {
             context("when the progress view is initialized") {
-                var track: UIView!
                 let numberOfSections: Int = 3
                 
                 beforeEach {
@@ -616,11 +598,10 @@ class MultiProgressViewSpec: QuickSpec {
                     progressView = self.setupProgressView(configure: { view in
                         view.dataSource = dataSource
                     })
-                    track = progressView.subviews.first
                 }
                 
                 it("should layout each section with zero width") {
-                    for section in track.subviews {
+                    for section in progressView.progressViewSections {
                         expect(section.frame.width).to(equal(0))
                     }
                 }
@@ -630,7 +611,6 @@ class MultiProgressViewSpec: QuickSpec {
                 context("on an individual progress view section") {
                     let numberOfSections: Int = 1
                     let progress: Float = 0.1
-                    var track: UIView!
                     
                     beforeEach {
                         let dataSource = MockMultiProgressViewDataSource(numberOfSections: numberOfSections)
@@ -638,17 +618,17 @@ class MultiProgressViewSpec: QuickSpec {
                             view.dataSource = dataSource
                         })
                         progressView.setProgress(section: 0, to: progress)
-                        track = progressView.subviews.first
                     }
                     
                     it("should calculate the correct width and origin for the section") {
-                        let section = track.subviews.first
+                        let track = progressView.track
+                        let section = progressView.progressViewSections[0]
                         let expectedWidth = CGFloat(progress) * track.frame.width
                         let expectedOrigin = CGPoint.zero
                         
-                        expect(section?.frame.origin.x).to(beCloseTo(expectedOrigin.x))
-                        expect(section?.frame.origin.y).to(beCloseTo(expectedOrigin.y))
-                        expect(section?.frame.width).to(beCloseTo(expectedWidth))
+                        expect(section.frame.origin.x).to(beCloseTo(expectedOrigin.x))
+                        expect(section.frame.origin.y).to(beCloseTo(expectedOrigin.y))
+                        expect(section.frame.width).to(beCloseTo(expectedWidth))
                     }
                 }
                 
@@ -656,7 +636,6 @@ class MultiProgressViewSpec: QuickSpec {
                     let numberOfSections: Int = 2
                     let firstSectionProgress: Float = 0.2
                     let secondSectionProgress: Float = 0.1
-                    var track: UIView!
                     
                     beforeEach {
                         let dataSource = MockMultiProgressViewDataSource(numberOfSections: numberOfSections)
@@ -665,12 +644,12 @@ class MultiProgressViewSpec: QuickSpec {
                         })
                         progressView.setProgress(section: 0, to: firstSectionProgress)
                         progressView.setProgress(section: 1, to: secondSectionProgress)
-                        track = progressView.subviews.first
                     }
                     
                     it("should calculate the correct width and origin for the section") {
-                        let firstSection = track.subviews.first!
-                        let secondSection = track.subviews.last!
+                        let track = progressView.track
+                        let firstSection = progressView.progressViewSections[0]
+                        let secondSection = progressView.progressViewSections[1]
                         
                         let expectedOrigin = CGPoint(x: firstSection.frame.width, y: 0)
                         let expectedWidth = CGFloat(secondSectionProgress) * track.frame.width

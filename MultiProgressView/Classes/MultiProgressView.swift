@@ -91,13 +91,14 @@ open class MultiProgressView: UIView {
         return currentProgress.reduce(0) { $0 + $1 }
     }
     
-    private let track: UIView = {
+    let track: UIView = {
         let view = UIView()
-        view.clipsToBounds = true
+        view.layer.masksToBounds = true
         return view
     }()
     
-    private var progressBarSections: [ProgressViewSection] = []
+    var progressViewSections: [ProgressViewSection] = []
+    
     private var numberOfSections: Int = 0
     private var currentProgress: [Float] = []
     
@@ -115,7 +116,7 @@ open class MultiProgressView: UIView {
     
     private func initialize() {
         backgroundColor = .white
-        clipsToBounds = true
+        layer.masksToBounds = true
         addSubview(track)
     }
     
@@ -150,7 +151,7 @@ open class MultiProgressView: UIView {
         labelConstraints = label?.anchorToSuperview(withAlignment: trackTitleAlignment, insets: trackTitleEdgeInsets) ?? []
         imageViewConstaints = imageView?.anchorToSuperview() ?? []
         
-        for (index, bar) in progressBarSections.enumerated() {
+        for (index, bar) in progressViewSections.enumerated() {
             layoutBar(bar, section: index)
             track.bringSubviewToFront(bar)
         }
@@ -169,7 +170,7 @@ open class MultiProgressView: UIView {
         if section == 0 {
             barConstraints.append(contentsOf: bar.anchor(top: track.topAnchor, left: track.leftAnchor, bottom: track.bottomAnchor))
         } else {
-            barConstraints.append(contentsOf: bar.anchor(top: track.topAnchor, left: progressBarSections[section - 1].rightAnchor, bottom: track.bottomAnchor))
+            barConstraints.append(contentsOf: bar.anchor(top: track.topAnchor, left: progressViewSections[section - 1].rightAnchor, bottom: track.bottomAnchor))
         }
         
         let widthConstraint = bar.widthAnchor.constraint(equalTo: track.widthAnchor, multiplier: CGFloat(currentProgress[section]))
@@ -197,8 +198,8 @@ open class MultiProgressView: UIView {
         guard let dataSource = dataSource else { return }
         numberOfSections = dataSource.numberOfSections(in: self)
         
-        progressBarSections.forEach({ $0.removeFromSuperview() })
-        progressBarSections.removeAll()
+        progressViewSections.forEach({ $0.removeFromSuperview() })
+        progressViewSections.removeAll()
         currentProgress.removeAll()
         barSectionConstraints.removeAll()
 
@@ -210,7 +211,7 @@ open class MultiProgressView: UIView {
     private func configureSection(_ section: Int) {
         guard let dataSource = dataSource else { return }
         let bar = dataSource.progressView(self, viewForSection: section)
-        progressBarSections.insert(bar, at: section)
+        progressViewSections.insert(bar, at: section)
         track.addSubview(bar)
         currentProgress.insert(0, at: section)
         barSectionConstraints.insert([], at: section)
@@ -259,7 +260,7 @@ open class MultiProgressView: UIView {
     }
     
     public func resetProgress() {
-        for section in 0..<progressBarSections.count {
+        for section in 0..<progressViewSections.count {
             setProgress(section: section, to: 0)
         }
     }
