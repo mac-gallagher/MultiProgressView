@@ -32,7 +32,7 @@ MultiProgressView is available through [CocoaPods](<https://cocoapods.org/>). To
 
 MultiProgressView is also avaiable through [Carthage](<https://github.com/Carthage/Carthage>). To install it, simply add the following line to your Cartfile:
 
-	github "mac-gallagher/MultiSwipeView"
+	github "mac-gallagher/MultiProgressView"
 
 ### Manual
 Download and drop the `MultiProgressView` directory into your project.
@@ -68,9 +68,6 @@ Download and drop the `MultiProgressView` directory into your project.
 Each `MultiProgressView` exposes the following variables:
 
 ```swift
-var dataSource: MultiProgressViewDataSource?
-var totalProgress: Float
-
 var cornerRadius: CGFloat = 0
 var borderWidth: CGFloat = 0
 var borderColor: UIColor? = .black
@@ -80,7 +77,9 @@ var trackInset: CGFloat = 0
 var trackBackgroundColor: UIColor? = .white
 var trackBorderColor: UIColor? = .black
 var trackBorderWidth: CGFloat = 0
+
 var trackImageView: UIImageView?
+
 var trackTitleLabel: UILabel?
 var trackTitleEdgeInsets: UIEdgeInsets = .zero
 var trackTitleAlignment: AlignmentType = .center
@@ -97,7 +96,7 @@ var titleAlignment: AlignmentType = .center
 ```
 
 ### Animating your progress
-All of methods which alter the view's progress can be animated. For example:
+The `setProgress(section:to:)` function be animated. For example:
 
 ```swift
 UIView.animate(withDuration: 0.2) {
