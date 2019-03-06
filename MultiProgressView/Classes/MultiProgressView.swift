@@ -8,6 +8,11 @@
 
 import UIKit
 
+public protocol MultiProgressViewDataSource {
+    func numberOfSections(in progressView: MultiProgressView) -> Int
+    func progressView(_ progressView: MultiProgressView, viewForSection section: Int) -> ProgressViewSection
+}
+
 open class MultiProgressView: UIView {
     public var dataSource: MultiProgressViewDataSource? {
         didSet {
@@ -57,11 +62,11 @@ open class MultiProgressView: UIView {
         }
     }
     
-    public var trackTitleLabel: UILabel? {
+    public var trackTitleLabel: UILabel {
         return label
     }
     
-    private var label: UILabel?
+    private var label: UILabel = UILabel()
     
     public var trackTitleEdgeInsets: UIEdgeInsets = .zero {
         didSet {
@@ -75,11 +80,11 @@ open class MultiProgressView: UIView {
         }
     }
     
-    public var trackImageView: UIImageView? {
+    public var trackImageView: UIImageView {
         return imageView
     }
     
-    private var imageView: UIImageView?
+    private var imageView: UIImageView = UIImageView()
     
     public var lineCap: LineCapType = .square {
         didSet {
@@ -91,9 +96,11 @@ open class MultiProgressView: UIView {
         return currentProgress.reduce(0) { $0 + $1 }
     }
     
-    let track: UIView = {
+    lazy var track: UIView = {
         let view = UIView()
         view.layer.masksToBounds = true
+        view.addSubview(trackTitleLabel)
+        view.addSubview(trackImageView)
         return view
     }()
     
@@ -101,6 +108,8 @@ open class MultiProgressView: UIView {
     
     private var numberOfSections: Int = 0
     private var currentProgress: [Float] = []
+    
+    private var layoutCalculator: LayoutCalculatable = LayoutCalculator.shared
     
     //MARK: - Initialization
     
@@ -114,6 +123,11 @@ open class MultiProgressView: UIView {
         initialize()
     }
     
+    convenience init(layoutCalculator: LayoutCalculatable) {
+        self.init(frame: .zero)
+        self.layoutCalculator = layoutCalculator
+    }
+    
     private func initialize() {
         backgroundColor = .white
         layer.masksToBounds = true
@@ -122,13 +136,6 @@ open class MultiProgressView: UIView {
     
     //MARK: - Layout
     
-    private var trackConstraints = [NSLayoutConstraint]() {
-        didSet {
-            NSLayoutConstraint.deactivate(oldValue)
-            NSLayoutConstraint.activate(trackConstraints)
-        }
-    }
-    
     private var labelConstraints = [NSLayoutConstraint]() {
         didSet {
             NSLayoutConstraint.deactivate(oldValue)
@@ -136,60 +143,29 @@ open class MultiProgressView: UIView {
         }
     }
     
-    private var imageViewConstaints = [NSLayoutConstraint]() {
-        didSet {
-            NSLayoutConstraint.deactivate(oldValue)
-            NSLayoutConstraint.activate(imageViewConstaints)
-        }
-    }
-    
-    private var barSectionConstraints = [[NSLayoutConstraint]]()
-    
     open override func layoutSubviews() {
         super.layoutSubviews()
-        trackConstraints = track.anchorToSuperview(withCapType: lineCap, padding: trackInset)
-        labelConstraints = label?.anchorToSuperview(withAlignment: trackTitleAlignment, insets: trackTitleEdgeInsets) ?? []
-        imageViewConstaints = imageView?.anchorToSuperview() ?? []
-        
-        for (index, bar) in progressViewSections.enumerated() {
-            layoutBar(bar, section: index)
-            track.bringSubviewToFront(bar)
-        }
-        
-        if let imageView = imageView {
-            track.sendSubviewToBack(imageView)
-        }
-
+        track.frame = layoutCalculator.trackFrame(forProgressView: self)
+        labelConstraints = layoutCalculator.layoutTitleLabel(label,
+                                                             withAlignment: trackTitleAlignment,
+                                                             insets: trackTitleEdgeInsets)
+        imageView.frame = layoutCalculator.trackImageViewFrame(forProgressView: self)
+        track.sendSubviewToBack(imageView)
+        layoutSections()
         applyCornerRadius()
     }
-
-    private func layoutBar(_ bar: ProgressViewSection, section: Int) {
-        NSLayoutConstraint.deactivate(barSectionConstraints[section])
-        var barConstraints = [NSLayoutConstraint]()
-        
-        if section == 0 {
-            barConstraints.append(contentsOf: bar.anchor(top: track.topAnchor, left: track.leftAnchor, bottom: track.bottomAnchor))
-        } else {
-            barConstraints.append(contentsOf: bar.anchor(top: track.topAnchor, left: progressViewSections[section - 1].rightAnchor, bottom: track.bottomAnchor))
+    
+    private func layoutSections() {
+        for (index, section) in progressViewSections.enumerated() {
+            section.frame = layoutCalculator.sectionFrame(forProgressView: self,
+                                                          section: index)
+            track.bringSubviewToFront(section)
         }
-        
-        let widthConstraint = bar.widthAnchor.constraint(equalTo: track.widthAnchor, multiplier: CGFloat(currentProgress[section]))
-        barConstraints.append(widthConstraint)
-        
-        NSLayoutConstraint.activate(barConstraints)
-        barSectionConstraints[section] = barConstraints
     }
     
     private func applyCornerRadius() {
-        let cornerRadiusFactor: CGFloat = cornerRadius / bounds.height
-        switch lineCap {
-        case .round:
-            layer.cornerRadius = cornerRadius == 0 ? bounds.height / 2 : cornerRadius
-            track.layer.cornerRadius = cornerRadius == 0 ? track.bounds.height / 2 : cornerRadiusFactor * track.bounds.height
-        case .butt, .square:
-            layer.cornerRadius = 0
-            track.layer.cornerRadius = 0
-        }
+        layer.cornerRadius = layoutCalculator.cornerRadius(forProgressView: self)
+        track.layer.cornerRadius = layoutCalculator.trackCornerRadius(forProgressView: self)
     }
     
     //MARK: - Data Source
@@ -198,11 +174,10 @@ open class MultiProgressView: UIView {
         guard let dataSource = dataSource else { return }
         numberOfSections = dataSource.numberOfSections(in: self)
         
-        progressViewSections.forEach({ $0.removeFromSuperview() })
+        progressViewSections.forEach { $0.removeFromSuperview() }
         progressViewSections.removeAll()
         currentProgress.removeAll()
-        barSectionConstraints.removeAll()
-
+        
         for index in 0..<numberOfSections {
             configureSection(index)
         }
@@ -214,39 +189,20 @@ open class MultiProgressView: UIView {
         progressViewSections.insert(bar, at: section)
         track.addSubview(bar)
         currentProgress.insert(0, at: section)
-        barSectionConstraints.insert([], at: section)
     }
     
     //MARK: - Main Methods
     
     public func setTitle(_ title: String?) {
-        createTrackTitleLabelIfNeeded()
-        label?.text = title
+        label.text = title
     }
     
     public func setAttributedTitle(_ title: NSAttributedString?) {
-        createTrackTitleLabelIfNeeded()
-        label?.attributedText = title
-    }
-    
-    private func createTrackTitleLabelIfNeeded() {
-        guard trackTitleLabel == nil else { return }
-        let title = UILabel()
-        track.addSubview(title)
-        label = title
+        label.attributedText = title
     }
     
     public func setTrackImage(_ image: UIImage?) {
-        guard let image = image else { return }
-        createTrackImageViewIfNeeded()
-        imageView?.image = image
-    }
-    
-    private func createTrackImageViewIfNeeded() {
-        guard imageView == nil else { return }
-        let iv = UIImageView()
-        track.addSubview(iv)
-        imageView = iv
+        imageView.image = image
     }
     
     public func progress(forSection section: Int) -> Float {

@@ -9,11 +9,11 @@
 import UIKit
 
 open class ProgressViewSection: UIView {
-    public var titleLabel: UILabel? {
-        return label
+    public var titleLabel: UILabel {
+        return sectionTitleLabel
     }
     
-    private var label: UILabel?
+    private var sectionTitleLabel: UILabel = UILabel()
 
     public var titleEdgeInsets: UIEdgeInsets = .zero {
         didSet {
@@ -27,11 +27,13 @@ open class ProgressViewSection: UIView {
         }
     }
     
-    public var imageView: UIImageView? {
+    public var imageView: UIImageView {
         return sectionImageView
     }
 
-    private var sectionImageView: UIImageView?
+    private var sectionImageView: UIImageView = UIImageView()
+    
+    private let layoutCalculator: LayoutCalculatable = LayoutCalculator.shared
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -46,6 +48,8 @@ open class ProgressViewSection: UIView {
     private func initialize() {
         backgroundColor = .black
         layer.masksToBounds = true
+        addSubview(sectionImageView)
+        addSubview(sectionTitleLabel)
     }
     
     private var labelConstraints = [NSLayoutConstraint]() {
@@ -55,50 +59,24 @@ open class ProgressViewSection: UIView {
         }
     }
     
-    private var imageViewConstaints = [NSLayoutConstraint]() {
-        didSet {
-            NSLayoutConstraint.deactivate(oldValue)
-            NSLayoutConstraint.activate(imageViewConstaints)
-        }
-    }
-    
     open override func layoutSubviews() {
         super.layoutSubviews()
-        labelConstraints = label?.anchorToSuperview(withAlignment: titleAlignment, insets: titleEdgeInsets) ?? []
-        imageViewConstaints = sectionImageView?.anchorToSuperview() ?? []
-        
-        if let imageView = sectionImageView {
-            sendSubviewToBack(imageView)
-        }
+        labelConstraints = layoutCalculator.layoutTitleLabel(sectionTitleLabel,
+                                                             withAlignment: titleAlignment,
+                                                             insets: titleEdgeInsets)
+        sectionImageView.frame = layoutCalculator.sectionImageViewFrame(forSection: self)
+        sendSubviewToBack(sectionImageView)
     }
     
     public func setTitle(_ title: String?) {
-        createTitleLabelIfNeeded()
-        label?.text = title
+        sectionTitleLabel.text = title
     }
     
     public func setAttributedTitle(_ title: NSAttributedString?) {
-        createTitleLabelIfNeeded()
-        label?.attributedText = title
+        sectionTitleLabel.attributedText = title
     }
     
     public func setImage(_ image: UIImage?) {
-        guard let image = image else { return }
-        createImageViewIfNeeded()
-        sectionImageView?.image = image
-    }
-    
-    private func createTitleLabelIfNeeded() {
-        guard titleLabel == nil else { return }
-        let title = UILabel()
-        addSubview(title)
-        label = title
-    }
-    
-    private func createImageViewIfNeeded() {
-        guard imageView == nil else { return }
-        let iv = UIImageView()
-        addSubview(iv)
-        sectionImageView = iv
+        sectionImageView.image = image
     }
 }
