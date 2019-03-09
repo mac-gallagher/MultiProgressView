@@ -9,8 +9,14 @@
 /* Begin PBXBuildFile section */
 		5ED3A186418B5166513B19E0 /* Pods_MultiProgressView_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD43E7433DD1898180C5B05E /* Pods_MultiProgressView_Tests.framework */; };
 		7F623FDE3F5C6636F98C6EE0 /* Pods_MultiProgressView_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32AC331554740EDEA43EC16F /* Pods_MultiProgressView_Example.framework */; };
-		AD301E30222F500100D1FAD6 /* LayoutCalculatorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD301E2F222F500100D1FAD6 /* LayoutCalculatorSpec.swift */; };
+		AD141BDD223347A200519E52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD141BDC223347A200519E52 /* AppDelegate.swift */; };
+		AD141BDF223347A200519E52 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD141BDE223347A200519E52 /* ViewController.swift */; };
+		AD141BE2223347A200519E52 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD141BE0223347A200519E52 /* Main.storyboard */; };
+		AD141BE4223347A400519E52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD141BE3223347A400519E52 /* Assets.xcassets */; };
+		AD141BE7223347A400519E52 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD141BE5223347A400519E52 /* LaunchScreen.storyboard */; };
 		AD301E38222F8BB100D1FAD6 /* MockLayoutCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD301E36222F8BAE00D1FAD6 /* MockLayoutCalculator.swift */; };
+		AD301E3C2231EF8200D1FAD6 /* TestableMultiProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD301E3B2231EF8200D1FAD6 /* TestableMultiProgressView.swift */; };
+		AD301E3D2231F0B500D1FAD6 /* LayoutCalculatorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD301E2F222F500100D1FAD6 /* LayoutCalculatorSpec.swift */; };
 		AD44368221E157DD00A98A97 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD44368121E157DD00A98A97 /* UIColor+Extensions.swift */; };
 		AD44368721E15F3000A98A97 /* StorageProgressSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD44368621E15F3000A98A97 /* StorageProgressSection.swift */; };
 		AD44368921E1908300A98A97 /* StorageStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD44368821E1908300A98A97 /* StorageStackView.swift */; };
@@ -29,6 +35,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		AD141BEC223347BB00519E52 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ADA523EA20F1BC9300CB8AE6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AD141BD9223347A200519E52;
+			remoteInfo = MultiProgressViewTestHostApp;
+		};
 		ADE1AECB21D40DF2000D9539 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = ADA523EA20F1BC9300CB8AE6 /* Project object */;
@@ -44,8 +57,16 @@
 		34E8A8CB8CECEADBDB015445 /* Pods-MultiProgressView_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultiProgressView_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-MultiProgressView_Example/Pods-MultiProgressView_Example.release.xcconfig"; sourceTree = "<group>"; };
 		38A60C038AB8AFCB4AB0A11E /* Pods-MultiProgressView_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultiProgressView_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MultiProgressView_Tests/Pods-MultiProgressView_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		42327A871F0BF754C72B0C25 /* Pods-MultiProgressView_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultiProgressView_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MultiProgressView_Tests/Pods-MultiProgressView_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		AD141BDA223347A200519E52 /* MultiProgressViewTestHostApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiProgressViewTestHostApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD141BDC223347A200519E52 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AD141BDE223347A200519E52 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AD141BE1223347A200519E52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		AD141BE3223347A400519E52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AD141BE6223347A400519E52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AD141BE8223347A400519E52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD301E2F222F500100D1FAD6 /* LayoutCalculatorSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutCalculatorSpec.swift; sourceTree = "<group>"; };
 		AD301E36222F8BAE00D1FAD6 /* MockLayoutCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLayoutCalculator.swift; sourceTree = "<group>"; };
+		AD301E3B2231EF8200D1FAD6 /* TestableMultiProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestableMultiProgressView.swift; sourceTree = "<group>"; };
 		AD43E7433DD1898180C5B05E /* Pods_MultiProgressView_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MultiProgressView_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD44368121E157DD00A98A97 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		AD44368621E15F3000A98A97 /* StorageProgressSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageProgressSection.swift; sourceTree = "<group>"; };
@@ -69,6 +90,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		AD141BD7223347A200519E52 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ADA523EF20F1BC9300CB8AE6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -97,6 +125,27 @@
 				38A60C038AB8AFCB4AB0A11E /* Pods-MultiProgressView_Tests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		AD141BDB223347A200519E52 /* TestHostApp */ = {
+			isa = PBXGroup;
+			children = (
+				AD141BDC223347A200519E52 /* AppDelegate.swift */,
+				AD141BDE223347A200519E52 /* ViewController.swift */,
+				AD141BE0223347A200519E52 /* Main.storyboard */,
+				AD141BE3223347A400519E52 /* Assets.xcassets */,
+				AD141BE5223347A400519E52 /* LaunchScreen.storyboard */,
+				AD141BE8223347A400519E52 /* Info.plist */,
+			);
+			path = TestHostApp;
+			sourceTree = "<group>";
+		};
+		AD301E3A2231EF6F00D1FAD6 /* Testables */ = {
+			isa = PBXGroup;
+			children = (
+				AD301E3B2231EF8200D1FAD6 /* TestableMultiProgressView.swift */,
+			);
+			path = Testables;
 			sourceTree = "<group>";
 		};
 		AD44368321E15A5C00A98A97 /* Extensions */ = {
@@ -143,6 +192,7 @@
 				AD536B9E20F337FA0003CA03 /* Podspec Metadata */,
 				ADA523F420F1BC9300CB8AE6 /* Example for MultiProgressView */,
 				ADE1AEC721D40DF2000D9539 /* Tests */,
+				AD141BDB223347A200519E52 /* TestHostApp */,
 				ADA523F320F1BC9300CB8AE6 /* Products */,
 				117CF13A193CD9F2202AFC2F /* Pods */,
 				DEB17BE03A963B4F4733EF42 /* Frameworks */,
@@ -154,6 +204,7 @@
 			children = (
 				ADA523F220F1BC9300CB8AE6 /* MultiProgressView_Example.app */,
 				ADE1AEC621D40DF2000D9539 /* MultiProgressView_Tests.xctest */,
+				AD141BDA223347A200519E52 /* MultiProgressViewTestHostApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -188,6 +239,7 @@
 			children = (
 				ADA2F3F822299247001A39F5 /* Mocks */,
 				ADA2F3F722299240001A39F5 /* Specs */,
+				AD301E3A2231EF6F00D1FAD6 /* Testables */,
 				ADE1AED621D416B6000D9539 /* Supporting Files */,
 			);
 			path = Tests;
@@ -213,6 +265,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		AD141BD9223347A200519E52 /* MultiProgressViewTestHostApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AD141BEB223347A400519E52 /* Build configuration list for PBXNativeTarget "MultiProgressViewTestHostApp" */;
+			buildPhases = (
+				AD141BD6223347A200519E52 /* Sources */,
+				AD141BD7223347A200519E52 /* Frameworks */,
+				AD141BD8223347A200519E52 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MultiProgressViewTestHostApp;
+			productName = MultiProgressViewTestHostApp;
+			productReference = AD141BDA223347A200519E52 /* MultiProgressViewTestHostApp.app */;
+			productType = "com.apple.product-type.application";
+		};
 		ADA523F120F1BC9300CB8AE6 /* MultiProgressView_Example */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = ADA5240420F1BC9500CB8AE6 /* Build configuration list for PBXNativeTarget "MultiProgressView_Example" */;
@@ -246,6 +315,7 @@
 			);
 			dependencies = (
 				ADE1AECC21D40DF2000D9539 /* PBXTargetDependency */,
+				AD141BED223347BB00519E52 /* PBXTargetDependency */,
 			);
 			name = MultiProgressView_Tests;
 			productName = MGSegmentedProgressBar_Tests;
@@ -262,13 +332,16 @@
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Mac Gallagher";
 				TargetAttributes = {
+					AD141BD9223347A200519E52 = {
+						CreatedOnToolsVersion = 10.1;
+					};
 					ADA523F120F1BC9300CB8AE6 = {
 						CreatedOnToolsVersion = 9.4.1;
 						LastSwiftMigration = 1000;
 					};
 					ADE1AEC521D40DF2000D9539 = {
 						CreatedOnToolsVersion = 10.1;
-						TestTargetID = ADA523F120F1BC9300CB8AE6;
+						TestTargetID = AD141BD9223347A200519E52;
 					};
 				};
 			};
@@ -287,11 +360,22 @@
 			targets = (
 				ADA523F120F1BC9300CB8AE6 /* MultiProgressView_Example */,
 				ADE1AEC521D40DF2000D9539 /* MultiProgressView_Tests */,
+				AD141BD9223347A200519E52 /* MultiProgressViewTestHostApp */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		AD141BD8223347A200519E52 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD141BE7223347A400519E52 /* LaunchScreen.storyboard in Resources */,
+				AD141BE4223347A400519E52 /* Assets.xcassets in Resources */,
+				AD141BE2223347A200519E52 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ADA523F020F1BC9300CB8AE6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -393,6 +477,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		AD141BD6223347A200519E52 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD141BDF223347A200519E52 /* ViewController.swift in Sources */,
+				AD141BDD223347A200519E52 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ADA523EE20F1BC9300CB8AE6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -401,7 +494,6 @@
 				AD44368B21E191EB00A98A97 /* StorageType.swift in Sources */,
 				AD536B9B20F3108D0003CA03 /* UIView+Extensions.swift in Sources */,
 				AD44368721E15F3000A98A97 /* StorageProgressSection.swift in Sources */,
-				AD301E30222F500100D1FAD6 /* LayoutCalculatorSpec.swift in Sources */,
 				ADA523F620F1BC9300CB8AE6 /* AppDelegate.swift in Sources */,
 				AD44368921E1908300A98A97 /* StorageStackView.swift in Sources */,
 				AD44368221E157DD00A98A97 /* UIColor+Extensions.swift in Sources */,
@@ -414,14 +506,21 @@
 			files = (
 				AD59919F21D438E3001381F9 /* MultiProgressViewSpec.swift in Sources */,
 				ADE1AEC921D40DF2000D9539 /* ProgressViewSectionSpec.swift in Sources */,
+				AD301E3D2231F0B500D1FAD6 /* LayoutCalculatorSpec.swift in Sources */,
 				ADA2F3FB2229D08D001A39F5 /* MockMultiProgressViewDataSource.swift in Sources */,
 				AD301E38222F8BB100D1FAD6 /* MockLayoutCalculator.swift in Sources */,
+				AD301E3C2231EF8200D1FAD6 /* TestableMultiProgressView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		AD141BED223347BB00519E52 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AD141BD9223347A200519E52 /* MultiProgressViewTestHostApp */;
+			targetProxy = AD141BEC223347BB00519E52 /* PBXContainerItemProxy */;
+		};
 		ADE1AECC21D40DF2000D9539 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = ADA523F120F1BC9300CB8AE6 /* MultiProgressView_Example */;
@@ -430,6 +529,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		AD141BE0223347A200519E52 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AD141BE1223347A200519E52 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		AD141BE5223347A400519E52 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AD141BE6223347A400519E52 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		ADA523FE20F1BC9500CB8AE6 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -441,6 +556,45 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		AD141BE9223347A400519E52 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DYZ8Y2U8DB;
+				INFOPLIST_FILE = "$(SRCROOT)/TestHostApp/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.macgallagher.MultiProgressViewTestHostApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AD141BEA223347A400519E52 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DYZ8Y2U8DB;
+				INFOPLIST_FILE = "$(SRCROOT)/TestHostApp/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.macgallagher.MultiProgressViewTestHostApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		ADA5240220F1BC9500CB8AE6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -615,7 +769,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MultiProgressView_Example.app/MultiProgressView_Example";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MultiProgressViewTestHostApp.app/MultiProgressViewTestHostApp";
 			};
 			name = Debug;
 		};
@@ -638,13 +792,22 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MultiProgressView_Example.app/MultiProgressView_Example";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MultiProgressViewTestHostApp.app/MultiProgressViewTestHostApp";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		AD141BEB223347A400519E52 /* Build configuration list for PBXNativeTarget "MultiProgressViewTestHostApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD141BE9223347A400519E52 /* Debug */,
+				AD141BEA223347A400519E52 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		ADA523ED20F1BC9300CB8AE6 /* Build configuration list for PBXProject "MultiProgressView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

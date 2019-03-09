@@ -10,31 +10,33 @@
 
 class MockLayoutCalculator: LayoutCalculatable {
     
+    var trackImageViewFrame: CGRect = CGRect()
     func trackImageViewFrame(forProgressView progressView: MultiProgressView) -> CGRect {
-        return .zero
+        return trackImageViewFrame
     }
     
+    var testSectionImageViewFrame: CGRect = CGRect()
     func sectionImageViewFrame(forSection section: ProgressViewSection) -> CGRect {
-        return .zero
+        return testSectionImageViewFrame
     }
     
+    var testTrackFrame: CGRect = CGRect()
     func trackFrame(forProgressView progressView: MultiProgressView) -> CGRect {
-        return .zero
+        return testTrackFrame
     }
     
+    var testSectionFrame: CGRect = CGRect()
     func sectionFrame(forProgressView progressView: MultiProgressView, section: Int) -> CGRect {
-        return .zero
+        return testSectionFrame
     }
     
-    func layoutTitleLabel(_ label: UILabel, withAlignment alignmentType: AlignmentType, insets: UIEdgeInsets) -> [NSLayoutConstraint] {
-        return []
-    }
-    
+    var testCornerRadius: CGFloat = CGFloat()
     func cornerRadius(forProgressView progressView: MultiProgressView) -> CGFloat {
-        return 0
+        return testCornerRadius
     }
     
+    var testTrackCornerRadius: CGFloat = CGFloat()
     func trackCornerRadius(forProgressView progressview: MultiProgressView) -> CGFloat {
-        return 0
+        return testTrackCornerRadius
     }
 }

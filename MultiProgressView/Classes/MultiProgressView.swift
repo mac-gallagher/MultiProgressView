@@ -146,9 +146,8 @@ open class MultiProgressView: UIView {
     open override func layoutSubviews() {
         super.layoutSubviews()
         track.frame = layoutCalculator.trackFrame(forProgressView: self)
-        labelConstraints = layoutCalculator.layoutTitleLabel(label,
-                                                             withAlignment: trackTitleAlignment,
-                                                             insets: trackTitleEdgeInsets)
+        labelConstraints = trackTitleLabel.layout(withAlignment: trackTitleAlignment,
+                                                   insets: trackTitleEdgeInsets)
         imageView.frame = layoutCalculator.trackImageViewFrame(forProgressView: self)
         track.sendSubviewToBack(imageView)
         layoutSections()

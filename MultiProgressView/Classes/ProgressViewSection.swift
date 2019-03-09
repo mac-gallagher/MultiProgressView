@@ -14,7 +14,7 @@ open class ProgressViewSection: UIView {
     }
     
     private var sectionTitleLabel: UILabel = UILabel()
-
+    
     public var titleEdgeInsets: UIEdgeInsets = .zero {
         didSet {
             setNeedsLayout()
@@ -30,7 +30,7 @@ open class ProgressViewSection: UIView {
     public var imageView: UIImageView {
         return sectionImageView
     }
-
+    
     private var sectionImageView: UIImageView = UIImageView()
     
     private let layoutCalculator: LayoutCalculatable = LayoutCalculator.shared
@@ -61,9 +61,8 @@ open class ProgressViewSection: UIView {
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-        labelConstraints = layoutCalculator.layoutTitleLabel(sectionTitleLabel,
-                                                             withAlignment: titleAlignment,
-                                                             insets: titleEdgeInsets)
+        labelConstraints = sectionTitleLabel.layout(withAlignment: titleAlignment,
+                                                    insets: titleEdgeInsets)
         sectionImageView.frame = layoutCalculator.sectionImageViewFrame(forSection: self)
         sendSubviewToBack(sectionImageView)
     }

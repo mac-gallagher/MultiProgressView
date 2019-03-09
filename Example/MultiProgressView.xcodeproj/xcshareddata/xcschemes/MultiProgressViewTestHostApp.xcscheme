@@ -7,16 +7,16 @@
       buildImplicitDependencies = "YES">
       <BuildActionEntries>
          <BuildActionEntry
-            buildForTesting = "NO"
+            buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ADA523F120F1BC9300CB8AE6"
-               BuildableName = "MultiProgressView_Example.app"
-               BlueprintName = "MultiProgressView_Example"
+               BlueprintIdentifier = "AD141BD9223347A200519E52"
+               BuildableName = "MultiProgressViewTestHostApp.app"
+               BlueprintName = "MultiProgressViewTestHostApp"
                ReferencedContainer = "container:MultiProgressView.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -26,17 +26,27 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      systemAttachmentLifetime = "keepAlways"
       codeCoverageEnabled = "YES"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO"
+            testExecutionOrdering = "random">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "ADE1AEC521D40DF2000D9539"
+               BuildableName = "MultiProgressView_Tests.xctest"
+               BlueprintName = "MultiProgressView_Tests"
+               ReferencedContainer = "container:MultiProgressView.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "ADA523F120F1BC9300CB8AE6"
-            BuildableName = "MultiProgressView_Example.app"
-            BlueprintName = "MultiProgressView_Example"
+            BlueprintIdentifier = "AD141BD9223347A200519E52"
+            BuildableName = "MultiProgressViewTestHostApp.app"
+            BlueprintName = "MultiProgressViewTestHostApp"
             ReferencedContainer = "container:MultiProgressView.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -57,9 +67,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "ADA523F120F1BC9300CB8AE6"
-            BuildableName = "MultiProgressView_Example.app"
-            BlueprintName = "MultiProgressView_Example"
+            BlueprintIdentifier = "AD141BD9223347A200519E52"
+            BuildableName = "MultiProgressViewTestHostApp.app"
+            BlueprintName = "MultiProgressViewTestHostApp"
             ReferencedContainer = "container:MultiProgressView.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -72,15 +82,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "ADA523F120F1BC9300CB8AE6"
-            BuildableName = "MultiProgressView_Example.app"
-            BlueprintName = "MultiProgressView_Example"
+            BlueprintIdentifier = "AD141BD9223347A200519E52"
+            BuildableName = "MultiProgressViewTestHostApp.app"
+            BlueprintName = "MultiProgressViewTestHostApp"
             ReferencedContainer = "container:MultiProgressView.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

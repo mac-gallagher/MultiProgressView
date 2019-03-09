@@ -14,31 +14,30 @@ import Nimble
 class MultiProgressViewSpec: QuickSpec {
     
     override func spec() {
-        let progressViewWidth: CGFloat = 300
-        let progressViewHeight: CGFloat = 50
         var mockLayoutCalculator: MockLayoutCalculator!
-        var subject: MultiProgressView!
+        var subject: TestableMultiProgressView!
         
         describe("MultiProgressView") {
             
             beforeEach {
                 mockLayoutCalculator = MockLayoutCalculator()
-                subject = MultiProgressView(layoutCalculator: mockLayoutCalculator)
-                self.layoutProgressView(subject,
-                                        width: progressViewWidth,
-                                        height: progressViewHeight)
+                subject = TestableMultiProgressView(layoutCalculator: mockLayoutCalculator)
             }
             
-            describe("initialization") {
+            //MARK: - Initialization
+            
+            describe("initialization") { //Done!
                 
                 context("when initializing a new progress view") {
                     
-                    it("should have a track title label") {
-                        expect(subject.trackTitleLabel).toNot(beNil())
+                    //MARK: Progress View
+                    
+                    it("should not have a data source") {
+                        expect(subject.dataSource).to(beNil())
                     }
                     
-                    it("should have track insets equal to zero") {
-                        expect(subject.trackInset).to(equal(0))
+                    it("should have corner radius equal to zero") {
+                        expect(subject.cornerRadius).to(equal(0))
                     }
                     
                     it("should have a border color of black") {
@@ -49,6 +48,44 @@ class MultiProgressViewSpec: QuickSpec {
                         expect(subject.borderWidth).to(equal(0))
                     }
                     
+                    it("should have a round line cap type") {
+                        expect(subject.lineCap).to(equal(.square))
+                    }
+                    
+                    it("should have total progress equal to zero") {
+                        expect(subject.totalProgress).to(equal(0))
+                    }
+                    
+                    it("should clip its layer to its bounds") {
+                        expect(subject.layer.masksToBounds).to(beTrue())
+                    }
+                    
+                    it("should have exactly one subview") {
+                        expect(subject.subviews.contains(subject.track)).to(beTrue())
+                    }
+                    
+                    //MARK: Progress View Track
+                    
+                    it("should have a track border width of zero") {
+                        expect(subject.trackBorderWidth).to(equal(0))
+                    }
+                    
+                    it("should have a track border color of black") {
+                        expect(subject.trackBorderColor).to(equal(.black))
+                    }
+                    
+                    it("should have track insets equal to zero") {
+                        expect(subject.trackInset).to(equal(0))
+                    }
+                    
+                    it("should have a track background color of white") {
+                        expect(subject.trackBackgroundColor).to(equal(.white))
+                    }
+                    
+                    it("should have a track title label") {
+                        expect(subject.trackTitleLabel).toNot(beNil())
+                    }
+                    
                     it("should have track title insets equal to zero") {
                         expect(subject.trackTitleEdgeInsets).to(equal(.zero))
                     }
@@ -57,55 +94,144 @@ class MultiProgressViewSpec: QuickSpec {
                         expect(subject.trackTitleAlignment).to(equal(.center))
                     }
                     
-                    it("should have a track background color of white") {
-                        expect(subject.trackBackgroundColor).to(equal(.white))
-                    }
-                    
-                    it("should have a track border color of black") {
-                        expect(subject.trackBorderColor).to(equal(.black))
-                    }
-                    
-                    it("should have a track border width of zero") {
-                        expect(subject.trackBorderWidth).to(equal(0))
-                    }
-                    
                     it("should have a track image view") {
                         expect(subject.trackImageView).toNot(beNil())
-                    }
-                    
-                    it("should have a round line cap type") {
-                        expect(subject.lineCap).to(equal(.square))
-                    }
-                    
-                    it("should have corner radius equal to zero") {
-                        expect(subject.cornerRadius).to(equal(0))
-                    }
-                    
-                    it("should have no data source") {
-                        expect(subject.dataSource).to(beNil())
-                    }
-                    
-                    it("should clip its layer to its bounds") {
-                        expect(subject.layer.masksToBounds).to(beTrue())
                     }
                     
                     it("should have its track's layer mask to its bounds") {
                         expect(subject.track.layer.masksToBounds).to(beTrue())
                     }
+                    
+                    it("should have a track with exactly two subviews") {
+                        expect(subject.track.subviews.contains(subject.trackTitleLabel)).to(beTrue())
+                        expect(subject.track.subviews.contains(subject.trackImageView)).to(beTrue())
+                    }
                 }
             }
+            
+            //MARK: - Layout Subviews
+            
+            describe("layout") {
+                
+                context("when the layoutSubviews method is called") {
+                    
+                }
+            }
+            
+            //MARK: - Borders
+            
+            describe("borders") {
+                
+                context("when setting the border color") {
+                    let color: UIColor = .blue
+                    
+                    beforeEach {
+                        subject.borderColor = color
+                    }
+                    
+                    it("should correctly set the border color") {
+                        expect(subject.borderColor).to(be(color))
+                    }
+                }
+                
+                context("when setting the border width") {
+                    let width: CGFloat = CGFloat()
+                    
+                    beforeEach {
+                        subject.borderWidth = width
+                    }
+                    
+                    it("should correctly set the border width") {
+                        expect(subject.borderWidth).to(be(width))
+                    }
+                }
+                
+                context("when setting the progress view's border color") {
+                    let color: UIColor = .blue
+                    
+                    beforeEach {
+                        subject.trackBorderColor = color
+                    }
+                    
+                    it("should correctly set the progress view's border color") {
+                        expect(subject.trackBorderColor).to(be(color))
+                    }
+                }
+                
+                context("when setting the progress view's border width") {
+                    let width: CGFloat = CGFloat()
+                    
+                    beforeEach {
+                        subject.trackBorderWidth = width
+                    }
+                    
+                    it("should correctly set the progress view's border width") {
+                        expect(subject.trackBorderWidth).to(be(width))
+                    }
+                }
+            }
+            
+            //MARK: - Track Background Color
+            
+            describe("progress view section background color") {
+                
+                context("when setting the progress view section's background color") {
+                    let color: UIColor = .blue
+                    
+                    beforeEach {
+                        subject.trackBackgroundColor = color
+                    }
+                    
+                    it("should correctly set the progress view's background color") {
+                        expect(subject.trackBackgroundColor).to(be(color))
+                    }
+                }
+            }
+            
+            //MARK: - Track Inset
+            
+            describe("track inset") {
+                
+                context("when the track insets are modified") {
+                    
+                    beforeEach {
+                        subject.trackInset = 0
+                    }
+                    
+                    it("should trigger a new layout cycle") {
+                        expect(subject.setNeedsLayoutCalled).to(beTrue())
+                    }
+                }
+            }
+            
+            describe("track image view") {
+                
+                context("when setting the track's image") {
+                    let image: UIImage = UIImage()
+                    
+                    beforeEach {
+                        subject.setTrackImage(image)
+                    }
+                    
+                    it("should have an image on it's track image view") {
+                        expect(subject.trackImageView.image).to(equal(image))
+                    }
+                }
+            }
+            
+            //MARK: - Set Title
             
             describe("progress view title label") {
                 
                 context("when setting the progress view's title") {
-                    let title: String = "title"
+                    let title: String = String()
                     
                     beforeEach {
                         subject.setTitle(title)
                     }
                     
                     it("should show the expected title") {
-                        expect(subject.trackTitleLabel.text).to(equal(title))
+                        expect(subject.trackTitleLabel.text).to(be(title))
                     }
                 }
                 
@@ -122,279 +248,7 @@ class MultiProgressViewSpec: QuickSpec {
                 }
             }
             
-            describe("corner radius") {
-                
-                context("when the line cap type is round") {
-                    let trackinset: CGFloat = 5
-                    
-                    context("when the corner radius is set to zero") {
-                        
-                        beforeEach {
-                            subject.lineCap = .round
-                            subject.trackInset = trackinset
-                            subject.cornerRadius = 0
-                            subject.layoutSubviews()
-                        }
-                        
-                        it("should have corner radius equal to half its height") {
-                            expect(subject.layer.cornerRadius).to(equal(subject.bounds.height / 2))
-                        }
-                        
-                        it("should have its track's corner radius equal to half its height") {
-                            expect(subject.track.layer.cornerRadius).to(equal(subject.track.bounds.height / 2))
-                        }
-                    }
-                    
-                    context("when the corner radius is nonzero") {
-                        let cornerRadius: CGFloat = 10
-                        
-                        beforeEach {
-                            subject.lineCap = .round
-                            subject.cornerRadius = cornerRadius
-                            subject.trackInset = trackinset
-                            subject.layoutSubviews()
-                        }
-                        
-                        it("should have corner radius equal to the set corner radius") {
-                            expect(subject.layer.cornerRadius).to(equal(cornerRadius))
-                        }
-                        
-                        it("should have the correct scaled track corner radius") {
-                            let cornerRadiusFactor: CGFloat = cornerRadius / subject.bounds.height
-                            expect(subject.track.layer.cornerRadius).to(equal(cornerRadiusFactor * subject.track.bounds.height))
-                        }
-                    }
-                }
-                
-                context("when the line cap type is square") {
-                    
-                    context("when the corner radius is set to zero") {
-                        
-                        beforeEach {
-                            subject.lineCap = .square
-                            subject.cornerRadius = 0
-                            subject.layoutIfNeeded()
-                        }
-                        
-                        it("should have corner radius equal to zero") {
-                            expect(subject.layer.cornerRadius).to(equal(0))
-                        }
-                        
-                        it("should have its track's corner radius equal to zero") {
-                            expect(subject.track.layer.cornerRadius).to(equal(0))
-                        }
-                    }
-                    
-                    context("when the corner radius is nonzero") {
-                        let cornerRadius: CGFloat = 1
-                        
-                        beforeEach {
-                            subject.lineCap = .square
-                            subject.cornerRadius = cornerRadius
-                            subject.layoutIfNeeded()
-                        }
-                        
-                        it("should have corner radius equal to zero") {
-                            expect(subject.layer.cornerRadius).to(equal(0))
-                        }
-                        
-                        it("should have its track's corner radius equal to zero") {
-                            expect(subject.track.layer.cornerRadius).to(equal(0))
-                        }
-                    }
-                }
-                
-                context("when the line cap type is butt") {
-                    
-                    context("when the corner radius is set to zero") {
-                        
-                        beforeEach {
-                            subject.lineCap = .butt
-                            subject.cornerRadius = 0
-                            subject.layoutIfNeeded()
-                        }
-                        
-                        it("should have corner radius equal to zero") {
-                            expect(subject.layer.cornerRadius).to(equal(0))
-                        }
-                        
-                        it("should have its track's corner radius equal to zero") {
-                            expect(subject.track.layer.cornerRadius).to(equal(0))
-                        }
-                    }
-                    
-                    context("when the corner radius is nonzero") {
-                        let cornerRadius: CGFloat = 1
-                        
-                        beforeEach {
-                            subject.lineCap = .butt
-                            subject.cornerRadius = cornerRadius
-                        }
-                        
-                        it("should have corner radius equal to zero") {
-                            expect(subject.layer.cornerRadius).to(equal(0))
-                        }
-                        
-                        it("should have its track's corner radius equal to zero") {
-                            expect(subject.track.layer.cornerRadius).to(equal(0))
-                        }
-                    }
-                }
-            }
-            
-            describe("borders") {
-                
-                context("when setting the border color") {
-                    let color: UIColor = .blue
-                    
-                    beforeEach {
-                        subject.borderColor = color
-                    }
-                    
-                    it("should correctly set the border color") {
-                        expect(subject.borderColor).to(equal(color))
-                    }
-                }
-                
-                context("when setting the border width") {
-                    let width: CGFloat = 5
-                    
-                    beforeEach {
-                        subject.borderWidth = width
-                    }
-                    
-                    it("should correctly set the border width") {
-                        expect(subject.borderWidth).to(equal(width))
-                    }
-                }
-                
-                context("when setting the progress view's border color") {
-                    let color: UIColor = .blue
-                    
-                    beforeEach {
-                        subject.trackBorderColor = color
-                    }
-                    
-                    it("should correctly set the progress view's border color") {
-                        expect(subject.trackBorderColor).to(equal(color))
-                    }
-                }
-                
-                context("when setting the progress view's border width") {
-                    let width: CGFloat = 5
-                    
-                    beforeEach {
-                        subject.trackBorderWidth = width
-                    }
-                    
-                    it("should correctly set the progress view's border width") {
-                        expect(subject.trackBorderWidth).to(equal(width))
-                    }
-                }
-            }
-            
-            describe("progress view section background color") {
-                
-                context("when setting the progress view section's background color") {
-                    let color: UIColor = .blue
-                    
-                    beforeEach {
-                        subject.trackBackgroundColor = color
-                    }
-                    
-                    it("should correctly set the progress view's background color") {
-                        expect(subject.trackBackgroundColor).to(equal(color))
-                    }
-                }
-            }
-            
-            describe("track inset") {
-                
-                context("when the track inset is equal to zero") {
-                    
-                    beforeEach {
-                        subject.trackInset = 0
-                    }
-                    
-                    //it should call the layout calculator with the correct parameters
-                    it("should have no insets on its track") {
-                        expect(subject.track.frame).to(equal(subject.bounds))
-                    }
-                }
-                
-                context("when the track inset is nonzero") {
-                    let inset: CGFloat = 1
-                    
-                    context("when the line cap type is round") {
-                        
-                        beforeEach {
-                            subject.trackInset = inset
-                            subject.lineCap = .round
-                            subject.layoutIfNeeded()
-                        }
-                        
-                        //it should call the layout calculator with the correct parameters
-                        it("should have a track with the correct size and origin") {
-                            expect(subject.track.bounds.height).to(equal(subject.bounds.height - 2 * inset))
-                            expect(subject.track.bounds.width).to(equal(subject.bounds.width - 2 * inset))
-                            expect(subject.track.frame.origin).to(equal(CGPoint(x: inset, y: inset)))
-                        }
-                    }
-                    
-                    context("when the line cap type is square") {
-                        
-                        beforeEach {
-                            subject.trackInset = inset
-                            subject.lineCap = .square
-                            subject.layoutIfNeeded()
-                        }
-                        
-                        //it should call the layout calculator with the correct parameters
-                        it("should have a track with the correct size and origin") {
-                            expect(subject.track.bounds.height).to(equal(subject.bounds.height - 2 * inset))
-                            expect(subject.track.bounds.width).to(equal(subject.bounds.width - 2 * inset))
-                            expect(subject.track.frame.origin).to(equal(CGPoint(x: inset, y: inset)))
-                        }
-                    }
-                    
-                    context("when the line cap type is butt") {
-                        
-                        beforeEach {
-                            subject.trackInset = inset
-                            subject.lineCap = .butt
-                            subject.layoutIfNeeded()
-                        }
-                        
-                        //it should call the layout calculator with the correct parameters
-                        it("should have a track with the correct size and origin") {
-                            expect(subject.track.bounds.height).to(equal(subject.bounds.height - 2 * inset))
-                            expect(subject.track.bounds.width).to(equal(subject.bounds.width))
-                            expect(subject.track.frame.origin).to(equal(CGPoint(x: 0, y: inset)))
-                        }
-                    }
-                }
-            }
-            
-            describe("track image view") {
-                
-                context("when setting the track's image") {
-                    let image: UIImage = UIImage()
-                    
-                    beforeEach {
-                        subject.setTrackImage(image)
-                        subject.layoutIfNeeded()
-                    }
-                    
-                    //it should call the layout calculator with the correct parameters
-                    it("should have a track image view with the correct bounds") {
-                        expect(subject.trackImageView.frame).to(equal(subject.track.bounds))
-                    }
-                    
-                    it("should have an image on it's track image view") {
-                        expect(subject.trackImageView.image).to(equal(image))
-                    }
-                }
-            }
+            //MARK: - Data Source
             
             describe("data source") {
                 
@@ -511,16 +365,16 @@ class MultiProgressViewSpec: QuickSpec {
                 }
                 
                 context("when setting a progress on an individual section with existing progress") {
-                    let progress: Float = 0.1
-                    let initialProgress: Float = 0.5
+                    let progress: Float = Float()
+                    let initialProgress: Float = Float()
                     
                     beforeEach {
                         subject.setProgress(section: 0, to: initialProgress)
                         subject.setProgress(section: 0, to: progress)
                     }
                     
-                    it("should replace its existing progress") {
-                        expect(subject.progress(forSection: 0)).to(equal(progress))
+                    it("should replace its existing progress with the most recent progress") {
+                        expect(subject.progress(forSection: 0)).to(be(progress))
                     }
                 }
                 
@@ -570,84 +424,6 @@ class MultiProgressViewSpec: QuickSpec {
                     }
                 }
             }
-            
-            describe("progress view section layout") {
-                
-                context("when the progress view is initialized") {
-                    let numberOfSections: Int = 3
-                    
-                    beforeEach {
-                        subject.dataSource = MockMultiProgressViewDataSource(numberOfSections: numberOfSections)
-                    }
-                    
-                    it("should layout each section with zero width") {
-                        for section in subject.progressViewSections {
-                            expect(section.frame.width).to(equal(0))
-                        }
-                    }
-                }
-                
-                context("after setting the progress") {
-                    
-                    context("on an individual progress view section") {
-                        let numberOfSections: Int = 1
-                        let progress: Float = 0.1
-                        
-                        beforeEach {
-                            subject.dataSource = MockMultiProgressViewDataSource(numberOfSections: numberOfSections)
-                            subject.setProgress(section: 0, to: progress)
-                        }
-                        
-                        it("should calculate the correct width and origin for the section") {
-                            let track = subject.track
-                            let section = subject.progressViewSections[0]
-                            let expectedWidth = CGFloat(progress) * track.frame.width
-                            
-                            expect(section.frame.origin.x).to(beCloseTo(0))
-                            expect(section.frame.origin.y).to(beCloseTo(0))
-                            expect(section.frame.width).to(beCloseTo(expectedWidth))
-                        }
-                    }
-                    
-                    context("on a section with whose section before it has nonzero progress") {
-                        let numberOfSections: Int = 2
-                        let firstSectionProgress: Float = 0.2
-                        let secondSectionProgress: Float = 0.1
-                        
-                        beforeEach {
-                            subject.dataSource = MockMultiProgressViewDataSource(numberOfSections: numberOfSections)
-                            subject.setProgress(section: 0, to: firstSectionProgress)
-                            subject.setProgress(section: 1, to: secondSectionProgress)
-                        }
-                        
-                        it("should calculate the correct width and origin for the section") {
-                            let track = subject.track
-                            let firstSection = subject.progressViewSections[0]
-                            let secondSection = subject.progressViewSections[1]
-                            
-                            let expectedOrigin = CGPoint(x: firstSection.frame.width, y: 0)
-                            let expectedWidth = CGFloat(secondSectionProgress) * track.frame.width
-                            
-                            expect(secondSection.frame.origin.x).to(beCloseTo(expectedOrigin.x))
-                            expect(secondSection.frame.origin.y).to(beCloseTo(expectedOrigin.y))
-                            expect(secondSection.frame.width).to(beCloseTo(expectedWidth))
-                        }
-                    }
-                }
-            }
         }
-    }
-}
-
-extension MultiProgressViewSpec {
-    func layoutProgressView(_ progressView: MultiProgressView, width: CGFloat, height: CGFloat) {
-        let parentView = UIView()
-        parentView.addSubview(progressView)
-        
-        progressView.translatesAutoresizingMaskIntoConstraints = false
-        progressView.widthAnchor.constraint(equalToConstant: width).isActive = true
-        progressView.heightAnchor.constraint(equalToConstant: height).isActive = true
-        
-        progressView.layoutIfNeeded()
     }
 }
