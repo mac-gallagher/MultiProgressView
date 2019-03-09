@@ -11,7 +11,7 @@ import Nimble
 
 @testable import MultiProgressView
 
-class LayoutCalculatorSpec: QuickSpec { //Done!
+class LayoutCalculatorSpec: QuickSpec {
     
     override func spec() {
         
@@ -307,6 +307,30 @@ class LayoutCalculatorSpec: QuickSpec { //Done!
                         
                         expect(actualCornerRadius).to(equal(expectedCornerRaduis))
                     }
+                }
+            }
+            
+            //TODO: Write these tests
+            describe("anchorToSuperview") {
+                
+                context("when calling the anchorToSuperview function") {
+                    let view: UIView = UIView()
+                    
+                    context("and the view has no superview") {
+                        
+                        it("should return no constraints") {
+                            let actualConstraints: [NSLayoutConstraint] = subject.anchorToSuperview(view,
+                                                                                                    withAlignment: .bottom,
+                                                                                                    insets: UIEdgeInsets())
+                            expect(actualConstraints).to(equal([]))
+                        }
+                    }
+                    
+                }
+                
+                func testConstraint() {
+                    //check isActive, constant, item1, etc...
+                    //or conform to equatable
                 }
             }
         }

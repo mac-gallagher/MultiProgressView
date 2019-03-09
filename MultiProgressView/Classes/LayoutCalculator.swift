@@ -3,6 +3,7 @@
 //  MultiProgressView
 //
 //  Created by Mac Gallagher on 3/5/19.
+//  Copyright © 2019 Mac Gallagher. All rights reserved.
 //
 
 protocol LayoutCalculatable {
@@ -12,6 +13,7 @@ protocol LayoutCalculatable {
     func sectionImageViewFrame(forSection section: ProgressViewSection) -> CGRect
     func cornerRadius(forProgressView progressView: MultiProgressView) -> CGFloat
     func trackCornerRadius(forProgressView progressview: MultiProgressView) -> CGFloat
+    func anchorToSuperview(_ view: UIView, withAlignment alignment: AlignmentType, insets: UIEdgeInsets) -> [NSLayoutConstraint]
 }
 
 struct LayoutCalculator: LayoutCalculatable {
@@ -74,5 +76,72 @@ struct LayoutCalculator: LayoutCalculatable {
         case .butt, .square:
             return 0
         }
+    }
+    
+    func anchorToSuperview(_ view: UIView, withAlignment alignment: AlignmentType, insets: UIEdgeInsets) -> [NSLayoutConstraint] {
+        guard let superview = view.superview else { return [] }
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        var constraints = [NSLayoutConstraint]()
+        
+        switch alignment {
+        case .bottom:
+            constraints.append(view.bottomAnchor.constraint(equalTo: superview.bottomAnchor,
+                                                            constant: -insets.bottom))
+            constraints.append(view.centerXAnchor.constraint(equalTo: superview.centerXAnchor,
+                                                             constant: insets.left - insets.right))
+            
+        case .bottomLeft:
+            constraints.append(view.bottomAnchor.constraint(equalTo: superview.bottomAnchor,
+                                                            constant: -insets.bottom))
+            constraints.append(view.leftAnchor.constraint(equalTo: superview.leftAnchor,
+                                                          constant: insets.left))
+            
+        case .bottomRight:
+            constraints.append(view.bottomAnchor.constraint(equalTo: superview.bottomAnchor,
+                                                            constant: -insets.bottom))
+            constraints.append(view.rightAnchor.constraint(equalTo: superview.rightAnchor,
+                                                           constant: -insets.right))
+            
+        case .center:
+            constraints.append(view.centerXAnchor.constraint(equalTo: superview.centerXAnchor,
+                                                             constant: insets.left - insets.right))
+            constraints.append(view.centerYAnchor.constraint(equalTo: superview.centerYAnchor,
+                                                             constant: insets.top - insets.bottom))
+            
+        case .left:
+            constraints.append(view.leftAnchor.constraint(equalTo: superview.leftAnchor,
+                                                          constant: insets.left))
+            constraints.append(view.centerYAnchor.constraint(equalTo: superview.centerYAnchor,
+                                                             constant: insets.top - insets.bottom))
+            
+        case .right:
+            constraints.append(view.rightAnchor.constraint(equalTo: superview.rightAnchor, 
+                                                           constant: -insets.right))
+            constraints.append(view.centerYAnchor.constraint(equalTo: superview.centerYAnchor,
+                                                             constant: insets.top - insets.bottom))
+            
+        case .top:
+            constraints.append(view.topAnchor.constraint(equalTo: superview.topAnchor,
+                                                         constant: insets.top))
+            constraints.append(view.centerXAnchor.constraint(equalTo: superview.centerXAnchor,
+                                                             constant: insets.left - insets.right))
+            
+        case .topLeft:
+            constraints.append(view.topAnchor.constraint(equalTo: superview.topAnchor,
+                                                         constant: insets.top))
+            constraints.append(view.leftAnchor.constraint(equalTo: superview.leftAnchor,
+                                                          constant: insets.left))
+            
+        case .topRight:
+            constraints.append(view.topAnchor.constraint(equalTo: superview.topAnchor,
+                                                         constant: insets.top))
+            constraints.append(view.rightAnchor.constraint(equalTo: superview.rightAnchor,
+                                                           constant: -insets.right))
+        }
+        
+        constraints.forEach { $0.isActive = true }
+        
+        return constraints
     }
 }

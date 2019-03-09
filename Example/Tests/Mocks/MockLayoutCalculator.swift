@@ -39,4 +39,14 @@ class MockLayoutCalculator: LayoutCalculatable {
     func trackCornerRadius(forProgressView progressview: MultiProgressView) -> CGFloat {
         return testTrackCornerRadius
     }
+    
+    var testAnchorConstraints: [NSLayoutConstraint] = []
+    var anchorToSuperviewAlignment: AlignmentType?
+    var anchorToSuperviewInsets: UIEdgeInsets?
+    
+    func anchorToSuperview(_ view: UIView, withAlignment alignment: AlignmentType, insets: UIEdgeInsets) -> [NSLayoutConstraint] {
+        anchorToSuperviewAlignment = alignment
+        anchorToSuperviewInsets = insets
+        return testAnchorConstraints
+    }
 }

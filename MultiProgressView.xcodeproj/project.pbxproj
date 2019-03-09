@@ -13,7 +13,6 @@
 		AD706AC821E460B60007AFE3 /* LineCapType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD706ABD21E460B60007AFE3 /* LineCapType.swift */; };
 		AD706AC921E460B60007AFE3 /* MultiProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = AD706ABF21E460B60007AFE3 /* MultiProgressView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AD706ACB21E460B60007AFE3 /* MultiProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD706AC121E460B60007AFE3 /* MultiProgressView.swift */; };
-		AD706ACC21E460B60007AFE3 /* MultiProgressViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD706AC221E460B60007AFE3 /* MultiProgressViewDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +24,6 @@
 		AD706ABF21E460B60007AFE3 /* MultiProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiProgressView.h; sourceTree = "<group>"; };
 		AD706AC021E460B60007AFE3 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD706AC121E460B60007AFE3 /* MultiProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiProgressView.swift; sourceTree = "<group>"; };
-		AD706AC221E460B60007AFE3 /* MultiProgressViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiProgressViewDataSource.swift; sourceTree = "<group>"; };
 		AD706AC421E460B60007AFE3 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -71,7 +69,6 @@
 				AD706ABC21E460B60007AFE3 /* AlignmentType.swift */,
 				AD706ABD21E460B60007AFE3 /* LineCapType.swift */,
 				AD706AC121E460B60007AFE3 /* MultiProgressView.swift */,
-				AD706AC221E460B60007AFE3 /* MultiProgressViewDataSource.swift */,
 				AD706ABB21E460B60007AFE3 /* ProgressViewSection.swift */,
 				AD706ABA21E460B60007AFE3 /* UIView+Extensions.swift */,
 				AD80E7E121E67D47009CED59 /* Supporting Files */,
@@ -176,7 +173,6 @@
 			files = (
 				AD706AC521E460B60007AFE3 /* UIView+Extensions.swift in Sources */,
 				AD706ACB21E460B60007AFE3 /* MultiProgressView.swift in Sources */,
-				AD706ACC21E460B60007AFE3 /* MultiProgressViewDataSource.swift in Sources */,
 				AD706AC621E460B60007AFE3 /* ProgressViewSection.swift in Sources */,
 				AD706AC821E460B60007AFE3 /* LineCapType.swift in Sources */,
 				AD706AC721E460B60007AFE3 /* AlignmentType.swift in Sources */,

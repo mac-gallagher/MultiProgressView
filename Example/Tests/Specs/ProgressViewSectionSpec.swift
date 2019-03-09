@@ -8,98 +8,182 @@
 
 import Quick
 import Nimble
-import MultiProgressView
 
-class ProgressViewSectionSpec: QuickSpec {
+@testable import MultiProgressView
+
+class ProgressViewSectionSpec: QuickSpec { //Done!
     
     override func spec() {
         
         describe("ProgressViewSection") {
-            let subjectFrame: CGRect = CGRect(x: 10, y: 10, width: 100, height: 50)
-            var subject: ProgressViewSection!
+            var mockLayoutCalculator: MockLayoutCalculator!
+            var subject: TestableProgressViewSection!
             
             beforeEach {
-                subject = ProgressViewSection(frame: subjectFrame)
+                mockLayoutCalculator = MockLayoutCalculator()
+                subject = TestableProgressViewSection(layoutCalculator: mockLayoutCalculator)
             }
             
+            //MARK: - Initialization
+            
             describe("initialization") {
+                var section: ProgressViewSection!
                 
-                context("when initializing a new section") {
+                context("when initializing a new section with the default initializer") {
                     
                     beforeEach {
-                        subject.layoutSubviews()
+                        section = ProgressViewSection()
                     }
                     
+                    testInitialProperties()
+                }
+                
+                context("when initializing a new section with the required initializer") {
+                    
+                    beforeEach {
+                        section = ProgressViewSection(coder: NSCoder())
+                    }
+                    
+                    //TODO: Replace this test with `testInitialProperties()` once the required initializer has been implemented
+                    it("should have a nil section") {
+                        expect(section).to(beNil())
+                    }
+                }
+                
+                func testInitialProperties() {
                     it("should have a title label") {
-                        expect(subject.titleLabel).toNot(beNil())
+                        expect(section.titleLabel).toNot(beNil())
                     }
                     
-                    it("should have an image view with the correct frame") {
-                        expect(subject.imageView).toNot(beNil())
-                    }
-                    
-                    it("should have a black background color") {
-                        expect(subject.backgroundColor).to(equal(.black))
+                    it("should have title edge insets equal to zero") {
+                        expect(section.titleEdgeInsets).to(equal(.zero))
                     }
                     
                     it("should have a center title alignment") {
-                        expect(subject.titleAlignment).to(equal(.center))
+                        expect(section.titleAlignment).to(equal(.center))
                     }
                     
-                    it("should clip to bounds") {
-                        expect(subject.clipsToBounds).to(beTrue())
+                    it("should have an image view") {
+                        expect(section.imageView).toNot(beNil())
+                    }
+                    
+                    it("should have a black background color") {
+                        expect(section.backgroundColor).to(equal(.black))
+                    }
+                    
+                    it("should have it's layer mask to bounds") {
+                        expect(section.layer.masksToBounds).to(beTrue())
+                    }
+                    
+                    it("should have it's imageView as a subview") {
+                        expect(section.subviews.contains(section.imageView)).to(beTrue())
+                    }
+                    
+                    it("should have it's titleLabel as a subview") {
+                        expect(section.subviews.contains(section.titleLabel)).to(beTrue())
                     }
                 }
             }
             
-            describe("title label") {
+            //MARK: - Title Insets
+            
+            describe("title insets") {
                 
-                context("when setting the section's title") {
+                context("when setting the title insets") {
+                    
+                    beforeEach {
+                        subject.titleEdgeInsets = UIEdgeInsets()
+                    }
+                    
+                    it("should trigger a layout update") {
+                        expect(subject.setNeedsLayoutCalled).to(beTrue())
+                    }
+                }
+            }
+            
+            //MARK: - Title Alignment
+            
+            describe("title alignment") {
+                
+                context("when setting the title alignment") {
+                    
+                    beforeEach {
+                        subject.titleAlignment = .bottom
+                    }
+                    
+                    it("should trigger a layout update") {
+                        expect(subject.setNeedsLayoutCalled).to(beTrue())
+                    }
+                }
+            }
+            
+            //MARK: - Layout
+            
+            describe("layout") {
+                
+                context("when calling the layoutSubviews method") {
+                    let imageViewFrame: CGRect = CGRect(x: 1, y: 2, width: 3, height: 4)
+                    let labelConstraints: [NSLayoutConstraint] = [NSLayoutConstraint]()
+                    
+                    beforeEach {
+                        mockLayoutCalculator.testSectionImageViewFrame = imageViewFrame
+                        mockLayoutCalculator.testAnchorConstraints = labelConstraints
+                        subject.layoutSubviews()
+                    }
+                    
+                    it("should correctly set the title label's constraints") {
+                        expect(subject.labelConstraints).to(be(labelConstraints))
+                        expect(mockLayoutCalculator.anchorToSuperviewAlignment).to(equal(subject.titleAlignment))
+                        expect(mockLayoutCalculator.anchorToSuperviewInsets).to(equal(subject.titleEdgeInsets))
+                    }
+                    
+                    it("should correctly set the imageView's frame") {
+                        expect(subject.imageView.frame).to(equal(imageViewFrame))
+                    }
+                    
+                    it("should send the the imageView to the back of the view hierarchy") {
+                        expect(subject.sendSubviewToBackView).to(equal(subject.imageView))
+                    }
+                }
+            }
+            
+            //MARK: - Main Methods
+            
+            describe("main methods") {
+                
+                context("when calling the setTitle method") {
                     let title: String = "title"
                     
                     beforeEach {
                         subject.setTitle(title)
                     }
                     
-                    it("should have a title") {
+                    it("should set the titleLabel's title") {
                         expect(subject.titleLabel.text).to(equal(title))
                     }
                 }
                 
-                context("when setting the section's attributed title") {
+                context("when calling the setAttributedTitle method") {
                     let attributedTitle: NSAttributedString = NSAttributedString(string: "title")
                     
                     beforeEach {
                         subject.setAttributedTitle(attributedTitle)
                     }
                     
-                    it("should have an attributed title") {
+                    it("should set the titleLabel's attributed title") {
                         expect(subject.titleLabel.attributedText).to(equal(attributedTitle))
                     }
                 }
-            }
-            
-            describe("image view") {
                 
-                context("when setting the section's image") {
+                context("when calling the setImage method") {
                     let image: UIImage = UIImage()
                     
                     beforeEach {
-                        let subview1 = UIView()
-                        subject.addSubview(subview1)
-                        
                         subject.setImage(image)
-                        
-                        let subview2 = UIView()
-                        subject.addSubview(subview2)
                     }
                     
-                    it("should have an image on it's image view") {
+                    it("should set the imageView's image") {
                         expect(subject.imageView.image).to(equal(image))
-                    }
-                    
-                    it("should have its image view behind all other subviews") {
-                        expect(subject.subviews.first is UIImageView).to(beTrue())
                     }
                 }
             }

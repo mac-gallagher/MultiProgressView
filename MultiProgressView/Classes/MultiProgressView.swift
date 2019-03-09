@@ -118,9 +118,9 @@ open class MultiProgressView: UIView {
         initialize()
     }
     
+    //TODO: Write this initializer
     public required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        initialize()
+        return nil
     }
     
     convenience init(layoutCalculator: LayoutCalculatable) {
@@ -146,8 +146,9 @@ open class MultiProgressView: UIView {
     open override func layoutSubviews() {
         super.layoutSubviews()
         track.frame = layoutCalculator.trackFrame(forProgressView: self)
-        labelConstraints = trackTitleLabel.layout(withAlignment: trackTitleAlignment,
-                                                   insets: trackTitleEdgeInsets)
+        labelConstraints = layoutCalculator.anchorToSuperview(trackTitleLabel,
+                                                              withAlignment: trackTitleAlignment,
+                                                              insets: trackTitleEdgeInsets)
         imageView.frame = layoutCalculator.trackImageViewFrame(forProgressView: self)
         track.sendSubviewToBack(imageView)
         layoutSections()

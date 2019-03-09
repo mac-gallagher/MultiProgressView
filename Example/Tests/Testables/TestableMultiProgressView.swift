@@ -12,18 +12,12 @@ class TestableMultiProgressView: MultiProgressView {
     
     var setNeedsLayoutCalled: Bool = false
     override func setNeedsLayout() {
-        super.setNeedsLayout()
         setNeedsLayoutCalled = true
     }
     
     var layoutIfNeededCalled: Bool = false
     override func layoutIfNeeded() {
         layoutIfNeededCalled = true
-    }
-    
-    var layoutSubviewsCalled: Bool = false
-    override func layoutSubviews() {
-        layoutSubviewsCalled = true
     }
     
     var reloadDataCalled: Bool = false

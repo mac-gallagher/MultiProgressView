@@ -33,16 +33,23 @@ open class ProgressViewSection: UIView {
     
     private var sectionImageView: UIImageView = UIImageView()
     
-    private let layoutCalculator: LayoutCalculatable = LayoutCalculator.shared
+    private var layoutCalculator: LayoutCalculatable = LayoutCalculator.shared
+    
+    //MARK: - Initialization
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
         initialize()
     }
     
+    //TODO: Write this initializer
     required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        initialize()
+        return nil
+    }
+    
+    convenience init(layoutCalculator: LayoutCalculatable) {
+        self.init(frame: .zero)
+        self.layoutCalculator = layoutCalculator
     }
     
     private func initialize() {
@@ -52,7 +59,9 @@ open class ProgressViewSection: UIView {
         addSubview(sectionTitleLabel)
     }
     
-    private var labelConstraints = [NSLayoutConstraint]() {
+    //MARK: - Layout
+    
+    var labelConstraints = [NSLayoutConstraint]() {
         didSet {
             NSLayoutConstraint.deactivate(oldValue)
             NSLayoutConstraint.activate(labelConstraints)
@@ -61,11 +70,14 @@ open class ProgressViewSection: UIView {
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-        labelConstraints = sectionTitleLabel.layout(withAlignment: titleAlignment,
-                                                    insets: titleEdgeInsets)
+        labelConstraints = layoutCalculator.anchorToSuperview(sectionTitleLabel,
+                                                              withAlignment: titleAlignment,
+                                                              insets: titleEdgeInsets)
         sectionImageView.frame = layoutCalculator.sectionImageViewFrame(forSection: self)
         sendSubviewToBack(sectionImageView)
     }
+    
+    //MARK: - Main Methods
     
     public func setTitle(_ title: String?) {
         sectionTitleLabel.text = title

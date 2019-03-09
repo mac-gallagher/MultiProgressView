@@ -17,7 +17,7 @@ class MultiProgressViewSpec: QuickSpec {
         var mockLayoutCalculator: MockLayoutCalculator!
         var subject: TestableMultiProgressView!
         
-        describe("MultiProgressView") {
+        fdescribe("MultiProgressView") {
             
             beforeEach {
                 mockLayoutCalculator = MockLayoutCalculator()
@@ -27,11 +27,31 @@ class MultiProgressViewSpec: QuickSpec {
             //MARK: - Initialization
             
             describe("initialization") { //Done!
+                var progressView: MultiProgressView!
                 
-                context("when initializing a new progress view") {
+                context("when initializing a new progress view with the default initializer") {
                     
-                    //MARK: Progress View
+                    beforeEach {
+                        progressView = MultiProgressView()
+                    }
                     
+                    testInitialProperties()
+                    testInitialTrackProperties()
+                }
+                
+                context("when initializing a new progress view with the required initializer") {
+                    
+                    beforeEach {
+                        progressView = MultiProgressView(coder: NSCoder())
+                    }
+                    
+                    //TODO: Replace this test once the required initializer has been implemented
+                    it("should have a nil progress view") {
+                        expect(progressView).to(beNil())
+                    }
+                }
+                
+                func testInitialProperties() {
                     it("should not have a data source") {
                         expect(subject.dataSource).to(beNil())
                     }
@@ -63,9 +83,9 @@ class MultiProgressViewSpec: QuickSpec {
                     it("should have exactly one subview") {
                         expect(subject.subviews.contains(subject.track)).to(beTrue())
                     }
-                    
-                    //MARK: Progress View Track
-                    
+                }
+                
+                func testInitialTrackProperties() {
                     it("should have a track border width of zero") {
                         expect(subject.trackBorderWidth).to(equal(0))
                     }
@@ -109,12 +129,100 @@ class MultiProgressViewSpec: QuickSpec {
                 }
             }
             
-            //MARK: - Layout Subviews
+            //MARK: - Corner Radius
             
-            describe("layout") {
+            describe("corner radius") {
                 
-                context("when the layoutSubviews method is called") {
+                context("when setting the corner radius") {
                     
+                    beforeEach {
+                        subject.cornerRadius = 0
+                    }
+                    
+                    it("should trigger a new layout cycle") {
+                        expect(subject.setNeedsLayoutCalled).to(beTrue())
+                    }
+                }
+            }
+            
+            //MARK: - Track Inset
+            
+            describe("track inset") {
+                
+                context("when setting the track insets") {
+                    
+                    beforeEach {
+                        subject.trackInset = 0
+                    }
+                    
+                    it("should trigger a new layout cycle") {
+                        expect(subject.setNeedsLayoutCalled).to(beTrue())
+                    }
+                }
+            }
+            
+            //MARK: - Track Background Color
+            
+            describe("progress view section background color") {
+                
+                context("when setting the progress view section's background color") {
+                    let color: UIColor = .blue
+                    
+                    beforeEach {
+                        subject.trackBackgroundColor = color
+                    }
+                    
+                    it("should correctly set the progress view's background color") {
+                        expect(subject.trackBackgroundColor).to(be(color))
+                    }
+                }
+            }
+            
+            //MARK: - Track Title Insets
+            
+            describe("track title inset") {
+                
+                context("when setting the track title insets") {
+                    
+                    beforeEach {
+                        subject.trackTitleEdgeInsets = UIEdgeInsets()
+                    }
+                    
+                    it("should trigger a new layout cycle") {
+                        expect(subject.setNeedsLayoutCalled).to(beTrue())
+                    }
+                }
+            }
+            
+            //MARK: - Track Title Alignment
+            
+            describe("track title alignment") {
+                
+                context("when setting the track title alignment") {
+                    
+                    beforeEach {
+                        subject.trackTitleAlignment = .bottom
+                    }
+                    
+                    it("should trigger a new layout cycle") {
+                        expect(subject.setNeedsLayoutCalled).to(beTrue())
+                    }
+                }
+            }
+            
+            //MARK: - Line Cap
+            
+            describe("line cap type") {
+                
+                context("when setting the line cap type") {
+                    
+                    beforeEach {
+                        subject.lineCap = .round
+                    }
+                    
+                    it("should trigger a new layout cycle") {
+                        expect(subject.setNeedsLayoutCalled).to(beTrue())
+                    }
                 }
             }
             
@@ -171,42 +279,20 @@ class MultiProgressViewSpec: QuickSpec {
                 }
             }
             
-            //MARK: - Track Background Color
+            //MARK: - Layout Subviews
             
-            describe("progress view section background color") {
+            describe("layout") {
                 
-                context("when setting the progress view section's background color") {
-                    let color: UIColor = .blue
+                context("when the layoutSubviews method is called") {
                     
-                    beforeEach {
-                        subject.trackBackgroundColor = color
-                    }
-                    
-                    it("should correctly set the progress view's background color") {
-                        expect(subject.trackBackgroundColor).to(be(color))
-                    }
                 }
             }
             
-            //MARK: - Track Inset
+            //MARK: - Set Track Image
             
-            describe("track inset") {
+            describe("setTrackImage") {
                 
-                context("when the track insets are modified") {
-                    
-                    beforeEach {
-                        subject.trackInset = 0
-                    }
-                    
-                    it("should trigger a new layout cycle") {
-                        expect(subject.setNeedsLayoutCalled).to(beTrue())
-                    }
-                }
-            }
-            
-            describe("track image view") {
-                
-                context("when setting the track's image") {
+                context("when calling the setTrackImage method") {
                     let image: UIImage = UIImage()
                     
                     beforeEach {
@@ -251,6 +337,17 @@ class MultiProgressViewSpec: QuickSpec {
             //MARK: - Data Source
             
             describe("data source") {
+                
+                context("when the data source is changed") {
+                    
+                    beforeEach {
+                        subject.dataSource = MockMultiProgressViewDataSource()
+                    }
+                    
+                    it("should call reloadData") {
+                        expect(subject.reloadDataCalled).to(beTrue())
+                    }
+                }
                 
                 context("when setting the data source") {
                     
