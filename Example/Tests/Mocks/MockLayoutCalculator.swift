@@ -10,9 +10,9 @@
 
 class MockLayoutCalculator: LayoutCalculatable {
     
-    var trackImageViewFrame: CGRect = CGRect()
+    var testTrackImageViewFrame: CGRect = CGRect()
     func trackImageViewFrame(forProgressView progressView: MultiProgressView) -> CGRect {
-        return trackImageViewFrame
+        return testTrackImageViewFrame
     }
     
     var testSectionImageViewFrame: CGRect = CGRect()

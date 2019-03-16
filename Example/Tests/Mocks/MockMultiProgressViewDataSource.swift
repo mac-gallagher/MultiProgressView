@@ -9,22 +9,25 @@
 import MultiProgressView
 
 class MockMultiProgressViewDataSource: MultiProgressViewDataSource {
-    var numberOfSectionsCalled: Bool = false
-    var viewForSectionCalledCount: Int = 0
-    
-    private var numberOfSections: Int
+    var numberOfSections: Int
     
     init(numberOfSections: Int = 0) {
         self.numberOfSections = numberOfSections
     }
     
     func numberOfSections(in progressView: MultiProgressView) -> Int {
-        numberOfSectionsCalled = true
         return numberOfSections
     }
     
+    lazy var progressViewSections: [ProgressViewSection] = {
+        var sections = [ProgressViewSection]()
+        for index in 0..<numberOfSections {
+            sections.append(ProgressViewSection())
+        }
+        return sections
+    }()
+    
     func progressView(_ progressView: MultiProgressView, viewForSection section: Int) -> ProgressViewSection {
-        viewForSectionCalledCount += 1
-        return ProgressViewSection()
+        return progressViewSections[section]
     }
 }

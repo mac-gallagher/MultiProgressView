@@ -11,7 +11,7 @@ import Nimble
 
 @testable import MultiProgressView
 
-class ProgressViewSectionSpec: QuickSpec { //Done!
+class ProgressViewSectionSpec: QuickSpec {
     
     override func spec() {
         
@@ -51,6 +51,7 @@ class ProgressViewSectionSpec: QuickSpec { //Done!
                 }
                 
                 func testInitialProperties() {
+                    
                     it("should have a title label") {
                         expect(section.titleLabel).toNot(beNil())
                     }
@@ -122,19 +123,23 @@ class ProgressViewSectionSpec: QuickSpec { //Done!
             describe("layout") {
                 
                 context("when calling the layoutSubviews method") {
-                    let imageViewFrame: CGRect = CGRect(x: 1, y: 2, width: 3, height: 4)
+                    let titleAlignment: AlignmentType = .topLeft
+                    let titleEdgeInsets: UIEdgeInsets = UIEdgeInsets(top: 1, left: 2, bottom: 3, right: 4)
                     let labelConstraints: [NSLayoutConstraint] = [NSLayoutConstraint]()
+                    let imageViewFrame: CGRect = CGRect(x: 1, y: 2, width: 3, height: 4)
                     
                     beforeEach {
-                        mockLayoutCalculator.testSectionImageViewFrame = imageViewFrame
                         mockLayoutCalculator.testAnchorConstraints = labelConstraints
+                        mockLayoutCalculator.testSectionImageViewFrame = imageViewFrame
+                        subject.titleAlignment = titleAlignment
+                        subject.titleEdgeInsets = titleEdgeInsets
                         subject.layoutSubviews()
                     }
                     
                     it("should correctly set the title label's constraints") {
                         expect(subject.labelConstraints).to(be(labelConstraints))
-                        expect(mockLayoutCalculator.anchorToSuperviewAlignment).to(equal(subject.titleAlignment))
-                        expect(mockLayoutCalculator.anchorToSuperviewInsets).to(equal(subject.titleEdgeInsets))
+                        expect(mockLayoutCalculator.anchorToSuperviewAlignment).to(equal(titleAlignment))
+                        expect(mockLayoutCalculator.anchorToSuperviewInsets).to(equal(titleEdgeInsets))
                     }
                     
                     it("should correctly set the imageView's frame") {
@@ -142,14 +147,14 @@ class ProgressViewSectionSpec: QuickSpec { //Done!
                     }
                     
                     it("should send the the imageView to the back of the view hierarchy") {
-                        expect(subject.sendSubviewToBackView).to(equal(subject.imageView))
+                        expect(subject.sendSubviewToBackView).to(be(subject.imageView))
                     }
                 }
             }
             
-            //MARK: - Main Methods
+            //MARK: - Setter Methods
             
-            describe("main methods") {
+            describe("setter methods") {
                 
                 context("when calling the setTitle method") {
                     let title: String = "title"

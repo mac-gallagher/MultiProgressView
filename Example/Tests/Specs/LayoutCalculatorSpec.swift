@@ -16,25 +16,21 @@ class LayoutCalculatorSpec: QuickSpec {
     override func spec() {
         
         describe("LayoutCalculator") {
-            let numberOfSections: Int = 5
+            let numberOfSections: Int = 2
             let progressViewWidth: CGFloat = 200
             let progressViewHeight: CGFloat = 50
-            let trackInset: CGFloat = 10
             
             var mockDataSource: MockMultiProgressViewDataSource!
-            var mockLayoutCalculator: MockLayoutCalculator!
             var progressView: TestableMultiProgressView!
             var subject: LayoutCalculator!
             
             beforeEach {
                 mockDataSource = MockMultiProgressViewDataSource(numberOfSections: numberOfSections)
-                mockLayoutCalculator = MockLayoutCalculator()
                 
                 let progressViewFrame: CGRect = CGRect(x: 0, y: 0, width: progressViewWidth, height: progressViewHeight)
-                progressView = TestableMultiProgressView(layoutCalculator: mockLayoutCalculator)
+                progressView = TestableMultiProgressView()
                 progressView.frame = progressViewFrame
                 progressView.dataSource = mockDataSource
-                progressView.trackInset = trackInset
                 
                 subject = LayoutCalculator()
             }
@@ -42,6 +38,11 @@ class LayoutCalculatorSpec: QuickSpec {
             //MARK: - Track Frame
             
             context("when calling the trackFrame function") {
+                let trackInset: CGFloat = 10
+                
+                beforeEach {
+                    progressView.trackInset = trackInset
+                }
                 
                 context("and the line cap type is butt") {
                     
@@ -120,7 +121,7 @@ class LayoutCalculatorSpec: QuickSpec {
                     }
                 }
                 
-                context("and there is nonzero progress on the section but no section before it") {
+                context("and there is some progress on the section and the section before it has zero width") {
                     let progress: Float = 0.5
                     
                     beforeEach {
@@ -139,7 +140,7 @@ class LayoutCalculatorSpec: QuickSpec {
                     }
                 }
                 
-                context("and there is nonzero progress on the section and the section before it has a nonzero width") {
+                context("and there is some progress on the section and the section before it has a nonzero width") {
                     let firstSectionFrame: CGRect = CGRect(x: 0, y: 0, width: 30, height: 0)
                     let progress: Float = 0.2
                     
@@ -166,10 +167,15 @@ class LayoutCalculatorSpec: QuickSpec {
             //MARK: - Track Image View Frame
             
             context("when calling the trackImageViewFrame function") {
+                let trackBounds: CGRect = CGRect(x: 10, y: 20, width: 30, height: 40)
+                
+                beforeEach {
+                    progressView.track.bounds = trackBounds
+                }
                 
                 it("should return the track's bounds") {
                     let actualFrame: CGRect = subject.trackImageViewFrame(forProgressView: progressView)
-                    expect(actualFrame).to(equal(progressView.track.bounds))
+                    expect(actualFrame).to(equal(trackBounds))
                 }
             }
             
@@ -239,7 +245,7 @@ class LayoutCalculatorSpec: QuickSpec {
                         progressView.cornerRadius = cornerRadius
                     }
                     
-                    it("should return the given corner radius") {
+                    it("should return the progressView's corner radius") {
                         let actualCornerRadius: CGFloat = subject.cornerRadius(forProgressView: progressView)
                         expect(actualCornerRadius).to(equal(cornerRadius))
                     }
@@ -304,35 +310,191 @@ class LayoutCalculatorSpec: QuickSpec {
                     it("should return the correct scaled corner radius") {
                         let actualCornerRadius: CGFloat = subject.trackCornerRadius(forProgressView: progressView)
                         let expectedCornerRaduis: CGFloat = cornerRadiusFactor * trackBounds.height
-                        
                         expect(actualCornerRadius).to(equal(expectedCornerRaduis))
                     }
                 }
             }
             
-            //TODO: Write these tests
-            describe("anchorToSuperview") {
+            //MARK: Layout Anchoring
+            
+            context("when calling the anchorToSuperview function") {
+                let insets: UIEdgeInsets = UIEdgeInsets(top: 1, left: 2, bottom: 3, right: 4)
+                var view: UIView!
                 
-                context("when calling the anchorToSuperview function") {
-                    let view: UIView = UIView()
+                beforeEach {
+                    view = UIView()
+                }
+                
+                context("and the view has no superview") {
                     
-                    context("and the view has no superview") {
+                    it("should return no constraints") {
+                        let actualConstraints: [NSLayoutConstraint] = subject.anchorToSuperview(view,
+                                                                                                withAlignment: .bottom,
+                                                                                                insets: insets)
+                        expect(actualConstraints).to(equal([]))
+                    }
+                }
+                
+                context("and the view has a superview") {
+                    let superview: UIView = UIView()
+                    var topConstraint: NSLayoutConstraint!
+                    var leftConstraint: NSLayoutConstraint!
+                    var rightConstraint: NSLayoutConstraint!
+                    var bottomConstraint: NSLayoutConstraint!
+                    var centerXConstraint: NSLayoutConstraint!
+                    var centerYConstraint: NSLayoutConstraint!
+                    
+                    beforeEach {
+                        superview.addSubview(view)
                         
-                        it("should return no constraints") {
+                        topConstraint = view.topAnchor.constraint(equalTo: superview.topAnchor,
+                                                                  constant: insets.top)
+                        leftConstraint = view.leftAnchor.constraint(equalTo: superview.leftAnchor,
+                                                                    constant: insets.left)
+                        rightConstraint = view.rightAnchor.constraint(equalTo: superview.rightAnchor,
+                                                                      constant: -insets.right)
+                        bottomConstraint = view.bottomAnchor.constraint(equalTo: superview.bottomAnchor,
+                                                                        constant: -insets.bottom)
+                        centerXConstraint = view.centerXAnchor.constraint(equalTo: superview.centerXAnchor,
+                                                                          constant: insets.left - insets.right)
+                        centerYConstraint = view.centerYAnchor.constraint(equalTo: superview.centerYAnchor,
+                                                                          constant: insets.top - insets.bottom)
+                    }
+                    
+                    context("and the alignment is equal to top") {
+                        
+                        it("should return the correct layout constraints") {
                             let actualConstraints: [NSLayoutConstraint] = subject.anchorToSuperview(view,
-                                                                                                    withAlignment: .bottom,
-                                                                                                    insets: UIEdgeInsets())
-                            expect(actualConstraints).to(equal([]))
+                                                                                                    withAlignment: .top,
+                                                                                                    insets: insets)
+                            expect(actualConstraints.count).to(equal(2))
+                            expect(actualConstraints.contains(centerXConstraint)).to(beTrue())
+                            expect(actualConstraints.contains(topConstraint)).to(beTrue())
                         }
                     }
                     
-                }
-                
-                func testConstraint() {
-                    //check isActive, constant, item1, etc...
-                    //or conform to equatable
+                    context("and the alignment is equal to topLeft") {
+                        
+                        it("should return the correct layout constraints") {
+                            let actualConstraints: [NSLayoutConstraint] = subject.anchorToSuperview(view,
+                                                                                                    withAlignment: .topLeft,
+                                                                                                    insets: insets)
+                            expect(actualConstraints.count).to(equal(2))
+                            expect(actualConstraints.contains(topConstraint)).to(beTrue())
+                            expect(actualConstraints.contains(leftConstraint)).to(beTrue())
+                        }
+                    }
+                    
+                    context("and the alignment is equal to left") {
+                        
+                        it("should return the correct layout constraints") {
+                            let actualConstraints: [NSLayoutConstraint] = subject.anchorToSuperview(view,
+                                                                                                    withAlignment: .left,
+                                                                                                    insets: insets)
+                            expect(actualConstraints.count).to(equal(2))
+                            expect(actualConstraints.contains(centerYConstraint)).to(beTrue())
+                            expect(actualConstraints.contains(leftConstraint)).to(beTrue())
+                        }
+                    }
+                    
+                    context("and the alignment is equal to bottomLeft") {
+                        
+                        it("should return the correct layout constraints") {
+                            let actualConstraints: [NSLayoutConstraint] = subject.anchorToSuperview(view,
+                                                                                                    withAlignment: .bottomLeft,
+                                                                                                    insets: insets)
+                            expect(actualConstraints.count).to(equal(2))
+                            expect(actualConstraints.contains(bottomConstraint)).to(beTrue())
+                            expect(actualConstraints.contains(leftConstraint)).to(beTrue())
+                        }
+                    }
+                    
+                    context("and the alignment is equal to bottom") {
+                        
+                        it("should return the correct layout constraints") {
+                            let actualConstraints: [NSLayoutConstraint] = subject.anchorToSuperview(view,
+                                                                                                    withAlignment: .bottom,
+                                                                                                    insets: insets)
+                            expect(actualConstraints.count).to(equal(2))
+                            expect(actualConstraints.contains(centerXConstraint)).to(beTrue())
+                            expect(actualConstraints.contains(bottomConstraint)).to(beTrue())
+                        }
+                    }
+                    
+                    context("and the alignment is equal to bottomRight") {
+                        
+                        it("should return the correct layout constraints") {
+                            let actualConstraints: [NSLayoutConstraint] = subject.anchorToSuperview(view,
+                                                                                                    withAlignment: .bottomRight,
+                                                                                                    insets: insets)
+                            expect(actualConstraints.count).to(equal(2))
+                            expect(actualConstraints.contains(bottomConstraint)).to(beTrue())
+                            expect(actualConstraints.contains(rightConstraint)).to(beTrue())
+                        }
+                    }
+                    
+                    context("and the alignment is equal to right") {
+                        
+                        it("should return the correct layout constraints") {
+                            let actualConstraints: [NSLayoutConstraint] = subject.anchorToSuperview(view,
+                                                                                                    withAlignment: .right,
+                                                                                                    insets: insets)
+                            expect(actualConstraints.count).to(equal(2))
+                            expect(actualConstraints.contains(centerYConstraint)).to(beTrue())
+                            expect(actualConstraints.contains(rightConstraint)).to(beTrue())
+                        }
+                    }
+                    
+                    context("and the alignment is equal to topRight") {
+                        
+                        it("should return the correct layout constraints") {
+                            let actualConstraints: [NSLayoutConstraint] = subject.anchorToSuperview(view,
+                                                                                                    withAlignment: .topRight,
+                                                                                                    insets: insets)
+                            expect(actualConstraints.count).to(equal(2))
+                            expect(actualConstraints.contains(rightConstraint)).to(beTrue())
+                            expect(actualConstraints.contains(topConstraint)).to(beTrue())
+                        }
+                    }
+                    
+                    context("and the alignment is equal to center") {
+                        
+                        it("should return the correct layout constraints") {
+                            let actualConstraints: [NSLayoutConstraint] = subject.anchorToSuperview(view,
+                                                                                                    withAlignment: .center,
+                                                                                                    insets: insets)
+                            expect(actualConstraints.count).to(equal(2))
+                            expect(actualConstraints.contains(centerXConstraint)).to(beTrue())
+                            expect(actualConstraints.contains(centerYConstraint)).to(beTrue())
+                        }
+                    }
                 }
             }
         }
+    }
+}
+
+//MARK: - NSLayoutConstraint Testable Helpers
+
+extension NSLayoutConstraint {
+    open override func isEqual(_ object: Any?) -> Bool {
+        guard let constraint = object as? NSLayoutConstraint else { return false }
+        
+        guard let firstItem = firstItem as? UIView,
+            let constraintFirstItem = constraint.firstItem as? UIView else { return false }
+        
+        guard let secondItem = secondItem as? UIView,
+            let constraintSecondItem = constraint.secondItem as? UIView else { return false }
+        
+        guard relation == constraint.relation,
+            constant == constraint.constant,
+            constant == constraint.constant,
+            firstItem == constraintFirstItem,
+            secondItem == constraintSecondItem,
+            multiplier == constraint.multiplier,
+            firstAttribute == constraint.firstAttribute,
+            secondAttribute == constraint.secondAttribute else { return false }
+        
+        return true
     }
 }

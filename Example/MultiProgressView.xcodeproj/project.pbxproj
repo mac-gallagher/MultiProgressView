@@ -11,7 +11,6 @@
 		7F623FDE3F5C6636F98C6EE0 /* Pods_MultiProgressView_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32AC331554740EDEA43EC16F /* Pods_MultiProgressView_Example.framework */; };
 		AD141BDD223347A200519E52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD141BDC223347A200519E52 /* AppDelegate.swift */; };
 		AD141BDF223347A200519E52 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD141BDE223347A200519E52 /* ViewController.swift */; };
-		AD141BE2223347A200519E52 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD141BE0223347A200519E52 /* Main.storyboard */; };
 		AD141BE4223347A400519E52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD141BE3223347A400519E52 /* Assets.xcassets */; };
 		AD141BE7223347A400519E52 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD141BE5223347A400519E52 /* LaunchScreen.storyboard */; };
 		AD301E38222F8BB100D1FAD6 /* MockLayoutCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD301E36222F8BAE00D1FAD6 /* MockLayoutCalculator.swift */; };
@@ -61,10 +60,9 @@
 		AD141BDA223347A200519E52 /* MultiProgressViewTestHostApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiProgressViewTestHostApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD141BDC223347A200519E52 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AD141BDE223347A200519E52 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		AD141BE1223347A200519E52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AD141BE3223347A400519E52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD141BE6223347A400519E52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		AD141BE8223347A400519E52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AD141BE8223347A400519E52 /* TestHostApp.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = TestHostApp.plist; sourceTree = "<group>"; };
 		AD301E2F222F500100D1FAD6 /* LayoutCalculatorSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutCalculatorSpec.swift; sourceTree = "<group>"; };
 		AD301E36222F8BAE00D1FAD6 /* MockLayoutCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLayoutCalculator.swift; sourceTree = "<group>"; };
 		AD301E3B2231EF8200D1FAD6 /* TestableMultiProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestableMultiProgressView.swift; sourceTree = "<group>"; };
@@ -85,10 +83,10 @@
 		ADA523F720F1BC9300CB8AE6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		ADA523FC20F1BC9500CB8AE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ADA523FF20F1BC9500CB8AE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		ADA5240120F1BC9500CB8AE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ADA5240120F1BC9500CB8AE6 /* MultiProgressView_Example.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = MultiProgressView_Example.plist; sourceTree = "<group>"; };
 		ADE1AEC621D40DF2000D9539 /* MultiProgressView_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MultiProgressView_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE1AEC821D40DF2000D9539 /* ProgressViewSectionSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewSectionSpec.swift; sourceTree = "<group>"; };
-		ADE1AECA21D40DF2000D9539 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Tests/Info.plist; sourceTree = "<group>"; };
+		ADE1AECA21D40DF2000D9539 /* MultiProgressView_Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = MultiProgressView_Tests.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,10 +132,7 @@
 			children = (
 				AD141BDC223347A200519E52 /* AppDelegate.swift */,
 				AD141BDE223347A200519E52 /* ViewController.swift */,
-				AD141BE0223347A200519E52 /* Main.storyboard */,
-				AD141BE3223347A400519E52 /* Assets.xcassets */,
-				AD141BE5223347A400519E52 /* LaunchScreen.storyboard */,
-				AD141BE8223347A400519E52 /* Info.plist */,
+				AD501268224AA63400370157 /* Supporting Files */,
 			);
 			path = TestHostApp;
 			sourceTree = "<group>";
@@ -158,6 +153,16 @@
 				AD44368121E157DD00A98A97 /* UIColor+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		AD501268224AA63400370157 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AD141BE3223347A400519E52 /* Assets.xcassets */,
+				AD141BE5223347A400519E52 /* LaunchScreen.storyboard */,
+				AD141BE8223347A400519E52 /* TestHostApp.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		AD536B9E20F337FA0003CA03 /* Podspec Metadata */ = {
@@ -231,7 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				ADA523FC20F1BC9500CB8AE6 /* Assets.xcassets */,
-				ADA5240120F1BC9500CB8AE6 /* Info.plist */,
+				ADA5240120F1BC9500CB8AE6 /* MultiProgressView_Example.plist */,
 				ADA523FE20F1BC9500CB8AE6 /* LaunchScreen.storyboard */,
 			);
 			name = "Supporting Files";
@@ -251,7 +256,7 @@
 		ADE1AED621D416B6000D9539 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				ADE1AECA21D40DF2000D9539 /* Info.plist */,
+				ADE1AECA21D40DF2000D9539 /* MultiProgressView_Tests.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -375,7 +380,6 @@
 			files = (
 				AD141BE7223347A400519E52 /* LaunchScreen.storyboard in Resources */,
 				AD141BE4223347A400519E52 /* Assets.xcassets in Resources */,
-				AD141BE2223347A200519E52 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,14 +537,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		AD141BE0223347A200519E52 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AD141BE1223347A200519E52 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		AD141BE5223347A400519E52 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -566,7 +562,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DYZ8Y2U8DB;
-				INFOPLIST_FILE = "$(SRCROOT)/TestHostApp/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/TestHostApp/TestHostApp.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -586,7 +583,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DYZ8Y2U8DB;
-				INFOPLIST_FILE = "$(SRCROOT)/TestHostApp/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/TestHostApp/TestHostApp.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -724,7 +722,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DYZ8Y2U8DB;
-				INFOPLIST_FILE = MultiProgressView/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/MultiProgressView/MultiProgressView_Example.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -743,7 +742,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DYZ8Y2U8DB;
-				INFOPLIST_FILE = MultiProgressView/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/MultiProgressView/MultiProgressView_Example.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -762,7 +762,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DYZ8Y2U8DB;
-				INFOPLIST_FILE = Tests/Info.plist;
+				INFOPLIST_FILE = Tests/MultiProgressView_Tests.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -786,7 +786,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DYZ8Y2U8DB;
-				INFOPLIST_FILE = Tests/Info.plist;
+				INFOPLIST_FILE = Tests/MultiProgressView_Tests.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

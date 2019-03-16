@@ -25,4 +25,10 @@ class TestableMultiProgressView: MultiProgressView {
         super.reloadData()
         reloadDataCalled = true
     }
+    
+    var updateCornerRadiusCalled: Bool = false
+    override func updateCornerRadius() {
+        super.updateCornerRadius()
+        updateCornerRadiusCalled = true
+    }
 }

@@ -84,60 +84,55 @@ struct LayoutCalculator: LayoutCalculatable {
         
         var constraints = [NSLayoutConstraint]()
         
+        let topConstraint: NSLayoutConstraint = view.topAnchor.constraint(equalTo: superview.topAnchor,
+                                                                          constant: insets.top)
+        let leftConstraint: NSLayoutConstraint = view.leftAnchor.constraint(equalTo: superview.leftAnchor,
+                                                                            constant: insets.left)
+        let rightConstraint: NSLayoutConstraint = view.rightAnchor.constraint(equalTo: superview.rightAnchor,
+                                                                              constant: -insets.right)
+        let bottomConstraint: NSLayoutConstraint = view.bottomAnchor.constraint(equalTo: superview.bottomAnchor,
+                                                                                constant: -insets.bottom)
+        let centerXConstraint: NSLayoutConstraint = view.centerXAnchor.constraint(equalTo: superview.centerXAnchor,
+                                                                                  constant: insets.left - insets.right)
+        let centerYConstraint: NSLayoutConstraint = view.centerYAnchor.constraint(equalTo: superview.centerYAnchor,
+                                                                                  constant: insets.top - insets.bottom)
+        
         switch alignment {
         case .bottom:
-            constraints.append(view.bottomAnchor.constraint(equalTo: superview.bottomAnchor,
-                                                            constant: -insets.bottom))
-            constraints.append(view.centerXAnchor.constraint(equalTo: superview.centerXAnchor,
-                                                             constant: insets.left - insets.right))
+            constraints.append(bottomConstraint)
+            constraints.append(centerXConstraint)
             
         case .bottomLeft:
-            constraints.append(view.bottomAnchor.constraint(equalTo: superview.bottomAnchor,
-                                                            constant: -insets.bottom))
-            constraints.append(view.leftAnchor.constraint(equalTo: superview.leftAnchor,
-                                                          constant: insets.left))
+            constraints.append(bottomConstraint)
+            constraints.append(leftConstraint)
             
         case .bottomRight:
-            constraints.append(view.bottomAnchor.constraint(equalTo: superview.bottomAnchor,
-                                                            constant: -insets.bottom))
-            constraints.append(view.rightAnchor.constraint(equalTo: superview.rightAnchor,
-                                                           constant: -insets.right))
+            constraints.append(bottomConstraint)
+            constraints.append(rightConstraint)
             
         case .center:
-            constraints.append(view.centerXAnchor.constraint(equalTo: superview.centerXAnchor,
-                                                             constant: insets.left - insets.right))
-            constraints.append(view.centerYAnchor.constraint(equalTo: superview.centerYAnchor,
-                                                             constant: insets.top - insets.bottom))
+            constraints.append(centerXConstraint)
+            constraints.append(centerYConstraint)
             
         case .left:
-            constraints.append(view.leftAnchor.constraint(equalTo: superview.leftAnchor,
-                                                          constant: insets.left))
-            constraints.append(view.centerYAnchor.constraint(equalTo: superview.centerYAnchor,
-                                                             constant: insets.top - insets.bottom))
+            constraints.append(leftConstraint)
+            constraints.append(centerYConstraint)
             
         case .right:
-            constraints.append(view.rightAnchor.constraint(equalTo: superview.rightAnchor, 
-                                                           constant: -insets.right))
-            constraints.append(view.centerYAnchor.constraint(equalTo: superview.centerYAnchor,
-                                                             constant: insets.top - insets.bottom))
+            constraints.append(rightConstraint)
+            constraints.append(centerYConstraint)
             
         case .top:
-            constraints.append(view.topAnchor.constraint(equalTo: superview.topAnchor,
-                                                         constant: insets.top))
-            constraints.append(view.centerXAnchor.constraint(equalTo: superview.centerXAnchor,
-                                                             constant: insets.left - insets.right))
+            constraints.append(topConstraint)
+            constraints.append(centerXConstraint)
             
         case .topLeft:
-            constraints.append(view.topAnchor.constraint(equalTo: superview.topAnchor,
-                                                         constant: insets.top))
-            constraints.append(view.leftAnchor.constraint(equalTo: superview.leftAnchor,
-                                                          constant: insets.left))
+            constraints.append(topConstraint)
+            constraints.append(leftConstraint)
             
         case .topRight:
-            constraints.append(view.topAnchor.constraint(equalTo: superview.topAnchor,
-                                                         constant: insets.top))
-            constraints.append(view.rightAnchor.constraint(equalTo: superview.rightAnchor,
-                                                           constant: -insets.right))
+            constraints.append(topConstraint)
+            constraints.append(rightConstraint)
         }
         
         constraints.forEach { $0.isActive = true }
