@@ -1,6 +1,6 @@
 # MultiProgressView
 
-![Swift-Version](https://img.shields.io/badge/Swift-4.2-orange.svg)
+![Swift-Version](https://img.shields.io/badge/Swift-5.0-orange.svg)
 ![CocoaPods](https://img.shields.io/cocoapods/v/MultiProgressView.svg)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 ![license](https://img.shields.io/cocoapods/l/MultiProgressView.svg)
@@ -18,8 +18,8 @@ To run the example project, clone the repo and run the `MultiProgressView-Exampl
 
 # Requirements
 * iOS 9.0+
-* Xcode 10.0+
-* Swift 4.2
+* Xcode 10.2+
+* Swift 5.0+
 
 # Installation
 
@@ -55,7 +55,7 @@ Download and drop the `MultiProgressView` directory into your project.
     ```swift
     progressView.dataSource = self
     ```
-3. Call the `setProgress` function to update your view's progress:
+3. Call `setProgress(section:to:)` to update your view's progress:
 
     ```swift
     progressView.setProgress(section: 0, to: 0.4)
@@ -71,16 +71,16 @@ Each `MultiProgressView` exposes the following variables:
 var cornerRadius: CGFloat = 0
 var borderWidth: CGFloat = 0
 var borderColor: UIColor? = .black
-var lineCap: LineCapType = .round 
+var lineCap: LineCapType = .square 
 
 var trackInset: CGFloat = 0
 var trackBackgroundColor: UIColor? = .white
 var trackBorderColor: UIColor? = .black
 var trackBorderWidth: CGFloat = 0
 
-var trackImageView: UIImageView?
+var trackImageView: UIImageView
 
-var trackTitleLabel: UILabel?
+var trackTitleLabel: UILabel
 var trackTitleEdgeInsets: UIEdgeInsets = .zero
 var trackTitleAlignment: AlignmentType = .center
 ```
@@ -89,8 +89,8 @@ var trackTitleAlignment: AlignmentType = .center
 Each `ProgressViewSection` exposes the following variables:
 
 ```swift
-var imageView: UIImageView?
-var titleLabel: UILabel?
+var imageView: UIImageView
+var titleLabel: UILabel
 var titleEdgeInsets: UIEdgeInsets = .zero
 var titleAlignment: AlignmentType = .center
 ```
