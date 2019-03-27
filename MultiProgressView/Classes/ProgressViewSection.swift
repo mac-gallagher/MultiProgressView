@@ -9,12 +9,12 @@
 import UIKit
 
 open class ProgressViewSection: UIView {
-    public var titleLabel: UILabel? {
-        return label
+    public var titleLabel: UILabel {
+        return sectionTitleLabel
     }
     
-    private var label: UILabel?
-
+    private var sectionTitleLabel: UILabel = UILabel()
+    
     public var titleEdgeInsets: UIEdgeInsets = .zero {
         didSet {
             setNeedsLayout()
@@ -27,78 +27,67 @@ open class ProgressViewSection: UIView {
         }
     }
     
-    public var imageView: UIImageView? {
+    public var imageView: UIImageView {
         return sectionImageView
     }
-
-    private var sectionImageView: UIImageView?
+    
+    private var sectionImageView: UIImageView = UIImageView()
+    
+    private var layoutCalculator: LayoutCalculatable = LayoutCalculator.shared
+    
+    //MARK: - Initialization
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
         initialize()
     }
     
+    //TODO: Write this initializer
     required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        initialize()
+        return nil
+    }
+    
+    convenience init(layoutCalculator: LayoutCalculatable) {
+        self.init(frame: .zero)
+        self.layoutCalculator = layoutCalculator
     }
     
     private func initialize() {
         backgroundColor = .black
         layer.masksToBounds = true
+        addSubview(sectionImageView)
+        addSubview(sectionTitleLabel)
     }
     
-    private var labelConstraints = [NSLayoutConstraint]() {
+    //MARK: - Layout
+    
+    var labelConstraints = [NSLayoutConstraint]() {
         didSet {
             NSLayoutConstraint.deactivate(oldValue)
             NSLayoutConstraint.activate(labelConstraints)
         }
     }
     
-    private var imageViewConstaints = [NSLayoutConstraint]() {
-        didSet {
-            NSLayoutConstraint.deactivate(oldValue)
-            NSLayoutConstraint.activate(imageViewConstaints)
-        }
-    }
-    
     open override func layoutSubviews() {
         super.layoutSubviews()
-        labelConstraints = label?.anchorToSuperview(withAlignment: titleAlignment, insets: titleEdgeInsets) ?? []
-        imageViewConstaints = sectionImageView?.anchorToSuperview() ?? []
-        
-        if let imageView = sectionImageView {
-            sendSubviewToBack(imageView)
-        }
+        labelConstraints = layoutCalculator.anchorToSuperview(sectionTitleLabel,
+                                                              withAlignment: titleAlignment,
+                                                              insets: titleEdgeInsets)
+        sectionImageView.frame = layoutCalculator.sectionImageViewFrame(forSection: self)
+        sendSubviewToBack(sectionImageView)
     }
     
+    //MARK: - Main Methods
+    
     public func setTitle(_ title: String?) {
-        createTitleLabelIfNeeded()
-        label?.text = title
+        sectionTitleLabel.text = title
     }
     
     public func setAttributedTitle(_ title: NSAttributedString?) {
-        createTitleLabelIfNeeded()
-        label?.attributedText = title
+        sectionTitleLabel.attributedText = title
     }
     
     public func setImage(_ image: UIImage?) {
-        guard let image = image else { return }
-        createImageViewIfNeeded()
-        sectionImageView?.image = image
-    }
-    
-    private func createTitleLabelIfNeeded() {
-        guard titleLabel == nil else { return }
-        let title = UILabel()
-        addSubview(title)
-        label = title
-    }
-    
-    private func createImageViewIfNeeded() {
-        guard imageView == nil else { return }
-        let iv = UIImageView()
-        addSubview(iv)
-        sectionImageView = iv
+        sectionImageView.image = image
     }
 }

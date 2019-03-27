@@ -2,7 +2,7 @@
 //  MultiProgressView.h
 //  MultiProgressView
 //
-//  Created by Mac Gallagher on 1/7/19.
+//  Created by Mac Gallagher on 3/26/19.
 //  Copyright © 2019 Mac Gallagher. All rights reserved.
 //
 

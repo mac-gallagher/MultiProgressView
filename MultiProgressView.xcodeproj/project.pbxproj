@@ -7,30 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AD706AC521E460B60007AFE3 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD706ABA21E460B60007AFE3 /* UIView+Extensions.swift */; };
-		AD706AC621E460B60007AFE3 /* ProgressViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD706ABB21E460B60007AFE3 /* ProgressViewSection.swift */; };
-		AD706AC721E460B60007AFE3 /* AlignmentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD706ABC21E460B60007AFE3 /* AlignmentType.swift */; };
-		AD706AC821E460B60007AFE3 /* LineCapType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD706ABD21E460B60007AFE3 /* LineCapType.swift */; };
-		AD706AC921E460B60007AFE3 /* MultiProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = AD706ABF21E460B60007AFE3 /* MultiProgressView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AD706ACB21E460B60007AFE3 /* MultiProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD706AC121E460B60007AFE3 /* MultiProgressView.swift */; };
-		AD706ACC21E460B60007AFE3 /* MultiProgressViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD706AC221E460B60007AFE3 /* MultiProgressViewDataSource.swift */; };
+		AD501289224B0E5400370157 /* LayoutCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD501280224B0E5400370157 /* LayoutCalculator.swift */; };
+		AD50128A224B0E5400370157 /* MultiProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = AD501281224B0E5400370157 /* MultiProgressView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AD50128B224B0E5400370157 /* ProgressViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD501282224B0E5400370157 /* ProgressViewSection.swift */; };
+		AD50128D224B0E5400370157 /* AlignmentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD501284224B0E5400370157 /* AlignmentType.swift */; };
+		AD50128E224B0E5400370157 /* LineCapType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD501285224B0E5400370157 /* LineCapType.swift */; };
+		AD50128F224B0E5400370157 /* MultiProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD501286224B0E5400370157 /* MultiProgressView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AD706AAD21E460090007AFE3 /* MultiProgressView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MultiProgressView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AD706ABA21E460B60007AFE3 /* UIView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
-		AD706ABB21E460B60007AFE3 /* ProgressViewSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressViewSection.swift; sourceTree = "<group>"; };
-		AD706ABC21E460B60007AFE3 /* AlignmentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlignmentType.swift; sourceTree = "<group>"; };
-		AD706ABD21E460B60007AFE3 /* LineCapType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineCapType.swift; sourceTree = "<group>"; };
-		AD706ABF21E460B60007AFE3 /* MultiProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiProgressView.h; sourceTree = "<group>"; };
-		AD706AC021E460B60007AFE3 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AD706AC121E460B60007AFE3 /* MultiProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiProgressView.swift; sourceTree = "<group>"; };
-		AD706AC221E460B60007AFE3 /* MultiProgressViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiProgressViewDataSource.swift; sourceTree = "<group>"; };
-		AD706AC421E460B60007AFE3 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		AD501273224B0E1600370157 /* MultiProgressView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MultiProgressView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD501280224B0E5400370157 /* LayoutCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutCalculator.swift; sourceTree = "<group>"; };
+		AD501281224B0E5400370157 /* MultiProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiProgressView.h; sourceTree = "<group>"; };
+		AD501282224B0E5400370157 /* ProgressViewSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressViewSection.swift; sourceTree = "<group>"; };
+		AD501283224B0E5400370157 /* MultiProgressView.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MultiProgressView.plist; sourceTree = "<group>"; };
+		AD501284224B0E5400370157 /* AlignmentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlignmentType.swift; sourceTree = "<group>"; };
+		AD501285224B0E5400370157 /* LineCapType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineCapType.swift; sourceTree = "<group>"; };
+		AD501286224B0E5400370157 /* MultiProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiProgressView.swift; sourceTree = "<group>"; };
+		AD501288224B0E5400370157 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		AD706AAA21E460090007AFE3 /* Frameworks */ = {
+		AD501270224B0E1600370157 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -40,58 +38,57 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AD706AA321E460090007AFE3 = {
+		AD501269224B0E1600370157 = {
 			isa = PBXGroup;
 			children = (
-				AD706AB821E460B60007AFE3 /* MultiProgressView */,
-				AD706AAE21E460090007AFE3 /* Products */,
+				AD50127E224B0E5400370157 /* MultiProgressView */,
+				AD501274224B0E1600370157 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		AD706AAE21E460090007AFE3 /* Products */ = {
+		AD501274224B0E1600370157 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AD706AAD21E460090007AFE3 /* MultiProgressView.framework */,
+				AD501273224B0E1600370157 /* MultiProgressView.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AD706AB821E460B60007AFE3 /* MultiProgressView */ = {
+		AD50127E224B0E5400370157 /* MultiProgressView */ = {
 			isa = PBXGroup;
 			children = (
-				AD706AB921E460B60007AFE3 /* Classes */,
-				AD706AC321E460B60007AFE3 /* Assets */,
+				AD50127F224B0E5400370157 /* Classes */,
+				AD501287224B0E5400370157 /* Assets */,
 			);
 			path = MultiProgressView;
 			sourceTree = "<group>";
 		};
-		AD706AB921E460B60007AFE3 /* Classes */ = {
+		AD50127F224B0E5400370157 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				AD706ABC21E460B60007AFE3 /* AlignmentType.swift */,
-				AD706ABD21E460B60007AFE3 /* LineCapType.swift */,
-				AD706AC121E460B60007AFE3 /* MultiProgressView.swift */,
-				AD706AC221E460B60007AFE3 /* MultiProgressViewDataSource.swift */,
-				AD706ABB21E460B60007AFE3 /* ProgressViewSection.swift */,
-				AD706ABA21E460B60007AFE3 /* UIView+Extensions.swift */,
-				AD80E7E121E67D47009CED59 /* Supporting Files */,
+				AD501280224B0E5400370157 /* LayoutCalculator.swift */,
+				AD501282224B0E5400370157 /* ProgressViewSection.swift */,
+				AD501284224B0E5400370157 /* AlignmentType.swift */,
+				AD501285224B0E5400370157 /* LineCapType.swift */,
+				AD501286224B0E5400370157 /* MultiProgressView.swift */,
+				AD501291224B0E5E00370157 /* Supporting Files */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		AD706AC321E460B60007AFE3 /* Assets */ = {
+		AD501287224B0E5400370157 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				AD706AC421E460B60007AFE3 /* .gitkeep */,
+				AD501288224B0E5400370157 /* .gitkeep */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
 		};
-		AD80E7E121E67D47009CED59 /* Supporting Files */ = {
+		AD501291224B0E5E00370157 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				AD706ABF21E460B60007AFE3 /* MultiProgressView.h */,
-				AD706AC021E460B60007AFE3 /* Info.plist */,
+				AD501281224B0E5400370157 /* MultiProgressView.h */,
+				AD501283224B0E5400370157 /* MultiProgressView.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -99,25 +96,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		AD706AA821E460090007AFE3 /* Headers */ = {
+		AD50126E224B0E1600370157 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD706AC921E460B60007AFE3 /* MultiProgressView.h in Headers */,
+				AD50128A224B0E5400370157 /* MultiProgressView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		AD706AAC21E460090007AFE3 /* MultiProgressView */ = {
+		AD501272224B0E1600370157 /* MultiProgressView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AD706AB521E460090007AFE3 /* Build configuration list for PBXNativeTarget "MultiProgressView" */;
+			buildConfigurationList = AD50127B224B0E1600370157 /* Build configuration list for PBXNativeTarget "MultiProgressView" */;
 			buildPhases = (
-				AD706AA821E460090007AFE3 /* Headers */,
-				AD706AA921E460090007AFE3 /* Sources */,
-				AD706AAA21E460090007AFE3 /* Frameworks */,
-				AD706AAB21E460090007AFE3 /* Resources */,
+				AD50126E224B0E1600370157 /* Headers */,
+				AD50126F224B0E1600370157 /* Sources */,
+				AD501270224B0E1600370157 /* Frameworks */,
+				AD501271224B0E1600370157 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -125,42 +122,42 @@
 			);
 			name = MultiProgressView;
 			productName = MultiProgressView;
-			productReference = AD706AAD21E460090007AFE3 /* MultiProgressView.framework */;
+			productReference = AD501273224B0E1600370157 /* MultiProgressView.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		AD706AA421E460090007AFE3 /* Project object */ = {
+		AD50126A224B0E1600370157 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Mac Gallagher";
 				TargetAttributes = {
-					AD706AAC21E460090007AFE3 = {
-						CreatedOnToolsVersion = 10.1;
+					AD501272224B0E1600370157 = {
+						CreatedOnToolsVersion = 10.2;
 					};
 				};
 			};
-			buildConfigurationList = AD706AA721E460090007AFE3 /* Build configuration list for PBXProject "MultiProgressView" */;
+			buildConfigurationList = AD50126D224B0E1600370157 /* Build configuration list for PBXProject "MultiProgressView" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = AD706AA321E460090007AFE3;
-			productRefGroup = AD706AAE21E460090007AFE3 /* Products */;
+			mainGroup = AD501269224B0E1600370157;
+			productRefGroup = AD501274224B0E1600370157 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AD706AAC21E460090007AFE3 /* MultiProgressView */,
+				AD501272224B0E1600370157 /* MultiProgressView */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		AD706AAB21E460090007AFE3 /* Resources */ = {
+		AD501271224B0E1600370157 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -170,23 +167,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		AD706AA921E460090007AFE3 /* Sources */ = {
+		AD50126F224B0E1600370157 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD706AC521E460B60007AFE3 /* UIView+Extensions.swift in Sources */,
-				AD706ACB21E460B60007AFE3 /* MultiProgressView.swift in Sources */,
-				AD706ACC21E460B60007AFE3 /* MultiProgressViewDataSource.swift in Sources */,
-				AD706AC621E460B60007AFE3 /* ProgressViewSection.swift in Sources */,
-				AD706AC821E460B60007AFE3 /* LineCapType.swift in Sources */,
-				AD706AC721E460B60007AFE3 /* AlignmentType.swift in Sources */,
+				AD501289224B0E5400370157 /* LayoutCalculator.swift in Sources */,
+				AD50128F224B0E5400370157 /* MultiProgressView.swift in Sources */,
+				AD50128B224B0E5400370157 /* ProgressViewSection.swift in Sources */,
+				AD50128E224B0E5400370157 /* LineCapType.swift in Sources */,
+				AD50128D224B0E5400370157 /* AlignmentType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		AD706AB321E460090007AFE3 /* Debug */ = {
+		AD501279224B0E1600370157 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -238,7 +234,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -250,7 +246,7 @@
 			};
 			name = Debug;
 		};
-		AD706AB421E460090007AFE3 /* Release */ = {
+		AD50127A224B0E1600370157 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -296,7 +292,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -308,7 +304,7 @@
 			};
 			name = Release;
 		};
-		AD706AB621E460090007AFE3 /* Debug */ = {
+		AD50127C224B0E1600370157 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
@@ -318,9 +314,8 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/MultiProgressView/Classes/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/MultiProgressView/Classes/MultiProgressView.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -329,12 +324,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.macgallagher.MultiProgressView;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		AD706AB721E460090007AFE3 /* Release */ = {
+		AD50127D224B0E1600370157 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
@@ -344,9 +339,8 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/MultiProgressView/Classes/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/MultiProgressView/Classes/MultiProgressView.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -355,7 +349,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.macgallagher.MultiProgressView;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -363,25 +357,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AD706AA721E460090007AFE3 /* Build configuration list for PBXProject "MultiProgressView" */ = {
+		AD50126D224B0E1600370157 /* Build configuration list for PBXProject "MultiProgressView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AD706AB321E460090007AFE3 /* Debug */,
-				AD706AB421E460090007AFE3 /* Release */,
+				AD501279224B0E1600370157 /* Debug */,
+				AD50127A224B0E1600370157 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AD706AB521E460090007AFE3 /* Build configuration list for PBXNativeTarget "MultiProgressView" */ = {
+		AD50127B224B0E1600370157 /* Build configuration list for PBXNativeTarget "MultiProgressView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AD706AB621E460090007AFE3 /* Debug */,
-				AD706AB721E460090007AFE3 /* Release */,
+				AD50127C224B0E1600370157 /* Debug */,
+				AD50127D224B0E1600370157 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = AD706AA421E460090007AFE3 /* Project object */;
+	rootObject = AD50126A224B0E1600370157 /* Project object */;
 }

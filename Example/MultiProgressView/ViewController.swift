@@ -85,7 +85,7 @@ class ViewController: UIViewController {
     private func setupLabels() {
         backgroundView.addSubview(iPhoneLabel)
         iPhoneLabel.anchor(top: backgroundView.topAnchor, left: backgroundView.leftAnchor, paddingTop: padding, paddingLeft: padding)
-        
+
         backgroundView.addSubview(dataUsedLabel)
         dataUsedLabel.anchor(top: backgroundView.topAnchor, right: backgroundView.rightAnchor, paddingTop: padding, paddingRight: padding)
     }
@@ -144,7 +144,7 @@ class ViewController: UIViewController {
         view.addSubview(resetButton)
         resetButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingBottom: 50, width: 200, height: 50)
         resetButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        
+
         view.addSubview(animateButton)
         animateButton.anchor(bottom: resetButton.topAnchor, paddingBottom: 20, width: 200, height: 50)
         animateButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
