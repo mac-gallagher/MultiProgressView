@@ -15,7 +15,7 @@ s.license      = { :type => 'MIT', :file => 'LICENSE' }
 s.author       = { "Mac Gallagher" => "jmgallagher36@gmail.com" }
 s.source       = { :git => "https://github.com/mac-gallagher/MultiProgressView.git", :tag => "v1.0.0" }
 
-s.swift_version = "4.2"
+s.swift_version = "5.0"
 s.source_files = "MultiProgressView/Classes/**/*"
 
 end
