@@ -1,9 +1,0 @@
-use_frameworks!
-
-platform :ios, '9.0'
-
-workspace 'MultiProgressView'
-
-target 'MultiProgressView_Example' do
-    pod 'MultiProgressView', :path => '../'
-end
