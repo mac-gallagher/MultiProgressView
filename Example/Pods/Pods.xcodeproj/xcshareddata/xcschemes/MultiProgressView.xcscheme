@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AD141BD9223347A200519E52"
-               BuildableName = "MultiProgressViewTestHostApp.app"
-               BlueprintName = "MultiProgressViewTestHostApp"
-               ReferencedContainer = "container:MultiProgressView.xcodeproj">
+               BlueprintIdentifier = "161FDA76958EC10F4DB750069946C5E0"
+               BuildableName = "MultiProgressView.framework"
+               BlueprintName = "MultiProgressView"
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -26,30 +26,9 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      codeCoverageEnabled = "YES"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO"
-            testExecutionOrdering = "random">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ADE1AEC521D40DF2000D9539"
-               BuildableName = "MultiProgressView_Tests.xctest"
-               BlueprintName = "MultiProgressView_Tests"
-               ReferencedContainer = "container:MultiProgressView.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AD141BD9223347A200519E52"
-            BuildableName = "MultiProgressViewTestHostApp.app"
-            BlueprintName = "MultiProgressViewTestHostApp"
-            ReferencedContainer = "container:MultiProgressView.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -66,10 +45,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AD141BD9223347A200519E52"
-            BuildableName = "MultiProgressViewTestHostApp.app"
-            BlueprintName = "MultiProgressViewTestHostApp"
-            ReferencedContainer = "container:MultiProgressView.xcodeproj">
+            BlueprintIdentifier = "161FDA76958EC10F4DB750069946C5E0"
+            BuildableName = "MultiProgressView.framework"
+            BlueprintName = "MultiProgressView"
+            ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -84,10 +63,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AD141BD9223347A200519E52"
-            BuildableName = "MultiProgressViewTestHostApp.app"
-            BlueprintName = "MultiProgressViewTestHostApp"
-            ReferencedContainer = "container:MultiProgressView.xcodeproj">
+            BlueprintIdentifier = "161FDA76958EC10F4DB750069946C5E0"
+            BuildableName = "MultiProgressView.framework"
+            BlueprintName = "MultiProgressView"
+            ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
