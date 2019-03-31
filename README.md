@@ -1,10 +1,11 @@
 # MultiProgressView
 
+[![Build Status](https://travis-ci.org/mac-gallagher/MultiProgressView.svg?branch=master)](https://travis-ci.org/mac-gallagher/MultiProgressView)
+![CocoaPods](https://img.shields.io/cocoapods/p/MultiProgressView.svg)
 ![Swift-Version](https://img.shields.io/badge/Swift-5.0-orange.svg)
 ![CocoaPods](https://img.shields.io/cocoapods/v/MultiProgressView.svg)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-![license](https://img.shields.io/cocoapods/l/MultiProgressView.svg)
-![CocoaPods](https://img.shields.io/cocoapods/p/MultiProgressView.svg)
+[![codecov](https://codecov.io/gh/mac-gallagher/MultiProgressView/branch/master/graph/badge.svg)](https://codecov.io/gh/mac-gallagher/MultiProgressView)
 
 
 # About
