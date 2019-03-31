@@ -1,6 +1,0 @@
-framework module Pods_MultiProgressView_Tests {
-  umbrella header "Pods-MultiProgressView_Tests-umbrella.h"
-
-  export *
-  module * { export * }
-}

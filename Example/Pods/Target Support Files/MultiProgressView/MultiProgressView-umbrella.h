@@ -10,6 +10,7 @@
 #endif
 #endif
 
+#import "MultiProgressView.h"
 
 FOUNDATION_EXPORT double MultiProgressViewVersionNumber;
 FOUNDATION_EXPORT const unsigned char MultiProgressViewVersionString[];
