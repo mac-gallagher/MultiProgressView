@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  MultiProgressView
+//  MultiProgressViewExample
 //
 //  Created by Mac Gallagher on 7/7/18.
 //  Copyright © 2018 Mac Gallagher. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  CustomProgressViewSection.swift
-//  MultiProgressView_Example
+//  MultiProgressViewExample
 //
 //  Created by Mac Gallagher on 1/5/19.
 //  Copyright © 2019 Mac Gallagher. All rights reserved.
