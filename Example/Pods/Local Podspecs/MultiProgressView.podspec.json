@@ -1,6 +1,6 @@
 {
   "name": "MultiProgressView",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "platforms": {
     "ios": "9.0"
   },
@@ -17,7 +17,7 @@
   },
   "source": {
     "git": "https://github.com/mac-gallagher/MultiProgressView.git",
-    "tag": "v1.0.0"
+    "tag": "v1.0.1"
   },
   "swift_version": "5.0",
   "source_files": "MultiProgressView/Classes/**/*"

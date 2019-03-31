@@ -7,11 +7,3 @@ workspace 'MultiProgressView'
 target 'MultiProgressView_Example' do
     pod 'MultiProgressView', :path => '../'
 end
-
-target 'MultiProgressView_Tests' do
-    pod 'MultiProgressView', :path => '../'
-    pod 'Quick'
-    pod 'Nimble'
-    
-    inherit! :search_paths
-end

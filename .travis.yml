@@ -1,0 +1,5 @@
+osx_image: xcode10.2
+language: swift
+xcode_workspace: MultiProgressView.xcworkspace
+xcode_scheme: MultiProgressViewTests
+xcode_destination: platform=iOS Simulator,OS=12.2,name=iPhone SE

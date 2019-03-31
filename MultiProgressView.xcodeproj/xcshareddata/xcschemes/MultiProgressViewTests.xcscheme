@@ -9,14 +9,14 @@
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AD141BD9223347A200519E52"
-               BuildableName = "MultiProgressViewTestHostApp.app"
-               BlueprintName = "MultiProgressViewTestHostApp"
+               BlueprintIdentifier = "AD3B326A225146B9006E0F14"
+               BuildableName = "MultiProgressViewTests.xctest"
+               BlueprintName = "MultiProgressViewTests"
                ReferencedContainer = "container:MultiProgressView.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -27,29 +27,29 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       codeCoverageEnabled = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "YES"
       shouldUseLaunchSchemeArgsEnv = "YES">
+      <CodeCoverageTargets>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "AD501272224B0E1600370157"
+            BuildableName = "MultiProgressView.framework"
+            BlueprintName = "MultiProgressView"
+            ReferencedContainer = "container:MultiProgressView.xcodeproj">
+         </BuildableReference>
+      </CodeCoverageTargets>
       <Testables>
          <TestableReference
-            skipped = "NO"
-            testExecutionOrdering = "random">
+            skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ADE1AEC521D40DF2000D9539"
-               BuildableName = "MultiProgressView_Tests.xctest"
-               BlueprintName = "MultiProgressView_Tests"
+               BlueprintIdentifier = "AD3B326A225146B9006E0F14"
+               BuildableName = "MultiProgressViewTests.xctest"
+               BlueprintName = "MultiProgressViewTests"
                ReferencedContainer = "container:MultiProgressView.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AD141BD9223347A200519E52"
-            BuildableName = "MultiProgressViewTestHostApp.app"
-            BlueprintName = "MultiProgressViewTestHostApp"
-            ReferencedContainer = "container:MultiProgressView.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -66,9 +66,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AD141BD9223347A200519E52"
-            BuildableName = "MultiProgressViewTestHostApp.app"
-            BlueprintName = "MultiProgressViewTestHostApp"
+            BlueprintIdentifier = "AD3B326A225146B9006E0F14"
+            BuildableName = "MultiProgressViewTests.xctest"
+            BlueprintName = "MultiProgressViewTests"
             ReferencedContainer = "container:MultiProgressView.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -84,9 +84,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AD141BD9223347A200519E52"
-            BuildableName = "MultiProgressViewTestHostApp.app"
-            BlueprintName = "MultiProgressViewTestHostApp"
+            BlueprintIdentifier = "AD3B326A225146B9006E0F14"
+            BuildableName = "MultiProgressViewTests.xctest"
+            BlueprintName = "MultiProgressViewTests"
             ReferencedContainer = "container:MultiProgressView.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
