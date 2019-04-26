@@ -9,6 +9,7 @@
 import UIKit
 
 open class ProgressViewSection: UIView {
+    
     public var titleLabel: UILabel {
         return sectionTitleLabel
     }
@@ -42,9 +43,9 @@ open class ProgressViewSection: UIView {
         initialize()
     }
     
-    //TODO: Write this initializer
     required public init?(coder aDecoder: NSCoder) {
-        return nil
+        super.init(coder: aDecoder)
+        initialize()
     }
     
     convenience init(layoutCalculator: LayoutCalculatable) {

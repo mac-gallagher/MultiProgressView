@@ -13,56 +13,58 @@ public protocol MultiProgressViewDataSource {
     func progressView(_ progressView: MultiProgressView, viewForSection section: Int) -> ProgressViewSection
 }
 
+@IBDesignable
 open class MultiProgressView: UIView {
+    
     public var dataSource: MultiProgressViewDataSource? {
         didSet {
             reloadData()
         }
     }
     
-    public var cornerRadius: CGFloat = 0 {
+    @IBInspectable public var cornerRadius: CGFloat = 0 {
         didSet {
             updateCornerRadius()
         }
     }
     
-    public var borderWidth: CGFloat = 0 {
+    @IBInspectable public var borderWidth: CGFloat = 0 {
         didSet {
             layer.borderWidth = borderWidth
         }
     }
     
-    public var borderColor: UIColor? = .black {
+    @IBInspectable public var borderColor: UIColor? = .black {
         didSet {
             layer.borderColor = borderColor?.cgColor
         }
     }
     
-    public var trackInset: CGFloat = 0 {
+    @IBInspectable public var trackInset: CGFloat = 0 {
         didSet {
             setNeedsLayout()
         }
     }
     
-    public var trackBackgroundColor: UIColor? = .white {
+    @IBInspectable public var trackBackgroundColor: UIColor? = .clear {
         didSet {
             track.backgroundColor = trackBackgroundColor
         }
     }
     
-    public var trackBorderColor: UIColor? = .black {
+    @IBInspectable public var trackBorderColor: UIColor? = .black {
         didSet {
             track.layer.borderColor = trackBorderColor?.cgColor
         }
     }
     
-    public var trackBorderWidth: CGFloat = 0 {
+    @IBInspectable public var trackBorderWidth: CGFloat = 0 {
         didSet {
             track.layer.borderWidth = trackBorderWidth
         }
     }
     
-    public var trackTitleLabel: UILabel {
+    @IBInspectable public var trackTitleLabel: UILabel {
         return label
     }
     
@@ -118,9 +120,9 @@ open class MultiProgressView: UIView {
         initialize()
     }
     
-    //TODO: Write this initializer
     public required init?(coder aDecoder: NSCoder) {
-        return nil
+        super.init(coder: aDecoder)
+        initialize()
     }
     
     convenience init(layoutCalculator: LayoutCalculatable) {

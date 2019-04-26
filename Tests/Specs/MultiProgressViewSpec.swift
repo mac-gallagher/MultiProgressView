@@ -41,13 +41,12 @@ class MultiProgressViewSpec: QuickSpec {
                 context("when initializing a new progress view with the required initializer") {
                     
                     beforeEach {
-                        progressView = MultiProgressView(coder: NSCoder())
+                        //TODO: - Find a non-deprecated way to accomplish this
+                        let coder = NSKeyedUnarchiver(forReadingWith: Data())
+                        progressView = MultiProgressView(coder: coder)
                     }
                     
-                    //TODO: Replace this test once the required initializer has been implemented
-                    it("should have a nil progress view") {
-                        expect(progressView).to(beNil())
-                    }
+                    testInitialProperties()
                 }
                 
                 func testInitialProperties() {
@@ -96,8 +95,8 @@ class MultiProgressViewSpec: QuickSpec {
                         expect(progressView.trackInset).to(equal(0))
                     }
                     
-                    it("should have a track background color of white") {
-                        expect(progressView.trackBackgroundColor).to(equal(.white))
+                    it("should have a track background color of clear") {
+                        expect(progressView.trackBackgroundColor).to(equal(.clear))
                     }
                     
                     it("should have a track border color of black") {

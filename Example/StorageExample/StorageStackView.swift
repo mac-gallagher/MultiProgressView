@@ -31,10 +31,9 @@ class StorageStackView: UIStackView {
         
         addArrangedSubview(colorView)
         colorView.anchor(width: colorViewHeight, height: colorViewHeight)
+        colorView.backgroundColor = storageType.color
         
         addArrangedSubview(titleLabel)
-        
-        colorView.backgroundColor = storageType.color
         titleLabel.text = storageType.description
     }
     

@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AD3B326A225146B9006E0F14"
+               BuildableName = "MultiProgressViewTests.xctest"
+               BlueprintName = "MultiProgressViewTests"
+               ReferencedContainer = "container:MultiProgressView.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "AD501272224B0E1600370157"
+            BuildableName = "MultiProgressView.framework"
+            BlueprintName = "MultiProgressView"
+            ReferencedContainer = "container:MultiProgressView.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
