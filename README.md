@@ -7,15 +7,16 @@
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![codecov](https://codecov.io/gh/mac-gallagher/MultiProgressView/branch/master/graph/badge.svg)](https://codecov.io/gh/mac-gallagher/MultiProgressView)
 
-
 # About
 **MultiProgressView** is an animatable view that depicts multiple progresses over time. The `MultiProgressView` class mimics `UIProgressView` as much as possible while providing additional customizations. 
 
 # Example
 
-To run the example project, clone the repo and run the `MultiProgressView-Example` target.
+To run the example project, clone the repo and run the `MultiProgressViewExample` target.
 
-![Apple Demo](https://raw.githubusercontent.com/mac-gallagher/MultiProgressView/master/Images/example.gif)
+![Demo1](https://raw.githubusercontent.com/mac-gallagher/MultiProgressView/add-storyboard-support/Images/example1.gif)
+
+![Demo2](Images/example2.gif)
 
 # Requirements
 * iOS 9.0+
@@ -39,6 +40,8 @@ MultiProgressView is also avaiable through [Carthage](<https://github.com/Cartha
 Download and drop the `MultiProgressView` directory into your project.
 
 # Usage
+
+## Programmatic
 1. Add a `MultiProgressView` to your view hierarchy:
 
     ```swift
@@ -62,11 +65,38 @@ Download and drop the `MultiProgressView` directory into your project.
     progressView.setProgress(section: 0, to: 0.4)
     ```
 
+## Using Storyboards
 
+1. Drag a `UIView` onto your view controller and set the view's class to `MultiProgressView` in the *Identity Inspector*:
+
+   ![IdentityInspector](Images/storyboard_identity_inspector.gif)
+
+3. Connect your progress view to your view controller with an `IBOutlet`:
+
+   ![IBOutlet](Images/storyboard_ib_outlet.gif)
+
+4. Conform your view controller to the `MultiProgressViewDataSource` protocol and implement the required methods:
+ 
+   ```swift
+    func numberOfSections(in progressView: MultiProgressView) -> Int
+    func progressBar(_ progressView: MultiProgressView, viewForSection section: Int) -> ProgressViewSection
+    ```
+     
+5. Set your view controller as the progress view's `dataSource`:
+   
+   ![DataSource](Images/storyboard_data_source.gif)
+
+6. Call `setProgress(section:to:)` to update your view's progress:
+
+    ```swift
+    progressView.setProgress(section: 0, to: 0.4)
+    ```
+    
 ## Customization
 
 ### MultiProgressView
-Each `MultiProgressView` exposes the following variables:
+Each `MultiProgressView` exposes the variables listed below. If using storyboards, many of these properties can be customized directly in the view's *Attribute Inspector*.
+
 
 ```swift
 var cornerRadius: CGFloat = 0
@@ -85,6 +115,9 @@ var trackTitleLabel: UILabel
 var trackTitleEdgeInsets: UIEdgeInsets = .zero
 var trackTitleAlignment: AlignmentType = .center
 ```
+
+**Note**: To apply a corner radius (using `layer.cornerRadius` or the `cornerRadius` variable) the `lineCap` type must be set to `.round`.
+
 
 ### ProgressViewSection
 Each `ProgressViewSection` exposes the following variables:
@@ -113,8 +146,9 @@ UIView.animate(withDuration: 0.2) {
 	- Have a detailed message as to what your pull request fixes/enhances/adds.
 
 # To-do
-- [ ] Storyboard/`IBInspectable` support
+- [ ] Swift Package Manager support
 - [ ] Progress object (Foundation) support
+- [x] Storyboard/`IBInspectable` support
 
 # Author
 Mac Gallagher, jmgallagher36@gmail.com.
