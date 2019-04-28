@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Language Example View Controller-->
+        <!--View Controller-->
         <scene sceneID="pEK-bZ-heE">
             <objects>
-                <viewController storyboardIdentifier="LanguageExampleViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0wb-Cb-WUL" customClass="LanguageExampleViewController" customModule="MultiProgressViewExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LanguageExampleViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0wb-Cb-WUL" userLabel="View Controller" customClass="LanguageExampleViewController" customModule="MultiProgressViewExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ygV-ek-BB9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -44,6 +44,9 @@
                                                 <color key="value" red="0.74117647058823533" green="0.74117647058823533" blue="0.74117647058823533" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="0wb-Cb-WUL" id="uad-jp-Zwy"/>
+                                        </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aqx-CJ-eFd" customClass="LanguageExampleProgressView" customModule="MultiProgressViewExample" customModuleProvider="target">
                                         <rect key="frame" x="15" y="102" width="384" height="25"/>
@@ -68,6 +71,9 @@
                                                 <color key="value" red="0.74117647060000003" green="0.74117647060000003" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="0wb-Cb-WUL" id="oxv-8k-Fp4"/>
+                                        </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CWo-Hk-zOo" customClass="LanguageExampleProgressView" customModule="MultiProgressViewExample" customModuleProvider="target">
                                         <rect key="frame" x="15" y="147" width="384" height="25"/>
@@ -92,6 +98,9 @@
                                                 <color key="value" red="0.74117647060000003" green="0.74117647060000003" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="0wb-Cb-WUL" id="Fk9-lG-EyR"/>
+                                        </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yei-zF-C21" customClass="LanguageExampleProgressView" customModule="MultiProgressViewExample" customModuleProvider="target">
                                         <rect key="frame" x="15" y="192" width="384" height="25"/>
@@ -116,6 +125,9 @@
                                                 <color key="value" red="0.74117647060000003" green="0.74117647060000003" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="0wb-Cb-WUL" id="mmq-QZ-Qva"/>
+                                        </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TJ5-4x-gVc" customClass="LanguageExampleProgressView" customModule="MultiProgressViewExample" customModuleProvider="target">
                                         <rect key="frame" x="15" y="237" width="384" height="25"/>
@@ -140,6 +152,9 @@
                                                 <color key="value" red="0.74117647060000003" green="0.74117647060000003" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="0wb-Cb-WUL" id="tIM-3R-UK6"/>
+                                        </connections>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Languages" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s77-Sh-QnM">
                                         <rect key="frame" x="15" y="20" width="71" height="17"/>

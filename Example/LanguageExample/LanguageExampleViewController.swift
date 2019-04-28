@@ -30,9 +30,6 @@ class LanguageExampleViewController: UIViewController {
     private func initialize() {
         backgroundView.layer.borderColor = UIColor.LanguageExample.borderColor.cgColor
         backgroundView.layer.borderWidth = 0.5
-        for progressView in progressViews {
-            progressView.dataSource = self
-        }
     }
     
     @IBAction private func animateButtonTapped(_ sender: UIButton) {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol MultiProgressViewDataSource {
+@objc public protocol MultiProgressViewDataSource: class {
     func numberOfSections(in progressView: MultiProgressView) -> Int
     func progressView(_ progressView: MultiProgressView, viewForSection section: Int) -> ProgressViewSection
 }
@@ -16,7 +16,7 @@ public protocol MultiProgressViewDataSource {
 @IBDesignable
 open class MultiProgressView: UIView {
     
-    public var dataSource: MultiProgressViewDataSource? {
+    @IBOutlet public var dataSource: MultiProgressViewDataSource? {
         didSet {
             reloadData()
         }
