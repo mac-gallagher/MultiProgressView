@@ -16,15 +16,7 @@ class StorageProgressSection: ProgressViewSection {
         return border
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: .zero)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func configure(storageType: StorageType) {
+    func configure(withStorageType storageType: StorageType) {
         addSubview(rightBorder)
         rightBorder.anchor(top: topAnchor, bottom: bottomAnchor, right: rightAnchor, width: 1)
         backgroundColor = storageType.color
