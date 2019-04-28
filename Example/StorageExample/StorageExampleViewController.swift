@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  StorageExampleViewController.swift
 //  MultiProgressViewExample
 //
 //  Created by Mac Gallagher on 7/7/18.
@@ -9,39 +9,38 @@
 import UIKit
 import MultiProgressView
 
-class ViewController: UIViewController {
+class StorageExampleViewController: UIViewController {
     private let backgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
-        view.layer.borderColor = UIColor.rgb(red: 189, green: 189, blue: 189).cgColor
+        view.layer.borderColor = UIColor.StorageExample.borderColor.cgColor
         view.layer.borderWidth = 0.5
         return view
     }()
     
     private lazy var progressView: MultiProgressView = {
         let progress = MultiProgressView()
-        progress.trackBackgroundColor = .progressBackground
-        progress.trackTitleAlignment = .left
+        progress.trackBackgroundColor = UIColor.StorageExample.progressBackground
         progress.lineCap = .round
         progress.cornerRadius = progressViewHeight / 4
         return progress
     }()
     
     private let animateButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.addTarget(self, action: #selector(handleTap), for: .touchUpInside)
         button.tag = 1
         button.setTitle("Animate", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         return button
     }()
     
     private let resetButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.addTarget(self, action: #selector(handleTap), for: .touchUpInside)
         button.tag = 2
         button.setTitle("Reset", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         return button
     }()
     
@@ -72,9 +71,12 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.rgb(red: 235, green: 235, blue: 242)
+        view.backgroundColor = UIColor.StorageExample.backgroundGray
         view.addSubview(backgroundView)
-        backgroundView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 50)
+        backgroundView.anchor(top: view.safeAreaLayoutGuide.topAnchor,
+                              left: view.safeAreaLayoutGuide.leftAnchor,
+                              right: view.safeAreaLayoutGuide.rightAnchor,
+                              paddingTop: 50)
         
         setupLabels()
         setupProgressBar()
@@ -84,21 +86,41 @@ class ViewController: UIViewController {
     
     private func setupLabels() {
         backgroundView.addSubview(iPhoneLabel)
-        iPhoneLabel.anchor(top: backgroundView.topAnchor, left: backgroundView.leftAnchor, paddingTop: padding, paddingLeft: padding)
+        iPhoneLabel.anchor(top: backgroundView.topAnchor,
+                           left: backgroundView.leftAnchor,
+                           paddingTop: padding,
+                           paddingLeft: padding)
 
         backgroundView.addSubview(dataUsedLabel)
-        dataUsedLabel.anchor(top: backgroundView.topAnchor, right: backgroundView.rightAnchor, paddingTop: padding, paddingRight: padding)
+        dataUsedLabel.anchor(top: backgroundView.topAnchor,
+                             right: backgroundView.rightAnchor,
+                             paddingTop: padding,
+                             paddingRight: padding)
     }
     
     private func setupProgressBar() {
         backgroundView.addSubview(progressView)
-        progressView.anchor(top: iPhoneLabel.bottomAnchor, left: backgroundView.leftAnchor, right: backgroundView.rightAnchor, paddingTop: padding, paddingLeft: padding, paddingRight: padding, height: progressViewHeight)
+        progressView.anchor(top: iPhoneLabel.bottomAnchor,
+                            left: backgroundView.leftAnchor,
+                            right: backgroundView.rightAnchor,
+                            paddingTop: padding,
+                            paddingLeft: padding,
+                            paddingRight: padding,
+                            height: progressViewHeight)
         progressView.dataSource = self
     }
     
     private func setupStackView() {
         backgroundView.addSubview(stackView)
-        stackView.anchor(top: progressView.bottomAnchor, left: backgroundView.leftAnchor, bottom: backgroundView.bottomAnchor, right: backgroundView.rightAnchor, paddingTop: padding, paddingLeft: padding, paddingBottom: padding, paddingRight: padding)
+        stackView.anchor(top: progressView.bottomAnchor,
+                         left: backgroundView.leftAnchor,
+                         bottom: backgroundView.bottomAnchor,
+                         right: backgroundView.rightAnchor,
+                         paddingTop: padding,
+                         paddingLeft: padding,
+                         paddingBottom: padding,
+                         paddingRight: padding)
+        
         for type in StorageType.allTypes {
             if type != .unknown {
                 stackView.addArrangedSubview(StorageStackView(storageType: type))
@@ -107,11 +129,38 @@ class ViewController: UIViewController {
         stackView.addArrangedSubview(UIView())
     }
     
+    private func setupButtons() {
+        view.addSubview(resetButton)
+        resetButton.anchor(top: backgroundView.bottomAnchor,
+                           paddingTop: 50)
+        NSLayoutConstraint(item: resetButton,
+                           attribute: .centerX,
+                           relatedBy: .equal,
+                           toItem: view,
+                           attribute: .centerX,
+                           multiplier: 0.5,
+                           constant: 0).isActive = true
+        
+        view.addSubview(animateButton)
+        animateButton.anchor(top: backgroundView.bottomAnchor,
+                           paddingTop: 50)
+        NSLayoutConstraint(item: animateButton,
+                           attribute: .centerX,
+                           relatedBy: .equal,
+                           toItem: view,
+                           attribute: .centerX,
+                           multiplier: 1.5,
+                           constant: 0).isActive = true
+    }
+    
     @objc private func handleTap(_ button: UIButton) {
-        if button.tag == 1 {
-            self.animateProgress()
-        } else if button.tag == 2 {
-            self.resetProgress()
+        switch button.tag {
+        case 1:
+            animateProgress()
+        case 2:
+            resetProgress()
+        default:
+            break
         }
     }
     
@@ -139,43 +188,18 @@ class ViewController: UIViewController {
         }
         dataUsedLabel.text = "0 GB of 64 GB Used"
     }
-    
-    private func setupButtons() {
-        view.addSubview(resetButton)
-        resetButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingBottom: 50, width: 200, height: 50)
-        resetButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-
-        view.addSubview(animateButton)
-        animateButton.anchor(bottom: resetButton.topAnchor, paddingBottom: 20, width: 200, height: 50)
-        animateButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    }
 }
 
-extension UIViewController: MultiProgressViewDataSource {
+//MARK: - Data Source
+
+extension StorageExampleViewController: MultiProgressViewDataSource {
     public func numberOfSections(in progressBar: MultiProgressView) -> Int {
         return 7
     }
     
     public func progressView(_ progressView: MultiProgressView, viewForSection section: Int) -> ProgressViewSection {
         let bar = StorageProgressSection()
-        switch section {
-        case 0:
-            bar.configure(storageType: .app)
-        case 1:
-            bar.configure(storageType: .message)
-        case 2:
-            bar.configure(storageType: .media)
-        case 3:
-            bar.configure(storageType: .photo)
-        case 4:
-            bar.configure(storageType: .mail)
-        case 5:
-            bar.configure(storageType: .unknown)
-        case 6:
-            bar.configure(storageType: .other)
-        default:
-            break
-        }
+        bar.configure(withStorageType: StorageType(rawValue: section) ?? .other)
         return bar
     }
 }

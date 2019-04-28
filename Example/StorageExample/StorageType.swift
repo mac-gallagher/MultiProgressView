@@ -8,16 +8,10 @@
 
 import UIKit
 
-enum StorageType {
-    static var allTypes: [StorageType] = [.app, .message, .media, .photo, .mail, .unknown, .other]
+enum StorageType: Int {
+    case app, message, media, photo, mail, unknown, other
     
-    case app
-    case message
-    case media
-    case photo
-    case mail
-    case unknown
-    case other
+    static var allTypes: [StorageType] = [.app, .message, .media, .photo, .mail, .unknown, .other]
     
     var description: String {
         switch self {
@@ -41,19 +35,19 @@ enum StorageType {
     var color: UIColor {
         switch self {
         case .app:
-            return .progressRed
+            return UIColor.StorageExample.progressRed
         case .message:
-            return .progressGreen
+            return UIColor.StorageExample.progressGreen
         case .media:
-            return .progressPurple
+            return UIColor.StorageExample.progressPurple
         case .photo:
-            return .progressYellow
+            return UIColor.StorageExample.progressYellow
         case .mail:
-            return .progressBlue
+            return UIColor.StorageExample.progressBlue
         case .unknown:
-            return .progressOrange
+            return UIColor.StorageExample.progressOrange
         case .other:
-            return .progressGray
+            return UIColor.StorageExample.progressGray
         }
     }
 }

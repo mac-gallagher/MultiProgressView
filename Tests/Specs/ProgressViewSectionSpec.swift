@@ -41,13 +41,12 @@ class ProgressViewSectionSpec: QuickSpec {
                 context("when initializing a new section with the required initializer") {
                     
                     beforeEach {
-                        section = ProgressViewSection(coder: NSCoder())
+                        //TODO: - Find a non-deprecated way to accomplish this
+                        let coder = NSKeyedUnarchiver(forReadingWith: Data())
+                        section = ProgressViewSection(coder: coder)
                     }
                     
-                    //TODO: Replace this test with `testInitialProperties()` once the required initializer has been implemented
-                    it("should have a nil section") {
-                        expect(section).to(beNil())
-                    }
+                    testInitialProperties()
                 }
                 
                 func testInitialProperties() {
