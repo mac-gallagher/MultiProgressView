@@ -14,7 +14,7 @@
 
 To run the example project, clone the repo and run the `MultiProgressViewExample` target.
 
-![Demo1](https://raw.githubusercontent.com/mac-gallagher/MultiProgressView/add-storyboard-support/Images/example1.gif)
+![Demo1](Images/example1.gif)
 
 ![Demo2](Images/example2.gif)
 
