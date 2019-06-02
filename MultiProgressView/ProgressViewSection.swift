@@ -36,7 +36,7 @@ open class ProgressViewSection: UIView {
     
     private var layoutCalculator: LayoutCalculatable = LayoutCalculator.shared
     
-    //MARK: - Initialization
+    // MARK: - Initialization
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -60,7 +60,7 @@ open class ProgressViewSection: UIView {
         addSubview(sectionTitleLabel)
     }
     
-    //MARK: - Layout
+    // MARK: - Layout
     
     var labelConstraints = [NSLayoutConstraint]() {
         didSet {
@@ -78,7 +78,7 @@ open class ProgressViewSection: UIView {
         sendSubviewToBack(sectionImageView)
     }
     
-    //MARK: - Main Methods
+    // MARK: - Main Methods
     
     public func setTitle(_ title: String?) {
         sectionTitleLabel.text = title

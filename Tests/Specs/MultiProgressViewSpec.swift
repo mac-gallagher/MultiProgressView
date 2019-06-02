@@ -1,6 +1,6 @@
 //
 //  MultiProgressViewSpec.swift
-//  MultiProgressView_Tests
+//  MultiProgressViewTests
 //
 //  Created by Mac Gallagher on 12/26/18.
 //  Copyright © 2018 Mac Gallagher. All rights reserved.
@@ -12,12 +12,10 @@ import Nimble
 @testable import MultiProgressView
 
 class MultiProgressViewSpec: QuickSpec {
-    
     override func spec() {
-        var mockLayoutCalculator: MockLayoutCalculator!
-        var subject: TestableMultiProgressView!
-        
         describe("MultiProgressView") {
+            var mockLayoutCalculator: MockLayoutCalculator!
+            var subject: TestableMultiProgressView!
             
             beforeEach {
                 mockLayoutCalculator = MockLayoutCalculator()
@@ -26,19 +24,21 @@ class MultiProgressViewSpec: QuickSpec {
             
             //MARK: - Initialization
             
-            describe("initialization") {
+            describe("Initialization") {
                 var progressView: MultiProgressView!
                 
-                context("when initializing a new progress view with the default initializer") {
+                context("When initializing a new progress view with the default initializer") {
                     
                     beforeEach {
                         progressView = MultiProgressView()
                     }
                     
-                    testInitialProperties()
+                    it("should have the correct initial properties") {
+                        testInitialProperties()
+                    }
                 }
                 
-                context("when initializing a new progress view with the required initializer") {
+                context("When initializing a new progress view with the required initializer") {
                     
                     beforeEach {
                         //TODO: - Find a non-deprecated way to accomplish this
@@ -46,7 +46,9 @@ class MultiProgressViewSpec: QuickSpec {
                         progressView = MultiProgressView(coder: coder)
                     }
                     
-                    testInitialProperties()
+                    it("should have the correct initial properties") {
+                        testInitialProperties()
+                    }
                 }
                 
                 func testInitialProperties() {
@@ -55,93 +57,38 @@ class MultiProgressViewSpec: QuickSpec {
                 }
                 
                 func testInitialProgressViewProperties() {
-                    
-                    it("should not have a data source") {
-                        expect(progressView.dataSource).to(beNil())
-                    }
-                    
-                    it("should have corner radius equal to zero") {
-                        expect(progressView.cornerRadius).to(equal(0))
-                    }
-                    
-                    it("should have a border width of zero") {
-                        expect(progressView.borderWidth).to(equal(0))
-                    }
-                    
-                    it("should have a border color of black") {
-                        expect(progressView.borderColor).to(equal(.black))
-                    }
-                    
-                    it("should have a square line cap type") {
-                        expect(progressView.lineCap).to(equal(.square))
-                    }
-                    
-                    it("should have total progress equal to zero") {
-                        expect(progressView.totalProgress).to(equal(0))
-                    }
-                    
-                    it("should mask its layer to its bounds") {
-                        expect(progressView.layer.masksToBounds).to(beTrue())
-                    }
-                    
-                    it("should have its track as a subview") {
-                        expect(progressView.subviews.contains(progressView.track)).to(beTrue())
-                    }
+                    expect(progressView.dataSource).to(beNil())
+                    expect(progressView.cornerRadius).to(equal(0))
+                    expect(progressView.borderWidth).to(equal(0))
+                    expect(progressView.borderColor).to(equal(.black))
+                    expect(progressView.lineCap).to(equal(.square))
+                    expect(progressView.totalProgress).to(equal(0))
+                    expect(progressView.layer.masksToBounds).to(beTrue())
+                    expect(progressView.subviews.contains(progressView.track)).to(beTrue())
                 }
                 
                 func testInitialTrackProperties() {
-                    
-                    it("should have track insets equal to zero") {
-                        expect(progressView.trackInset).to(equal(0))
-                    }
-                    
-                    it("should have a track background color of clear") {
-                        expect(progressView.trackBackgroundColor).to(equal(.clear))
-                    }
-                    
-                    it("should have a track border color of black") {
-                        expect(progressView.trackBorderColor).to(equal(.black))
-                    }
-                    
-                    it("should have a track border width of zero") {
-                        expect(progressView.trackBorderWidth).to(equal(0))
-                    }
-                    
-                    it("should have a track title label") {
-                        expect(progressView.trackTitleLabel).toNot(beNil())
-                    }
-                    
-                    it("should have track title insets equal to zero") {
-                        expect(progressView.trackTitleEdgeInsets).to(equal(.zero))
-                    }
-                    
-                    it("should have a center track title alignment") {
-                        expect(progressView.trackTitleAlignment).to(equal(.center))
-                    }
-                    
-                    it("should have a track image view") {
-                        expect(progressView.trackImageView).toNot(beNil())
-                    }
-                    
-                    it("should have the track's layer mask to its bounds") {
-                        expect(progressView.track.layer.masksToBounds).to(beTrue())
-                    }
-                    
-                    it("should have the trackTitleLabel as a subview of its track") {
-                        expect(progressView.track.subviews.contains(progressView.trackTitleLabel)).to(beTrue())
-                    }
-                    
-                    it("should have the trackImageView as a subview of its track") {
-                        expect(progressView.track.subviews.contains(progressView.trackImageView)).to(beTrue())
-                    }
+                    expect(progressView.trackInset).to(equal(0))
+                    expect(progressView.trackBackgroundColor).to(equal(.clear))
+                    expect(progressView.trackBorderColor).to(equal(.black))
+                    expect(progressView.trackBorderWidth).to(equal(0))
+                    expect(progressView.trackTitleLabel).toNot(beNil())
+                    expect(progressView.trackTitleEdgeInsets).to(equal(.zero))
+                    expect(progressView.trackTitleAlignment).to(equal(.center))
+                    expect(progressView.trackImageView).toNot(beNil())
+                    expect(progressView.track.layer.masksToBounds).to(beTrue())
+                    expect(progressView.track.subviews.contains(progressView.trackTitleLabel)).to(beTrue())
+                    expect(progressView.track.subviews.contains(progressView.trackImageView)).to(beTrue())
                 }
             }
             
-            //MARK: - Data Source
+            // MARK: - Variables
             
-            describe("data source") {
+            // MARK: Data Source
+            
+            describe("Data Source") {
                 
-                context("when setting the data source") {
+                context("When setting the data source") {
                     
                     beforeEach {
                         subject.dataSource = MockMultiProgressViewDataSource()
@@ -153,11 +100,11 @@ class MultiProgressViewSpec: QuickSpec {
                 }
             }
             
-            //MARK: - Track Inset
+            // MARK: Track Inset
             
-            describe("track inset") {
+            describe("Track Inset") {
                 
-                context("when setting the track insets") {
+                context("When setting trackInsets") {
                     
                     beforeEach {
                         subject.trackInset = 0
@@ -169,11 +116,11 @@ class MultiProgressViewSpec: QuickSpec {
                 }
             }
             
-            //MARK: - Track Background Color
+            // MARK: Track Background Color
             
-            describe("track background color") {
+            describe("Track background color") {
                 
-                context("when setting the track background color") {
+                context("When setting trackBackgroundColor") {
                     let color: UIColor = .blue
                     
                     beforeEach {
@@ -186,11 +133,11 @@ class MultiProgressViewSpec: QuickSpec {
                 }
             }
             
-            //MARK: - Track Title Insets
+            // MARK: Track Title Insets
             
-            describe("track title insets") {
+            describe("Track Title Insets") {
                 
-                context("when setting the track title insets") {
+                context("When setting trackTitleInsets") {
                     
                     beforeEach {
                         subject.trackTitleEdgeInsets = UIEdgeInsets()
@@ -202,11 +149,11 @@ class MultiProgressViewSpec: QuickSpec {
                 }
             }
             
-            //MARK: - Track Title Alignment
+            // MARK: Track Title Alignment
             
-            describe("track title alignment") {
+            describe("Track Title Alignment") {
                 
-                context("when setting the track title alignment") {
+                context("When setting trackTitleAlignment") {
                     
                     beforeEach {
                         subject.trackTitleAlignment = .bottom
@@ -218,11 +165,11 @@ class MultiProgressViewSpec: QuickSpec {
                 }
             }
             
-            //MARK: - Line Cap Type
+            // MARK: Line Cap Type
             
-            describe("line cap type") {
+            describe("Line Cap Type") {
                 
-                context("when setting the line cap type") {
+                context("When setting lineCapType") {
                     
                     beforeEach {
                         subject.lineCap = .round
@@ -234,12 +181,12 @@ class MultiProgressViewSpec: QuickSpec {
                 }
             }
             
-            //MARK: - Borders
+            // MARK: Borders
             
-            describe("borders") {
+            describe("Borders") {
                 
-                context("when setting the border width") {
-                    let width: CGFloat = CGFloat()
+                context("When setting borderWidth") {
+                    let width = CGFloat()
                     
                     beforeEach {
                         subject.borderWidth = width
@@ -250,7 +197,7 @@ class MultiProgressViewSpec: QuickSpec {
                     }
                 }
                 
-                context("when setting the border color") {
+                context("When setting borderColor") {
                     let color: UIColor = .blue
                     
                     beforeEach {
@@ -262,7 +209,7 @@ class MultiProgressViewSpec: QuickSpec {
                     }
                 }
                 
-                context("when setting the track border color") {
+                context("When setting the trackBorderColor") {
                     let color: UIColor = .blue
                     
                     beforeEach {
@@ -274,8 +221,8 @@ class MultiProgressViewSpec: QuickSpec {
                     }
                 }
                 
-                context("when setting the track border width") {
-                    let width: CGFloat = CGFloat()
+                context("When setting the trackBorderWidth") {
+                    let width = CGFloat()
                     
                     beforeEach {
                         subject.trackBorderWidth = width
@@ -287,11 +234,11 @@ class MultiProgressViewSpec: QuickSpec {
                 }
             }
             
-            //MARK: - Corner Radius
+            // MARK: Corner Radius
             
-            describe("corner radius") {
+            describe("Corner Radius") {
                 
-                context("when setting the corner radius") {
+                context("When setting cornerRadius") {
                     
                     beforeEach {
                         subject.cornerRadius = 0
@@ -302,7 +249,7 @@ class MultiProgressViewSpec: QuickSpec {
                     }
                 }
                 
-                context("when calling the updateCornerRadius method") {
+                context("When calling the updateCornerRadius method") {
                     let cornerRadius: CGFloat = 10
                     let trackCornerRadius: CGFloat = 20
                     
@@ -322,11 +269,11 @@ class MultiProgressViewSpec: QuickSpec {
                 }
             }
             
-            //MARK: - Total Progress
+            // MARK: Total Progress
             
-            describe("total progress") {
+            describe("Total Progress") {
                 
-                context("when accessing the totalProgress variable") {
+                context("When accessing totalProgress") {
                     let numberOfSections: Int = 2
                     let progress0: Float = 0.2
                     let progress1: Float = 0.3
@@ -345,9 +292,9 @@ class MultiProgressViewSpec: QuickSpec {
                 }
             }
             
-            //MARK: - Layout
+            // MARK: - Layout
             
-            describe("layout") {
+            describe("Layout") {
                 let numberOfSections: Int = 3
                 var dataSource: MockMultiProgressViewDataSource!
                 
@@ -356,13 +303,13 @@ class MultiProgressViewSpec: QuickSpec {
                     subject.dataSource = dataSource
                 }
                 
-                context("when the layoutSubviews method is called") {
-                    let trackFrame: CGRect = CGRect(x: 1, y: 2, width: 3, height: 4)
-                    let trackTitleLabelConstraints: [NSLayoutConstraint] = [NSLayoutConstraint]()
+                context("When the layoutSubviews method is called") {
+                    let trackFrame = CGRect(x: 1, y: 2, width: 3, height: 4)
+                    let trackTitleLabelConstraints = [NSLayoutConstraint]()
                     let trackTitleLabelAlignment: AlignmentType = .topLeft
-                    let trackTitleLabelInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 1, bottom: 2, right: 3)
-                    let trackImageViewFrame: CGRect = CGRect(x: 5, y: 6, width: 7, height: 8)
-                    let sectionFrame: CGRect = CGRect(x: 9, y: 10, width: 11, height: 12)
+                    let trackTitleLabelInsets = UIEdgeInsets(top: 0, left: 1, bottom: 2, right: 3)
+                    let trackImageViewFrame = CGRect(x: 5, y: 6, width: 7, height: 8)
+                    let sectionFrame = CGRect(x: 9, y: 10, width: 11, height: 12)
                     
                     beforeEach {
                         mockLayoutCalculator.testTrackFrame = trackFrame
@@ -395,7 +342,6 @@ class MultiProgressViewSpec: QuickSpec {
                     
                     it("should layout each section and add each as a subview of the track") {
                         for section in dataSource.progressViewSections {
-                            let expectedFrame: CGRect
                             expect(section.frame).to(equal(sectionFrame))
                             expect(section.superview).to(equal(subject.track))
                         }
@@ -407,12 +353,14 @@ class MultiProgressViewSpec: QuickSpec {
                 }
             }
             
-            //MARK: - Getter/Setter Methods
+            // MARK: - Getter/Setter Methods
             
-            describe("getter/setter methods") {
+            // MARK: Set Title
+            
+            describe("Set Title") {
                 
-                context("when calling the setTitle method") {
-                    let title: String = String()
+                context("When calling the setTitle method") {
+                    let title = String()
                     
                     beforeEach {
                         subject.setTitle(title)
@@ -422,9 +370,14 @@ class MultiProgressViewSpec: QuickSpec {
                         expect(subject.trackTitleLabel.text).to(be(title))
                     }
                 }
+            }
+            
+            // MARK: Set Track Image
+            
+            describe("Set Track Image") {
                 
-                context("when calling the setTrackImage method") {
-                    let image: UIImage = UIImage()
+                context("When calling the setTrackImage method") {
+                    let image = UIImage()
                     
                     beforeEach {
                         subject.setTrackImage(image)
@@ -434,9 +387,14 @@ class MultiProgressViewSpec: QuickSpec {
                         expect(subject.trackImageView.image).to(equal(image))
                     }
                 }
+            }
+            
+            // MARK: Set Attributed Title
+            
+            describe("Set Attributed Title") {
                 
-                context("when calling the setAttributedTitle method") {
-                    let title: NSAttributedString = NSAttributedString(string: "title")
+                context("When calling the setAttributedTitle method") {
+                    let title = NSAttributedString(string: "title")
                     
                     beforeEach {
                         subject.setAttributedTitle(title)
@@ -446,8 +404,13 @@ class MultiProgressViewSpec: QuickSpec {
                         expect(subject.trackTitleLabel.attributedText).to(equal(title))
                     }
                 }
+            }
+            
+            // MARK: Progress
+            
+            describe("Progress") {
                 
-                context("when calling the progress(forSection:) method") {
+                context("When calling the progress(forSection:) method") {
                     let progress: Float = 0.5
                     var dataSource: MockMultiProgressViewDataSource!
                     
@@ -464,13 +427,13 @@ class MultiProgressViewSpec: QuickSpec {
                 }
             }
             
-            //MARK: - Data Loading
+            // MARK: - Reload Data
             
-            describe("data loading") {
+            describe("Reload Data") {
                 let numberOfSections: Int = 3
                 var dataSource: MockMultiProgressViewDataSource!
                 
-                context("when calling the reloadData method when there is no data source") {
+                context("When calling the reloadData method when there is no data source") {
                     
                     beforeEach {
                         subject.dataSource = nil
@@ -482,7 +445,7 @@ class MultiProgressViewSpec: QuickSpec {
                     }
                 }
                 
-                context("when calling the reloadData method when there is no existing data") {
+                context("When calling the reloadData method when there is no existing data") {
                     
                     beforeEach {
                         dataSource = MockMultiProgressViewDataSource(numberOfSections: numberOfSections)
@@ -492,7 +455,7 @@ class MultiProgressViewSpec: QuickSpec {
                     testReloadData()
                 }
                 
-                context("when calling the reloadData when there is existing data") {
+                context("When calling the reloadData when there is existing data") {
                     
                     beforeEach {
                         dataSource = MockMultiProgressViewDataSource(numberOfSections: numberOfSections)
@@ -504,7 +467,6 @@ class MultiProgressViewSpec: QuickSpec {
                 }
                 
                 func testReloadData() {
-                    
                     it("should add the correct number of progress view sections") {
                         expect(subject.reloadDataCalled).to(beTrue())
                         expect(subject.progressViewSections.count).to(equal(numberOfSections))
@@ -512,21 +474,21 @@ class MultiProgressViewSpec: QuickSpec {
                     
                     it("should add the sections in the correct order and remove any previous data") {
                         for index in 0..<numberOfSections {
-                            let section: ProgressViewSection = dataSource.progressViewSections[index]
+                            let section = dataSource.progressViewSections[index]
                             expect(subject.progressViewSections[index]).to(be(section))
                         }
                     }
                     
                     it("should add each section as a subview to the track and remove any previous sections") {
-                        let trackSubviews: [UIView] = subject.track.subviews.filter { $0 is ProgressViewSection }
+                        let trackSubviews = subject.track.subviews.filter { $0 is ProgressViewSection }
                         expect(trackSubviews.count).to(equal(numberOfSections))
                     }
                 }
             }
             
-            //MARK: - Setting Progress
+            // MARK: - Set progress
             
-            describe("setting progress") {
+            describe("Set Progress") {
                 let numberOfSections: Int = 3
                 var dataSource: MockMultiProgressViewDataSource!
                 
@@ -535,7 +497,7 @@ class MultiProgressViewSpec: QuickSpec {
                     subject.dataSource = dataSource
                 }
                 
-                context("when setting a progress") {
+                context("When setting a progress") {
                     
                     beforeEach {
                         subject.setProgress(section: 0, to: 0)
@@ -550,7 +512,7 @@ class MultiProgressViewSpec: QuickSpec {
                     }
                 }
                 
-                context("when setting a progress that does not exceed 1") {
+                context("When setting a progress that does not exceed 1") {
                     let progress: Float = 0.1
                     
                     beforeEach {
@@ -562,7 +524,7 @@ class MultiProgressViewSpec: QuickSpec {
                     }
                 }
                 
-                context("when setting a progress that exceeds 1") {
+                context("When setting a progress that exceeds 1") {
                     let progress: Float = 1.1
                     
                     beforeEach {
@@ -574,7 +536,7 @@ class MultiProgressViewSpec: QuickSpec {
                     }
                 }
                 
-                context("when setting a negative progress on a section") {
+                context("When setting a negative progress on a section") {
                     let progress: Float = -0.1
                     
                     beforeEach {
@@ -586,7 +548,7 @@ class MultiProgressViewSpec: QuickSpec {
                     }
                 }
                 
-                context("when setting a progress on a section with existing progress") {
+                context("When setting a progress on a section with existing progress") {
                     let progress: Float = 0.1
                     let initialProgress: Float = 0.2
                     
@@ -600,7 +562,7 @@ class MultiProgressViewSpec: QuickSpec {
                     }
                 }
                 
-                context("when setting a progress which causes the sum of all sections' progress to exceed 1") {
+                context("When setting a progress which causes the sum of all sections' progress to exceed 1") {
                     let firstProgress: Float = 0.2
                     let secondProgress: Float = 0.3
                     let thirdProgress: Float = 1000
@@ -617,11 +579,11 @@ class MultiProgressViewSpec: QuickSpec {
                 }
             }
             
-            //MARK: - Resetting Progress
+            // MARK: - Reset Progress
             
-            describe("resetting progress") {
+            describe("Reset Progress") {
                 
-                context("when calling the resetProgress method") {
+                context("When calling the resetProgress method") {
                     let numberOfSections: Int = 3
                     var dataSource: MockMultiProgressViewDataSource!
                     

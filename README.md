@@ -7,41 +7,19 @@
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![codecov](https://codecov.io/gh/mac-gallagher/MultiProgressView/branch/master/graph/badge.svg)](https://codecov.io/gh/mac-gallagher/MultiProgressView)
 
-# About
-**MultiProgressView** is an animatable view that depicts multiple progresses over time. The `MultiProgressView` class mimics `UIProgressView` as much as possible while providing additional customizations. 
+**MultiProgressView** is an animatable view that depicts multiple progresses over time. The `MultiProgressView` class mimics `UIProgressView` as much as possible while providing additional [customizations](#customization). 
 
-# Example
+## Example
 
 To run the example project, clone the repo and run the `MultiProgressViewExample` target.
 
-![Demo1](Images/example1.gif)
+![Demo2](https://raw.githubusercontent.com/mac-gallagher/MultiProgressView/master/Images/example2.gif)
 
-![Demo2](Images/example2.gif)
+![Demo1](https://raw.githubusercontent.com/mac-gallagher/MultiProgressView/master/Images/example1.gif)
 
-# Requirements
-* iOS 9.0+
-* Xcode 10.2+
-* Swift 5.0+
+## Usage
 
-# Installation
-
-### CocoaPods
-MultiProgressView is available through [CocoaPods](<https://cocoapods.org/>). To install it, simply add the following line to your Podfile:
-
-	pod 'MultiProgressView'
-
-### Carthage
-
-MultiProgressView is also avaiable through [Carthage](<https://github.com/Carthage/Carthage>). To install it, simply add the following line to your Cartfile:
-
-	github "mac-gallagher/MultiProgressView"
-
-### Manual
-Download and drop the `MultiProgressView` directory into your project.
-
-# Usage
-
-## Programmatic
+### Programmatic
 1. Add a `MultiProgressView` to your view hierarchy:
 
     ```swift
@@ -62,18 +40,18 @@ Download and drop the `MultiProgressView` directory into your project.
 3. Call `setProgress(section:to:)` to update your view's progress:
 
     ```swift
-    progressView.setProgress(section: 0, to: 0.4)
+    progressView.setProgress(section: 0, to: 0.4) //animatable
     ```
 
-## Using Storyboards
+### Storyboards
 
 1. Drag a `UIView` onto your view controller and set the view's class to `MultiProgressView` in the *Identity Inspector*:
 
-   ![IdentityInspector](Images/storyboard_identity_inspector.gif)
+   ![IdentityInspector](https://raw.githubusercontent.com/mac-gallagher/MultiProgressView/master/Images/storyboard_identity_inspector.gif)
 
 3. Connect your progress view to your view controller with an `IBOutlet`:
 
-   ![IBOutlet](Images/storyboard_ib_outlet.gif)
+   ![IBOutlet](https://raw.githubusercontent.com/mac-gallagher/MultiProgressView/master/Images/storyboard_ib_outlet.gif)
 
 4. Conform your view controller to the `MultiProgressViewDataSource` protocol and implement the required methods:
  
@@ -84,14 +62,14 @@ Download and drop the `MultiProgressView` directory into your project.
      
 5. Set your view controller as the progress view's `dataSource`:
    
-   ![DataSource](Images/storyboard_data_source.gif)
+   ![DataSource](https://raw.githubusercontent.com/mac-gallagher/MultiProgressView/master/Images/storyboard_data_source.gif)
 
 6. Call `setProgress(section:to:)` to update your view's progress:
 
     ```swift
-    progressView.setProgress(section: 0, to: 0.4)
+    progressView.setProgress(section: 0, to: 0.4) //animatable
     ```
-    
+
 ## Customization
 
 ### MultiProgressView
@@ -129,29 +107,29 @@ var titleEdgeInsets: UIEdgeInsets = .zero
 var titleAlignment: AlignmentType = .center
 ```
 
-### Animating your progress
-The `setProgress(section:to:)` function be animated. For example:
+## Installation
 
-```swift
-UIView.animate(withDuration: 0.2) {
-    self.progressView.setProgress(section: 0, to: 0.4)
-}
-```
+### CocoaPods
+MultiProgressView is available through [CocoaPods](<https://cocoapods.org/>). To install it, simply add the following line to your Podfile:
 
-# Contributing
-- If you **found a bug**, open an issue and tag as bug.
-- If you **have a feature request**, open an issue and tag as feature.
-- If you **want to contribute**, submit a pull request.
-	- In order to submit a pull request, please fork this repo and submit a pull request from your forked repo.
-	- Have a detailed message as to what your pull request fixes/enhances/adds.
+	pod 'MultiProgressView'
 
-# To-do
-- [ ] Swift Package Manager support
-- [ ] Progress object (Foundation) support
-- [x] Storyboard/`IBInspectable` support
+### Carthage
 
-# Author
+MultiProgressView is also available through [Carthage](<https://github.com/Carthage/Carthage>). To install it, simply add the following line to your Cartfile:
+
+	github "mac-gallagher/MultiProgressView"
+
+### Manual
+Download and drop the `MultiProgressView` directory into your project.
+
+## Requirements
+* iOS 9.0+
+* Xcode 10.2+
+* Swift 5.0+
+
+## Author
 Mac Gallagher, jmgallagher36@gmail.com.
 
-# License
-MultiProgressView is available under the [MIT License](LICENSE), see LICENSE for more infomation.
+## License
+MultiProgressView is available under the MIT license. See [LICENSE](LICENSE) for more infomation.

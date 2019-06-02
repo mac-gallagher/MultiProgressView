@@ -1,6 +1,6 @@
 //
 //  TestableMultiProgressView.swift
-//  MultiProgressView_Tests
+//  MultiProgressViewTests
 //
 //  Created by Mac Gallagher on 3/7/19.
 //  Copyright © 2019 Mac Gallagher. All rights reserved.

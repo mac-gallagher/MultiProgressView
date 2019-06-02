@@ -1,6 +1,6 @@
 //
 //  MockMultiProgressViewDataSource.swift
-//  MultiProgressView_Example
+//  MultiProgressViewTests
 //
 //  Created by Mac Gallagher on 3/1/19.
 //  Copyright © 2019 Mac Gallagher. All rights reserved.
