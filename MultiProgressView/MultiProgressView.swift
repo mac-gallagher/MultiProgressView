@@ -113,7 +113,7 @@ open class MultiProgressView: UIView {
     
     private var layoutCalculator: LayoutCalculatable = LayoutCalculator.shared
     
-    //MARK: - Initialization
+    // MARK: - Initialization
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -135,7 +135,7 @@ open class MultiProgressView: UIView {
         addSubview(track)
     }
     
-    //MARK: - Layout
+    // MARK: - Layout
     
     var trackTitleLabelConstraints = [NSLayoutConstraint]() {
         didSet {
@@ -169,7 +169,7 @@ open class MultiProgressView: UIView {
         track.layer.cornerRadius = layoutCalculator.trackCornerRadius(forProgressView: self)
     }
     
-    //MARK: - Data Source
+    // MARK: - Data Source
     
     public func reloadData() {
         guard let dataSource = dataSource else { return }
@@ -191,7 +191,7 @@ open class MultiProgressView: UIView {
         currentProgress.insert(0, at: section)
     }
     
-    //MARK: - Getter/Setter Methods
+    // MARK: - Getter/Setter Methods
     
     public func setTitle(_ title: String?) {
         label.text = title
@@ -209,7 +209,7 @@ open class MultiProgressView: UIView {
         return currentProgress[section]
     }
     
-    //MARK: - Main Methods
+    // MARK: - Main Methods
     
     public func setProgress(section: Int, to progress: Float) {
         currentProgress[section] = max(0, min(progress, 1 - totalProgress + currentProgress[section]))
