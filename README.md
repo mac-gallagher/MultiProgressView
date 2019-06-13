@@ -31,7 +31,7 @@ To run the example project, clone the repo and run the `MultiProgressViewExample
 
     ```swift
     func numberOfSections(in progressView: MultiProgressView) -> Int
-    func progressBar(_ progressView: MultiProgressView, viewForSection section: Int) -> ProgressViewSection
+    func progressView(_ progressView: MultiProgressView, viewForSection section: Int) -> ProgressViewSection
     ```
     
     ```swift
@@ -57,7 +57,7 @@ To run the example project, clone the repo and run the `MultiProgressViewExample
  
    ```swift
     func numberOfSections(in progressView: MultiProgressView) -> Int
-    func progressBar(_ progressView: MultiProgressView, viewForSection section: Int) -> ProgressViewSection
+    func progressView(_ progressView: MultiProgressView, viewForSection section: Int) -> ProgressViewSection
     ```
      
 5. Set your view controller as the progress view's `dataSource`:
