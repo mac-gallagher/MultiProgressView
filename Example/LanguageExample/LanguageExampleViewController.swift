@@ -19,7 +19,8 @@ class LanguageExampleViewController: UIViewController {
     @IBOutlet private weak var progressView4: LanguageExampleProgressView!
     @IBOutlet private weak var progressView5: LanguageExampleProgressView!
     
-    private lazy var progressViews = backgroundView.subviews.filter { $0 is LanguageExampleProgressView }
+    private lazy var progressViews
+        = backgroundView.subviews.filter { $0 is LanguageExampleProgressView }
         as! [LanguageExampleProgressView]
     
     override func viewDidLoad() {

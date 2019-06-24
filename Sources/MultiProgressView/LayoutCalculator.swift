@@ -6,6 +6,8 @@
 //  Copyright © 2019 Mac Gallagher. All rights reserved.
 //
 
+import UIKit
+
 protocol LayoutCalculatable {
     func trackFrame(forProgressView progressView: MultiProgressView) -> CGRect
     func trackImageViewFrame(forProgressView progressView: MultiProgressView) -> CGRect

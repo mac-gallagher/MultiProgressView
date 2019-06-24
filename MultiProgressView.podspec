@@ -16,6 +16,6 @@ s.author       = { "Mac Gallagher" => "jmgallagher36@gmail.com" }
 s.source       = { :git => "https://github.com/mac-gallagher/MultiProgressView.git", :tag => "v1.1.0" }
 
 s.swift_version = "5.0"
-s.source_files = "MultiProgressView/**/*"
+s.source_files = "Sources/**/*"
 
 end
