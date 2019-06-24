@@ -28,7 +28,6 @@ class ProgressViewSectionSpec: QuickSpec {
                 var section: ProgressViewSection!
 
                 context("When initializing a new section with the default initializer") {
-
                     beforeEach {
                         section = ProgressViewSection()
                     }
@@ -39,7 +38,6 @@ class ProgressViewSectionSpec: QuickSpec {
                 }
 
                 context("When initializing a new section with the required initializer") {
-
                     beforeEach {
                         // TODO: - Find a non-deprecated way to accomplish this
                         let coder = NSKeyedUnarchiver(forReadingWith: Data())
@@ -68,9 +66,7 @@ class ProgressViewSectionSpec: QuickSpec {
             // MARK: Title Insets
 
             describe("Title Insets") {
-
                 context("When setting the title insets") {
-
                     beforeEach {
                         subject.titleEdgeInsets = UIEdgeInsets()
                     }
@@ -84,9 +80,7 @@ class ProgressViewSectionSpec: QuickSpec {
             // MARK: Title Alignment
 
             describe("Title Alignment") {
-
                 context("When setting the title alignment") {
-
                     beforeEach {
                         subject.titleAlignment = .bottom
                     }
@@ -100,7 +94,6 @@ class ProgressViewSectionSpec: QuickSpec {
             // MARK: - Layout
 
             describe("Layout") {
-
                 context("When calling the layoutSubviews method") {
                     let titleAlignment: AlignmentType = .topLeft
                     let titleEdgeInsets = UIEdgeInsets(top: 1, left: 2, bottom: 3, right: 4)
@@ -136,7 +129,6 @@ class ProgressViewSectionSpec: QuickSpec {
             // MARK: Set Title
 
             describe("Set Title") {
-
                 context("When calling the setTitle method") {
                     let title: String = "title"
 
@@ -153,7 +145,6 @@ class ProgressViewSectionSpec: QuickSpec {
             // MARK: Set Attributed Title
 
             describe("Set Attributed Title") {
-
                 context("When calling the setAttributedTitle method") {
                     let attributedTitle = NSAttributedString(string: "title")
 
@@ -170,7 +161,6 @@ class ProgressViewSectionSpec: QuickSpec {
             // MARK: Set Image
 
             describe("Set Image") {
-
                 context("when calling the setImage method") {
                     let image = UIImage()
 
