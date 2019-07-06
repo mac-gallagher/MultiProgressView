@@ -226,29 +226,33 @@ class LayoutCalculatorSpec: QuickSpec {
                         }
                     }
                     
-                    context("and the line cap type is round and corner radius is equal to zero") {
+                    context("and the line cap type is round") {
                         beforeEach {
                             progressView.lineCap = .round
-                            progressView.cornerRadius = 0
                         }
                         
-                        it("should return half the height of the progressView") {
-                            let actualCornerRadius = subject.cornerRadius(forProgressView: progressView)
-                            expect(actualCornerRadius).to(equal(progressViewHeight / 2))
-                        }
-                    }
-                    
-                    context("and the line cap type is round and corner radius is nonzero") {
-                        let cornerRadius: CGFloat = 5
-                        
-                        beforeEach {
-                            progressView.lineCap = .round
-                            progressView.cornerRadius = cornerRadius
+                        context("and the corner radius is zero") {
+                            beforeEach {
+                                progressView.cornerRadius = 0
+                            }
+                            
+                            it("should return half the height of the progressView") {
+                                let actualCornerRadius = subject.cornerRadius(forProgressView: progressView)
+                                expect(actualCornerRadius).to(equal(progressViewHeight / 2))
+                            }
                         }
                         
-                        it("should return the progressView's corner radius") {
-                            let actualCornerRadius = subject.cornerRadius(forProgressView: progressView)
-                            expect(actualCornerRadius).to(equal(cornerRadius))
+                        context("and the corner radius is nonzero") {
+                            let cornerRadius: CGFloat = 5
+                            
+                            beforeEach {
+                                progressView.cornerRadius = cornerRadius
+                            }
+                            
+                            it("should return the progressView's corner radius") {
+                                let actualCornerRadius = subject.cornerRadius(forProgressView: progressView)
+                                expect(actualCornerRadius).to(equal(cornerRadius))
+                            }
                         }
                     }
                 }
@@ -280,37 +284,40 @@ class LayoutCalculatorSpec: QuickSpec {
                         }
                     }
                     
-                    context("and the line cap type is round and corner radius is equal to zero") {
+                    context("and the line cap type is round") {
                         let trackBounds = CGRect(x: 0, y: 0, width: 0, height: 500)
                         
                         beforeEach {
                             progressView.track.bounds = trackBounds
                             progressView.lineCap = .round
-                            progressView.cornerRadius = 0
                         }
                         
-                        it("should return half the height of the track") {
-                            let actualCornerRadius = subject.trackCornerRadius(forProgressView: progressView)
-                            expect(actualCornerRadius).to(equal(trackBounds.height / 2))
-                        }
-                    }
-                    
-                    context("and the line cap type is round and corner radius is nonzero") {
-                        let trackBounds = CGRect(x: 0, y: 0, width: 0, height: 500)
-                        let cornerRadius: CGFloat = 5
-                        var cornerRadiusFactor: CGFloat!
-                        
-                        beforeEach {
-                            progressView.track.bounds = trackBounds
-                            progressView.lineCap = .round
-                            progressView.cornerRadius = cornerRadius
-                            cornerRadiusFactor = cornerRadius / progressViewHeight
+                        context("and the corner radius is equal to zero") {
+                            beforeEach {
+                                progressView.cornerRadius = 0
+                            }
+                            
+                            it("should return half the height of the track") {
+                                let actualCornerRadius = subject.trackCornerRadius(forProgressView: progressView)
+                                expect(actualCornerRadius).to(equal(trackBounds.height / 2))
+                            }
                         }
                         
-                        it("should return the correct scaled corner radius") {
-                            let actualCornerRadius = subject.trackCornerRadius(forProgressView: progressView)
-                            let expectedCornerRaduis = cornerRadiusFactor * trackBounds.height
-                            expect(actualCornerRadius).to(equal(expectedCornerRaduis))
+                        context("and the corner radius is nonzero") {
+                            let cornerRadius: CGFloat = 5
+                            var cornerRadiusFactor: CGFloat!
+                            
+                            beforeEach {
+                                progressView.track.bounds = trackBounds
+                                progressView.cornerRadius = cornerRadius
+                                cornerRadiusFactor = cornerRadius / progressViewHeight
+                            }
+                            
+                            it("should return the correct scaled corner radius") {
+                                let actualCornerRadius = subject.trackCornerRadius(forProgressView: progressView)
+                                let expectedCornerRaduis = cornerRadiusFactor * trackBounds.height
+                                expect(actualCornerRadius).to(equal(expectedCornerRaduis))
+                            }
                         }
                     }
                 }
@@ -337,7 +344,7 @@ class LayoutCalculatorSpec: QuickSpec {
                     }
                     
                     context("and the view has a superview") {
-                        let superview: UIView = UIView()
+                        let superview = UIView()
                         var topConstraint: NSLayoutConstraint!
                         var leftConstraint: NSLayoutConstraint!
                         var rightConstraint: NSLayoutConstraint!

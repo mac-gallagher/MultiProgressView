@@ -342,19 +342,19 @@ class MultiProgressViewSpec: QuickSpec {
             
             // MARK: Set Title
             
-            describe("Set Title") {
-                context("When calling the setTitle method") {
-                    let title = String()
-                    
-                    beforeEach {
-                        subject.setTitle(title)
-                    }
-                    
-                    it("should set the text on the trackTitleLabel") {
-                        expect(subject.trackTitleLabel.text).to(be(title))
-                    }
-                }
-            }
+//            describe("Set Title") {
+//                context("When calling the setTitle method") {
+//                    let title = String()
+//
+//                    beforeEach {
+//                        subject.setTitle(title)
+//                    }
+//
+//                    it("should set the text on the trackTitleLabel") {
+//                        expect(subject.trackTitleLabel.text).to(be(title))
+//                    }
+//                }
+//            }
             
             // MARK: Set Track Image
             

@@ -8,8 +8,16 @@ coverage:
   range: "70...100"
 
   status:
-    project: yes
-    patch: yes
+    project:
+      default:
+        target: 100%
+        threshold: null
+        paths: "Sources/"
+    patch: 
+      default:
+        target: 100%
+        threshold: null
+        paths: "Sources/"
     changes: no
 
 parsers:
