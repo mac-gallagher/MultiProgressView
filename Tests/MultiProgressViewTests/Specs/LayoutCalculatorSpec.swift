@@ -38,7 +38,6 @@ class LayoutCalculatorSpec: QuickSpec {
             //MARK: - Track Frame
             
             describe("Track Frame") {
-                
                 context("When calling the trackFrame function") {
                     let trackInset: CGFloat = 10
                     
@@ -47,7 +46,6 @@ class LayoutCalculatorSpec: QuickSpec {
                     }
                     
                     context("and the line cap type is butt") {
-                        
                         beforeEach {
                             progressView.lineCap = .butt
                         }
@@ -63,7 +61,6 @@ class LayoutCalculatorSpec: QuickSpec {
                     }
                     
                     context("and the line cap type is round") {
-                        
                         beforeEach {
                             progressView.lineCap = .round
                         }
@@ -79,7 +76,6 @@ class LayoutCalculatorSpec: QuickSpec {
                     }
                     
                     context("and the line cap type is square") {
-                        
                         beforeEach {
                             progressView.lineCap = .square
                         }
@@ -98,7 +94,6 @@ class LayoutCalculatorSpec: QuickSpec {
             //MARK: - Section Frame
             
             describe("Section Frame") {
-                
                 context("When calling the sectionFrame function") {
                     let trackBounds = CGRect(x: 10, y: 20, width: 30, height: 40)
                     let section: Int = 1
@@ -172,7 +167,6 @@ class LayoutCalculatorSpec: QuickSpec {
             //MARK: - Track Image View Frame
             
             describe("Track Image View Frame") {
-                
                 context("When calling the trackImageViewFrame function") {
                     let trackBounds = CGRect(x: 10, y: 20, width: 30, height: 40)
                     
@@ -190,7 +184,6 @@ class LayoutCalculatorSpec: QuickSpec {
             //MARK: - Section Image View Frame
             
             describe("Section Image View Frame") {
-                
                 context("When calling the sectionImageViewFrame function") {
                     let sectionBounds = CGRect(x: 1, y: 2, width: 3, height: 4)
                     var section: ProgressViewSection!
@@ -210,11 +203,8 @@ class LayoutCalculatorSpec: QuickSpec {
             //MARK: - Corner Radius
             
             describe("Corner Radius") {
-                
                 context("When calling the cornerRadius function") {
-                    
                     context("and the line cap type is butt") {
-                        
                         beforeEach {
                             progressView.lineCap = .butt
                         }
@@ -226,7 +216,6 @@ class LayoutCalculatorSpec: QuickSpec {
                     }
                     
                     context("and the line cap type is square") {
-                        
                         beforeEach {
                             progressView.lineCap = .square
                         }
@@ -237,30 +226,33 @@ class LayoutCalculatorSpec: QuickSpec {
                         }
                     }
                     
-                    context("and the line cap type is round and corner radius is equal to zero") {
-                        
+                    context("and the line cap type is round") {
                         beforeEach {
                             progressView.lineCap = .round
-                            progressView.cornerRadius = 0
                         }
                         
-                        it("should return half the height of the progressView") {
-                            let actualCornerRadius = subject.cornerRadius(forProgressView: progressView)
-                            expect(actualCornerRadius).to(equal(progressViewHeight / 2))
-                        }
-                    }
-                    
-                    context("and the line cap type is round and corner radius is nonzero") {
-                        let cornerRadius: CGFloat = 5
-                        
-                        beforeEach {
-                            progressView.lineCap = .round
-                            progressView.cornerRadius = cornerRadius
+                        context("and the corner radius is zero") {
+                            beforeEach {
+                                progressView.cornerRadius = 0
+                            }
+                            
+                            it("should return half the height of the progressView") {
+                                let actualCornerRadius = subject.cornerRadius(forProgressView: progressView)
+                                expect(actualCornerRadius).to(equal(progressViewHeight / 2))
+                            }
                         }
                         
-                        it("should return the progressView's corner radius") {
-                            let actualCornerRadius = subject.cornerRadius(forProgressView: progressView)
-                            expect(actualCornerRadius).to(equal(cornerRadius))
+                        context("and the corner radius is nonzero") {
+                            let cornerRadius: CGFloat = 5
+                            
+                            beforeEach {
+                                progressView.cornerRadius = cornerRadius
+                            }
+                            
+                            it("should return the progressView's corner radius") {
+                                let actualCornerRadius = subject.cornerRadius(forProgressView: progressView)
+                                expect(actualCornerRadius).to(equal(cornerRadius))
+                            }
                         }
                     }
                 }
@@ -269,11 +261,8 @@ class LayoutCalculatorSpec: QuickSpec {
             //MARK: - Track Corner Radius
             
             describe("Track Corner Radius") {
-                
                 context("When calling the trackCornerRadius function") {
-                    
                     context("and the line cap type is butt") {
-                        
                         beforeEach {
                             progressView.lineCap = .butt
                         }
@@ -285,7 +274,6 @@ class LayoutCalculatorSpec: QuickSpec {
                     }
                     
                     context("and the line cap type is square") {
-                        
                         beforeEach {
                             progressView.lineCap = .square
                         }
@@ -296,37 +284,40 @@ class LayoutCalculatorSpec: QuickSpec {
                         }
                     }
                     
-                    context("and the line cap type is round and corner radius is equal to zero") {
+                    context("and the line cap type is round") {
                         let trackBounds = CGRect(x: 0, y: 0, width: 0, height: 500)
                         
                         beforeEach {
                             progressView.track.bounds = trackBounds
                             progressView.lineCap = .round
-                            progressView.cornerRadius = 0
                         }
                         
-                        it("should return half the height of the track") {
-                            let actualCornerRadius = subject.trackCornerRadius(forProgressView: progressView)
-                            expect(actualCornerRadius).to(equal(trackBounds.height / 2))
-                        }
-                    }
-                    
-                    context("and the line cap type is round and corner radius is nonzero") {
-                        let trackBounds = CGRect(x: 0, y: 0, width: 0, height: 500)
-                        let cornerRadius: CGFloat = 5
-                        var cornerRadiusFactor: CGFloat!
-                        
-                        beforeEach {
-                            progressView.track.bounds = trackBounds
-                            progressView.lineCap = .round
-                            progressView.cornerRadius = cornerRadius
-                            cornerRadiusFactor = cornerRadius / progressViewHeight
+                        context("and the corner radius is equal to zero") {
+                            beforeEach {
+                                progressView.cornerRadius = 0
+                            }
+                            
+                            it("should return half the height of the track") {
+                                let actualCornerRadius = subject.trackCornerRadius(forProgressView: progressView)
+                                expect(actualCornerRadius).to(equal(trackBounds.height / 2))
+                            }
                         }
                         
-                        it("should return the correct scaled corner radius") {
-                            let actualCornerRadius = subject.trackCornerRadius(forProgressView: progressView)
-                            let expectedCornerRaduis = cornerRadiusFactor * trackBounds.height
-                            expect(actualCornerRadius).to(equal(expectedCornerRaduis))
+                        context("and the corner radius is nonzero") {
+                            let cornerRadius: CGFloat = 5
+                            var cornerRadiusFactor: CGFloat!
+                            
+                            beforeEach {
+                                progressView.track.bounds = trackBounds
+                                progressView.cornerRadius = cornerRadius
+                                cornerRadiusFactor = cornerRadius / progressViewHeight
+                            }
+                            
+                            it("should return the correct scaled corner radius") {
+                                let actualCornerRadius = subject.trackCornerRadius(forProgressView: progressView)
+                                let expectedCornerRaduis = cornerRadiusFactor * trackBounds.height
+                                expect(actualCornerRadius).to(equal(expectedCornerRaduis))
+                            }
                         }
                     }
                 }
@@ -335,7 +326,6 @@ class LayoutCalculatorSpec: QuickSpec {
             //MARK: Layout Anchoring
             
             describe("Layout Anchoring") {
-                
                 context("When calling the anchorToSuperview function") {
                     let insets = UIEdgeInsets(top: 1, left: 2, bottom: 3, right: 4)
                     var view: UIView!
@@ -345,7 +335,6 @@ class LayoutCalculatorSpec: QuickSpec {
                     }
                     
                     context("and the view has no superview") {
-                        
                         it("should return no constraints") {
                             let actualConstraints = subject.anchorToSuperview(view,
                                                                               withAlignment: .bottom,
@@ -355,7 +344,7 @@ class LayoutCalculatorSpec: QuickSpec {
                     }
                     
                     context("and the view has a superview") {
-                        let superview: UIView = UIView()
+                        let superview = UIView()
                         var topConstraint: NSLayoutConstraint!
                         var leftConstraint: NSLayoutConstraint!
                         var rightConstraint: NSLayoutConstraint!
@@ -381,7 +370,6 @@ class LayoutCalculatorSpec: QuickSpec {
                         }
                         
                         context("and the alignment is equal to top") {
-                            
                             it("should return the correct layout constraints") {
                                 let actualConstraints = subject.anchorToSuperview(view,
                                                                                   withAlignment: .top,
@@ -393,7 +381,6 @@ class LayoutCalculatorSpec: QuickSpec {
                         }
                         
                         context("and the alignment is equal to topLeft") {
-                            
                             it("should return the correct layout constraints") {
                                 let actualConstraints = subject.anchorToSuperview(view,
                                                                                   withAlignment: .topLeft,
@@ -405,7 +392,6 @@ class LayoutCalculatorSpec: QuickSpec {
                         }
                         
                         context("and the alignment is equal to left") {
-                            
                             it("should return the correct layout constraints") {
                                 let actualConstraints = subject.anchorToSuperview(view,
                                                                                   withAlignment: .left,
@@ -417,7 +403,6 @@ class LayoutCalculatorSpec: QuickSpec {
                         }
                         
                         context("and the alignment is equal to bottomLeft") {
-                            
                             it("should return the correct layout constraints") {
                                 let actualConstraints = subject.anchorToSuperview(view,
                                                                                   withAlignment: .bottomLeft,
@@ -429,7 +414,6 @@ class LayoutCalculatorSpec: QuickSpec {
                         }
                         
                         context("and the alignment is equal to bottom") {
-                            
                             it("should return the correct layout constraints") {
                                 let actualConstraints = subject.anchorToSuperview(view,
                                                                                   withAlignment: .bottom,
@@ -441,7 +425,6 @@ class LayoutCalculatorSpec: QuickSpec {
                         }
                         
                         context("and the alignment is equal to bottomRight") {
-                            
                             it("should return the correct layout constraints") {
                                 let actualConstraints = subject.anchorToSuperview(view,
                                                                                   withAlignment: .bottomRight,
@@ -453,7 +436,6 @@ class LayoutCalculatorSpec: QuickSpec {
                         }
                         
                         context("and the alignment is equal to right") {
-                            
                             it("should return the correct layout constraints") {
                                 let actualConstraints = subject.anchorToSuperview(view,
                                                                                   withAlignment: .right,
@@ -465,7 +447,6 @@ class LayoutCalculatorSpec: QuickSpec {
                         }
                         
                         context("and the alignment is equal to topRight") {
-                            
                             it("should return the correct layout constraints") {
                                 let actualConstraints = subject.anchorToSuperview(view,
                                                                                   withAlignment: .topRight,
@@ -477,7 +458,6 @@ class LayoutCalculatorSpec: QuickSpec {
                         }
                         
                         context("and the alignment is equal to center") {
-                            
                             it("should return the correct layout constraints") {
                                 let actualConstraints = subject.anchorToSuperview(view,
                                                                                   withAlignment: .center,

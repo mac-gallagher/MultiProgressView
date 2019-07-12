@@ -31,7 +31,7 @@ To run the example project, clone the repo and run the `MultiProgressViewExample
 
     ```swift
     func numberOfSections(in progressView: MultiProgressView) -> Int
-    func progressBar(_ progressView: MultiProgressView, viewForSection section: Int) -> ProgressViewSection
+    func progressView(_ progressView: MultiProgressView, viewForSection section: Int) -> ProgressViewSection
     ```
     
     ```swift
@@ -57,7 +57,7 @@ To run the example project, clone the repo and run the `MultiProgressViewExample
  
    ```swift
     func numberOfSections(in progressView: MultiProgressView) -> Int
-    func progressBar(_ progressView: MultiProgressView, viewForSection section: Int) -> ProgressViewSection
+    func progressView(_ progressView: MultiProgressView, viewForSection section: Int) -> ProgressViewSection
     ```
      
 5. Set your view controller as the progress view's `dataSource`:
@@ -116,9 +116,18 @@ MultiProgressView is available through [CocoaPods](<https://cocoapods.org/>). To
 
 ### Carthage
 
-MultiProgressView is also available through [Carthage](<https://github.com/Carthage/Carthage>). To install it, simply add the following line to your Cartfile:
+MultiProgressView is available through [Carthage](<https://github.com/Carthage/Carthage>). To install it, simply add the following line to your Cartfile:
 
 	github "mac-gallagher/MultiProgressView"
+
+### Swift Package Manager
+MultiProgressView is available through [Swift PM](<https://swift.org/package-manager/>). To install it, simply add the package as a dependency in `Package.swift`:
+
+```swift
+dependencies: [
+  .package(url: "https://github.com/mac-gallagher/MultiProgressView.git", from: "1.2.0"),
+]
+```
 
 ### Manual
 Download and drop the `MultiProgressView` directory into your project.

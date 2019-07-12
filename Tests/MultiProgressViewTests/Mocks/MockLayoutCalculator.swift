@@ -10,32 +10,32 @@
 
 class MockLayoutCalculator: LayoutCalculatable {
     
-    var testTrackImageViewFrame: CGRect = CGRect()
+    var testTrackImageViewFrame: CGRect = .zero
     func trackImageViewFrame(forProgressView progressView: MultiProgressView) -> CGRect {
         return testTrackImageViewFrame
     }
     
-    var testSectionImageViewFrame: CGRect = CGRect()
+    var testSectionImageViewFrame: CGRect = .zero
     func sectionImageViewFrame(forSection section: ProgressViewSection) -> CGRect {
         return testSectionImageViewFrame
     }
     
-    var testTrackFrame: CGRect = CGRect()
+    var testTrackFrame: CGRect = .zero
     func trackFrame(forProgressView progressView: MultiProgressView) -> CGRect {
         return testTrackFrame
     }
     
-    var testSectionFrame: CGRect = CGRect()
+    var testSectionFrame: CGRect = .zero
     func sectionFrame(forProgressView progressView: MultiProgressView, section: Int) -> CGRect {
         return testSectionFrame
     }
     
-    var testCornerRadius: CGFloat = CGFloat()
+    var testCornerRadius: CGFloat = 0.0
     func cornerRadius(forProgressView progressView: MultiProgressView) -> CGFloat {
         return testCornerRadius
     }
     
-    var testTrackCornerRadius: CGFloat = CGFloat()
+    var testTrackCornerRadius: CGFloat = 0.0
     func trackCornerRadius(forProgressView progressview: MultiProgressView) -> CGFloat {
         return testTrackCornerRadius
     }
