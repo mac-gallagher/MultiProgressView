@@ -11,33 +11,45 @@
 struct MockLayoutProvider: LayoutProvidable {
     
     static var testTrackFrame: CGRect = .zero
-    static var trackFrame: (MultiProgressView) -> CGRect = { _ in
-        return testTrackFrame
+    static var trackFrame: (MultiProgressView) -> CGRect {
+        return { _ in
+            return testTrackFrame
+        }
     }
     
     static var testTrackImageViewFrame: CGRect = .zero
-    static var trackImageViewFrame: (MultiProgressView) -> CGRect = { _ in
-        return testTrackImageViewFrame
+    static var trackImageViewFrame: (MultiProgressView) -> CGRect {
+        return { _ in
+            return testTrackImageViewFrame
+        }
     }
     
     static var testSectionImageViewFrame: CGRect = .zero
-    static var sectionImageViewFrame: (ProgressViewSection) -> CGRect = { _ in
-        return testSectionImageViewFrame
+    static var sectionImageViewFrame: (ProgressViewSection) -> CGRect {
+        return { _ in
+            return testSectionImageViewFrame
+        }
     }
     
     static var testSectionFrame: CGRect = .zero
-    static var sectionFrame: (MultiProgressView, Int) -> CGRect = { _, _ in
-        return testSectionFrame
+    static var sectionFrame: (MultiProgressView, Int) -> CGRect {
+        return { _, _ in
+            return testSectionFrame
+        }
     }
     
     static var testCornerRadius: CGFloat = 0.0
-    static var cornerRadius: (MultiProgressView) -> CGFloat = { _ in
-        return testCornerRadius
+    static var cornerRadius: (MultiProgressView) -> CGFloat {
+        return { _ in
+            return testCornerRadius
+        }
     }
     
     static var testTrackCornerRadius: CGFloat = 0.0
-    static var trackCornerRadius: (MultiProgressView) -> CGFloat = { _ in
-        return testTrackCornerRadius
+    static var trackCornerRadius: (MultiProgressView) -> CGFloat {
+        return { _ in
+            return testTrackCornerRadius
+        }
     }
     
     static var testAnchorConstraints: [NSLayoutConstraint] = []
@@ -51,6 +63,8 @@ struct MockLayoutProvider: LayoutProvidable {
         anchorToSuperviewInsets = insets
         return testAnchorConstraints
     }
+    
+    // MARK: - Test Helpers
     
     static func reset() {
         testTrackFrame = .zero
