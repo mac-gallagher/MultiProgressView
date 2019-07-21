@@ -14,49 +14,46 @@ import Nimble
 class MultiProgressViewSpec: QuickSpec {
     override func spec() {
         describe("MultiProgressView") {
-            var mockLayoutCalculator: MockLayoutCalculator!
+            let mockLayoutProvider = MockLayoutProvider.self
             var subject: TestableMultiProgressView!
             
             beforeEach {
-                mockLayoutCalculator = MockLayoutCalculator()
-                subject = TestableMultiProgressView(layoutCalculator: mockLayoutCalculator)
+                subject = TestableMultiProgressView(layoutProvider: mockLayoutProvider)
             }
             
-            //MARK: - Initialization
+            // MARK: - Initialization
             
             describe("Initialization") {
                 var progressView: MultiProgressView!
                 
                 context("When initializing a new progress view with the default initializer") {
-                    
                     beforeEach {
                         progressView = MultiProgressView()
                     }
                     
-                    it("should have the correct initial properties") {
-                        testInitialProperties()
+                    it("should have the correct default properties") {
+                        testDefaultProperties()
                     }
                 }
                 
                 context("When initializing a new progress view with the required initializer") {
-                    
                     beforeEach {
-                        //TODO: - Find a non-deprecated way to accomplish this
+                        // TODO: - Find a non-deprecated way to accomplish this
                         let coder = NSKeyedUnarchiver(forReadingWith: Data())
                         progressView = MultiProgressView(coder: coder)
                     }
                     
-                    it("should have the correct initial properties") {
-                        testInitialProperties()
+                    it("should have the correct default properties") {
+                        testDefaultProperties()
                     }
                 }
                 
-                func testInitialProperties() {
-                    testInitialProgressViewProperties()
-                    testInitialTrackProperties()
+                func testDefaultProperties() {
+                    testDefaultProgressViewProperties()
+                    testDefaultTrackProperties()
                 }
                 
-                func testInitialProgressViewProperties() {
+                func testDefaultProgressViewProperties() {
                     expect(progressView.dataSource).to(beNil())
                     expect(progressView.cornerRadius).to(equal(0))
                     expect(progressView.borderWidth).to(equal(0))
@@ -67,7 +64,7 @@ class MultiProgressViewSpec: QuickSpec {
                     expect(progressView.subviews.contains(progressView.track)).to(beTrue())
                 }
                 
-                func testInitialTrackProperties() {
+                func testDefaultTrackProperties() {
                     expect(progressView.trackInset).to(equal(0))
                     expect(progressView.trackBackgroundColor).to(equal(.clear))
                     expect(progressView.trackBorderColor).to(equal(.black))
@@ -240,9 +237,13 @@ class MultiProgressViewSpec: QuickSpec {
                     let trackCornerRadius: CGFloat = 20
                     
                     beforeEach {
-                        mockLayoutCalculator.testCornerRadius = cornerRadius
-                        mockLayoutCalculator.testTrackCornerRadius = trackCornerRadius
+                        mockLayoutProvider.testCornerRadius = cornerRadius
+                        mockLayoutProvider.testTrackCornerRadius = trackCornerRadius
                         subject.updateCornerRadius()
+                    }
+                    
+                    afterEach {
+                        mockLayoutProvider.reset()
                     }
                     
                     it("should correctly set the corner radius") {
@@ -297,14 +298,18 @@ class MultiProgressViewSpec: QuickSpec {
                     let sectionFrame = CGRect(x: 9, y: 10, width: 11, height: 12)
                     
                     beforeEach {
-                        mockLayoutCalculator.testTrackFrame = trackFrame
-                        mockLayoutCalculator.testAnchorConstraints = trackTitleLabelConstraints
-                        mockLayoutCalculator.testSectionFrame = sectionFrame
-                        mockLayoutCalculator.testTrackImageViewFrame = trackImageViewFrame
+                        mockLayoutProvider.testTrackFrame = trackFrame
+                        mockLayoutProvider.testAnchorConstraints = trackTitleLabelConstraints
+                        mockLayoutProvider.testSectionFrame = sectionFrame
+                        mockLayoutProvider.testTrackImageViewFrame = trackImageViewFrame
                         
                         subject.trackTitleAlignment = trackTitleLabelAlignment
                         subject.trackTitleEdgeInsets = trackTitleLabelInsets
                         subject.layoutSubviews()
+                    }
+                    
+                    afterEach {
+                        mockLayoutProvider.reset()
                     }
                     
                     it("should correctly set the track's frame") {
@@ -313,8 +318,8 @@ class MultiProgressViewSpec: QuickSpec {
                     
                     it("should correctly layout the trackTitleLabel") {
                         expect(subject.trackTitleLabelConstraints).to(be(trackTitleLabelConstraints))
-                        expect(mockLayoutCalculator.anchorToSuperviewAlignment).to(equal(trackTitleLabelAlignment))
-                        expect(mockLayoutCalculator.anchorToSuperviewInsets).to(equal(trackTitleLabelInsets))
+                        expect(mockLayoutProvider.anchorToSuperviewAlignment).to(equal(trackTitleLabelAlignment))
+                        expect(mockLayoutProvider.anchorToSuperviewInsets).to(equal(trackTitleLabelInsets))
                     }
                     
                     it("should correctly set the imageView's frame") {

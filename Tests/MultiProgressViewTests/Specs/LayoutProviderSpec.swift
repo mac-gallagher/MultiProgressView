@@ -1,5 +1,5 @@
 //
-//  LayoutCalculatorSpec.swift
+//  LayoutProviderSpec.swift
 //  MultiProgressViewTests
 //
 //  Created by Mac Gallagher on 3/5/19.
@@ -11,16 +11,16 @@ import Nimble
 
 @testable import MultiProgressView
 
-class LayoutCalculatorSpec: QuickSpec {
+class LayoutProviderSpec: QuickSpec {
     override func spec() {
-        describe("LayoutCalculator") {
+        describe("LayoutProvider") {
             let numberOfSections: Int = 2
             let progressViewWidth: CGFloat = 200
             let progressViewHeight: CGFloat = 50
+            let subject = LayoutProvider.self
             
             var mockDataSource: MockMultiProgressViewDataSource!
             var progressView: TestableMultiProgressView!
-            var subject: LayoutCalculator!
             
             beforeEach {
                 mockDataSource = MockMultiProgressViewDataSource(numberOfSections: numberOfSections)
@@ -31,8 +31,6 @@ class LayoutCalculatorSpec: QuickSpec {
                 progressView = TestableMultiProgressView()
                 progressView.frame = progressViewFrame
                 progressView.dataSource = mockDataSource
-                
-                subject = LayoutCalculator()
             }
             
             //MARK: - Track Frame
@@ -51,7 +49,7 @@ class LayoutCalculatorSpec: QuickSpec {
                         }
                         
                         it("should return the correct track frame") {
-                            let actualFrame = subject.trackFrame(forProgressView: progressView)
+                            let actualFrame = subject.trackFrame(progressView)
                             let expectedFrame = CGRect(x: 0,
                                                        y: trackInset,
                                                        width: progressViewWidth,
@@ -66,7 +64,7 @@ class LayoutCalculatorSpec: QuickSpec {
                         }
                         
                         it("should return the correct track frame") {
-                            let actualFrame = subject.trackFrame(forProgressView: progressView)
+                            let actualFrame = subject.trackFrame(progressView)
                             let expectedFrame = CGRect(x: trackInset,
                                                        y: trackInset,
                                                        width: progressViewWidth - 2 * trackInset,
@@ -81,7 +79,7 @@ class LayoutCalculatorSpec: QuickSpec {
                         }
                         
                         it("should return the correct track frame") {
-                            let actualFrame = subject.trackFrame(forProgressView: progressView)
+                            let actualFrame = subject.trackFrame(progressView)
                             let expectedFrame = CGRect(x: trackInset,
                                                        y: trackInset,
                                                        width: progressViewWidth - 2 * trackInset,
@@ -110,8 +108,7 @@ class LayoutCalculatorSpec: QuickSpec {
                         }
                         
                         it("should return the correct frame with zero width") {
-                            let actualFrame = subject.sectionFrame(forProgressView: progressView,
-                                                                   section: section)
+                            let actualFrame = subject.sectionFrame(progressView, section)
                             let expectedFrame = CGRect(x: trackBounds.origin.x,
                                                        y: trackBounds.origin.y,
                                                        width: 0,
@@ -128,8 +125,7 @@ class LayoutCalculatorSpec: QuickSpec {
                         }
                         
                         it("should return the correct frame with the proper width") {
-                            let actualFrame = subject.sectionFrame(forProgressView: progressView,
-                                                                   section: section)
+                            let actualFrame = subject.sectionFrame(progressView, section)
                             let expectedWidth = trackBounds.width * CGFloat(progress)
                             let expectedFrame = CGRect(x: trackBounds.origin.x,
                                                        y: trackBounds.origin.y,
@@ -149,8 +145,7 @@ class LayoutCalculatorSpec: QuickSpec {
                         }
                         
                         it("should return the correct frame with the proper width and origin") {
-                            let actualFrame = subject.sectionFrame(forProgressView: progressView,
-                                                                   section: section)
+                            let actualFrame = subject.sectionFrame(progressView, section)
                             
                             let expectedOrigin = CGPoint(x: trackBounds.origin.x + firstSectionFrame.width,
                                                          y: trackBounds.origin.y)
@@ -175,7 +170,7 @@ class LayoutCalculatorSpec: QuickSpec {
                     }
                     
                     it("should return the track's bounds") {
-                        let actualFrame = subject.trackImageViewFrame(forProgressView: progressView)
+                        let actualFrame = subject.trackImageViewFrame(progressView)
                         expect(actualFrame).to(equal(trackBounds))
                     }
                 }
@@ -194,7 +189,7 @@ class LayoutCalculatorSpec: QuickSpec {
                     }
                     
                     it("should return the section's bounds") {
-                        let actualFrame = subject.sectionImageViewFrame(forSection: section)
+                        let actualFrame = subject.sectionImageViewFrame(section)
                         expect(actualFrame).to(equal(sectionBounds))
                     }
                 }
@@ -210,7 +205,7 @@ class LayoutCalculatorSpec: QuickSpec {
                         }
                         
                         it("should return zero") {
-                            let actualCornerRadius = subject.cornerRadius(forProgressView: progressView)
+                            let actualCornerRadius = subject.cornerRadius(progressView)
                             expect(actualCornerRadius).to(equal(0))
                         }
                     }
@@ -221,7 +216,7 @@ class LayoutCalculatorSpec: QuickSpec {
                         }
                         
                         it("should return zero") {
-                            let actualCornerRadius = subject.cornerRadius(forProgressView: progressView)
+                            let actualCornerRadius = subject.cornerRadius(progressView)
                             expect(actualCornerRadius).to(equal(0))
                         }
                     }
@@ -237,7 +232,7 @@ class LayoutCalculatorSpec: QuickSpec {
                             }
                             
                             it("should return half the height of the progressView") {
-                                let actualCornerRadius = subject.cornerRadius(forProgressView: progressView)
+                                let actualCornerRadius = subject.cornerRadius(progressView)
                                 expect(actualCornerRadius).to(equal(progressViewHeight / 2))
                             }
                         }
@@ -250,7 +245,7 @@ class LayoutCalculatorSpec: QuickSpec {
                             }
                             
                             it("should return the progressView's corner radius") {
-                                let actualCornerRadius = subject.cornerRadius(forProgressView: progressView)
+                                let actualCornerRadius = subject.cornerRadius(progressView)
                                 expect(actualCornerRadius).to(equal(cornerRadius))
                             }
                         }
@@ -268,7 +263,7 @@ class LayoutCalculatorSpec: QuickSpec {
                         }
                         
                         it("should return zero") {
-                            let actualCornerRadius = subject.trackCornerRadius(forProgressView: progressView)
+                            let actualCornerRadius = subject.trackCornerRadius(progressView)
                             expect(actualCornerRadius).to(equal(0))
                         }
                     }
@@ -279,7 +274,7 @@ class LayoutCalculatorSpec: QuickSpec {
                         }
                         
                         it("should return zero") {
-                            let actualCornerRadius = subject.trackCornerRadius(forProgressView: progressView)
+                            let actualCornerRadius = subject.trackCornerRadius(progressView)
                             expect(actualCornerRadius).to(equal(0))
                         }
                     }
@@ -298,7 +293,7 @@ class LayoutCalculatorSpec: QuickSpec {
                             }
                             
                             it("should return half the height of the track") {
-                                let actualCornerRadius = subject.trackCornerRadius(forProgressView: progressView)
+                                let actualCornerRadius = subject.trackCornerRadius(progressView)
                                 expect(actualCornerRadius).to(equal(trackBounds.height / 2))
                             }
                         }
@@ -314,7 +309,7 @@ class LayoutCalculatorSpec: QuickSpec {
                             }
                             
                             it("should return the correct scaled corner radius") {
-                                let actualCornerRadius = subject.trackCornerRadius(forProgressView: progressView)
+                                let actualCornerRadius = subject.trackCornerRadius(progressView)
                                 let expectedCornerRaduis = cornerRadiusFactor * trackBounds.height
                                 expect(actualCornerRadius).to(equal(expectedCornerRaduis))
                             }

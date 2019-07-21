@@ -10,7 +10,8 @@ import UIKit
 
 @objc public protocol MultiProgressViewDataSource: class {
     func numberOfSections(in progressView: MultiProgressView) -> Int
-    func progressView(_ progressView: MultiProgressView, viewForSection section: Int) -> ProgressViewSection
+    func progressView(_ progressView: MultiProgressView,
+                      viewForSection section: Int) -> ProgressViewSection
 }
 
 @IBDesignable
@@ -111,7 +112,7 @@ open class MultiProgressView: UIView {
     private var numberOfSections: Int = 0
     private var currentProgress: [Float] = []
     
-    private var layoutCalculator: LayoutCalculatable = LayoutCalculator.shared
+    private var layoutProvider: LayoutProvidable.Type = LayoutProvider.self
     
     // MARK: - Initialization
     
@@ -125,9 +126,9 @@ open class MultiProgressView: UIView {
         initialize()
     }
     
-    convenience init(layoutCalculator: LayoutCalculatable) {
+    convenience init(layoutProvider: LayoutProvidable.Type) {
         self.init(frame: .zero)
-        self.layoutCalculator = layoutCalculator
+        self.layoutProvider = layoutProvider
     }
     
     private func initialize() {
@@ -146,11 +147,11 @@ open class MultiProgressView: UIView {
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-        track.frame = layoutCalculator.trackFrame(forProgressView: self)
-        trackTitleLabelConstraints = layoutCalculator.anchorToSuperview(trackTitleLabel,
-                                                              withAlignment: trackTitleAlignment,
-                                                              insets: trackTitleEdgeInsets)
-        imageView.frame = layoutCalculator.trackImageViewFrame(forProgressView: self)
+        track.frame = layoutProvider.trackFrame(self)
+        trackTitleLabelConstraints = layoutProvider.anchorToSuperview(trackTitleLabel,
+                                                                      withAlignment: trackTitleAlignment,
+                                                                      insets: trackTitleEdgeInsets)
+        imageView.frame = layoutProvider.trackImageViewFrame(self)
         track.sendSubviewToBack(imageView)
         layoutSections()
         updateCornerRadius()
@@ -158,15 +159,14 @@ open class MultiProgressView: UIView {
     
     private func layoutSections() {
         for (index, section) in progressViewSections.enumerated() {
-            section.frame = layoutCalculator.sectionFrame(forProgressView: self,
-                                                          section: index)
+            section.frame = layoutProvider.sectionFrame(self, index)
             track.bringSubviewToFront(section)
         }
     }
     
     func updateCornerRadius() {
-        layer.cornerRadius = layoutCalculator.cornerRadius(forProgressView: self)
-        track.layer.cornerRadius = layoutCalculator.trackCornerRadius(forProgressView: self)
+        layer.cornerRadius = layoutProvider.cornerRadius(self)
+        track.layer.cornerRadius = layoutProvider.trackCornerRadius(self)
     }
     
     // MARK: - Data Source
@@ -184,7 +184,8 @@ open class MultiProgressView: UIView {
         }
     }
     
-    private func configureSection(withDataSource dataSource: MultiProgressViewDataSource, _ section: Int) {
+    private func configureSection(withDataSource dataSource: MultiProgressViewDataSource,
+                                  _ section: Int) {
         let bar = dataSource.progressView(self, viewForSection: section)
         progressViewSections.insert(bar, at: section)
         track.addSubview(bar)

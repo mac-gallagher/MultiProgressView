@@ -34,7 +34,7 @@ open class ProgressViewSection: UIView {
     
     private var sectionImageView: UIImageView = UIImageView()
     
-    private var layoutCalculator: LayoutCalculatable = LayoutCalculator.shared
+    private var layoutProvider: LayoutProvidable.Type = LayoutProvider.self
     
     // MARK: - Initialization
     
@@ -48,9 +48,9 @@ open class ProgressViewSection: UIView {
         initialize()
     }
     
-    convenience init(layoutCalculator: LayoutCalculatable) {
+    convenience init(layoutProvider: LayoutProvidable.Type) {
         self.init(frame: .zero)
-        self.layoutCalculator = layoutCalculator
+        self.layoutProvider = layoutProvider
     }
     
     private func initialize() {
@@ -71,10 +71,10 @@ open class ProgressViewSection: UIView {
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-        labelConstraints = layoutCalculator.anchorToSuperview(sectionTitleLabel,
-                                                              withAlignment: titleAlignment,
-                                                              insets: titleEdgeInsets)
-        sectionImageView.frame = layoutCalculator.sectionImageViewFrame(forSection: self)
+        labelConstraints = layoutProvider.anchorToSuperview(sectionTitleLabel,
+                                                            withAlignment: titleAlignment,
+                                                            insets: titleEdgeInsets)
+        sectionImageView.frame = layoutProvider.sectionImageViewFrame(self)
         sendSubviewToBack(sectionImageView)
     }
     
