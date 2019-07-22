@@ -17,7 +17,7 @@ import UIKit
 @IBDesignable
 open class MultiProgressView: UIView {
     
-    @IBOutlet public var dataSource: MultiProgressViewDataSource? {
+    @IBOutlet public weak var dataSource: MultiProgressViewDataSource? {
         didSet {
             reloadData()
         }

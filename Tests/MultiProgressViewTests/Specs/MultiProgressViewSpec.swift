@@ -85,8 +85,11 @@ class MultiProgressViewSpec: QuickSpec {
             
             describe("Data Source") {
                 context("When setting the data source") {
+                    var dataSource: MultiProgressViewDataSource!
+                    
                     beforeEach {
-                        subject.dataSource = MockMultiProgressViewDataSource()
+                        dataSource = MockMultiProgressViewDataSource()
+                        subject.dataSource = dataSource
                     }
                     
                     it("should reload it's data") {
