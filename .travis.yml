@@ -1,11 +1,11 @@
 osx_image: xcode10.2
 language: swift
 xcode_workspace: MultiProgressView.xcworkspace
-xcode_scheme: MultiProgressViewTests
-xcode_destination: platform=iOS Simulator,OS=12.2,name=iPhone SE
+xcode_scheme: MultiProgressView
+xcode_destination: platform=iOS Simulator,OS=9.0,name=iPhone 6
 
 #Codecov
 script:
-  - xcodebuild -scheme MultiProgressViewTests -workspace MultiProgressView.xcworkspace -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone SE,OS=12.2' build test
+  - xcodebuild test -workspace MultiProgressView.xcworkspace -scheme MultiProgressView -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone X,OS=12.2' | xcpretty
 after_success:
   - bash <(curl -s https://codecov.io/bash)
