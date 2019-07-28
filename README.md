@@ -1,23 +1,41 @@
-# MultiProgressView
+<H1 align="center"> MultiProgressView
+</H1>
 
-[![Build Status](https://travis-ci.org/mac-gallagher/MultiProgressView.svg?branch=master)](https://travis-ci.org/mac-gallagher/MultiProgressView)
-![CocoaPods](https://img.shields.io/cocoapods/p/MultiProgressView.svg)
-![Swift-Version](https://img.shields.io/badge/Swift-5.0-orange.svg)
-![CocoaPods](https://img.shields.io/cocoapods/v/MultiProgressView.svg)
-[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![codecov](https://codecov.io/gh/mac-gallagher/MultiProgressView/branch/master/graph/badge.svg)](https://codecov.io/gh/mac-gallagher/MultiProgressView)
+<H4 align="center">
+📊 An animatable view that depicts multiple progresses over time.
+</br>
+Modeled after UIProgressView.
+</H4>
 
-**MultiProgressView** is an animatable view that depicts multiple progresses over time. The `MultiProgressView` class mimics `UIProgressView` as much as possible while providing additional [customizations](#customization). 
+<p align="center">
+<a href="https://developer.apple.com/swift"><img alt="Swift 5" src="https://img.shields.io/badge/language-Swift_5-orange.svg"/></a>
+<a href="https://cocoapods.org/pods/MultiProgressView"><img alt="CocoaPods" src="https://img.shields.io/cocoapods/v/MultiProgressView.svg"/></a>
+<a href="https://github.com/Carthage/Carthage"><img alt="Carthage" src="https://img.shields.io/badge/carthage-compatible-4BC51D.svg?style=flat)"/></a>
+<a href="https://swift.org/package-manager"><img alt="Swift Package Manager" src="https://img.shields.io/badge/swift pm-compatible-yellow.svg"/></a>
+</br>
+<a href="https://travis-ci.org/mac-gallagher/MultiProgressView"><img alt="Build Status" src="https://travis-ci.com/mac-gallagher/MultiProgressView.svg?branch=master"/></a>
+<a href="https://cocoapods.org/pods/MultiProgressView"><img alt="Platform" src="https://img.shields.io/cocoapods/p/MultiProgressView.svg"/></a>
+<a href="https://codecov.io/gh/mac-gallagher/MultiProgressView"><img alt="Code Coverage" src="https://codecov.io/gh/mac-gallagher/MultiProgressView/branch/master/graph/badge.svg"></a>
+<a href="https://github.com/mac-gallagher/MultiProgressView/blob/master/LICENSE"><img alt="LICENSE" src="https://img.shields.io/cocoapods/l/MultiProgressView"></a>
+</p>
+
+<p align="center">
+Made with ❤️ by <a href="https://github.com/mac-gallagher">Mac Gallagher</a>
+</p>
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/mac-gallagher/MultiProgressView/master/Images/example1.gif" width="550">
+
+<!--<img src="https://raw.githubusercontent.com/mac-gallagher/MultiProgressView/master/Images/example2.gif" width="400">
+</p>-->
+
+---
 
 ## Example
 
 To run the example project, clone the repo and run the `MultiProgressViewExample` target.
 
-![Demo2](https://raw.githubusercontent.com/mac-gallagher/MultiProgressView/master/Images/example2.gif)
-
-![Demo1](https://raw.githubusercontent.com/mac-gallagher/MultiProgressView/master/Images/example1.gif)
-
-## Usage
+## Basic Usage
 
 ### Programmatic
 1. Add a `MultiProgressView` to your view hierarchy:
@@ -136,9 +154,6 @@ Download and drop the `MultiProgressView` directory into your project.
 * iOS 9.0+
 * Xcode 10.2+
 * Swift 5.0+
-
-## Author
-Mac Gallagher, jmgallagher36@gmail.com.
 
 ## License
 MultiProgressView is available under the MIT license. See [LICENSE](LICENSE) for more infomation.
