@@ -144,10 +144,15 @@ Download and drop the `MultiProgressView` directory into your project.
 * Xcode 10.2+
 * Swift 5.0+
 
-## Author
-Mac Gallagher, jmgallagher36@gmail.com. 
+## Apps Using MultiProgressView
+We love to hear about apps that use MultiProgressView - feel free to submit a pull request and share yours here!
 
-(Header design by Mazen Ghani, mghani@uwm.edu)
+</br>
+ 
+---
 
-## License
-MultiProgressView is available under the MIT license. See [LICENSE](LICENSE) for more infomation.
+<p align="center">
+ Made with ❤️ by <a href="https://github.com/mac-gallagher">Mac Gallagher</a>
+ </br>
+(Header design by <a href="mailto:mghani@uwm.edu">Mazen Ghani</a>)
+</p>
