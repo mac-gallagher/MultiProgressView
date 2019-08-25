@@ -3,22 +3,21 @@ codecov:
     require_ci_to_pass: yes
 
 coverage:
-  precision: 2
-  round: down
-  range: "70...100"
-
+  precision: 2 # number of decimal places
+  round: down # round down coverage
+  range: "70...100" # visual color range in codecov
   status:
-    project:
+    project: # measures the overall project coverage and compares it against the base of the pull request or parent commit
       default:
-        target: 100%
-        threshold: null
-        paths: "Sources/"
-    patch: 
+        target: auto  # use the coverage from the base commit (pull request base or parent commit) coverage to compare against
+        threshold: null # if coverage drops, do not post a success status
+        base: auto # use the pull request base if the commit is on a pull request. If not, use the parent commit
+    patch: # measures only the lines adjusted in the pull request or single commit, if the commit is not in a pull request
       default:
-        target: 100%
+        target: 100  # all new code should have 100% coverage
         threshold: null
-        paths: "Sources/"
-    changes: no
+        base: auto
+    changes: yes # detect changes in coverage that are NOT included in the commit/pull diff, and report these changes as a commit status
 
 parsers:
   gcov:
@@ -28,11 +27,11 @@ parsers:
       method: no
       macro: no
 
-comment:
-  layout: "header, diff"
-  behavior: default
-  require_changes: no
+comment: # configure github pull request comment
+  layout: "diff, flags, files"
+  behavior: default # update comment, if exists. Otherwise post new.
+  require_changes: no # comments post regardless if there is a coverage change or not
 
-ignore:
+ignore: # ignore these files when measuring absolute coverage (reported in the Github badge)
   - "Pods/"
   - "Tests/"
