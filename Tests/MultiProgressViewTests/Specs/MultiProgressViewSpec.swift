@@ -283,68 +283,68 @@ class MultiProgressViewSpec: QuickSpec {
             
             // MARK: - Layout
             
-            describe("Layout") {
-                let numberOfSections: Int = 3
-                var dataSource: MockMultiProgressViewDataSource!
-                
-                beforeEach {
-                    dataSource = MockMultiProgressViewDataSource(numberOfSections: numberOfSections)
-                    subject.dataSource = dataSource
-                }
-                
-                context("When the layoutSubviews method is called") {
-                    let trackFrame = CGRect(x: 1, y: 2, width: 3, height: 4)
-                    let trackTitleLabelConstraints = [NSLayoutConstraint]()
-                    let trackTitleLabelAlignment: AlignmentType = .topLeft
-                    let trackTitleLabelInsets = UIEdgeInsets(top: 0, left: 1, bottom: 2, right: 3)
-                    let trackImageViewFrame = CGRect(x: 5, y: 6, width: 7, height: 8)
-                    let sectionFrame = CGRect(x: 9, y: 10, width: 11, height: 12)
-                    
-                    beforeEach {
-                        mockLayoutProvider.testTrackFrame = trackFrame
-                        mockLayoutProvider.testAnchorConstraints = trackTitleLabelConstraints
-                        mockLayoutProvider.testSectionFrame = sectionFrame
-                        mockLayoutProvider.testTrackImageViewFrame = trackImageViewFrame
-                        
-                        subject.trackTitleAlignment = trackTitleLabelAlignment
-                        subject.trackTitleEdgeInsets = trackTitleLabelInsets
-                        subject.layoutSubviews()
-                    }
-                    
-                    afterEach {
-                        mockLayoutProvider.reset()
-                    }
-                    
-                    it("should correctly set the track's frame") {
-                        expect(subject.track.frame).to(equal(trackFrame))
-                    }
-                    
-                    it("should correctly layout the trackTitleLabel") {
-                        expect(subject.trackTitleLabelConstraints).to(be(trackTitleLabelConstraints))
-                        expect(mockLayoutProvider.anchorToSuperviewAlignment).to(equal(trackTitleLabelAlignment))
-                        expect(mockLayoutProvider.anchorToSuperviewInsets).to(equal(trackTitleLabelInsets))
-                    }
-                    
-                    it("should correctly set the imageView's frame") {
-                        expect(subject.trackImageView.frame).to(equal(trackImageViewFrame))
-                    }
-                    
-                    it("should send the trackImageView to the back of the track's view hierarchy") {
-                        expect(subject.track.subviews[0]).to(equal(subject.trackImageView))
-                    }
-                    
-                    it("should layout each section and add each as a subview of the track") {
-                        for section in dataSource.progressViewSections {
-                            expect(section.frame).to(equal(sectionFrame))
-                            expect(section.superview).to(equal(subject.track))
-                        }
-                    }
-                    
-                    it("should call the updateCornerRadius method") {
-                        expect(subject.updateCornerRadiusCalled).to(beTrue())
-                    }
-                }
-            }
+//            describe("Layout") {
+//                let numberOfSections: Int = 3
+//                var dataSource: MockMultiProgressViewDataSource!
+//
+//                beforeEach {
+//                    dataSource = MockMultiProgressViewDataSource(numberOfSections: numberOfSections)
+//                    subject.dataSource = dataSource
+//                }
+//
+//                context("When the layoutSubviews method is called") {
+//                    let trackFrame = CGRect(x: 1, y: 2, width: 3, height: 4)
+//                    let trackTitleLabelConstraints = [NSLayoutConstraint]()
+//                    let trackTitleLabelAlignment: AlignmentType = .topLeft
+//                    let trackTitleLabelInsets = UIEdgeInsets(top: 0, left: 1, bottom: 2, right: 3)
+//                    let trackImageViewFrame = CGRect(x: 5, y: 6, width: 7, height: 8)
+//                    let sectionFrame = CGRect(x: 9, y: 10, width: 11, height: 12)
+//
+//                    beforeEach {
+//                        mockLayoutProvider.testTrackFrame = trackFrame
+//                        mockLayoutProvider.testAnchorConstraints = trackTitleLabelConstraints
+//                        mockLayoutProvider.testSectionFrame = sectionFrame
+//                        mockLayoutProvider.testTrackImageViewFrame = trackImageViewFrame
+//
+//                        subject.trackTitleAlignment = trackTitleLabelAlignment
+//                        subject.trackTitleEdgeInsets = trackTitleLabelInsets
+//                        subject.layoutSubviews()
+//                    }
+//
+//                    afterEach {
+//                        mockLayoutProvider.reset()
+//                    }
+//
+//                    it("should correctly set the track's frame") {
+//                        expect(subject.track.frame).to(equal(trackFrame))
+//                    }
+//
+//                    it("should correctly layout the trackTitleLabel") {
+//                        expect(subject.trackTitleLabelConstraints).to(be(trackTitleLabelConstraints))
+//                        expect(mockLayoutProvider.anchorToSuperviewAlignment).to(equal(trackTitleLabelAlignment))
+//                        expect(mockLayoutProvider.anchorToSuperviewInsets).to(equal(trackTitleLabelInsets))
+//                    }
+//
+//                    it("should correctly set the imageView's frame") {
+//                        expect(subject.trackImageView.frame).to(equal(trackImageViewFrame))
+//                    }
+//
+//                    it("should send the trackImageView to the back of the track's view hierarchy") {
+//                        expect(subject.track.subviews[0]).to(equal(subject.trackImageView))
+//                    }
+//
+//                    it("should layout each section and add each as a subview of the track") {
+//                        for section in dataSource.progressViewSections {
+//                            expect(section.frame).to(equal(sectionFrame))
+//                            expect(section.superview).to(equal(subject.track))
+//                        }
+//                    }
+//
+//                    it("should call the updateCornerRadius method") {
+//                        expect(subject.updateCornerRadiusCalled).to(beTrue())
+//                    }
+//                }
+//            }
             
             // MARK: - Getter/Setter Methods
             
