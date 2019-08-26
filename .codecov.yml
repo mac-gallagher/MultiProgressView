@@ -7,16 +7,10 @@ coverage:
   round: down # round down coverage
   range: "70...100" # visual color range in codecov
   status:
-    project: # measures the overall project coverage and compares it against the base of the pull request or parent commit
-      default:
-        target: auto  # use the coverage from the base commit (pull request base or parent commit) coverage to compare against
-        threshold: null # if coverage drops, do not post a success status
-        base: auto # use the pull request base if the commit is on a pull request. If not, use the parent commit
+    project: yes # measures the overall project coverage and compares it against the base of the pull request or parent commit
     patch: # measures only the lines adjusted in the pull request or single commit, if the commit is not in a pull request
       default:
-        target: 100  # all new code should have 100% coverage
-        threshold: null
-        base: auto
+        target: 100% # all new code should have 100% coverage
     changes: yes # detect changes in coverage that are NOT included in the commit/pull diff, and report these changes as a commit status
 
 parsers:
