@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		0F33B13D1BCF84BE40120FC5 /* Pods_MultiProgressViewTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E594A8658F530A5575039A4 /* Pods_MultiProgressViewTests.framework */; };
 		AD0BF7FC2273C0DE0081722E /* CodingLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0BF7FB2273C0DE0081722E /* CodingLanguage.swift */; };
+		AD20667B238F5DAE00CAA61D /* MockProgressViewSectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD20667A238F5DAE00CAA61D /* MockProgressViewSectionDelegate.swift */; };
+		AD20667D238F5EEB00CAA61D /* TestableTapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD20667C238F5EEB00CAA61D /* TestableTapGestureRecognizer.swift */; };
+		AD20667F238F8CC200CAA61D /* MockProgressViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD20667E238F8CC200CAA61D /* MockProgressViewDelegate.swift */; };
 		AD3B3270225146B9006E0F14 /* MultiProgressView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD501273224B0E1600370157 /* MultiProgressView.framework */; };
 		AD3B329B22514B4E006E0F14 /* MockLayoutProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3B329122514B4E006E0F14 /* MockLayoutProvider.swift */; };
 		AD3B329C22514B4E006E0F14 /* MockMultiProgressViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3B329222514B4E006E0F14 /* MockMultiProgressViewDataSource.swift */; };
@@ -75,6 +78,9 @@
 		4E594A8658F530A5575039A4 /* Pods_MultiProgressViewTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MultiProgressViewTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D3DCEE1FF2C5A9C79322BC2 /* Pods-MultiProgressViewTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultiProgressViewTests.release.xcconfig"; path = "Target Support Files/Pods-MultiProgressViewTests/Pods-MultiProgressViewTests.release.xcconfig"; sourceTree = "<group>"; };
 		AD0BF7FB2273C0DE0081722E /* CodingLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodingLanguage.swift; sourceTree = "<group>"; };
+		AD20667A238F5DAE00CAA61D /* MockProgressViewSectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockProgressViewSectionDelegate.swift; sourceTree = "<group>"; };
+		AD20667C238F5EEB00CAA61D /* TestableTapGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestableTapGestureRecognizer.swift; sourceTree = "<group>"; };
+		AD20667E238F8CC200CAA61D /* MockProgressViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockProgressViewDelegate.swift; sourceTree = "<group>"; };
 		AD3B326B225146B9006E0F14 /* MultiProgressViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MultiProgressViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD3B32882251488A006E0F14 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		AD3B32892251488A006E0F14 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
@@ -168,6 +174,8 @@
 			children = (
 				AD3B329122514B4E006E0F14 /* MockLayoutProvider.swift */,
 				AD3B329222514B4E006E0F14 /* MockMultiProgressViewDataSource.swift */,
+				AD20667E238F8CC200CAA61D /* MockProgressViewDelegate.swift */,
+				AD20667A238F5DAE00CAA61D /* MockProgressViewSectionDelegate.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -187,6 +195,7 @@
 			children = (
 				AD3B329922514B4E006E0F14 /* TestableProgressViewSection.swift */,
 				AD3B329A22514B4E006E0F14 /* TestableMultiProgressView.swift */,
+				AD20667C238F5EEB00CAA61D /* TestableTapGestureRecognizer.swift */,
 			);
 			path = Testables;
 			sourceTree = "<group>";
@@ -529,10 +538,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD20667F238F8CC200CAA61D /* MockProgressViewDelegate.swift in Sources */,
 				AD3B329E22514B4E006E0F14 /* ProgressViewSectionSpec.swift in Sources */,
 				AD3B329C22514B4E006E0F14 /* MockMultiProgressViewDataSource.swift in Sources */,
+				AD20667B238F5DAE00CAA61D /* MockProgressViewSectionDelegate.swift in Sources */,
 				AD3B329D22514B4E006E0F14 /* MultiProgressViewSpec.swift in Sources */,
 				AD3B329B22514B4E006E0F14 /* MockLayoutProvider.swift in Sources */,
+				AD20667D238F5EEB00CAA61D /* TestableTapGestureRecognizer.swift in Sources */,
 				AD3B329F22514B4E006E0F14 /* LayoutProviderSpec.swift in Sources */,
 				AD3B32A222514B4E006E0F14 /* TestableMultiProgressView.swift in Sources */,
 				AD3B32A122514B4E006E0F14 /* TestableProgressViewSection.swift in Sources */,

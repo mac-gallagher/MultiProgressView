@@ -1,12 +1,8 @@
-//
-//  ProgressViewSection.swift
-//  MultiProgressView
-//
-//  Created by Mac Gallagher on 6/15/18.
-//  Copyright © 2018 Mac Gallagher. All rights reserved.
-//
-
 import UIKit
+
+protocol ProgressViewSectionDelegate: class {
+    func didTapSection(_ section: ProgressViewSection)
+}
 
 open class ProgressViewSection: UIView {
     
@@ -31,6 +27,15 @@ open class ProgressViewSection: UIView {
     public var imageView: UIImageView {
         return sectionImageView
     }
+    
+    var tapGestureRecognizer: UITapGestureRecognizer {
+        return tapRecognizer
+    }
+    
+    private lazy var tapRecognizer = UITapGestureRecognizer(target: self,
+                                                            action: #selector(didTap))
+    
+    weak var delegate: ProgressViewSectionDelegate?
     
     private var sectionImageView: UIImageView = UIImageView()
     
@@ -58,6 +63,13 @@ open class ProgressViewSection: UIView {
         layer.masksToBounds = true
         addSubview(sectionImageView)
         addSubview(sectionTitleLabel)
+        addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    // MARK: - Tap handler
+    
+    @objc func didTap() {
+        delegate?.didTapSection(self)
     }
     
     // MARK: - Layout

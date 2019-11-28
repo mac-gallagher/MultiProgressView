@@ -76,7 +76,7 @@ class LanguageExampleViewController: UIViewController {
     }
 }
 
-//MARK: - Data Source
+//MARK: - MultiProgressViewDataSource
 
 extension LanguageExampleViewController: MultiProgressViewDataSource {
     func numberOfSections(in progressView: MultiProgressView) -> Int {
@@ -96,5 +96,19 @@ extension LanguageExampleViewController: MultiProgressViewDataSource {
             break
         }
         return sectionView
+    }
+}
+
+// MARK: - MultiProgressViewDelegate
+
+extension LanguageExampleViewController: MultiProgressViewDelegate {
+    
+    func progressView(_ progressView: MultiProgressView, didTapSectionAt index: Int) {
+        for (progressViewIndex, view) in progressViews.enumerated() {
+            if view === progressView {
+                print("Tapped progressView \(progressViewIndex) at section \(index)")
+                break
+            }
+        }
     }
 }

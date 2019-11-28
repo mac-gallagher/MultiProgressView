@@ -1,17 +1,13 @@
-//
-//  MultiProgressView.swift
-//  MultiProgressView
-//
-//  Created by Mac Gallagher on 6/15/18.
-//  Copyright © 2018 Mac Gallagher. All rights reserved.
-//
-
 import UIKit
 
 @objc public protocol MultiProgressViewDataSource: class {
     func numberOfSections(in progressView: MultiProgressView) -> Int
     func progressView(_ progressView: MultiProgressView,
                       viewForSection section: Int) -> ProgressViewSection
+}
+
+@objc public protocol MultiProgressViewDelegate: class {
+    @objc optional func progressView(_ progressView: MultiProgressView, didTapSectionAt index: Int)
 }
 
 @IBDesignable
@@ -22,6 +18,8 @@ open class MultiProgressView: UIView {
             reloadData()
         }
     }
+    
+    @IBOutlet public weak var delegate: MultiProgressViewDelegate?
     
     @IBInspectable public var cornerRadius: CGFloat = 0 {
         didSet {
@@ -107,7 +105,9 @@ open class MultiProgressView: UIView {
         return view
     }()
     
-    var progressViewSections: [ProgressViewSection] = []
+    /// A map containing the sections of the progress view.
+    /// The key is the section and the value is the section's index in the progress view.
+    var progressViewSections: [ProgressViewSection: Int] = [:]
     
     private var numberOfSections: Int = 0
     private var currentProgress: [Float] = []
@@ -158,7 +158,7 @@ open class MultiProgressView: UIView {
     }
     
     private func layoutSections() {
-        for (index, section) in progressViewSections.enumerated() {
+        for (section, index) in progressViewSections {
             section.frame = layoutProvider.sectionFrame(self, index)
             track.bringSubviewToFront(section)
         }
@@ -175,7 +175,7 @@ open class MultiProgressView: UIView {
         guard let dataSource = dataSource else { return }
         numberOfSections = dataSource.numberOfSections(in: self)
         
-        progressViewSections.forEach { $0.removeFromSuperview() }
+        progressViewSections.keys.forEach { $0.removeFromSuperview() }
         progressViewSections.removeAll()
         currentProgress.removeAll()
         
@@ -187,7 +187,8 @@ open class MultiProgressView: UIView {
     private func configureSection(withDataSource dataSource: MultiProgressViewDataSource,
                                   _ section: Int) {
         let bar = dataSource.progressView(self, viewForSection: section)
-        progressViewSections.insert(bar, at: section)
+        bar.delegate = self
+        progressViewSections[bar] = section
         track.addSubview(bar)
         currentProgress.insert(0, at: section)
     }
@@ -221,6 +222,17 @@ open class MultiProgressView: UIView {
     public func resetProgress() {
         for section in 0..<progressViewSections.count {
             setProgress(section: section, to: 0)
+        }
+    }
+}
+
+// MARK: - ProgressViewSectionDelegate
+
+extension MultiProgressView: ProgressViewSectionDelegate {
+    
+    func didTapSection(_ section: ProgressViewSection) {
+        if let index = progressViewSections[section] {
+            delegate?.progressView?(self, didTapSectionAt: index)
         }
     }
 }

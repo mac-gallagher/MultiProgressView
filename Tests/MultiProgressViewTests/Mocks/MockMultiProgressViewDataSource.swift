@@ -1,11 +1,3 @@
-//
-//  MockMultiProgressViewDataSource.swift
-//  MultiProgressViewTests
-//
-//  Created by Mac Gallagher on 3/1/19.
-//  Copyright © 2019 Mac Gallagher. All rights reserved.
-//
-
 import MultiProgressView
 
 class MockMultiProgressViewDataSource: MultiProgressViewDataSource {

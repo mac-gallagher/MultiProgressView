@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -46,6 +44,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="dataSource" destination="0wb-Cb-WUL" id="uad-jp-Zwy"/>
+                                            <outlet property="delegate" destination="0wb-Cb-WUL" id="SS4-fz-to2"/>
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aqx-CJ-eFd" customClass="LanguageExampleProgressView" customModule="MultiProgressViewExample" customModuleProvider="target">
@@ -73,6 +72,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="dataSource" destination="0wb-Cb-WUL" id="oxv-8k-Fp4"/>
+                                            <outlet property="delegate" destination="0wb-Cb-WUL" id="gMg-bN-CTQ"/>
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CWo-Hk-zOo" customClass="LanguageExampleProgressView" customModule="MultiProgressViewExample" customModuleProvider="target">
@@ -100,6 +100,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="dataSource" destination="0wb-Cb-WUL" id="Fk9-lG-EyR"/>
+                                            <outlet property="delegate" destination="0wb-Cb-WUL" id="WJC-E7-xgA"/>
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yei-zF-C21" customClass="LanguageExampleProgressView" customModule="MultiProgressViewExample" customModuleProvider="target">
@@ -127,6 +128,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="dataSource" destination="0wb-Cb-WUL" id="mmq-QZ-Qva"/>
+                                            <outlet property="delegate" destination="0wb-Cb-WUL" id="MHC-iU-0sI"/>
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TJ5-4x-gVc" customClass="LanguageExampleProgressView" customModule="MultiProgressViewExample" customModuleProvider="target">
@@ -154,6 +156,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="dataSource" destination="0wb-Cb-WUL" id="tIM-3R-UK6"/>
+                                            <outlet property="delegate" destination="0wb-Cb-WUL" id="5kH-zF-2Nw"/>
                                         </connections>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Languages" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s77-Sh-QnM">

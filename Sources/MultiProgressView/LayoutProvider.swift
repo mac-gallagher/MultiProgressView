@@ -1,11 +1,3 @@
-//
-//  LayoutProvider.swift
-//  MultiProgressView
-//
-//  Created by Mac Gallagher on 3/5/19.
-//  Copyright © 2019 Mac Gallagher. All rights reserved.
-//
-
 import UIKit
 
 protocol LayoutProvidable {
@@ -81,9 +73,9 @@ struct LayoutProvider: LayoutProvidable {
             let size = CGSize(width: width, height: trackBounds.height)
             
             var origin: CGPoint = trackBounds.origin
-            for index in 0..<progressView.progressViewSections.count {
+            for (bar, index) in progressView.progressViewSections {
                 if index < section {
-                    origin.x += progressView.progressViewSections[index].frame.width
+                    origin.x += bar.frame.width
                 }
             }
             

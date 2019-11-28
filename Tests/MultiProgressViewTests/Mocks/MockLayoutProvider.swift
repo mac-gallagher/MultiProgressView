@@ -1,11 +1,3 @@
-//
-//  MockLayoutProvider.swift
-//  MultiProgressViewTests
-//
-//  Created by Mac Gallagher on 3/6/19.
-//  Copyright © 2019 Mac Gallagher. All rights reserved.
-//
-
 @testable import MultiProgressView
 
 struct MockLayoutProvider: LayoutProvidable {
