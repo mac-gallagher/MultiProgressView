@@ -1,4 +1,4 @@
-osx_image: xcode10.2
+osx_image: xcode11.2
 language: swift
 xcode_workspace: MultiProgressView.xcworkspace
 xcode_scheme: MultiProgressView
@@ -6,7 +6,7 @@ xcode_destination: platform=iOS Simulator,OS=9.0,name=iPhone 6
 
 # run tests
 script:
-  - xcodebuild test -workspace MultiProgressView.xcworkspace -scheme MultiProgressView -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone X,OS=12.2'
+  - xcodebuild test -workspace MultiProgressView.xcworkspace -scheme MultiProgressView -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11,OS=13.2.2'
 
 # upload codecov report
 after_success:
