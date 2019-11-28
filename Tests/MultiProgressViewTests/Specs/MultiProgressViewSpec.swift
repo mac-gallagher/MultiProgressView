@@ -1,11 +1,3 @@
-//
-//  MultiProgressViewSpec.swift
-//  MultiProgressViewTests
-//
-//  Created by Mac Gallagher on 12/26/18.
-//  Copyright © 2018 Mac Gallagher. All rights reserved.
-//
-
 import Quick
 import Nimble
 
@@ -340,6 +332,12 @@ class MultiProgressViewSpec: QuickSpec {
                         }
                     }
                     
+                    it("should correctly set the delegate for each section") {
+                        for section in dataSource.progressViewSections {
+                            expect(section.delegate).to(be(subject))
+                        }
+                    }
+                    
                     it("should call the updateCornerRadius method") {
                         expect(subject.updateCornerRadiusCalled).to(beTrue())
                     }
@@ -416,6 +414,32 @@ class MultiProgressViewSpec: QuickSpec {
                 }
             }
             
+            // MARK: - Did Tap Section At
+            
+            describe("Did Tap Section At") {
+                context("When calling the didTapSectionAt method") {
+                    let numberOfSections = 5
+                    let index = 3
+                    var dataSource: MockMultiProgressViewDataSource!
+                    var delegate: MockMultiProgressViewDelegate!
+                    
+                    beforeEach {
+                        dataSource = MockMultiProgressViewDataSource(numberOfSections: numberOfSections)
+                        delegate = MockMultiProgressViewDelegate()
+                        subject.dataSource = dataSource
+                        subject.delegate = delegate
+                        
+                        let testSection = dataSource.progressViewSections[index]
+                        subject.didTapSection(testSection)
+                    }
+                    
+                    it("should call the delegate's didTapSectionAt method with the correct section index") {
+                        expect(delegate.didTapSectionAtCalled).to(beTrue())
+                        expect(delegate.didTapSectionIndex).to(equal(index))
+                    }
+                }
+            }
+            
             // MARK: - Reload Data
             
             describe("Reload Data") {
@@ -458,10 +482,12 @@ class MultiProgressViewSpec: QuickSpec {
                         expect(subject.progressViewSections.count).to(equal(numberOfSections))
                     }
                     
-                    it("should add the sections in the correct order and remove any previous data") {
+                    it("should add the section/index pairs to the dictionary and remove any previous data") {
                         for index in 0..<numberOfSections {
-                            let section = dataSource.progressViewSections[index]
-                            expect(subject.progressViewSections[index]).to(be(section))
+                            let expectedSection = dataSource.progressViewSections[index]
+                            let actualSections = subject.progressViewSections.filter({ $0.value == index }).keys
+                            expect(actualSections.count).to(equal(1))
+                            expect(actualSections.first).to(be(expectedSection))
                         }
                     }
                     

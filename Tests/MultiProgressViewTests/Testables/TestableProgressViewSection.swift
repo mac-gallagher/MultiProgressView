@@ -1,14 +1,13 @@
-//
-//  TestableProgressViewSection.swift
-//  MultiProgressViewTests
-//
-//  Created by Mac Gallagher on 3/8/19.
-//  Copyright © 2019 Mac Gallagher. All rights reserved.
-//
-
-import MultiProgressView
+@testable import MultiProgressView
 
 class TestableProgressViewSection: ProgressViewSection {
+    
+    override var tapGestureRecognizer: UITapGestureRecognizer {
+        return tapRecognizer
+    }
+    
+    private lazy var tapRecognizer = TestableTapGestureRecognizer(target: self,
+                                                                  action: #selector(didTap))
     
     var setNeedsLayoutCalled: Bool = false
     override func setNeedsLayout() {

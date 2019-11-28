@@ -1,11 +1,3 @@
-//
-//  ProgressViewSectionSpec.swift
-//  MultiProgressViewTests
-//
-//  Created by Mac Gallagher on 12/26/18.
-//  Copyright © 2018 Mac Gallagher. All rights reserved.
-//
-
 import Quick
 import Nimble
 
@@ -57,6 +49,7 @@ class ProgressViewSectionSpec: QuickSpec {
                     expect(section.layer.masksToBounds).to(beTrue())
                     expect(section.subviews.contains(section.imageView)).to(beTrue())
                     expect(section.subviews.contains(section.titleLabel)).to(beTrue())
+                    expect(section.gestureRecognizers?.count).to(equal(1))
                 }
             }
             
@@ -123,6 +116,26 @@ class ProgressViewSectionSpec: QuickSpec {
                     
                     it("should send the the imageView to the back of the view hierarchy") {
                         expect(subject.sendSubviewToBackView).to(be(subject.imageView))
+                    }
+                }
+            }
+            
+            // MARK: - Tap Gesture Recognizer
+            
+            describe("Tap Gesture Recognizer") {
+                context("When performing a tap on the section") {
+                    var mockDelegate: MockProgressViewSectionDelegate!
+                    
+                    beforeEach {
+                        mockDelegate = MockProgressViewSectionDelegate()
+                        subject.delegate = mockDelegate
+                        
+                        let tapGestureRecognizer = subject.tapGestureRecognizer as? TestableTapGestureRecognizer
+                        tapGestureRecognizer?.performTap(withLocation: .zero)
+                    }
+                    
+                    it("should call the delegate's didTapSection method") {
+                        expect(mockDelegate.didTapSectionCalled).to(beTrue())
                     }
                 }
             }

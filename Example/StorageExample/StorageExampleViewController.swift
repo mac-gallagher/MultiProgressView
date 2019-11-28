@@ -108,6 +108,7 @@ class StorageExampleViewController: UIViewController {
                             paddingRight: padding,
                             height: progressViewHeight)
         progressView.dataSource = self
+        progressView.delegate = self
     }
     
     private func setupStackView() {
@@ -190,7 +191,7 @@ class StorageExampleViewController: UIViewController {
     }
 }
 
-//MARK: - Data Source
+//MARK: - MultiProgressViewDataSource
 
 extension StorageExampleViewController: MultiProgressViewDataSource {
     public func numberOfSections(in progressBar: MultiProgressView) -> Int {
@@ -201,5 +202,14 @@ extension StorageExampleViewController: MultiProgressViewDataSource {
         let bar = StorageProgressSection()
         bar.configure(withStorageType: StorageType(rawValue: section) ?? .other)
         return bar
+    }
+}
+
+// MARK: - MultiProgressViewDelegate
+
+extension StorageExampleViewController: MultiProgressViewDelegate {
+    
+    func progressView(_ progressView: MultiProgressView, didTapSectionAt index: Int) {
+        print("Tapped section \(index)")
     }
 }

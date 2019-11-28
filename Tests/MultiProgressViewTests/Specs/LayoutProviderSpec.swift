@@ -1,11 +1,3 @@
-//
-//  LayoutProviderSpec.swift
-//  MultiProgressViewTests
-//
-//  Created by Mac Gallagher on 3/5/19.
-//  Copyright © 2019 Mac Gallagher. All rights reserved.
-//
-
 import Quick
 import Nimble
 
@@ -33,7 +25,7 @@ class LayoutProviderSpec: QuickSpec {
                 progressView.dataSource = mockDataSource
             }
             
-            //MARK: - Track Frame
+            // MARK: - Track Frame
             
             describe("Track Frame") {
                 context("When calling the trackFrame function") {
@@ -89,7 +81,7 @@ class LayoutProviderSpec: QuickSpec {
                     }
                 }
             }
-            //MARK: - Section Frame
+            // MARK: - Section Frame
             
             describe("Section Frame") {
                 context("When calling the sectionFrame function") {
@@ -140,7 +132,8 @@ class LayoutProviderSpec: QuickSpec {
                         let progress: Float = 0.2
                         
                         beforeEach {
-                            progressView.progressViewSections[0].frame = firstSectionFrame
+                            let firstSection = progressView.progressViewSections.first(where: { $0.value == 0 })?.key
+                            firstSection?.frame = firstSectionFrame
                             progressView.setProgress(section: section, to: progress)
                         }
                         
@@ -159,7 +152,7 @@ class LayoutProviderSpec: QuickSpec {
                 }
             }
             
-            //MARK: - Track Image View Frame
+            // MARK: - Track Image View Frame
             
             describe("Track Image View Frame") {
                 context("When calling the trackImageViewFrame function") {
@@ -176,15 +169,14 @@ class LayoutProviderSpec: QuickSpec {
                 }
             }
             
-            //MARK: - Section Image View Frame
+            // MARK: - Section Image View Frame
             
             describe("Section Image View Frame") {
                 context("When calling the sectionImageViewFrame function") {
                     let sectionBounds = CGRect(x: 1, y: 2, width: 3, height: 4)
-                    var section: ProgressViewSection!
+                    let section = ProgressViewSection()
                     
                     beforeEach {
-                        section = progressView.progressViewSections[0]
                         section.bounds = sectionBounds
                     }
                     
@@ -195,7 +187,7 @@ class LayoutProviderSpec: QuickSpec {
                 }
             }
             
-            //MARK: - Corner Radius
+            // MARK: - Corner Radius
             
             describe("Corner Radius") {
                 context("When calling the cornerRadius function") {
@@ -253,7 +245,7 @@ class LayoutProviderSpec: QuickSpec {
                 }
             }
             
-            //MARK: - Track Corner Radius
+            // MARK: - Track Corner Radius
             
             describe("Track Corner Radius") {
                 context("When calling the trackCornerRadius function") {
@@ -318,7 +310,7 @@ class LayoutProviderSpec: QuickSpec {
                 }
             }
             
-            //MARK: Layout Anchoring
+            // MARK: Layout Anchoring
             
             describe("Layout Anchoring") {
                 context("When calling the anchorToSuperview function") {
@@ -469,7 +461,7 @@ class LayoutProviderSpec: QuickSpec {
     }
 }
 
-//MARK: - NSLayoutConstraint Testable Helpers
+// MARK: - NSLayoutConstraint Testable Helpers
 
 extension NSLayoutConstraint {
     open override func isEqual(_ object: Any?) -> Bool {
