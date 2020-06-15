@@ -136,7 +136,7 @@ open class MultiProgressView: UIView {
   private var numberOfSections: Int = 0
   private var currentProgress: [Float] = []
 
-  private var layoutProvider: LayoutProvidable.Type = LayoutProvider.self
+  private var layoutProvider: LayoutProvidable = LayoutProvider.shared
 
   // MARK: - Initialization
 
@@ -150,7 +150,7 @@ open class MultiProgressView: UIView {
     initialize()
   }
 
-  convenience init(layoutProvider: LayoutProvidable.Type) {
+  convenience init(layoutProvider: LayoutProvidable) {
     self.init(frame: .zero)
     self.layoutProvider = layoutProvider
   }
@@ -183,7 +183,7 @@ open class MultiProgressView: UIView {
 
   private func layoutSections() {
     for (section, index) in progressViewSections {
-      section.frame = layoutProvider.sectionFrame(self, index)
+      section.frame = layoutProvider.sectionFrame(self, section: index)
       track.bringSubviewToFront(section)
     }
   }

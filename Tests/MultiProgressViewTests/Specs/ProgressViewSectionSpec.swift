@@ -30,10 +30,11 @@ import Nimble
 class ProgressViewSectionSpec: QuickSpec {
   override func spec() {
     describe("ProgressViewSection") {
-      let mockLayoutProvider = MockLayoutProvider.self
+      var mockLayoutProvider: MockLayoutProvider!
       var subject: TestableProgressViewSection!
 
       beforeEach {
+        mockLayoutProvider = MockLayoutProvider()
         subject = TestableProgressViewSection(layoutProvider: mockLayoutProvider)
       }
 
@@ -122,10 +123,6 @@ class ProgressViewSectionSpec: QuickSpec {
             subject.titleAlignment = titleAlignment
             subject.titleEdgeInsets = titleEdgeInsets
             subject.layoutSubviews()
-          }
-
-          afterEach {
-            mockLayoutProvider.reset()
           }
 
           it("should correctly set the title label's constraints") {

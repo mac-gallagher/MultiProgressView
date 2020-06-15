@@ -33,10 +33,10 @@ class LayoutProviderSpec: QuickSpec {
       let numberOfSections: Int = 2
       let progressViewWidth: CGFloat = 200
       let progressViewHeight: CGFloat = 50
-      let subject = LayoutProvider.self
 
       var mockDataSource: MockMultiProgressViewDataSource!
       var progressView: TestableMultiProgressView!
+      var subject: LayoutProvider!
 
       beforeEach {
         mockDataSource = MockMultiProgressViewDataSource(numberOfSections: numberOfSections)
@@ -47,6 +47,8 @@ class LayoutProviderSpec: QuickSpec {
         progressView = TestableMultiProgressView()
         progressView.frame = progressViewFrame
         progressView.dataSource = mockDataSource
+
+        subject = LayoutProvider()
       }
 
       // MARK: - Track Frame
@@ -124,7 +126,7 @@ class LayoutProviderSpec: QuickSpec {
             }
 
             it("should return the correct frame with zero width") {
-              let actualFrame = subject.sectionFrame(progressView, section)
+              let actualFrame = subject.sectionFrame(progressView, section: section)
               let expectedFrame = CGRect(x: trackBounds.origin.x,
                                          y: trackBounds.origin.y,
                                          width: 0,
@@ -141,7 +143,7 @@ class LayoutProviderSpec: QuickSpec {
             }
 
             it("should return the correct frame with the proper width") {
-              let actualFrame = subject.sectionFrame(progressView, section)
+              let actualFrame = subject.sectionFrame(progressView, section: section)
               let expectedWidth = trackBounds.width * CGFloat(progress)
               let expectedFrame = CGRect(x: trackBounds.origin.x,
                                          y: trackBounds.origin.y,
@@ -162,7 +164,7 @@ class LayoutProviderSpec: QuickSpec {
             }
 
             it("should return the correct frame with the proper width and origin") {
-              let actualFrame = subject.sectionFrame(progressView, section)
+              let actualFrame = subject.sectionFrame(progressView, section: section)
 
               let expectedOrigin = CGPoint(x: trackBounds.origin.x + firstSectionFrame.width,
                                            y: trackBounds.origin.y)

@@ -24,74 +24,48 @@
 
 @testable import MultiProgressView
 
-struct MockLayoutProvider: LayoutProvidable {
+class MockLayoutProvider: LayoutProvidable {
 
-  static var testTrackFrame: CGRect = .zero
-  static var trackFrame: (MultiProgressView) -> CGRect {
-    return { _ in
-      return testTrackFrame
-    }
+  var testTrackFrame: CGRect = .zero
+  func trackFrame(_ progressView: MultiProgressView) -> CGRect {
+    return testTrackFrame
   }
 
-  static var testTrackImageViewFrame: CGRect = .zero
-  static var trackImageViewFrame: (MultiProgressView) -> CGRect {
-    return { _ in
-      return testTrackImageViewFrame
-    }
+  var testTrackImageViewFrame: CGRect = .zero
+  func trackImageViewFrame(_ progressView: MultiProgressView) -> CGRect {
+    return testTrackImageViewFrame
   }
 
-  static var testSectionImageViewFrame: CGRect = .zero
-  static var sectionImageViewFrame: (ProgressViewSection) -> CGRect {
-    return { _ in
-      return testSectionImageViewFrame
-    }
+  var testCornerRadius: CGFloat = 0.0
+  func cornerRadius(_ progressView: MultiProgressView) -> CGFloat {
+    return testCornerRadius
   }
 
-  static var testSectionFrame: CGRect = .zero
-  static var sectionFrame: (MultiProgressView, Int) -> CGRect {
-    return { _, _ in
-      return testSectionFrame
-    }
+  var testTrackCornerRadius: CGFloat = 0.0
+  func trackCornerRadius(_ progressView: MultiProgressView) -> CGFloat {
+    return testTrackCornerRadius
   }
 
-  static var testCornerRadius: CGFloat = 0.0
-  static var cornerRadius: (MultiProgressView) -> CGFloat {
-    return { _ in
-      return testCornerRadius
-    }
+  var testSectionFrame: CGRect = .zero
+  func sectionFrame(_ progressView: MultiProgressView, section: Int) -> CGRect {
+    return testSectionFrame
   }
 
-  static var testTrackCornerRadius: CGFloat = 0.0
-  static var trackCornerRadius: (MultiProgressView) -> CGFloat {
-    return { _ in
-      return testTrackCornerRadius
-    }
+  var testSectionImageViewFrame: CGRect = .zero
+  func sectionImageViewFrame(_ section: ProgressViewSection) -> CGRect {
+    return testSectionImageViewFrame
   }
 
-  static var testAnchorConstraints: [NSLayoutConstraint] = []
-  static var anchorToSuperviewAlignment: AlignmentType?
-  static var anchorToSuperviewInsets: UIEdgeInsets?
 
-  static func anchorToSuperview(_ view: UIView,
-                                withAlignment alignment: AlignmentType,
-                                insets: UIEdgeInsets) -> [NSLayoutConstraint] {
+  var testAnchorConstraints: [NSLayoutConstraint] = []
+  var anchorToSuperviewAlignment: AlignmentType?
+  var anchorToSuperviewInsets: UIEdgeInsets?
+
+  func anchorToSuperview(_ view: UIView,
+                         withAlignment alignment: AlignmentType,
+                         insets: UIEdgeInsets) -> [NSLayoutConstraint] {
     anchorToSuperviewAlignment = alignment
     anchorToSuperviewInsets = insets
     return testAnchorConstraints
-  }
-
-  // MARK: - Test Helpers
-
-  static func reset() {
-    testTrackFrame = .zero
-    testTrackImageViewFrame = .zero
-    testSectionImageViewFrame = .zero
-    testSectionFrame = .zero
-    testCornerRadius = 0.0
-    testTrackCornerRadius = 0.0
-
-    testAnchorConstraints = []
-    anchorToSuperviewAlignment = nil
-    anchorToSuperviewInsets = nil
   }
 }
