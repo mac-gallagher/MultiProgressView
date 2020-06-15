@@ -10,15 +10,15 @@ import UIKit
 import MultiProgressView
 
 class StorageProgressSection: ProgressViewSection {
-    private let rightBorder: UIView = {
-        let border = UIView()
-        border.backgroundColor = .white
-        return border
-    }()
-    
-    func configure(withStorageType storageType: StorageType) {
-        addSubview(rightBorder)
-        rightBorder.anchor(top: topAnchor, bottom: bottomAnchor, right: rightAnchor, width: 1)
-        backgroundColor = storageType.color
-    }
+  private let rightBorder: UIView = {
+    let border = UIView()
+    border.backgroundColor = .white
+    return border
+  }()
+
+  func configure(withStorageType storageType: StorageType) {
+    addSubview(rightBorder)
+    rightBorder.anchor(top: topAnchor, bottom: bottomAnchor, right: rightAnchor, width: 1)
+    backgroundColor = storageType.color
+  }
 }
