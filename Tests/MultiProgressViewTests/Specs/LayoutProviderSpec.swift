@@ -26,8 +26,9 @@
 import Nimble
 import Quick
 
+// swiftlint:disable function_body_length implicitly_unwrapped_optional closure_body_length
 class LayoutProviderSpec: QuickSpec {
-  
+
   override func spec() {
     let numberOfSections: Int = 2
     let progressViewWidth: CGFloat = 200
@@ -40,7 +41,8 @@ class LayoutProviderSpec: QuickSpec {
     beforeEach {
       mockDataSource = MockMultiProgressViewDataSource(numberOfSections: numberOfSections)
 
-      let progressViewFrame = CGRect(x: 0, y: 0,
+      let progressViewFrame = CGRect(x: 0,
+                                     y: 0,
                                      width: progressViewWidth,
                                      height: progressViewHeight)
       progressView = TestableMultiProgressView()
@@ -71,7 +73,7 @@ class LayoutProviderSpec: QuickSpec {
                                        y: trackInset,
                                        width: progressViewWidth,
                                        height: progressViewHeight - 2 * trackInset)
-            expect(actualFrame).to(equal(expectedFrame))
+            expect(actualFrame) == expectedFrame
           }
         }
 
@@ -86,7 +88,7 @@ class LayoutProviderSpec: QuickSpec {
                                        y: trackInset,
                                        width: progressViewWidth - 2 * trackInset,
                                        height: progressViewHeight - 2 * trackInset)
-            expect(actualFrame).to(equal(expectedFrame))
+            expect(actualFrame) == expectedFrame
           }
         }
 
@@ -101,7 +103,7 @@ class LayoutProviderSpec: QuickSpec {
                                        y: trackInset,
                                        width: progressViewWidth - 2 * trackInset,
                                        height: progressViewHeight - 2 * trackInset)
-            expect(actualFrame).to(equal(expectedFrame))
+            expect(actualFrame) == expectedFrame
           }
         }
       }
@@ -131,7 +133,7 @@ class LayoutProviderSpec: QuickSpec {
                                        y: trackBounds.origin.y,
                                        width: 0,
                                        height: trackBounds.height)
-            expect(actualFrame).to(equal(expectedFrame))
+            expect(actualFrame) == expectedFrame
           }
         }
 
@@ -149,7 +151,7 @@ class LayoutProviderSpec: QuickSpec {
                                        y: trackBounds.origin.y,
                                        width: expectedWidth,
                                        height: trackBounds.height)
-            expect(actualFrame).to(equal(expectedFrame))
+            expect(actualFrame) == expectedFrame
           }
         }
 
@@ -172,7 +174,7 @@ class LayoutProviderSpec: QuickSpec {
                                       height: trackBounds.height)
             let expectedFrame = CGRect(origin: expectedOrigin, size: expectedSize)
 
-            expect(actualFrame).to(equal(expectedFrame))
+            expect(actualFrame) == expectedFrame
           }
         }
       }
@@ -189,7 +191,7 @@ class LayoutProviderSpec: QuickSpec {
 
       it("should return the track's bounds") {
         let actualFrame = subject.trackImageViewFrame(progressView)
-        expect(actualFrame).to(equal(trackBounds))
+        expect(actualFrame) == trackBounds
       }
     }
 
@@ -205,7 +207,7 @@ class LayoutProviderSpec: QuickSpec {
 
       it("should return the section's bounds") {
         let actualFrame = subject.sectionImageViewFrame(section)
-        expect(actualFrame).to(equal(sectionBounds))
+        expect(actualFrame) == sectionBounds
       }
     }
 
@@ -219,7 +221,7 @@ class LayoutProviderSpec: QuickSpec {
 
         it("should return zero") {
           let actualCornerRadius = subject.cornerRadius(progressView)
-          expect(actualCornerRadius).to(equal(0))
+          expect(actualCornerRadius) == 0
         }
       }
 
@@ -230,7 +232,7 @@ class LayoutProviderSpec: QuickSpec {
 
         it("should return zero") {
           let actualCornerRadius = subject.cornerRadius(progressView)
-          expect(actualCornerRadius).to(equal(0))
+          expect(actualCornerRadius) == 0
         }
       }
 
@@ -246,7 +248,7 @@ class LayoutProviderSpec: QuickSpec {
 
           it("should return half the height of the progressView") {
             let actualCornerRadius = subject.cornerRadius(progressView)
-            expect(actualCornerRadius).to(equal(progressViewHeight / 2))
+            expect(actualCornerRadius) == progressViewHeight / 2
           }
         }
 
@@ -259,7 +261,7 @@ class LayoutProviderSpec: QuickSpec {
 
           it("should return the progressView's corner radius") {
             let actualCornerRadius = subject.cornerRadius(progressView)
-            expect(actualCornerRadius).to(equal(cornerRadius))
+            expect(actualCornerRadius) == cornerRadius
           }
         }
       }
@@ -275,7 +277,7 @@ class LayoutProviderSpec: QuickSpec {
 
         it("should return zero") {
           let actualCornerRadius = subject.trackCornerRadius(progressView)
-          expect(actualCornerRadius).to(equal(0))
+          expect(actualCornerRadius) == 0
         }
       }
 
@@ -286,7 +288,7 @@ class LayoutProviderSpec: QuickSpec {
 
         it("should return zero") {
           let actualCornerRadius = subject.trackCornerRadius(progressView)
-          expect(actualCornerRadius).to(equal(0))
+          expect(actualCornerRadius) == 0
         }
       }
 
@@ -305,7 +307,7 @@ class LayoutProviderSpec: QuickSpec {
 
           it("should return half the height of the track") {
             let actualCornerRadius = subject.trackCornerRadius(progressView)
-            expect(actualCornerRadius).to(equal(trackBounds.height / 2))
+            expect(actualCornerRadius) == trackBounds.height / 2
           }
         }
 
@@ -322,7 +324,7 @@ class LayoutProviderSpec: QuickSpec {
           it("should return the correct scaled corner radius") {
             let actualCornerRadius = subject.trackCornerRadius(progressView)
             let expectedCornerRaduis = cornerRadiusFactor * trackBounds.height
-            expect(actualCornerRadius).to(equal(expectedCornerRaduis))
+            expect(actualCornerRadius) == expectedCornerRaduis
           }
         }
       }
@@ -343,7 +345,7 @@ class LayoutProviderSpec: QuickSpec {
           let actualConstraints = subject.anchorToSuperview(view,
                                                             withAlignment: .bottom,
                                                             insets: insets)
-          expect(actualConstraints).to(equal([]))
+          expect(actualConstraints) == []
         }
       }
 
@@ -378,9 +380,9 @@ class LayoutProviderSpec: QuickSpec {
             let actualConstraints = subject.anchorToSuperview(view,
                                                               withAlignment: .top,
                                                               insets: insets)
-            expect(actualConstraints.count).to(equal(2))
-            expect(actualConstraints.contains(centerXConstraint)).to(beTrue())
-            expect(actualConstraints.contains(topConstraint)).to(beTrue())
+            expect(actualConstraints.count) == 2
+            expect(actualConstraints.contains(centerXConstraint)) == true
+            expect(actualConstraints.contains(topConstraint)) == true
           }
         }
 
@@ -389,9 +391,9 @@ class LayoutProviderSpec: QuickSpec {
             let actualConstraints = subject.anchorToSuperview(view,
                                                               withAlignment: .topLeft,
                                                               insets: insets)
-            expect(actualConstraints.count).to(equal(2))
-            expect(actualConstraints.contains(topConstraint)).to(beTrue())
-            expect(actualConstraints.contains(leftConstraint)).to(beTrue())
+            expect(actualConstraints.count) == 2
+            expect(actualConstraints.contains(topConstraint)) == true
+            expect(actualConstraints.contains(leftConstraint)) == true
           }
         }
 
@@ -400,9 +402,9 @@ class LayoutProviderSpec: QuickSpec {
             let actualConstraints = subject.anchorToSuperview(view,
                                                               withAlignment: .left,
                                                               insets: insets)
-            expect(actualConstraints.count).to(equal(2))
-            expect(actualConstraints.contains(centerYConstraint)).to(beTrue())
-            expect(actualConstraints.contains(leftConstraint)).to(beTrue())
+            expect(actualConstraints.count) == 2
+            expect(actualConstraints.contains(centerYConstraint)) == true
+            expect(actualConstraints.contains(leftConstraint)) == true
           }
         }
 
@@ -411,9 +413,9 @@ class LayoutProviderSpec: QuickSpec {
             let actualConstraints = subject.anchorToSuperview(view,
                                                               withAlignment: .bottomLeft,
                                                               insets: insets)
-            expect(actualConstraints.count).to(equal(2))
-            expect(actualConstraints.contains(bottomConstraint)).to(beTrue())
-            expect(actualConstraints.contains(leftConstraint)).to(beTrue())
+            expect(actualConstraints.count) == 2
+            expect(actualConstraints.contains(bottomConstraint)) == true
+            expect(actualConstraints.contains(leftConstraint)) == true
           }
         }
 
@@ -422,9 +424,9 @@ class LayoutProviderSpec: QuickSpec {
             let actualConstraints = subject.anchorToSuperview(view,
                                                               withAlignment: .bottom,
                                                               insets: insets)
-            expect(actualConstraints.count).to(equal(2))
-            expect(actualConstraints.contains(centerXConstraint)).to(beTrue())
-            expect(actualConstraints.contains(bottomConstraint)).to(beTrue())
+            expect(actualConstraints.count) == 2
+            expect(actualConstraints.contains(centerXConstraint)) == true
+            expect(actualConstraints.contains(bottomConstraint)) == true
           }
         }
 
@@ -433,9 +435,9 @@ class LayoutProviderSpec: QuickSpec {
             let actualConstraints = subject.anchorToSuperview(view,
                                                               withAlignment: .bottomRight,
                                                               insets: insets)
-            expect(actualConstraints.count).to(equal(2))
-            expect(actualConstraints.contains(bottomConstraint)).to(beTrue())
-            expect(actualConstraints.contains(rightConstraint)).to(beTrue())
+            expect(actualConstraints.count) == 2
+            expect(actualConstraints.contains(bottomConstraint)) == true
+            expect(actualConstraints.contains(rightConstraint)) == true
           }
         }
 
@@ -444,9 +446,9 @@ class LayoutProviderSpec: QuickSpec {
             let actualConstraints = subject.anchorToSuperview(view,
                                                               withAlignment: .right,
                                                               insets: insets)
-            expect(actualConstraints.count).to(equal(2))
-            expect(actualConstraints.contains(centerYConstraint)).to(beTrue())
-            expect(actualConstraints.contains(rightConstraint)).to(beTrue())
+            expect(actualConstraints.count) == 2
+            expect(actualConstraints.contains(centerYConstraint)) == true
+            expect(actualConstraints.contains(rightConstraint)) == true
           }
         }
 
@@ -455,9 +457,9 @@ class LayoutProviderSpec: QuickSpec {
             let actualConstraints = subject.anchorToSuperview(view,
                                                               withAlignment: .topRight,
                                                               insets: insets)
-            expect(actualConstraints.count).to(equal(2))
-            expect(actualConstraints.contains(rightConstraint)).to(beTrue())
-            expect(actualConstraints.contains(topConstraint)).to(beTrue())
+            expect(actualConstraints.count) == 2
+            expect(actualConstraints.contains(rightConstraint)) == true
+            expect(actualConstraints.contains(topConstraint)) == true
           }
         }
 
@@ -466,12 +468,13 @@ class LayoutProviderSpec: QuickSpec {
             let actualConstraints = subject.anchorToSuperview(view,
                                                               withAlignment: .center,
                                                               insets: insets)
-            expect(actualConstraints.count).to(equal(2))
-            expect(actualConstraints.contains(centerXConstraint)).to(beTrue())
-            expect(actualConstraints.contains(centerYConstraint)).to(beTrue())
+            expect(actualConstraints.count) == 2
+            expect(actualConstraints.contains(centerXConstraint)) == true
+            expect(actualConstraints.contains(centerYConstraint)) == true
           }
         }
       }
     }
   }
 }
+// swiftlint:enable function_body_length implicitly_unwrapped_optional

@@ -1,0 +1,89 @@
+included: # paths to include during linting. `--path` is ignored if present.
+- Example
+- Sources
+- Tests
+
+disabled_rules: # rule identifiers to exclude from running
+- orphaned_doc_comment
+- type_name
+
+opt_in_rules: # some rules are only opt-in
+- anyobject_protocol
+- attributes
+- class_delegate_protocol
+- closure_body_length
+- closure_end_indentation
+- closure_spacing
+- convenience_type
+- discouraged_object_literal
+- discouraged_optional_collection
+- empty_collection_literal
+- empty_count
+- empty_string
+- empty_xctest_method
+- explicit_init
+- extension_access_modifier
+- fatal_error_message
+- file_name
+- file_name_no_space
+- flatmap_over_map_reduce
+- force_unwrapping
+- identical_operands
+- implicitly_unwrapped_optional
+- joined_default_parameter
+- last_where
+- legacy_multiple
+- legacy_random
+- modifier_order
+- multiline_arguments
+- multiline_function_chains
+- multiline_parameters
+- nimble_operator
+- operator_usage_whitespace
+- overridden_super_call
+- prefer_self_type_over_type_of_self
+- prohibited_super_call
+- quick_discouraged_focused_test
+- quick_discouraged_pending_test
+- reduce_into
+- redundant_nil_coalescing
+- redundant_type_annotation
+- single_test_class
+- sorted_first_last
+- sorted_imports
+- static_operator
+- strict_fileprivate
+- switch_case_on_newline
+- toggle_bool
+- unneeded_parentheses_in_closure_argument
+- unused_import
+- vertical_parameter_alignment_on_call
+- vertical_whitespace_closing_braces
+- yoda_condition
+
+# configurable rules
+cyclomatic_complexity:
+  warning: 10
+  error: 15
+
+file_length:
+  warning: 600
+  error: 1000
+
+function_body_length:
+  warning: 50
+  error: 100
+
+function_parameter_count:
+  warning: 6
+  error: 8
+
+line_length:
+  warning: 120
+  error: 150
+
+type_body_length:
+  warning: 300
+  error: 400
+
+reporter: "xcode" # reporter type (xcode, json, csv, checkstyle, junit, html, emoji)

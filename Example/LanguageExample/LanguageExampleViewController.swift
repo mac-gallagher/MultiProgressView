@@ -22,10 +22,11 @@
 /// SOFTWARE.
 ///
 
-import UIKit
 import MultiProgressView
+import UIKit
 
 class LanguageExampleViewController: UIViewController {
+
   @IBOutlet private weak var backgroundView: UIView!
   @IBOutlet private weak var totalProgressLabel: UILabel!
 
@@ -35,9 +36,8 @@ class LanguageExampleViewController: UIViewController {
   @IBOutlet private weak var progressView4: LanguageExampleProgressView!
   @IBOutlet private weak var progressView5: LanguageExampleProgressView!
 
-  private lazy var progressViews
-    = backgroundView.subviews.filter { $0 is LanguageExampleProgressView }
-      as! [LanguageExampleProgressView]
+  private lazy var progressViews = backgroundView.subviews.filter { $0 is LanguageExampleProgressView }
+    as? [LanguageExampleProgressView] ?? []
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -63,14 +63,21 @@ class LanguageExampleViewController: UIViewController {
     totalProgressLabel.text = "52%"
   }
 
-  private func animateSetProgress(_ progressView: LanguageExampleProgressView, firstProgress: Float, secondProgress: Float) {
-    UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: {
-      progressView.setProgress(section: 0, to: firstProgress)
-    }) { _ in
-      UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: {
-        progressView.setProgress(section: 1, to: secondProgress)
-      }, completion: nil)
-    }
+  private func animateSetProgress(_ progressView: LanguageExampleProgressView,
+                                  firstProgress: Float,
+                                  secondProgress: Float) {
+    UIView.animate(withDuration: 0.25,
+                   delay: 0,
+                   options: .curveEaseInOut,
+                   animations: { progressView.setProgress(section: 0, to: firstProgress) },
+                   completion: { _ in
+                    UIView.animate(withDuration: 0.25,
+                                   delay: 0,
+                                   options: .curveEaseInOut,
+                                   animations: { progressView.setProgress(section: 1, to: secondProgress) },
+                                   completion: nil)
+    })
+
     progressView.percentage = Int(100 * (firstProgress + secondProgress))
   }
 
@@ -82,17 +89,20 @@ class LanguageExampleViewController: UIViewController {
   }
 
   private func animateResetProgress(_ progressView: LanguageExampleProgressView) {
-    UIView.animate(withDuration: 0.25, animations: {
-      progressView.setProgress(section: 0, to: 0)
-      progressView.setProgress(section: 1, to: 0)
-    }) { _ in
-      progressView.shouldHideTitle(true)
-    }
+    UIView.animate(withDuration: 0.25,
+                   animations: {
+                    progressView.setProgress(section: 0, to: 0)
+                    progressView.setProgress(section: 1, to: 0)
+    },
+                   completion: { _ in
+                    progressView.shouldHideTitle(true)
+    })
+
     progressView.percentage = 0
   }
 }
 
-//MARK: - MultiProgressViewDataSource
+// MARK: - MultiProgressViewDataSource
 
 extension LanguageExampleViewController: MultiProgressViewDataSource {
   func numberOfSections(in progressView: MultiProgressView) -> Int {
@@ -120,11 +130,8 @@ extension LanguageExampleViewController: MultiProgressViewDataSource {
 extension LanguageExampleViewController: MultiProgressViewDelegate {
 
   func progressView(_ progressView: MultiProgressView, didTapSectionAt index: Int) {
-    for (progressViewIndex, view) in progressViews.enumerated() {
-      if view === progressView {
-        print("Tapped progressView \(progressViewIndex) at section \(index)")
-        break
-      }
+    for (progressViewIndex, view) in progressViews.enumerated() where view === progressView {
+      print("Tapped progressView \(progressViewIndex) at section \(index)")
     }
   }
 }

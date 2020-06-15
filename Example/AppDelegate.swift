@@ -24,11 +24,14 @@
 
 import UIKit
 
+// swiftlint:disable discouraged_optional_collection
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+
   var window: UIWindow?
 
-  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+  func application(_ application: UIApplication,
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     window = UIWindow(frame: UIScreen.main.bounds)
     window?.makeKeyAndVisible()
     let navigationController = UINavigationController(rootViewController: DemoViewController())
@@ -36,3 +39,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     return true
   }
 }
+// swiftlint:enable discouraged_optional_collection

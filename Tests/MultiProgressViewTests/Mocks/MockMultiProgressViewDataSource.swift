@@ -25,6 +25,8 @@
 import MultiProgressView
 
 class MockMultiProgressViewDataSource: MultiProgressViewDataSource {
+
+  // swiftlint:disable:next implicitly_unwrapped_optional
   private var numberOfSections: Int!
 
   lazy var progressViewSections: [ProgressViewSection] = {

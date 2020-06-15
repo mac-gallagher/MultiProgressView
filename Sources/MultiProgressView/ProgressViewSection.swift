@@ -24,7 +24,7 @@
 
 import UIKit
 
-protocol ProgressViewSectionDelegate: class {
+protocol ProgressViewSectionDelegate: AnyObject {
   func didTapSection(_ section: ProgressViewSection)
 }
 
@@ -34,7 +34,7 @@ open class ProgressViewSection: UIView {
     return sectionTitleLabel
   }
 
-  private var sectionTitleLabel: UILabel = UILabel()
+  private var sectionTitleLabel = UILabel()
 
   public var titleEdgeInsets: UIEdgeInsets = .zero {
     didSet {
@@ -68,18 +68,18 @@ open class ProgressViewSection: UIView {
 
   weak var delegate: ProgressViewSectionDelegate?
 
-  private var sectionImageView: UIImageView = UIImageView()
+  private var sectionImageView = UIImageView()
 
   private var layoutProvider: LayoutProvidable = LayoutProvider.shared
 
   // MARK: - Initialization
 
-  public override init(frame: CGRect) {
+  override public init(frame: CGRect) {
     super.init(frame: frame)
     initialize()
   }
 
-  required public init?(coder aDecoder: NSCoder) {
+  public required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     initialize()
   }
@@ -99,13 +99,14 @@ open class ProgressViewSection: UIView {
 
   // MARK: - Tap handler
 
-  @objc private func didTap() {
+  @objc
+  private func didTap() {
     delegate?.didTapSection(self)
   }
 
   // MARK: - Layout
 
-  open override func layoutSubviews() {
+  override open func layoutSubviews() {
     super.layoutSubviews()
     labelConstraints = layoutProvider.anchorToSuperview(sectionTitleLabel,
                                                         withAlignment: titleAlignment,

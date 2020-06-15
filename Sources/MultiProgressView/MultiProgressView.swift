@@ -24,14 +24,17 @@
 
 import UIKit
 
-@objc public protocol MultiProgressViewDataSource: class {
+@objc
+public protocol MultiProgressViewDataSource: AnyObject {
   func numberOfSections(in progressView: MultiProgressView) -> Int
   func progressView(_ progressView: MultiProgressView,
                     viewForSection section: Int) -> ProgressViewSection
 }
 
-@objc public protocol MultiProgressViewDelegate: class {
-  @objc optional func progressView(_ progressView: MultiProgressView, didTapSectionAt index: Int)
+@objc
+public protocol MultiProgressViewDelegate: AnyObject {
+  @objc
+  optional func progressView(_ progressView: MultiProgressView, didTapSectionAt index: Int)
 }
 
 @IBDesignable
@@ -87,11 +90,11 @@ open class MultiProgressView: UIView, ProgressViewSectionDelegate {
     }
   }
 
-  @IBInspectable public var trackTitleLabel: UILabel {
+  public var trackTitleLabel: UILabel {
     return label
   }
 
-  private var label: UILabel = UILabel()
+  private var label = UILabel()
 
   public var trackTitleEdgeInsets: UIEdgeInsets = .zero {
     didSet {
@@ -109,7 +112,7 @@ open class MultiProgressView: UIView, ProgressViewSectionDelegate {
     return imageView
   }
 
-  private var imageView: UIImageView = UIImageView()
+  private var imageView = UIImageView()
 
   public var lineCap: LineCapType = .square {
     didSet {
@@ -147,7 +150,7 @@ open class MultiProgressView: UIView, ProgressViewSectionDelegate {
 
   // MARK: - Initialization
 
-  public override init(frame: CGRect) {
+  override public init(frame: CGRect) {
     super.init(frame: frame)
     initialize()
   }
@@ -169,7 +172,7 @@ open class MultiProgressView: UIView, ProgressViewSectionDelegate {
 
   // MARK: - Layout
 
-  open override func layoutSubviews() {
+  override open func layoutSubviews() {
     super.layoutSubviews()
     track.frame = layoutProvider.trackFrame(self)
     trackTitleLabelConstraints = layoutProvider.anchorToSuperview(trackTitleLabel,
@@ -180,7 +183,7 @@ open class MultiProgressView: UIView, ProgressViewSectionDelegate {
     layoutSections()
     updateCornerRadius()
   }
-  
+
   private func layoutSections() {
     for (section, index) in progressViewSections {
       section.frame = layoutProvider.sectionFrame(self, section: index)
@@ -207,7 +210,7 @@ open class MultiProgressView: UIView, ProgressViewSectionDelegate {
       configureSection(withDataSource: dataSource, index)
     }
   }
-  
+
   private func configureSection(withDataSource dataSource: MultiProgressViewDataSource,
                                 _ section: Int) {
     let bar = dataSource.progressView(self, viewForSection: section)

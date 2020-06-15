@@ -22,10 +22,11 @@
 /// SOFTWARE.
 ///
 
-import UIKit
 import MultiProgressView
+import UIKit
 
 class StorageExampleViewController: UIViewController {
+
   private let backgroundView: UIView = {
     let view = UIView()
     view.backgroundColor = .white
@@ -61,10 +62,10 @@ class StorageExampleViewController: UIViewController {
   }()
 
   private let stackView: UIStackView = {
-    let sv = UIStackView()
-    sv.distribution = .equalSpacing
-    sv.alignment = .center
-    return sv
+    let stackView = UIStackView()
+    stackView.distribution = .equalSpacing
+    stackView.alignment = .center
+    return stackView
   }()
 
   private let iPhoneLabel: UILabel = {
@@ -138,10 +139,8 @@ class StorageExampleViewController: UIViewController {
                      paddingBottom: padding,
                      paddingRight: padding)
 
-    for type in StorageType.allTypes {
-      if type != .unknown {
-        stackView.addArrangedSubview(StorageStackView(storageType: type))
-      }
+    for type in StorageType.allTypes where type != .unknown {
+      stackView.addArrangedSubview(StorageStackView(storageType: type))
     }
     stackView.addArrangedSubview(UIView())
   }
@@ -170,7 +169,8 @@ class StorageExampleViewController: UIViewController {
                        constant: 0).isActive = true
   }
 
-  @objc private func handleTap(_ button: UIButton) {
+  @objc
+  private func handleTap(_ button: UIButton) {
     switch button.tag {
     case 1:
       animateProgress()
@@ -207,7 +207,7 @@ class StorageExampleViewController: UIViewController {
   }
 }
 
-//MARK: - MultiProgressViewDataSource
+// MARK: - MultiProgressViewDataSource
 
 extension StorageExampleViewController: MultiProgressViewDataSource {
   public func numberOfSections(in progressBar: MultiProgressView) -> Int {

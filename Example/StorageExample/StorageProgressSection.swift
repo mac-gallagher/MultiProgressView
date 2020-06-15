@@ -22,10 +22,11 @@
 /// SOFTWARE.
 ///
 
-import UIKit
 import MultiProgressView
+import UIKit
 
 class StorageProgressSection: ProgressViewSection {
+
   private let rightBorder: UIView = {
     let border = UIView()
     border.backgroundColor = .white
