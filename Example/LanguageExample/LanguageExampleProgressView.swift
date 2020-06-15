@@ -22,12 +22,12 @@
 /// SOFTWARE.
 ///
 
-import UIKit
 import MultiProgressView
+import UIKit
 
 @IBDesignable
 class LanguageExampleProgressView: MultiProgressView {
-  
+
   @IBInspectable var language: Int = 0 {
     didSet {
       titleLabel.text = CodingLanguage(rawValue: language)?.description

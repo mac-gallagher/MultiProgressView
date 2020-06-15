@@ -25,6 +25,7 @@
 import UIKit
 
 class DemoViewController: UITableViewController {
+
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationItem.title = "Demo"
@@ -34,6 +35,7 @@ class DemoViewController: UITableViewController {
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = UITableViewCell()
     cell.textLabel?.font = UIFont.systemFont(ofSize: 14)
+
     switch indexPath.row {
     case 0:
       cell.textLabel?.text = "Single Progress View (Programmatic)"

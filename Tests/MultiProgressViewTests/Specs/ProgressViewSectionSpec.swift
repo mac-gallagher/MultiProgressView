@@ -26,6 +26,7 @@
 import Nimble
 import Quick
 
+// swiftlint:disable function_body_length implicitly_unwrapped_optional closure_body_length
 class ProgressViewSectionSpec: QuickSpec {
 
   override func spec() {
@@ -66,14 +67,14 @@ class ProgressViewSectionSpec: QuickSpec {
 
       func testDefaultProperties() {
         expect(section.titleLabel).toNot(beNil())
-        expect(section.titleEdgeInsets).to(equal(.zero))
-        expect(section.titleAlignment).to(equal(.center))
+        expect(section.titleEdgeInsets) == .zero
+        expect(section.titleAlignment) == .center
         expect(section.imageView).toNot(beNil())
-        expect(section.backgroundColor).to(equal(.black))
-        expect(section.layer.masksToBounds).to(beTrue())
-        expect(section.subviews.contains(section.imageView)).to(beTrue())
-        expect(section.subviews.contains(section.titleLabel)).to(beTrue())
-        expect(section.gestureRecognizers?.count).to(equal(1))
+        expect(section.backgroundColor) == .black
+        expect(section.layer.masksToBounds) == true
+        expect(section.subviews.contains(section.imageView)) == true
+        expect(section.subviews.contains(section.titleLabel)) == true
+        expect(section.gestureRecognizers?.count) == 1
       }
     }
 
@@ -87,7 +88,7 @@ class ProgressViewSectionSpec: QuickSpec {
       }
 
       it("should trigger a layout update") {
-        expect(subject.setNeedsLayoutCalled).to(beTrue())
+        expect(subject.setNeedsLayoutCalled) == true
       }
     }
 
@@ -99,7 +100,7 @@ class ProgressViewSectionSpec: QuickSpec {
       }
 
       it("should trigger a layout update") {
-        expect(subject.setNeedsLayoutCalled).to(beTrue())
+        expect(subject.setNeedsLayoutCalled) == true
       }
     }
 
@@ -121,12 +122,12 @@ class ProgressViewSectionSpec: QuickSpec {
 
       it("should correctly set the title label's constraints") {
         expect(subject.labelConstraints).to(be(labelConstraints))
-        expect(mockLayoutProvider.anchorToSuperviewAlignment).to(equal(titleAlignment))
-        expect(mockLayoutProvider.anchorToSuperviewInsets).to(equal(titleEdgeInsets))
+        expect(mockLayoutProvider.anchorToSuperviewAlignment) == titleAlignment
+        expect(mockLayoutProvider.anchorToSuperviewInsets) == titleEdgeInsets
       }
 
       it("should set the imageView's frame") {
-        expect(subject.imageView.frame).to(equal(imageViewFrame))
+        expect(subject.imageView.frame) == imageViewFrame
       }
 
       it("should send the the imageView to the back of the view hierarchy") {
@@ -148,7 +149,7 @@ class ProgressViewSectionSpec: QuickSpec {
       }
 
       it("should call the delegate's didTapSection method") {
-        expect(mockDelegate.didTapSectionCalled).to(beTrue())
+        expect(mockDelegate.didTapSectionCalled) == true
       }
     }
 
@@ -164,7 +165,7 @@ class ProgressViewSectionSpec: QuickSpec {
       }
 
       it("should set the titleLabel's title") {
-        expect(subject.titleLabel.text).to(equal(title))
+        expect(subject.titleLabel.text) == title
       }
     }
 
@@ -178,7 +179,7 @@ class ProgressViewSectionSpec: QuickSpec {
       }
 
       it("should set the titleLabel's attributed title") {
-        expect(subject.titleLabel.attributedText).to(equal(attributedTitle))
+        expect(subject.titleLabel.attributedText) == attributedTitle
       }
     }
 
@@ -192,8 +193,9 @@ class ProgressViewSectionSpec: QuickSpec {
       }
 
       it("should set the imageView's image") {
-        expect(subject.imageView.image).to(equal(image))
+        expect(subject.imageView.image) == image
       }
     }
   }
 }
+// swiftlint:enable function_body_length implicitly_unwrapped_optional closure_body_length

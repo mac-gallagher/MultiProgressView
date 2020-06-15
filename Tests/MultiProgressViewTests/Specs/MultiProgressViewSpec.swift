@@ -26,6 +26,7 @@
 import Nimble
 import Quick
 
+// swiftlint:disable function_body_length type_body_length file_length implicitly_unwrapped_optional closure_body_length
 class MultiProgressViewSpec: QuickSpec {
 
   override func spec() {
@@ -71,27 +72,27 @@ class MultiProgressViewSpec: QuickSpec {
 
       func testDefaultProgressViewProperties() {
         expect(progressView.dataSource).to(beNil())
-        expect(progressView.cornerRadius).to(equal(0))
-        expect(progressView.borderWidth).to(equal(0))
-        expect(progressView.borderColor).to(equal(.black))
-        expect(progressView.lineCap).to(equal(.square))
-        expect(progressView.totalProgress).to(equal(0))
-        expect(progressView.layer.masksToBounds).to(beTrue())
-        expect(progressView.subviews.contains(progressView.track)).to(beTrue())
+        expect(progressView.cornerRadius) == 0
+        expect(progressView.borderWidth) == 0
+        expect(progressView.borderColor) == .black
+        expect(progressView.lineCap) == .square
+        expect(progressView.totalProgress) == 0
+        expect(progressView.layer.masksToBounds) == true
+        expect(progressView.subviews.contains(progressView.track)) == true
       }
 
       func testDefaultTrackProperties() {
-        expect(progressView.trackInset).to(equal(0))
-        expect(progressView.trackBackgroundColor).to(equal(.clear))
-        expect(progressView.trackBorderColor).to(equal(.black))
-        expect(progressView.trackBorderWidth).to(equal(0))
+        expect(progressView.trackInset) == 0
+        expect(progressView.trackBackgroundColor) == .clear
+        expect(progressView.trackBorderColor) == .black
+        expect(progressView.trackBorderWidth) == 0
         expect(progressView.trackTitleLabel).toNot(beNil())
-        expect(progressView.trackTitleEdgeInsets).to(equal(.zero))
-        expect(progressView.trackTitleAlignment).to(equal(.center))
+        expect(progressView.trackTitleEdgeInsets) == .zero
+        expect(progressView.trackTitleAlignment) == .center
         expect(progressView.trackImageView).toNot(beNil())
-        expect(progressView.track.layer.masksToBounds).to(beTrue())
-        expect(progressView.track.subviews.contains(progressView.trackTitleLabel)).to(beTrue())
-        expect(progressView.track.subviews.contains(progressView.trackImageView)).to(beTrue())
+        expect(progressView.track.layer.masksToBounds) == true
+        expect(progressView.track.subviews.contains(progressView.trackTitleLabel)) == true
+        expect(progressView.track.subviews.contains(progressView.trackImageView)) == true
       }
     }
 
@@ -108,7 +109,7 @@ class MultiProgressViewSpec: QuickSpec {
       }
 
       it("should reload it's data") {
-        expect(subject.reloadDataCalled).to(beTrue())
+        expect(subject.reloadDataCalled) == true
       }
     }
 
@@ -120,7 +121,7 @@ class MultiProgressViewSpec: QuickSpec {
       }
 
       it("should trigger a layout update") {
-        expect(subject.setNeedsLayoutCalled).to(beTrue())
+        expect(subject.setNeedsLayoutCalled) == true
       }
     }
 
@@ -146,7 +147,7 @@ class MultiProgressViewSpec: QuickSpec {
       }
 
       it("should trigger a layout update") {
-        expect(subject.setNeedsLayoutCalled).to(beTrue())
+        expect(subject.setNeedsLayoutCalled) == true
       }
     }
 
@@ -158,7 +159,7 @@ class MultiProgressViewSpec: QuickSpec {
       }
 
       it("should trigger a layout update") {
-        expect(subject.setNeedsLayoutCalled).to(beTrue())
+        expect(subject.setNeedsLayoutCalled) == true
       }
     }
 
@@ -170,7 +171,7 @@ class MultiProgressViewSpec: QuickSpec {
       }
 
       it("should trigger a layout update") {
-        expect(subject.setNeedsLayoutCalled).to(beTrue())
+        expect(subject.setNeedsLayoutCalled) == true
       }
     }
 
@@ -196,7 +197,7 @@ class MultiProgressViewSpec: QuickSpec {
       }
 
       it("should correctly set the border color") {
-        expect(subject.layer.borderColor).to(equal(color.cgColor))
+        expect(subject.layer.borderColor) == color.cgColor
       }
     }
 
@@ -208,7 +209,7 @@ class MultiProgressViewSpec: QuickSpec {
       }
 
       it("should correctly set the progress view's border color") {
-        expect(subject.track.layer.borderColor).to(equal(color.cgColor))
+        expect(subject.track.layer.borderColor) == color.cgColor
       }
     }
 
@@ -232,7 +233,7 @@ class MultiProgressViewSpec: QuickSpec {
       }
 
       it("should call updateCornerRadius") {
-        expect(subject.updateCornerRadiusCalled).to(beTrue())
+        expect(subject.updateCornerRadiusCalled) == true
       }
     }
 
@@ -252,7 +253,7 @@ class MultiProgressViewSpec: QuickSpec {
       }
 
       it("should return the correct total progress") {
-        expect(subject.totalProgress).to(equal(progress0 + progress1))
+        expect(subject.totalProgress) == progress0 + progress1
       }
     }
 
@@ -266,7 +267,7 @@ class MultiProgressViewSpec: QuickSpec {
       let trackTitleLabelInsets = UIEdgeInsets(top: 0, left: 1, bottom: 2, right: 3)
       let trackImageViewFrame = CGRect(x: 5, y: 6, width: 7, height: 8)
       let sectionFrame = CGRect(x: 9, y: 10, width: 11, height: 12)
-      
+
       var dataSource: MockMultiProgressViewDataSource!
 
       beforeEach {
@@ -274,7 +275,6 @@ class MultiProgressViewSpec: QuickSpec {
         mockLayoutProvider.testAnchorConstraints = trackTitleLabelConstraints
         mockLayoutProvider.testSectionFrame = sectionFrame
         mockLayoutProvider.testTrackImageViewFrame = trackImageViewFrame
-
 
         dataSource = MockMultiProgressViewDataSource(numberOfSections: numberOfSections)
         subject.dataSource = dataSource
@@ -284,27 +284,27 @@ class MultiProgressViewSpec: QuickSpec {
       }
 
       it("should correctly set the track's frame") {
-        expect(subject.track.frame).to(equal(trackFrame))
+        expect(subject.track.frame) == trackFrame
       }
 
       it("should correctly layout the trackTitleLabel") {
         expect(subject.trackTitleLabelConstraints).to(be(trackTitleLabelConstraints))
-        expect(mockLayoutProvider.anchorToSuperviewAlignment).to(equal(trackTitleLabelAlignment))
-        expect(mockLayoutProvider.anchorToSuperviewInsets).to(equal(trackTitleLabelInsets))
+        expect(mockLayoutProvider.anchorToSuperviewAlignment) == trackTitleLabelAlignment
+        expect(mockLayoutProvider.anchorToSuperviewInsets) == trackTitleLabelInsets
       }
 
       it("should correctly set the imageView's frame") {
-        expect(subject.trackImageView.frame).to(equal(trackImageViewFrame))
+        expect(subject.trackImageView.frame) == trackImageViewFrame
       }
 
       it("should send the trackImageView to the back of the track's view hierarchy") {
-        expect(subject.track.subviews[0]).to(equal(subject.trackImageView))
+        expect(subject.track.subviews[0]) == subject.trackImageView
       }
 
       it("should layout each section and add each as a subview of the track") {
         for section in dataSource.progressViewSections {
-          expect(section.frame).to(equal(sectionFrame))
-          expect(section.superview).to(equal(subject.track))
+          expect(section.frame) == sectionFrame
+          expect(section.superview) == subject.track
         }
       }
 
@@ -315,7 +315,7 @@ class MultiProgressViewSpec: QuickSpec {
       }
 
       it("should call updateCornerRadius") {
-        expect(subject.updateCornerRadiusCalled).to(beTrue())
+        expect(subject.updateCornerRadiusCalled) == true
       }
     }
 
@@ -345,7 +345,7 @@ class MultiProgressViewSpec: QuickSpec {
       }
 
       it("should set the image on the trackImageView") {
-        expect(subject.trackImageView.image).to(equal(image))
+        expect(subject.trackImageView.image) == image
       }
     }
 
@@ -359,7 +359,7 @@ class MultiProgressViewSpec: QuickSpec {
       }
 
       it("should set the attributed text on the trackTitleLabel") {
-        expect(subject.trackTitleLabel.attributedText).to(equal(title))
+        expect(subject.trackTitleLabel.attributedText) == title
       }
     }
 
@@ -377,7 +377,7 @@ class MultiProgressViewSpec: QuickSpec {
 
       it("should return the correct progress") {
         let actualProgress: Float = subject.progress(forSection: 0)
-        expect(actualProgress).to(equal(progress))
+        expect(actualProgress) == progress
       }
     }
 
@@ -387,11 +387,11 @@ class MultiProgressViewSpec: QuickSpec {
       let numberOfSections = 5
       let index = 3
       var dataSource: MockMultiProgressViewDataSource!
-      var delegate: MockMultiProgressViewDelegate!
+      var delegate: MockProgressViewDelegate!
 
       beforeEach {
         dataSource = MockMultiProgressViewDataSource(numberOfSections: numberOfSections)
-        delegate = MockMultiProgressViewDelegate()
+        delegate = MockProgressViewDelegate()
         subject.dataSource = dataSource
         subject.delegate = delegate
 
@@ -400,8 +400,8 @@ class MultiProgressViewSpec: QuickSpec {
       }
 
       it("should call the delegate's didTapSectionAt method with the correct section index") {
-        expect(delegate.didTapSectionAtCalled).to(beTrue())
-        expect(delegate.didTapSectionIndex).to(equal(index))
+        expect(delegate.didTapSectionAtCalled) == true
+        expect(delegate.didTapSectionIndex) == index
       }
     }
 
@@ -417,8 +417,8 @@ class MultiProgressViewSpec: QuickSpec {
         }
 
         it("should not load any data") {
-          expect(subject.reloadDataCalled).to(beTrue())
-          expect(subject.progressViewSections.count).to(equal(0))
+          expect(subject.reloadDataCalled) == true
+          expect(subject.progressViewSections.count) == 0
         }
       }
 
@@ -443,22 +443,22 @@ class MultiProgressViewSpec: QuickSpec {
 
       func testReloadData() {
         it("should add the correct number of progress view sections") {
-          expect(subject.reloadDataCalled).to(beTrue())
-          expect(subject.progressViewSections.count).to(equal(numberOfSections))
+          expect(subject.reloadDataCalled) == true
+          expect(subject.progressViewSections.count) == numberOfSections
         }
 
         it("should add the section/index pairs to the dictionary and remove any previous data") {
           for index in 0..<numberOfSections {
             let expectedSection = dataSource.progressViewSections[index]
             let actualSections = subject.progressViewSections.filter({ $0.value == index }).keys
-            expect(actualSections.count).to(equal(1))
+            expect(actualSections.count) == 1
             expect(actualSections.first).to(be(expectedSection))
           }
         }
 
         it("should add each section as a subview to the track and remove any previous sections") {
           let trackSubviews = subject.track.subviews.filter { $0 is ProgressViewSection }
-          expect(trackSubviews.count).to(equal(numberOfSections))
+          expect(trackSubviews.count) == numberOfSections
         }
       }
     }
@@ -476,11 +476,11 @@ class MultiProgressViewSpec: QuickSpec {
       }
 
       it("should correctly set the corner radius") {
-        expect(subject.layer.cornerRadius).to(equal(cornerRadius))
+        expect(subject.layer.cornerRadius) == cornerRadius
       }
 
       it("should correctly set the track's corner radius") {
-        expect(subject.track.layer.cornerRadius).to(equal(trackCornerRadius))
+        expect(subject.track.layer.cornerRadius) == trackCornerRadius
       }
     }
 
@@ -501,11 +501,11 @@ class MultiProgressViewSpec: QuickSpec {
         }
 
         it("should always call setNeedsLayout") {
-          expect(subject.setNeedsLayoutCalled).to(beTrue())
+          expect(subject.setNeedsLayoutCalled) == true
         }
 
         it("should always call layoutIfNeeded") {
-          expect(subject.layoutIfNeededCalled).to(beTrue())
+          expect(subject.layoutIfNeededCalled) == true
         }
       }
 
@@ -517,7 +517,7 @@ class MultiProgressViewSpec: QuickSpec {
         }
 
         it("should set the correct progress for the section") {
-          expect(subject.progress(forSection: 0)).to(equal(progress))
+          expect(subject.progress(forSection: 0)) == progress
         }
       }
 
@@ -529,7 +529,7 @@ class MultiProgressViewSpec: QuickSpec {
         }
 
         it("should set the progress to 1") {
-          expect(subject.progress(forSection: 0)).to(equal(1))
+          expect(subject.progress(forSection: 0)) == 1
         }
       }
 
@@ -541,7 +541,7 @@ class MultiProgressViewSpec: QuickSpec {
         }
 
         it("should set it's progress to zero") {
-          expect(subject.progress(forSection: 0)).to(equal(0))
+          expect(subject.progress(forSection: 0)) == 0
         }
       }
 
@@ -555,7 +555,7 @@ class MultiProgressViewSpec: QuickSpec {
         }
 
         it("should replace its existing progress with the most recent progress") {
-          expect(subject.progress(forSection: 0)).to(equal(progress))
+          expect(subject.progress(forSection: 0)) == progress
         }
       }
 
@@ -571,7 +571,7 @@ class MultiProgressViewSpec: QuickSpec {
         }
 
         it("should only progress the section up the remaining progress") {
-          expect(subject.progress(forSection: 2)).to(equal(1 - (firstProgress + secondProgress)))
+          expect(subject.progress(forSection: 2)) == 1 - (firstProgress + secondProgress)
         }
       }
     }
@@ -594,9 +594,10 @@ class MultiProgressViewSpec: QuickSpec {
 
       it("should set each section's progress to zero") {
         for index in 0..<numberOfSections {
-          expect(subject.progress(forSection: index)).to(equal(0))
+          expect(subject.progress(forSection: index)) == 0
         }
       }
     }
   }
 }
+// swiftlint:enable function_body_length type_body_length file_length implicitly_unwrapped_optional closure_body_length

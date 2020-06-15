@@ -29,7 +29,7 @@ protocol LayoutProvidable {
   func trackImageViewFrame(_ progressView: MultiProgressView) -> CGRect
   func cornerRadius(_ progressView: MultiProgressView) -> CGFloat
   func trackCornerRadius(_ progressView: MultiProgressView) -> CGFloat
-  
+
   func sectionFrame(_ progressView: MultiProgressView, section: Int) -> CGRect
   func sectionImageViewFrame(_ section: ProgressViewSection) -> CGRect
 
@@ -90,10 +90,8 @@ class LayoutProvider: LayoutProvidable {
     let size = CGSize(width: width, height: trackBounds.height)
 
     var origin: CGPoint = trackBounds.origin
-    for (bar, index) in progressView.progressViewSections {
-      if index < section {
-        origin.x += bar.frame.width
-      }
+    for (bar, index) in progressView.progressViewSections where index < section {
+      origin.x += bar.frame.width
     }
 
     return CGRect(origin: origin, size: size)
@@ -121,8 +119,8 @@ class LayoutProvider: LayoutProvidable {
                                                         constant: -insets.bottom)
     let centerXConstraint = view.centerXAnchor.constraint(equalTo: superview.centerXAnchor,
                                                           constant: insets.left - insets.right)
-    let centerYConstraint  = view.centerYAnchor.constraint(equalTo: superview.centerYAnchor,
-                                                           constant: insets.top - insets.bottom)
+    let centerYConstraint = view.centerYAnchor.constraint(equalTo: superview.centerYAnchor,
+                                                          constant: insets.top - insets.bottom)
 
     switch alignment {
     case .bottom:

@@ -25,6 +25,7 @@
 import UIKit
 
 extension UIView {
+
   @discardableResult
   func anchor(top: NSLayoutYAxisAnchor? = nil,
               left: NSLayoutXAxisAnchor? = nil,
@@ -59,7 +60,7 @@ extension UIView {
       anchors.append(heightAnchor.constraint(equalToConstant: height))
     }
 
-    anchors.forEach({$0.isActive = true})
+    anchors.forEach({ $0.isActive = true })
 
     return anchors
   }

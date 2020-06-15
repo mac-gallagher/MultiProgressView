@@ -26,7 +26,7 @@ import UIKit
 
 extension NSLayoutConstraint {
 
-  open override func isEqual(_ object: Any?) -> Bool {
+  override open func isEqual(_ object: Any?) -> Bool {
     guard let constraint = object as? NSLayoutConstraint else { return false }
 
     guard let firstItem = firstItem as? UIView,

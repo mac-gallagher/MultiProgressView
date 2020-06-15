@@ -25,12 +25,13 @@
 import UIKit
 
 class StorageStackView: UIStackView {
+
   private let titleLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont.systemFont(ofSize: 11)
     return label
   }()
-  
+
   private lazy var colorView: UIView = {
     let view = UIView()
     view.layer.cornerRadius = colorViewHeight / 4

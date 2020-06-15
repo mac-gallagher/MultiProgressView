@@ -24,7 +24,7 @@
 
 import MultiProgressView
 
-class MockMultiProgressViewDelegate: MultiProgressViewDelegate {
+class MockProgressViewDelegate: MultiProgressViewDelegate {
 
   var didTapSectionAtCalled: Bool = false
   var didTapSectionIndex: Int?

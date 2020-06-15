@@ -25,11 +25,12 @@
 import UIKit
 
 extension UIColor {
+
   static func rgb(red: CGFloat, green: CGFloat, blue: CGFloat) -> UIColor {
-    return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: 1)
+    return UIColor(red: red / 255, green: green / 255, blue: blue / 255, alpha: 1)
   }
 
-  struct StorageExample {
+  enum StorageExample {
     static let progressRed = UIColor.rgb(red: 251, green: 16, blue: 68)
     static let progressGreen = UIColor.rgb(red: 67, green: 213, blue: 82)
     static let progressPurple = UIColor.rgb(red: 70, green: 58, blue: 205)
@@ -43,7 +44,7 @@ extension UIColor {
     static let borderColor = UIColor.rgb(red: 189, green: 189, blue: 189)
   }
 
-  struct LanguageExample {
+  enum LanguageExample {
     static let progressBlueDark = UIColor.rgb(red: 45, green: 94, blue: 146)
     static let progressBlueLight = UIColor.rgb(red: 54, green: 117, blue: 190)
     static let progressGreenDark = UIColor.rgb(red: 65, green: 136, blue: 61)

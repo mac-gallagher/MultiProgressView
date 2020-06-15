@@ -6,6 +6,20 @@
 	objectVersion = 50;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		AD9665282497123400E60DF7 /* SwiftLint */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = AD96652B2497123400E60DF7 /* Build configuration list for PBXAggregateTarget "SwiftLint" */;
+			buildPhases = (
+				AD96652C2497125100E60DF7 /* Run SwiftLint */,
+			);
+			dependencies = (
+			);
+			name = SwiftLint;
+			productName = SwiftLint;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		0F33B13D1BCF84BE40120FC5 /* Pods_MultiProgressViewTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E594A8658F530A5575039A4 /* Pods_MultiProgressViewTests.framework */; };
 		AD0BF7FC2273C0DE0081722E /* CodingLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0BF7FB2273C0DE0081722E /* CodingLanguage.swift */; };
@@ -38,7 +52,7 @@
 		AD6CED652273AE1A0049CDBA /* LanguageExampleProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6CED642273AE1A0049CDBA /* LanguageExampleProgressView.swift */; };
 		AD9665202496FEE400E60DF7 /* TapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD96651F2496FEE400E60DF7 /* TapGestureRecognizer.swift */; };
 		AD9665232496FF4200E60DF7 /* TestableProgressViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9665212496FF3300E60DF7 /* TestableProgressViewSection.swift */; };
-		AD96652724970D1200E60DF7 /* NSLayoutConstraintTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD96652624970D1200E60DF7 /* NSLayoutConstraintTestHelpers.swift */; };
+		AD96652724970D1200E60DF7 /* NSLayoutConstraint+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD96652624970D1200E60DF7 /* NSLayoutConstraint+TestHelpers.swift */; };
 		ADF85D492273515D0049D580 /* MultiProgressView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD501273224B0E1600370157 /* MultiProgressView.framework */; };
 		ADF85D4A2273515D0049D580 /* MultiProgressView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD501273224B0E1600370157 /* MultiProgressView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ADF85D4F227353980049D580 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF85D4E227353980049D580 /* DemoViewController.swift */; };
@@ -115,7 +129,7 @@
 		AD6CED642273AE1A0049CDBA /* LanguageExampleProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageExampleProgressView.swift; sourceTree = "<group>"; };
 		AD96651F2496FEE400E60DF7 /* TapGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapGestureRecognizer.swift; sourceTree = "<group>"; };
 		AD9665212496FF3300E60DF7 /* TestableProgressViewSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestableProgressViewSection.swift; sourceTree = "<group>"; };
-		AD96652624970D1200E60DF7 /* NSLayoutConstraintTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraintTestHelpers.swift; sourceTree = "<group>"; };
+		AD96652624970D1200E60DF7 /* NSLayoutConstraint+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+TestHelpers.swift"; sourceTree = "<group>"; };
 		ADA760F7225168070044095C /* MultiProgressView.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = MultiProgressView.podspec; sourceTree = "<group>"; };
 		ADA760F8225168080044095C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		ADB8EECE22ED2B8B004F8633 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -304,7 +318,7 @@
 		AD8E50C522C14EE200905D79 /* MultiProgressViewTests */ = {
 			isa = PBXGroup;
 			children = (
-				AD96652624970D1200E60DF7 /* NSLayoutConstraintTestHelpers.swift */,
+				AD96652624970D1200E60DF7 /* NSLayoutConstraint+TestHelpers.swift */,
 				AD3B329022514B4E006E0F14 /* Mocks */,
 				AD3B329322514B4E006E0F14 /* Specs */,
 				AD3B329822514B4E006E0F14 /* Testables */,
@@ -446,6 +460,9 @@
 					AD501272224B0E1600370157 = {
 						CreatedOnToolsVersion = 10.2;
 					};
+					AD9665282497123400E60DF7 = {
+						CreatedOnToolsVersion = 11.5;
+					};
 				};
 			};
 			buildConfigurationList = AD50126D224B0E1600370157 /* Build configuration list for PBXProject "MultiProgressView" */;
@@ -464,6 +481,7 @@
 				AD501272224B0E1600370157 /* MultiProgressView */,
 				AD3B326A225146B9006E0F14 /* MultiProgressViewTests */,
 				AD3B3318225161C9006E0F14 /* MultiProgressViewExample */,
+				AD9665282497123400E60DF7 /* SwiftLint */,
 			);
 		};
 /* End PBXProject section */
@@ -542,6 +560,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		AD96652C2497125100E60DF7 /* Run SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftLint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -558,7 +594,7 @@
 				AD3B329B22514B4E006E0F14 /* MockLayoutProvider.swift in Sources */,
 				AD3B329F22514B4E006E0F14 /* LayoutProviderSpec.swift in Sources */,
 				AD3B32A222514B4E006E0F14 /* TestableMultiProgressView.swift in Sources */,
-				AD96652724970D1200E60DF7 /* NSLayoutConstraintTestHelpers.swift in Sources */,
+				AD96652724970D1200E60DF7 /* NSLayoutConstraint+TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -877,6 +913,24 @@
 			};
 			name = Release;
 		};
+		AD9665292497123400E60DF7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DYZ8Y2U8DB;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		AD96652A2497123400E60DF7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DYZ8Y2U8DB;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -912,6 +966,15 @@
 			buildConfigurations = (
 				AD50127C224B0E1600370157 /* Debug */,
 				AD50127D224B0E1600370157 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AD96652B2497123400E60DF7 /* Build configuration list for PBXAggregateTarget "SwiftLint" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD9665292497123400E60DF7 /* Debug */,
+				AD96652A2497123400E60DF7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
