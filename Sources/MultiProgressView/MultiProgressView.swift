@@ -35,7 +35,7 @@ import UIKit
 }
 
 @IBDesignable
-open class MultiProgressView: UIView {
+open class MultiProgressView: UIView, ProgressViewSectionDelegate {
 
   @IBOutlet public weak var dataSource: MultiProgressViewDataSource? {
     didSet {
@@ -133,6 +133,13 @@ open class MultiProgressView: UIView {
   /// The key is the section and the value is the section's index in the progress view.
   var progressViewSections: [ProgressViewSection: Int] = [:]
 
+  var trackTitleLabelConstraints = [NSLayoutConstraint]() {
+    didSet {
+      NSLayoutConstraint.deactivate(oldValue)
+      NSLayoutConstraint.activate(trackTitleLabelConstraints)
+    }
+  }
+
   private var numberOfSections: Int = 0
   private var currentProgress: [Float] = []
 
@@ -162,13 +169,6 @@ open class MultiProgressView: UIView {
 
   // MARK: - Layout
 
-  var trackTitleLabelConstraints = [NSLayoutConstraint]() {
-    didSet {
-      NSLayoutConstraint.deactivate(oldValue)
-      NSLayoutConstraint.activate(trackTitleLabelConstraints)
-    }
-  }
-
   open override func layoutSubviews() {
     super.layoutSubviews()
     track.frame = layoutProvider.trackFrame(self)
@@ -180,7 +180,7 @@ open class MultiProgressView: UIView {
     layoutSections()
     updateCornerRadius()
   }
-
+  
   private func layoutSections() {
     for (section, index) in progressViewSections {
       section.frame = layoutProvider.sectionFrame(self, section: index)
@@ -248,11 +248,8 @@ open class MultiProgressView: UIView {
       setProgress(section: section, to: 0)
     }
   }
-}
 
-// MARK: - ProgressViewSectionDelegate
-
-extension MultiProgressView: ProgressViewSectionDelegate {
+  // MARK: - ProgressViewSectionDelegate
 
   func didTapSection(_ section: ProgressViewSection) {
     if let index = progressViewSections[section] {

@@ -1,4 +1,4 @@
-///
+/// 
 /// MIT License
 ///
 /// Copyright (c) 2020 Mac Gallagher
@@ -22,15 +22,28 @@
 /// SOFTWARE.
 ///
 
-import MultiProgressView
+import UIKit
 
-class MockMultiProgressViewDelegate: MultiProgressViewDelegate {
+extension NSLayoutConstraint {
 
-  var didTapSectionAtCalled: Bool = false
-  var didTapSectionIndex: Int?
+  open override func isEqual(_ object: Any?) -> Bool {
+    guard let constraint = object as? NSLayoutConstraint else { return false }
 
-  func progressView(_ progressView: MultiProgressView, didTapSectionAt index: Int) {
-    didTapSectionAtCalled = true
-    didTapSectionIndex = index
+    guard let firstItem = firstItem as? UIView,
+      let constraintFirstItem = constraint.firstItem as? UIView else { return false }
+
+    guard let secondItem = secondItem as? UIView,
+      let constraintSecondItem = constraint.secondItem as? UIView else { return false }
+
+    guard relation == constraint.relation,
+      constant == constraint.constant,
+      constant == constraint.constant,
+      firstItem == constraintFirstItem,
+      secondItem == constraintSecondItem,
+      multiplier == constraint.multiplier,
+      firstAttribute == constraint.firstAttribute,
+      secondAttribute == constraint.secondAttribute else { return false }
+
+    return true
   }
 }
