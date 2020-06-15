@@ -63,7 +63,7 @@ open class ProgressViewSection: UIView {
 
   private var sectionImageView: UIImageView = UIImageView()
 
-  private var layoutProvider: LayoutProvidable.Type = LayoutProvider.self
+  private var layoutProvider: LayoutProvidable = LayoutProvider.shared
 
   // MARK: - Initialization
 
@@ -77,7 +77,7 @@ open class ProgressViewSection: UIView {
     initialize()
   }
 
-  convenience init(layoutProvider: LayoutProvidable.Type) {
+  convenience init(layoutProvider: LayoutProvidable) {
     self.init(frame: .zero)
     self.layoutProvider = layoutProvider
   }

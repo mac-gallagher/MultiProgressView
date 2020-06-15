@@ -30,10 +30,11 @@ import Nimble
 class MultiProgressViewSpec: QuickSpec {
   override func spec() {
     describe("MultiProgressView") {
-      let mockLayoutProvider = MockLayoutProvider.self
+      var mockLayoutProvider: MockLayoutProvider!
       var subject: TestableMultiProgressView!
 
       beforeEach {
+        mockLayoutProvider = MockLayoutProvider()
         subject = TestableMultiProgressView(layoutProvider: mockLayoutProvider)
       }
 
@@ -261,10 +262,6 @@ class MultiProgressViewSpec: QuickSpec {
             subject.updateCornerRadius()
           }
 
-          afterEach {
-            mockLayoutProvider.reset()
-          }
-
           it("should correctly set the corner radius") {
             expect(subject.layer.cornerRadius).to(equal(cornerRadius))
           }
@@ -326,11 +323,7 @@ class MultiProgressViewSpec: QuickSpec {
             subject.trackTitleEdgeInsets = trackTitleLabelInsets
             subject.layoutSubviews()
           }
-
-          afterEach {
-            mockLayoutProvider.reset()
-          }
-
+          
           it("should correctly set the track's frame") {
             expect(subject.track.frame).to(equal(trackFrame))
           }
