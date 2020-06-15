@@ -3,7 +3,7 @@ codecov:
     require_ci_to_pass: yes
 
 coverage:
-  precision: 2 # number of decimal places
+  precision: 1 # number of decimal places
   round: down # round down coverage
   range: "70...100" # visual color range in codecov
   status:
@@ -28,4 +28,5 @@ comment: # configure github pull request comment
 
 ignore: # ignore these files when measuring absolute coverage (reported in the Github badge)
   - "Pods/"
+  - "Sources/MultiProgressView/Internal"
   - "Tests/"

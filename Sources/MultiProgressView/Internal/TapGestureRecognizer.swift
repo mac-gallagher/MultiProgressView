@@ -1,4 +1,4 @@
-///
+/// 
 /// MIT License
 ///
 /// Copyright (c) 2020 Mac Gallagher
@@ -24,9 +24,12 @@
 
 import UIKit
 
-class TestableTapGestureRecognizer: UITapGestureRecognizer {
-  private var testTarget: AnyObject?
+/// A testable `UITapGestureRecognizer`
+class TapGestureRecognizer: UITapGestureRecognizer {
+
+  private weak var testTarget: AnyObject?
   private var testAction: Selector?
+
   private var testLocation: CGPoint?
 
   override init(target: Any?, action: Selector?) {

@@ -56,8 +56,15 @@ open class ProgressViewSection: UIView {
     return tapRecognizer
   }
 
-  private lazy var tapRecognizer = UITapGestureRecognizer(target: self,
-                                                          action: #selector(didTap))
+  private lazy var tapRecognizer = TapGestureRecognizer(target: self,
+                                                        action: #selector(didTap))
+
+  var labelConstraints = [NSLayoutConstraint]() {
+    didSet {
+      NSLayoutConstraint.deactivate(oldValue)
+      NSLayoutConstraint.activate(labelConstraints)
+    }
+  }
 
   weak var delegate: ProgressViewSectionDelegate?
 
@@ -92,18 +99,11 @@ open class ProgressViewSection: UIView {
 
   // MARK: - Tap handler
 
-  @objc func didTap() {
+  @objc private func didTap() {
     delegate?.didTapSection(self)
   }
 
   // MARK: - Layout
-
-  var labelConstraints = [NSLayoutConstraint]() {
-    didSet {
-      NSLayoutConstraint.deactivate(oldValue)
-      NSLayoutConstraint.activate(labelConstraints)
-    }
-  }
 
   open override func layoutSubviews() {
     super.layoutSubviews()

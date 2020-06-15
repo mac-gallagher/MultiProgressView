@@ -56,7 +56,6 @@ class MockLayoutProvider: LayoutProvidable {
     return testSectionImageViewFrame
   }
 
-
   var testAnchorConstraints: [NSLayoutConstraint] = []
   var anchorToSuperviewAlignment: AlignmentType?
   var anchorToSuperviewInsets: UIEdgeInsets?
