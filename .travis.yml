@@ -1,13 +1,15 @@
-osx_image: xcode11.2
-language: swift
-xcode_workspace: MultiProgressView.xcworkspace
-xcode_scheme: MultiProgressView
-xcode_destination: platform=iOS Simulator,OS=9.0,name=iPhone 6
-
-# run tests
-script:
-  - xcodebuild test -workspace MultiProgressView.xcworkspace -scheme MultiProgressView -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11,OS=13.2.2'
+language: objective-c
+os: osx
+osx_image: xcode11.5
+jobs:
+  include:
+    - stage: "Build & Test"
+      script: xcodebuild -workspace MultiProgressView.xcworkspace -scheme SwiftLint -sdk iphonesimulator -destination platform="iOS Simulator,name=iPhone 11 Pro Max,OS=13.5"
+      name: "Run SwiftLint"
+    - script: xcodebuild test -workspace MultiProgressView.xcworkspace -scheme MultiProgressView -sdk iphonesimulator -destination platform="iOS Simulator,name=iPhone 11 Pro Max,OS=13.5"
+      name: "Run Unit Tests"
+    - script: xcodebuild -workspace MultiProgressView.xcworkspace -scheme MultiProgressViewExample -sdk iphonesimulator -destination platform="iOS Simulator,name=iPhone 11 Pro Max,OS=13.5"
+      name: "Build Example Project"
 
 # upload codecov report
-after_success:
-  - bash <(curl -s https://codecov.io/bash) -J 'MultiProgressView'
+after_success: bash <(curl -s https://codecov.io/bash) -J 'MultiProgressView'
