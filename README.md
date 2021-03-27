@@ -66,16 +66,52 @@ To run the example project, clone the repo and run the `MultiProgressViewExample
     func numberOfSections(in progressView: MultiProgressView) -> Int
     func progressView(_ progressView: MultiProgressView, viewForSection section: Int) -> ProgressViewSection
     ```
-     
+
 5. Set your view controller as the progress view's `dataSource`:
    
    ![DataSource](https://raw.githubusercontent.com/mac-gallagher/MultiProgressView/master/Images/storyboard_data_source.gif)
+     
+6. (Optional) Conform your view controller to the `MultiProgressViewDelegate` protocol and implement the required method if you need to add a tap gesture recognizer to your `MultiProgressView` instance:
 
-6. Call `setProgress(section:to:)` to update your view's progress:
+    ```swift
+    func progressView(_ progressView: MultiProgressView, didTapSectionAt index: Int)
+    ```
+
+7. Call `setProgress(section:to:)` to update your view's progress:
 
     ```swift
     progressView.setProgress(section: 0, to: 0.4) //animatable
     ```
+
+## Data Source
+Each `MultiProgressView` needs to conform to the `MultiProgressViewDataSource` protocol:
+
+```swift
+func numberOfSections(in progressView: MultiProgressView) -> Int {
+    return 1    // Return the number of section of your MultiProgressView
+}
+
+func progressView(_ progressView: MultiProgressView, viewForSection section: Int) -> ProgressViewSection {
+    guard let progressView = progressView as? CustomProgressView() else { return ProgressViewSection() }
+
+    // Customize your progressView here...
+
+    return progressView
+}
+```
+
+## Delegate
+
+Optionally, a `MultiProgressView` can conform to the `MultiProgressViewDelegate` protocol, which define a method to recognize a tap event on `MultiProgressView`'s sections:
+
+```swift
+func progressView(_ progressView: MultiProgressView, didTapSectionAt index: Int) {
+    for (progressViewIndex, view) in progressViews.enumerated() where view === progressView {
+      print("Tapped progressView \(progressViewIndex) at section \(index)")
+    }
+}
+```
+
 
 ## Customization
 
